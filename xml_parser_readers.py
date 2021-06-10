@@ -3,11 +3,13 @@ import operator
 import os
 import json
 
-readers = [{
-	'reader': [],
-	'frequency': 0,
-	'paths' : []
-}]
+# Initialize list with empty dictionaries
+readers = [] 
+# readers = [{
+	# 'reader_name': [],
+	# 'frequency': 0,
+	# 'paths' : []
+# }]
 
 folder = []
 source_path = "./Dataset/English spoken wikipedia/english/"
@@ -21,22 +23,23 @@ for audio_path in os.scandir(source_path):
 		# root.iter creates a tree iterator with the current element as the root. The iterator iterates over this element and all elements below it, in document (depth first) order.
 		for property in root.iter(tag = 'prop'):
 			if (property.attrib['key'] == 'reader.name'):
-				if not any(item['reader'] == property.attrib['value'].lower() for item in readers):
-					dict = {'reader': property.attrib['value'].lower(), \
+				if not any(reader['reader_name'] == property.attrib['value'].lower() for reader in readers):
+					dict = {'reader_name': property.attrib['value'].lower(), \
 							'frequency': 1, \
 							'paths' : [audio_path.path] \
 						}
 					readers.append(dict)
 				else:
-					for item in readers:
-						if (item['reader'] == property.attrib['value'].lower()):
-							item['frequency'] = item['frequency'] + 1
-							item['paths'].append(audio_path.path)
+					for reader in readers:
+						if (reader['reader_name'] == property.attrib['value'].lower()):
+							reader['frequency'] = reader['frequency'] + 1
+							reader['paths'].append(audio_path.path)
 		
 print("len(readers): ", str(len(readers)))
 
+# popularoutcast
 f = open("readers_paths.txt", "w")
-f.write(json.dumps(readers))
+f.write(json.dumps(readers, indent = 4, sort_keys = False))
 f.close()
 
 	#for item in target_words:
