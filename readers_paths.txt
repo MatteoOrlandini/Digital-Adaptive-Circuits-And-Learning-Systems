@@ -1,0 +1,3892 @@
+[
+	{
+		"reader": "the epopt",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/(I_Can%27t_Get_No)_Satisfaction",
+			"./Dataset/English spoken wikipedia/english/Ceremonial_ship_launching",
+			"./Dataset/English spoken wikipedia/english/Limerence",
+			"./Dataset/English spoken wikipedia/english/Revolt_of_the_Admirals",
+			"./Dataset/English spoken wikipedia/english/Ship_commissioning"
+		]
+	},
+	{
+		"reader": "wodup",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/0.999..%2e",
+			"./Dataset/English spoken wikipedia/english/Execution_by_elephant",
+			"./Dataset/English spoken wikipedia/english/Hell_Is_Other_Robots",
+			"./Dataset/English spoken wikipedia/english/Tom_Bosley",
+			"./Dataset/English spoken wikipedia/english/Truthiness"
+		]
+	},
+	{
+		"reader": "<font face=\"terminal\">[[:en:user:flaminglawyer|flaming]][[:en:user talk:flaminglawyer|lawyer]]<sup>[[:en:special:contributions/flaminglawyer|c]]</sup></font>",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1%3a64_scale"
+		]
+	},
+	{
+		"reader": "willmcw",
+		"frequency": 11,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1755_Lisbon_earthquake",
+			"./Dataset/English spoken wikipedia/english/Charles_Ives",
+			"./Dataset/English spoken wikipedia/english/England_expects_that_every_man_will_do_his_duty",
+			"./Dataset/English spoken wikipedia/english/Francis_Petre",
+			"./Dataset/English spoken wikipedia/english/History_of_the_world",
+			"./Dataset/English spoken wikipedia/english/John_Day_(printer)",
+			"./Dataset/English spoken wikipedia/english/Order_of_the_Bath",
+			"./Dataset/English spoken wikipedia/english/Poetry",
+			"./Dataset/English spoken wikipedia/english/Ralph_Yarborough",
+			"./Dataset/English spoken wikipedia/english/Roy_Orbison",
+			"./Dataset/English spoken wikipedia/english/War_elephant"
+		]
+	},
+	{
+		"reader": "laurascudder",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1900_Galveston_hurricane"
+		]
+	},
+	{
+		"reader": "s_whistler",
+		"frequency": 37,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1910_London_to_Manchester_air_race",
+			"./Dataset/English spoken wikipedia/english/2012_Buenos_Aires_rail_disaster",
+			"./Dataset/English spoken wikipedia/english/500_euro_note",
+			"./Dataset/English spoken wikipedia/english/Accurate_News_and_Information_Act",
+			"./Dataset/English spoken wikipedia/english/American_Airlines_Flight_11",
+			"./Dataset/English spoken wikipedia/english/Asteroid_belt",
+			"./Dataset/English spoken wikipedia/english/Barack_Obama",
+			"./Dataset/English spoken wikipedia/english/Bill_Clinton",
+			"./Dataset/English spoken wikipedia/english/Cold_War",
+			"./Dataset/English spoken wikipedia/english/CSI_effect",
+			"./Dataset/English spoken wikipedia/english/Cyclone_Elita",
+			"./Dataset/English spoken wikipedia/english/Disneyland_with_the_Death_Penalty",
+			"./Dataset/English spoken wikipedia/english/Dyson_sphere",
+			"./Dataset/English spoken wikipedia/english/Eastern_Bloc",
+			"./Dataset/English spoken wikipedia/english/Embrace%2c_extend_and_extinguish",
+			"./Dataset/English spoken wikipedia/english/European_Economic_Community",
+			"./Dataset/English spoken wikipedia/english/George_H._W._Bush",
+			"./Dataset/English spoken wikipedia/english/George_W._Bush",
+			"./Dataset/English spoken wikipedia/english/Grandfather_paradox",
+			"./Dataset/English spoken wikipedia/english/Howard_Hughes",
+			"./Dataset/English spoken wikipedia/english/Insider_trading",
+			"./Dataset/English spoken wikipedia/english/Iron_Curtain",
+			"./Dataset/English spoken wikipedia/english/Lake_Nyos",
+			"./Dataset/English spoken wikipedia/english/Marshall_Plan",
+			"./Dataset/English spoken wikipedia/english/Martha_Layne_Collins",
+			"./Dataset/English spoken wikipedia/english/Oort_cloud",
+			"./Dataset/English spoken wikipedia/english/Origins_of_the_Cold_War",
+			"./Dataset/English spoken wikipedia/english/Red_Scare",
+			"./Dataset/English spoken wikipedia/english/Richard_Branson",
+			"./Dataset/English spoken wikipedia/english/Ronald_Reagan",
+			"./Dataset/English spoken wikipedia/english/Russell%27s_teapot",
+			"./Dataset/English spoken wikipedia/english/Ten_percent_of_the_brain_myth",
+			"./Dataset/English spoken wikipedia/english/Transit_of_Venus",
+			"./Dataset/English spoken wikipedia/english/Trolley_problem",
+			"./Dataset/English spoken wikipedia/english/Virgin_Galactic",
+			"./Dataset/English spoken wikipedia/english/Wife_selling_(English_custom)",
+			"./Dataset/English spoken wikipedia/english/X_Article"
+		]
+	},
+	{
+		"reader": "[[user:zanimum|nicholas moreau]]",
+		"frequency": 33,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1937_Fox_vault_fire",
+			"./Dataset/English spoken wikipedia/english/2011_Wuxi_Classic",
+			"./Dataset/English spoken wikipedia/english/All_I_Want_for_Christmas_(film)",
+			"./Dataset/English spoken wikipedia/english/All_I_Want_for_Christmas_Is_You_(Vince_Vance_&_The_Valiants_song)",
+			"./Dataset/English spoken wikipedia/english/Atlanta_Nights",
+			"./Dataset/English spoken wikipedia/english/Baie-Johan-Beetz%2c_Quebec",
+			"./Dataset/English spoken wikipedia/english/Brad_Imes",
+			"./Dataset/English spoken wikipedia/english/Burns_Municipal_Airport",
+			"./Dataset/English spoken wikipedia/english/Catholic_Worker",
+			"./Dataset/English spoken wikipedia/english/Elongate_carpet_shark",
+			"./Dataset/English spoken wikipedia/english/Entertaining_Angels%3a_The_Dorothy_Day_Story",
+			"./Dataset/English spoken wikipedia/english/Falcon%27s_Fury",
+			"./Dataset/English spoken wikipedia/english/Finance_and_Expenditure_Committee",
+			"./Dataset/English spoken wikipedia/english/Ford_Nation",
+			"./Dataset/English spoken wikipedia/english/Hogettes",
+			"./Dataset/English spoken wikipedia/english/Island_Beach%2c_New_Jersey",
+			"./Dataset/English spoken wikipedia/english/James_Brogan_(Medal_of_Honor)",
+			"./Dataset/English spoken wikipedia/english/Jean-Claude_Bouttier",
+			"./Dataset/English spoken wikipedia/english/Krini%2c_Greece",
+			"./Dataset/English spoken wikipedia/english/List_of_accolades_received_by_Ratatouille",
+			"./Dataset/English spoken wikipedia/english/List_of_Canadian_Idol_finalists",
+			"./Dataset/English spoken wikipedia/english/Merry_Christmas_Darling",
+			"./Dataset/English spoken wikipedia/english/Merry_Christmas_with_Love",
+			"./Dataset/English spoken wikipedia/english/Naked_Came_the_Phoenix",
+			"./Dataset/English spoken wikipedia/english/Naked_Came_the_Stranger",
+			"./Dataset/English spoken wikipedia/english/Nat_Tate%3a_An_American_Artist_1928%e2%80%931960",
+			"./Dataset/English spoken wikipedia/english/Saltine_cracker_challenge",
+			"./Dataset/English spoken wikipedia/english/Scar_(The_Lion_King)",
+			"./Dataset/English spoken wikipedia/english/Shannon_Rutherford",
+			"./Dataset/English spoken wikipedia/english/The_%22Blog%22_of_%22Unnecessary%22_Quotation_Marks",
+			"./Dataset/English spoken wikipedia/english/Vaughan_Metropolitan_Centre_station",
+			"./Dataset/English spoken wikipedia/english/Washington_Army_National_Guard",
+			"./Dataset/English spoken wikipedia/english/Worst_Episode_Ever"
+		]
+	},
+	{
+		"reader": "[[user:frogbrains|frogbrains]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1942_(video_game)"
+		]
+	},
+	{
+		"reader": "frogbrains",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1943%3a_The_Battle_of_Midway"
+		]
+	},
+	{
+		"reader": "s whistler",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1958_Tybee_Island_mid-air_collision",
+			"./Dataset/English spoken wikipedia/english/Voluntary_Human_Extinction_Movement"
+		]
+	},
+	{
+		"reader": "popularoutcast",
+		"frequency": 33,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1968_Illinois_earthquake",
+			"./Dataset/English spoken wikipedia/english/Acid2",
+			"./Dataset/English spoken wikipedia/english/Age_of_Empires",
+			"./Dataset/English spoken wikipedia/english/American_goldfinch",
+			"./Dataset/English spoken wikipedia/english/Arctic_tern",
+			"./Dataset/English spoken wikipedia/english/Black_Seminoles",
+			"./Dataset/English spoken wikipedia/english/Black_vulture",
+			"./Dataset/English spoken wikipedia/english/Cattle_egret",
+			"./Dataset/English spoken wikipedia/english/Common_chiffchaff",
+			"./Dataset/English spoken wikipedia/english/Confederate_government_of_Kentucky",
+			"./Dataset/English spoken wikipedia/english/D._B._Cooper",
+			"./Dataset/English spoken wikipedia/english/Daylight_saving_time",
+			"./Dataset/English spoken wikipedia/english/Edward_Low",
+			"./Dataset/English spoken wikipedia/english/Elderly_Instruments",
+			"./Dataset/English spoken wikipedia/english/Elfin_woods_warbler",
+			"./Dataset/English spoken wikipedia/english/Fermi_paradox",
+			"./Dataset/English spoken wikipedia/english/Freak_Out!",
+			"./Dataset/English spoken wikipedia/english/Hurricane_Grace",
+			"./Dataset/English spoken wikipedia/english/Hurricane_Ismael",
+			"./Dataset/English spoken wikipedia/english/Indigenous_people_of_the_Everglades_region",
+			"./Dataset/English spoken wikipedia/english/Introduction_to_viruses",
+			"./Dataset/English spoken wikipedia/english/Moe_Berg",
+			"./Dataset/English spoken wikipedia/english/Mourning_dove",
+			"./Dataset/English spoken wikipedia/english/Northern_pintail",
+			"./Dataset/English spoken wikipedia/english/Oil_shale",
+			"./Dataset/English spoken wikipedia/english/Same-sex_marriage_in_Spain",
+			"./Dataset/English spoken wikipedia/english/Storm_botnet",
+			"./Dataset/English spoken wikipedia/english/Tawny_owl",
+			"./Dataset/English spoken wikipedia/english/The_World_Without_Us",
+			"./Dataset/English spoken wikipedia/english/Trapped_in_the_Closet_(South_Park)",
+			"./Dataset/English spoken wikipedia/english/Troy_McClure",
+			"./Dataset/English spoken wikipedia/english/Wood_Badge",
+			"./Dataset/English spoken wikipedia/english/Xanadu_Houses"
+		]
+	},
+	{
+		"reader": "[[user:etimbo|etimbo]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1973_National_500"
+		]
+	},
+	{
+		"reader": "[[user:incledon|incledon]]",
+		"frequency": 18,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1973_world_oil_market_chronology",
+			"./Dataset/English spoken wikipedia/english/Art_Wiebe",
+			"./Dataset/English spoken wikipedia/english/Brei%c3%b0dalsv%c3%adk_Airport",
+			"./Dataset/English spoken wikipedia/english/Bridgehampton_Polo_Club",
+			"./Dataset/English spoken wikipedia/english/Broad_Creek%2c_North_Carolina",
+			"./Dataset/English spoken wikipedia/english/George_Campbell_Tinning",
+			"./Dataset/English spoken wikipedia/english/Ivy%2c_Virginia",
+			"./Dataset/English spoken wikipedia/english/Larry_Winn",
+			"./Dataset/English spoken wikipedia/english/Leonard_Independent_School_District",
+			"./Dataset/English spoken wikipedia/english/Mayfield_(Middletown%2c_Delaware)",
+			"./Dataset/English spoken wikipedia/english/Missouri_Department_of_Conservation",
+			"./Dataset/English spoken wikipedia/english/Montreat%2c_North_Carolina",
+			"./Dataset/English spoken wikipedia/english/New_Jersey_Surcharge",
+			"./Dataset/English spoken wikipedia/english/Nouakchott-Nord_Region",
+			"./Dataset/English spoken wikipedia/english/Richard_Topus",
+			"./Dataset/English spoken wikipedia/english/Ropica_biroi",
+			"./Dataset/English spoken wikipedia/english/Sam_A._Scribner",
+			"./Dataset/English spoken wikipedia/english/Wyoming_Department_of_Corrections"
+		]
+	},
+	{
+		"reader": "hassocks5489",
+		"frequency": 23,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1994_San_Marino_Grand_Prix",
+			"./Dataset/English spoken wikipedia/english/Arsenal_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Aston_Villa_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Chelsea_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Coronation_Street",
+			"./Dataset/English spoken wikipedia/english/Countdown_(game_show)",
+			"./Dataset/English spoken wikipedia/english/Docklands_Light_Railway",
+			"./Dataset/English spoken wikipedia/english/Everton_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Gillingham_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Hamlet_chicken_processing_plant_fire",
+			"./Dataset/English spoken wikipedia/english/Ipswich_Town_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Manchester_City_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Margate_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Murder_of_James_Bulger",
+			"./Dataset/English spoken wikipedia/english/New_Zealand_national_rugby_union_team",
+			"./Dataset/English spoken wikipedia/english/Norwich_City_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Premier_League",
+			"./Dataset/English spoken wikipedia/english/Shaw_and_Crompton",
+			"./Dataset/English spoken wikipedia/english/Sheffield",
+			"./Dataset/English spoken wikipedia/english/Sheffield_Wednesday_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Weymouth%2c_Dorset",
+			"./Dataset/English spoken wikipedia/english/Whuppity_Scoorie_Day",
+			"./Dataset/English spoken wikipedia/english/York_City_F.C%2e"
+		]
+	},
+	{
+		"reader": "the voice of hassocks",
+		"frequency": 26,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/1995_Japanese_Grand_Prix",
+			"./Dataset/English spoken wikipedia/english/1995_Pacific_Grand_Prix",
+			"./Dataset/English spoken wikipedia/english/Altrincham",
+			"./Dataset/English spoken wikipedia/english/Alzheimer%27s_disease",
+			"./Dataset/English spoken wikipedia/english/Birchington-on-Sea",
+			"./Dataset/English spoken wikipedia/english/Brownhills",
+			"./Dataset/English spoken wikipedia/english/Dover_Athletic_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/Exmoor",
+			"./Dataset/English spoken wikipedia/english/Hellingly_Hospital_Railway",
+			"./Dataset/English spoken wikipedia/english/Herne_Bay%2c_Kent",
+			"./Dataset/English spoken wikipedia/english/John_Douglas_(architect)",
+			"./Dataset/English spoken wikipedia/english/Luton_Town_F.C%2e",
+			"./Dataset/English spoken wikipedia/english/M62_motorway",
+			"./Dataset/English spoken wikipedia/english/Manchester",
+			"./Dataset/English spoken wikipedia/english/Manchester_Bolton_&_Bury_Canal",
+			"./Dataset/English spoken wikipedia/english/Oldham",
+			"./Dataset/English spoken wikipedia/english/Peterborough",
+			"./Dataset/English spoken wikipedia/english/Peterloo_Massacre",
+			"./Dataset/English spoken wikipedia/english/Scout_Moor_Wind_Farm",
+			"./Dataset/English spoken wikipedia/english/Sheerness",
+			"./Dataset/English spoken wikipedia/english/Stephens_City%2c_Virginia",
+			"./Dataset/English spoken wikipedia/english/Stretford",
+			"./Dataset/English spoken wikipedia/english/Subarachnoid_hemorrhage",
+			"./Dataset/English spoken wikipedia/english/Trafford",
+			"./Dataset/English spoken wikipedia/english/Westgate-on-Sea",
+			"./Dataset/English spoken wikipedia/english/William_Shakespeare"
+		]
+	},
+	{
+		"reader": "user at projectfliry vorruwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/2005_Atlantic_hurricane_season"
+		]
+	},
+	{
+		"reader": "fliry vorru",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/2006_Atlantic_hurricane_season",
+			"./Dataset/English spoken wikipedia/english/Effects_of_Hurricane_Ivan_in_the_Lesser_Antilles_and_South_America",
+			"./Dataset/English spoken wikipedia/english/Some_Thoughts_Concerning_Education",
+			"./Dataset/English spoken wikipedia/english/The_Green_(Dartmouth_College)"
+		]
+	},
+	{
+		"reader": "[[user:a. parrot|a. parrot]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/2012_phenomenon"
+		]
+	},
+	{
+		"reader": "tonyle",
+		"frequency": 7,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/300_(film)",
+			"./Dataset/English spoken wikipedia/english/Archimedes",
+			"./Dataset/English spoken wikipedia/english/Greek_mythology",
+			"./Dataset/English spoken wikipedia/english/Hurricane_Dog_(1950)",
+			"./Dataset/English spoken wikipedia/english/Interstate_15_in_Arizona",
+			"./Dataset/English spoken wikipedia/english/List_of_Greek_mythological_figures",
+			"./Dataset/English spoken wikipedia/english/SS_Ohioan_(1914)"
+		]
+	},
+	{
+		"reader": "gorillawarfare",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/4chan",
+			"./Dataset/English spoken wikipedia/english/Fossil_fuel"
+		]
+	},
+	{
+		"reader": "flowerparty",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/A._E._J._Collins"
+		]
+	},
+	{
+		"reader": "yelocab",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/AAA_400_Drive_for_Autism"
+		]
+	},
+	{
+		"reader": "[[user:house_clegane|house_clegane]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Abbot_Augustus_Low"
+		]
+	},
+	{
+		"reader": "marmenta",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Abiogenesis",
+			"./Dataset/English spoken wikipedia/english/Earth",
+			"./Dataset/English spoken wikipedia/english/History_of_Earth",
+			"./Dataset/English spoken wikipedia/english/Human",
+			"./Dataset/English spoken wikipedia/english/Introduction_to_evolution",
+			"./Dataset/English spoken wikipedia/english/Universe"
+		]
+	},
+	{
+		"reader": "ama1016",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Accessibility",
+			"./Dataset/English spoken wikipedia/english/Americans_with_Disabilities_Act_of_1990"
+		]
+	},
+	{
+		"reader": "shivaji mitra",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Acharya_Jagadish_Chandra_Bose_College"
+		]
+	},
+	{
+		"reader": "steinsky",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Action_potential",
+			"./Dataset/English spoken wikipedia/english/Chemical_synapse",
+			"./Dataset/English spoken wikipedia/english/DNA_repair",
+			"./Dataset/English spoken wikipedia/english/Dorset",
+			"./Dataset/English spoken wikipedia/english/Hydrochloric_acid"
+		]
+	},
+	{
+		"reader": "alexkillby",
+		"frequency": 23,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Adam_Curry",
+			"./Dataset/English spoken wikipedia/english/David_O._McKay",
+			"./Dataset/English spoken wikipedia/english/Ezra_Taft_Benson",
+			"./Dataset/English spoken wikipedia/english/Fin_whale",
+			"./Dataset/English spoken wikipedia/english/George_Albert_Smith",
+			"./Dataset/English spoken wikipedia/english/Gordon_B._Hinckley",
+			"./Dataset/English spoken wikipedia/english/Harold_B._Lee",
+			"./Dataset/English spoken wikipedia/english/Heber_J._Grant",
+			"./Dataset/English spoken wikipedia/english/Howard_W._Hunter",
+			"./Dataset/English spoken wikipedia/english/Joseph_F._Smith",
+			"./Dataset/English spoken wikipedia/english/Joseph_Fielding_Smith",
+			"./Dataset/English spoken wikipedia/english/Latter_Day_Saint_movement",
+			"./Dataset/English spoken wikipedia/english/LDS_Conference_Center",
+			"./Dataset/English spoken wikipedia/english/Lorenzo_Snow",
+			"./Dataset/English spoken wikipedia/english/McDonaldland",
+			"./Dataset/English spoken wikipedia/english/Patrick_Norton",
+			"./Dataset/English spoken wikipedia/english/Salt_Lake_Assembly_Hall",
+			"./Dataset/English spoken wikipedia/english/Salt_Lake_Tabernacle",
+			"./Dataset/English spoken wikipedia/english/Salt_Lake_Temple",
+			"./Dataset/English spoken wikipedia/english/Seagull_Monument",
+			"./Dataset/English spoken wikipedia/english/Temple_Square",
+			"./Dataset/English spoken wikipedia/english/The_Church_of_Jesus_Christ_of_Latter-day_Saints",
+			"./Dataset/English spoken wikipedia/english/University_of_Rhode_Island"
+		]
+	},
+	{
+		"reader": "wikibofh",
+		"frequency": 7,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Adam_Elsheimer",
+			"./Dataset/English spoken wikipedia/english/Chesty_Puller",
+			"./Dataset/English spoken wikipedia/english/Dennis_Anderson",
+			"./Dataset/English spoken wikipedia/english/Dennis_Ritchie",
+			"./Dataset/English spoken wikipedia/english/Ken_Thompson",
+			"./Dataset/English spoken wikipedia/english/Monster_truck",
+			"./Dataset/English spoken wikipedia/english/World_War_I"
+		]
+	},
+	{
+		"reader": "sergeantbolt",
+		"frequency": 12,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Adewale_Akinnuoye-Agbaje",
+			"./Dataset/English spoken wikipedia/english/Ana_Lucia_Cortez",
+			"./Dataset/English spoken wikipedia/english/Boone_Carlyle",
+			"./Dataset/English spoken wikipedia/english/Claire_Littleton",
+			"./Dataset/English spoken wikipedia/english/Hugo_%22Hurley%22_Reyes",
+			"./Dataset/English spoken wikipedia/english/Jack_Shephard",
+			"./Dataset/English spoken wikipedia/english/Jin-Soo_Kwon",
+			"./Dataset/English spoken wikipedia/english/Julia_Stiles",
+			"./Dataset/English spoken wikipedia/english/Kate_Austen",
+			"./Dataset/English spoken wikipedia/english/Libby_(Lost)",
+			"./Dataset/English spoken wikipedia/english/Lost_(TV_series)",
+			"./Dataset/English spoken wikipedia/english/Uma_Thurman"
+		]
+	},
+	{
+		"reader": "english and simple wikipedia coontributors  (sound files are spoken word versions of articles referenced in file name)",
+		"frequency": 13,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Adrian_Lowe",
+			"./Dataset/English spoken wikipedia/english/Dylan_Alcott",
+			"./Dataset/English spoken wikipedia/english/Greg_Ball_(cyclist)",
+			"./Dataset/English spoken wikipedia/english/Kelly_Barnes",
+			"./Dataset/English spoken wikipedia/english/Kieran_Ault-Connell",
+			"./Dataset/English spoken wikipedia/english/Mark_Altmann",
+			"./Dataset/English spoken wikipedia/english/Michael_Anderson_(swimmer)",
+			"./Dataset/English spoken wikipedia/english/Paul_Barnett_(swimmer)",
+			"./Dataset/English spoken wikipedia/english/Petrea_Barker",
+			"./Dataset/English spoken wikipedia/english/Rene_Ahrens",
+			"./Dataset/English spoken wikipedia/english/Ryley_Batt",
+			"./Dataset/English spoken wikipedia/english/Tracy_Barrell",
+			"./Dataset/English spoken wikipedia/english/Troy_Andrews_(basketball)"
+		]
+	},
+	{
+		"reader": "mangst",
+		"frequency": 44,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Aegaeon_(moon)",
+			"./Dataset/English spoken wikipedia/english/Anthe_(moon)",
+			"./Dataset/English spoken wikipedia/english/Atlas_(moon)",
+			"./Dataset/English spoken wikipedia/english/Battle_of_the_Somme",
+			"./Dataset/English spoken wikipedia/english/Bioinformatics",
+			"./Dataset/English spoken wikipedia/english/Calypso_(moon)",
+			"./Dataset/English spoken wikipedia/english/Computational_neuroscience",
+			"./Dataset/English spoken wikipedia/english/Connectionism",
+			"./Dataset/English spoken wikipedia/english/Daphnis_(moon)",
+			"./Dataset/English spoken wikipedia/english/Dione_(moon)",
+			"./Dataset/English spoken wikipedia/english/Enceladus",
+			"./Dataset/English spoken wikipedia/english/Epimetheus_(moon)",
+			"./Dataset/English spoken wikipedia/english/Functional_programming",
+			"./Dataset/English spoken wikipedia/english/Helene_(moon)",
+			"./Dataset/English spoken wikipedia/english/HTTP_cookie",
+			"./Dataset/English spoken wikipedia/english/Hyperion_(moon)",
+			"./Dataset/English spoken wikipedia/english/Iapetus_(moon)",
+			"./Dataset/English spoken wikipedia/english/IBM_WebSphere_MQ",
+			"./Dataset/English spoken wikipedia/english/Ijiraq_(moon)",
+			"./Dataset/English spoken wikipedia/english/JavaScript",
+			"./Dataset/English spoken wikipedia/english/Java_(software_platform)",
+			"./Dataset/English spoken wikipedia/english/Kiviuq_(moon)",
+			"./Dataset/English spoken wikipedia/english/Methone_(moon)",
+			"./Dataset/English spoken wikipedia/english/Mimas_(moon)",
+			"./Dataset/English spoken wikipedia/english/Minecraft",
+			"./Dataset/English spoken wikipedia/english/NeXT",
+			"./Dataset/English spoken wikipedia/english/OpenBSD",
+			"./Dataset/English spoken wikipedia/english/Paaliaq",
+			"./Dataset/English spoken wikipedia/english/Pallene_(moon)",
+			"./Dataset/English spoken wikipedia/english/Pandora_(moon)",
+			"./Dataset/English spoken wikipedia/english/Pan_(moon)",
+			"./Dataset/English spoken wikipedia/english/Parallel_computing",
+			"./Dataset/English spoken wikipedia/english/Phoebe_(moon)",
+			"./Dataset/English spoken wikipedia/english/PHP",
+			"./Dataset/English spoken wikipedia/english/Polydeuces_(moon)",
+			"./Dataset/English spoken wikipedia/english/Prometheus_(moon)",
+			"./Dataset/English spoken wikipedia/english/Ray_Kurzweil",
+			"./Dataset/English spoken wikipedia/english/Rhea_(moon)",
+			"./Dataset/English spoken wikipedia/english/Sequence_alignment",
+			"./Dataset/English spoken wikipedia/english/Service-oriented_architecture",
+			"./Dataset/English spoken wikipedia/english/Tarqeq",
+			"./Dataset/English spoken wikipedia/english/Titan_(moon)",
+			"./Dataset/English spoken wikipedia/english/ToeJam_&_Earl",
+			"./Dataset/English spoken wikipedia/english/VoiceXML"
+		]
+	},
+	{
+		"reader": "patrickjoel",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/African_Union",
+			"./Dataset/English spoken wikipedia/english/Conventional_sex"
+		]
+	},
+	{
+		"reader": "the jacobin",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Aggie_Bonfire",
+			"./Dataset/English spoken wikipedia/english/Helium"
+		]
+	},
+	{
+		"reader": "jsharpminor",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Air-tractor_sledge"
+		]
+	},
+	{
+		"reader": "music2611",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alan_Harper_(Two_and_a_Half_Men)"
+		]
+	},
+	{
+		"reader": "craigy144",
+		"frequency": 8,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alexandra_of_Denmark",
+			"./Dataset/English spoken wikipedia/english/Anne%2c_Queen_of_Great_Britain",
+			"./Dataset/English spoken wikipedia/english/Carl_XVI_Gustaf_of_Sweden",
+			"./Dataset/English spoken wikipedia/english/Hereditary_peer",
+			"./Dataset/English spoken wikipedia/english/House_of_Hanover",
+			"./Dataset/English spoken wikipedia/english/House_of_York",
+			"./Dataset/English spoken wikipedia/english/Princess_Elizabeth_of_Clarence",
+			"./Dataset/English spoken wikipedia/english/Vittorio_Emanuele%2c_Prince_of_Naples"
+		]
+	},
+	{
+		"reader": "phearson",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alexi_Salamone",
+			"./Dataset/English spoken wikipedia/english/Royal_Maundy"
+		]
+	},
+	{
+		"reader": "wikipedia",
+		"frequency": 11,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alex_Harris_(swimmer)",
+			"./Dataset/English spoken wikipedia/english/Christie_Dawes",
+			"./Dataset/English spoken wikipedia/english/Daniel_Polson",
+			"./Dataset/English spoken wikipedia/english/David_Munk",
+			"./Dataset/English spoken wikipedia/english/Gail_Nicholson",
+			"./Dataset/English spoken wikipedia/english/Grant_Mizens",
+			"./Dataset/English spoken wikipedia/english/Jeremy_Doyle",
+			"./Dataset/English spoken wikipedia/english/Kylie_Gauci",
+			"./Dataset/English spoken wikipedia/english/Louise_Ellery",
+			"./Dataset/English spoken wikipedia/english/Paul_Mitchell_(athlete)",
+			"./Dataset/English spoken wikipedia/english/Rodney_Nugent"
+		]
+	},
+	{
+		"reader": "[[user:viktor o. ledenyov|viktor o. ledenyov]]",
+		"frequency": 24,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alfred_Nobel",
+			"./Dataset/English spoken wikipedia/english/Bar%2c_Vinnytsia_Oblast",
+			"./Dataset/English spoken wikipedia/english/Bona_Sforza",
+			"./Dataset/English spoken wikipedia/english/Economic_Club_of_Canada",
+			"./Dataset/English spoken wikipedia/english/Economic_Club_of_New_York",
+			"./Dataset/English spoken wikipedia/english/Eugene_Fama",
+			"./Dataset/English spoken wikipedia/english/George_Gamow",
+			"./Dataset/English spoken wikipedia/english/Heike_Kamerlingh_Onnes",
+			"./Dataset/English spoken wikipedia/english/Joseph_Barondess",
+			"./Dataset/English spoken wikipedia/english/Joseph_Stiglitz",
+			"./Dataset/English spoken wikipedia/english/Justin_Trudeau",
+			"./Dataset/English spoken wikipedia/english/Kharkiv",
+			"./Dataset/English spoken wikipedia/english/Klaus_Schwab",
+			"./Dataset/English spoken wikipedia/english/Lev_Landau",
+			"./Dataset/English spoken wikipedia/english/Michael_C._Jensen",
+			"./Dataset/English spoken wikipedia/english/Michael_Porter",
+			"./Dataset/English spoken wikipedia/english/Nobel_Memorial_Prize_in_Economic_Sciences",
+			"./Dataset/English spoken wikipedia/english/Nobel_Prize",
+			"./Dataset/English spoken wikipedia/english/Nobel_Prize_in_Physics",
+			"./Dataset/English spoken wikipedia/english/Royal_Automobile_Club",
+			"./Dataset/English spoken wikipedia/english/Royal_Swedish_Academy_of_Sciences",
+			"./Dataset/English spoken wikipedia/english/Simon_Kuznets",
+			"./Dataset/English spoken wikipedia/english/Viktor_Bunyakovsky",
+			"./Dataset/English spoken wikipedia/english/World_Economic_Forum"
+		]
+	},
+	{
+		"reader": "[[user:laurahale|laurahale]]",
+		"frequency": 27,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alice_Ingley",
+			"./Dataset/English spoken wikipedia/english/Australian_Paralympic_Committee",
+			"./Dataset/English spoken wikipedia/english/Burundi_women%27s_national_football_team",
+			"./Dataset/English spoken wikipedia/english/Casey_Samuels",
+			"./Dataset/English spoken wikipedia/english/Chinese_Taipei_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Cuba_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Eggbeater_kick",
+			"./Dataset/English spoken wikipedia/english/Finnish_Paralympic_Committee",
+			"./Dataset/English spoken wikipedia/english/Guam_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Indonesia_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Japan_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Kristin_Otto",
+			"./Dataset/English spoken wikipedia/english/Luciano_Ercoli",
+			"./Dataset/English spoken wikipedia/english/Papua_New_Guinea_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Paralympics_New_Zealand",
+			"./Dataset/English spoken wikipedia/english/Research_and_Development_Establishment",
+			"./Dataset/English spoken wikipedia/english/S12_(classification)",
+			"./Dataset/English spoken wikipedia/english/Singapore_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Sporting_Wheelies_and_Disabled_Association",
+			"./Dataset/English spoken wikipedia/english/Susan_J._Douglas",
+			"./Dataset/English spoken wikipedia/english/Sydney_Uni_Water_Polo_Club",
+			"./Dataset/English spoken wikipedia/english/United_States_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Virgin_Islands_men%27s_national_softball_team",
+			"./Dataset/English spoken wikipedia/english/Women%27s_squash_in_Australia",
+			"./Dataset/English spoken wikipedia/english/Women%27s_surfing_in_Australia",
+			"./Dataset/English spoken wikipedia/english/Women%27s_tennis_in_the_United_States",
+			"./Dataset/English spoken wikipedia/english/Zanzibar_women%27s_national_football_team"
+		]
+	},
+	{
+		"reader": "kenumay",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Ali_G"
+		]
+	},
+	{
+		"reader": "[[:en:user:popularoutcast|popularoutcast]] at en.wikipedia",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alleyway"
+		]
+	},
+	{
+		"reader": "davumaya",
+		"frequency": 13,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Alliterative_verse",
+			"./Dataset/English spoken wikipedia/english/Azerbaijan",
+			"./Dataset/English spoken wikipedia/english/Franklin_D._Roosevelt",
+			"./Dataset/English spoken wikipedia/english/Hrafnkels_saga",
+			"./Dataset/English spoken wikipedia/english/I-35W_Mississippi_River_bridge",
+			"./Dataset/English spoken wikipedia/english/Jay_Chou",
+			"./Dataset/English spoken wikipedia/english/Krag%e2%80%93J%c3%b8rgensen",
+			"./Dataset/English spoken wikipedia/english/Minneapolis",
+			"./Dataset/English spoken wikipedia/english/Oxygen",
+			"./Dataset/English spoken wikipedia/english/Peking_opera",
+			"./Dataset/English spoken wikipedia/english/Reykjav%c3%adk",
+			"./Dataset/English spoken wikipedia/english/Shen_Kuo",
+			"./Dataset/English spoken wikipedia/english/To_Kill_a_Mockingbird"
+		]
+	},
+	{
+		"reader": "sophie",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/All_your_base_are_belong_to_us",
+			"./Dataset/English spoken wikipedia/english/East_Goscote",
+			"./Dataset/English spoken wikipedia/english/Rearsby"
+		]
+	},
+	{
+		"reader": "speakthings:mellerbeck",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Amanita_phalloides",
+			"./Dataset/English spoken wikipedia/english/Fightin%27_Texas_Aggie_Band",
+			"./Dataset/English spoken wikipedia/english/Jersey_Shore_shark_attacks_of_1916",
+			"./Dataset/English spoken wikipedia/english/Thou",
+			"./Dataset/English spoken wikipedia/english/Triceratops",
+			"./Dataset/English spoken wikipedia/english/Wiki"
+		]
+	},
+	{
+		"reader": "peter mcginley",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Amber_MacArthur",
+			"./Dataset/English spoken wikipedia/english/Kevin_Rose",
+			"./Dataset/English spoken wikipedia/english/Shoe_polish"
+		]
+	},
+	{
+		"reader": "[[user:matthew david gonzález|matthew david gonzález]]",
+		"frequency": 20,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/American_football",
+			"./Dataset/English spoken wikipedia/english/Edward_VII",
+			"./Dataset/English spoken wikipedia/english/Elizabeth_II",
+			"./Dataset/English spoken wikipedia/english/George_V",
+			"./Dataset/English spoken wikipedia/english/George_VI",
+			"./Dataset/English spoken wikipedia/english/Hillary_Clinton",
+			"./Dataset/English spoken wikipedia/english/Jane_Cobden",
+			"./Dataset/English spoken wikipedia/english/John_Y._Brown_(politician%2c_born_1835)",
+			"./Dataset/English spoken wikipedia/english/Pope_Anacletus",
+			"./Dataset/English spoken wikipedia/english/Pope_Clement_I",
+			"./Dataset/English spoken wikipedia/english/Pope_Evaristus",
+			"./Dataset/English spoken wikipedia/english/Pope_Linus",
+			"./Dataset/English spoken wikipedia/english/Princess_Beatrice_of_York",
+			"./Dataset/English spoken wikipedia/english/Prince_Edward%2c_Earl_of_Wessex",
+			"./Dataset/English spoken wikipedia/english/Prince_Harry",
+			"./Dataset/English spoken wikipedia/english/Prince_William%2c_Duke_of_Gloucester",
+			"./Dataset/English spoken wikipedia/english/Queen_Victoria",
+			"./Dataset/English spoken wikipedia/english/Sophie%2c_Countess_of_Wessex",
+			"./Dataset/English spoken wikipedia/english/William_II_of_England",
+			"./Dataset/English spoken wikipedia/english/William_the_Conqueror"
+		]
+	},
+	{
+		"reader": "glennobrien",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/American_Standard_Version",
+			"./Dataset/English spoken wikipedia/english/Harry_Jenkins_Sr%2e"
+		]
+	},
+	{
+		"reader": "[[user:mikewhitcombe|mrw]] ([[user talk:mikewhitcombe|talk]]) 22:13, 12 december 2011 (utc)",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Andalusian_horse"
+		]
+	},
+	{
+		"reader": "zach_brissett",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Andr%c3%a9_Bessette"
+		]
+	},
+	{
+		"reader": "[[:en:user:alexkillby|alexkillby]] ([[:en:user talk:alexkillby|talk]])",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Andrew_Watson_(footballer%2c_born_1856)",
+			"./Dataset/English spoken wikipedia/english/Investigative_journalism",
+			"./Dataset/English spoken wikipedia/english/Kandersteg_International_Scout_Centre",
+			"./Dataset/English spoken wikipedia/english/Peace_journalism",
+			"./Dataset/English spoken wikipedia/english/Preventive_journalism",
+			"./Dataset/English spoken wikipedia/english/Princess_Beatrice_of_the_United_Kingdom"
+		]
+	},
+	{
+		"reader": "liverpudlian100",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Anfield",
+			"./Dataset/English spoken wikipedia/english/Michael_Jordan",
+			"./Dataset/English spoken wikipedia/english/Terry_Fox"
+		]
+	},
+	{
+		"reader": "abby83",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Angelo_Fabroni"
+		]
+	},
+	{
+		"reader": "[[user:phearson|phearson]]",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Angel_(company)",
+			"./Dataset/English spoken wikipedia/english/Vector_Marketing"
+		]
+	},
+	{
+		"reader": "jason",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Annabel_Chong"
+		]
+	},
+	{
+		"reader": "[[user:theroachyjay|theroachyjay]]",
+		"frequency": 8,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Annandale_High_School",
+			"./Dataset/English spoken wikipedia/english/Cleavage_(breasts)",
+			"./Dataset/English spoken wikipedia/english/David_After_Dentist",
+			"./Dataset/English spoken wikipedia/english/Death_erection",
+			"./Dataset/English spoken wikipedia/english/Kira_Buckland",
+			"./Dataset/English spoken wikipedia/english/Priapus",
+			"./Dataset/English spoken wikipedia/english/Star_Trek",
+			"./Dataset/English spoken wikipedia/english/Teledildonics"
+		]
+	},
+	{
+		"reader": "[[user:lexlexlex|lexlexlex]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Announcer"
+		]
+	},
+	{
+		"reader": "messedrocker",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Antarctic_krill"
+		]
+	},
+	{
+		"reader": "aka_mbg",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Anton_Chekhov",
+			"./Dataset/English spoken wikipedia/english/History_of_Russia",
+			"./Dataset/English spoken wikipedia/english/Saint_Petersburg"
+		]
+	},
+	{
+		"reader": "goh wz",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/An_Inconvenient_Truth"
+		]
+	},
+	{
+		"reader": "runfellow",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Apogee_Stadium",
+			"./Dataset/English spoken wikipedia/english/Lewisville%2c_Texas"
+		]
+	},
+	{
+		"reader": "rsskill",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Apophallation",
+			"./Dataset/English spoken wikipedia/english/Torcello",
+			"./Dataset/English spoken wikipedia/english/Vampire_Weekend"
+		]
+	},
+	{
+		"reader": "thevoicebeforethevoid",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Archibald_MacLeish"
+		]
+	},
+	{
+		"reader": "random2502",
+		"frequency": 15,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Arctic_Boosh",
+			"./Dataset/English spoken wikipedia/english/Autoboosh",
+			"./Dataset/English spoken wikipedia/english/Dave_Brown_(comedian)",
+			"./Dataset/English spoken wikipedia/english/Desmond_Hume",
+			"./Dataset/English spoken wikipedia/english/Julian_Barratt",
+			"./Dataset/English spoken wikipedia/english/Love_Actually",
+			"./Dataset/English spoken wikipedia/english/Michael_Fielding",
+			"./Dataset/English spoken wikipedia/english/Monifieth_High_School",
+			"./Dataset/English spoken wikipedia/english/Noel_Fielding",
+			"./Dataset/English spoken wikipedia/english/Ribena",
+			"./Dataset/English spoken wikipedia/english/Rich_Fulcher",
+			"./Dataset/English spoken wikipedia/english/Sweet_(film)",
+			"./Dataset/English spoken wikipedia/english/The_Boosh_(radio_series)",
+			"./Dataset/English spoken wikipedia/english/The_Mighty_Boosh_(1998_stage_show)",
+			"./Dataset/English spoken wikipedia/english/Unnatural_Acts_(TV_series)"
+		]
+	},
+	{
+		"reader": "persian poet gal",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Article_One_of_the_United_States_Constitution",
+			"./Dataset/English spoken wikipedia/english/Association_football",
+			"./Dataset/English spoken wikipedia/english/California_Gold_Rush",
+			"./Dataset/English spoken wikipedia/english/Island_fox",
+			"./Dataset/English spoken wikipedia/english/Peter_Jennings"
+		]
+	},
+	{
+		"reader": "[[user:rfc1394|rfc1394]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Asperger_syndrome"
+		]
+	},
+	{
+		"reader": "sophus bie",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Atari_video_game_burial"
+		]
+	},
+	{
+		"reader": "[[user:warpig1994|warpig1994]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Audio_codec"
+		]
+	},
+	{
+		"reader": "valerieinto",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Audio_description",
+			"./Dataset/English spoken wikipedia/english/Project_Gutenberg"
+		]
+	},
+	{
+		"reader": "ckamaeleon",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Austin%e2%80%93Bergstrom_International_Airport",
+			"./Dataset/English spoken wikipedia/english/Beverage-can_stove",
+			"./Dataset/English spoken wikipedia/english/Intonation_(linguistics)",
+			"./Dataset/English spoken wikipedia/english/Nucular",
+			"./Dataset/English spoken wikipedia/english/Signature"
+		]
+	},
+	{
+		"reader": "macropode",
+		"frequency": 12,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Australian_green_tree_frog",
+			"./Dataset/English spoken wikipedia/english/Australian_ringneck",
+			"./Dataset/English spoken wikipedia/english/Cane_toad",
+			"./Dataset/English spoken wikipedia/english/Comet_Shoemaker%e2%80%93Levy_9",
+			"./Dataset/English spoken wikipedia/english/Cyclone_Tracy",
+			"./Dataset/English spoken wikipedia/english/Eureka_Rebellion",
+			"./Dataset/English spoken wikipedia/english/Fauna_of_Australia",
+			"./Dataset/English spoken wikipedia/english/Green_and_golden_bell_frog",
+			"./Dataset/English spoken wikipedia/english/Mount_Pinatubo",
+			"./Dataset/English spoken wikipedia/english/Short-beaked_echidna",
+			"./Dataset/English spoken wikipedia/english/Social_anxiety",
+			"./Dataset/English spoken wikipedia/english/Tasmanian_devil"
+		]
+	},
+	{
+		"reader": "original uploadertheroachyjaywikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Avril_Lavigne"
+		]
+	},
+	{
+		"reader": "dbradzit",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Ayn_Rand"
+		]
+	},
+	{
+		"reader": "kungfuadam",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Aztalan_State_Park"
+		]
+	},
+	{
+		"reader": "two2thehead",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/A_Sound_of_Thunder"
+		]
+	},
+	{
+		"reader": "[[:en:user:srikeit|srikeit]] at [http://en.wikipedia.org en.wikipedia]",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/B._S._Chandrasekhar",
+			"./Dataset/English spoken wikipedia/english/Salil_Ankola",
+			"./Dataset/English spoken wikipedia/english/V._B._Chandrasekhar"
+		]
+	},
+	{
+		"reader": "bowie media",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Baba_O%27Riley",
+			"./Dataset/English spoken wikipedia/english/Barbie%3a_Game_Girl",
+			"./Dataset/English spoken wikipedia/english/Gail_Edwards",
+			"./Dataset/English spoken wikipedia/english/Who_Wants_to_Live_Forever"
+		]
+	},
+	{
+		"reader": "abacatabacaxi",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Babinet%27s_principle"
+		]
+	},
+	{
+		"reader": "storkk",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Baden-Powell_House",
+			"./Dataset/English spoken wikipedia/english/Eagle_Scout_(Boy_Scouts_of_America)"
+		]
+	},
+	{
+		"reader": "[[user:tdxiang|tdxiang]].",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bakkwa",
+			"./Dataset/English spoken wikipedia/english/Chang_Fei",
+			"./Dataset/English spoken wikipedia/english/Esplanade_Bridge",
+			"./Dataset/English spoken wikipedia/english/Sentosa",
+			"./Dataset/English spoken wikipedia/english/Shamoke",
+			"./Dataset/English spoken wikipedia/english/Sri_Mariamman_Temple%2c_Singapore"
+		]
+	},
+	{
+		"reader": "ooddiittyy",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bandits_of_the_Acoustic_Revolution"
+		]
+	},
+	{
+		"reader": "ashlin",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bank_myna"
+		]
+	},
+	{
+		"reader": "dcoetzee",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Barack_Obama_citizenship_conspiracy_theories",
+			"./Dataset/English spoken wikipedia/english/P_versus_NP_problem"
+		]
+	},
+	{
+		"reader": "joaopais",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Battle_of_Aljubarrota"
+		]
+	},
+	{
+		"reader": "divinemeaninglessness",
+		"frequency": 17,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Battle_of_Fredericksburg",
+			"./Dataset/English spoken wikipedia/english/Dark_romanticism",
+			"./Dataset/English spoken wikipedia/english/Dewey_Lake_Monster",
+			"./Dataset/English spoken wikipedia/english/Introduction_to_M-theory",
+			"./Dataset/English spoken wikipedia/english/Kindred_(novel)",
+			"./Dataset/English spoken wikipedia/english/Krampus",
+			"./Dataset/English spoken wikipedia/english/Lilith%27s_Brood",
+			"./Dataset/English spoken wikipedia/english/Masters_and_Johnson",
+			"./Dataset/English spoken wikipedia/english/Mu_(lost_continent)",
+			"./Dataset/English spoken wikipedia/english/Nyarlathotep",
+			"./Dataset/English spoken wikipedia/english/Octavia_E._Butler",
+			"./Dataset/English spoken wikipedia/english/Paraprosdokian",
+			"./Dataset/English spoken wikipedia/english/Sex_and_sexuality_in_speculative_fiction",
+			"./Dataset/English spoken wikipedia/english/Sims%2c_North_Dakota",
+			"./Dataset/English spoken wikipedia/english/The_Aleph_(short_story)",
+			"./Dataset/English spoken wikipedia/english/The_Dog_(Goya)",
+			"./Dataset/English spoken wikipedia/english/The_Raven"
+		]
+	},
+	{
+		"reader": "zegoma beach",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Battle_of_Vimy_Ridge",
+			"./Dataset/English spoken wikipedia/english/Harry_Aubrey_de_Vere_Maclean"
+		]
+	},
+	{
+		"reader": "[[user:jormallester|jormallester]]",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Battle_of_Wake_Island",
+			"./Dataset/English spoken wikipedia/english/Doolittle_Raid"
+		]
+	},
+	{
+		"reader": "m4th5",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/BBC_Radio_1",
+			"./Dataset/English spoken wikipedia/english/Kerry_Ellis"
+		]
+	},
+	{
+		"reader": "tom morris",
+		"frequency": 8,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/BBC_Radio_4",
+			"./Dataset/English spoken wikipedia/english/Help_Me_Anthea%2c_I%27m_Infested",
+			"./Dataset/English spoken wikipedia/english/John_Locke",
+			"./Dataset/English spoken wikipedia/english/Microsoft_Bob",
+			"./Dataset/English spoken wikipedia/english/Monument_to_the_Great_Fire_of_London",
+			"./Dataset/English spoken wikipedia/english/Susan_Haack",
+			"./Dataset/English spoken wikipedia/english/Timothy_E._Quill",
+			"./Dataset/English spoken wikipedia/english/Tower_Block_of_Commons"
+		]
+	},
+	{
+		"reader": "dolliellama",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/BDSM",
+			"./Dataset/English spoken wikipedia/english/Cat"
+		]
+	},
+	{
+		"reader": "yarnbarndarn",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Beauchamp%e2%80%93Sharp_Tragedy",
+			"./Dataset/English spoken wikipedia/english/Fritz_the_Cat_(film)"
+		]
+	},
+	{
+		"reader": "drkencarter",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Behavioral_neuroscience",
+			"./Dataset/English spoken wikipedia/english/Global_Assessment_of_Functioning",
+			"./Dataset/English spoken wikipedia/english/Hypochondriasis",
+			"./Dataset/English spoken wikipedia/english/Learned_helplessness",
+			"./Dataset/English spoken wikipedia/english/Shyness"
+		]
+	},
+	{
+		"reader": "eite1wil",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bemidji_State_University"
+		]
+	},
+	{
+		"reader": "timwi",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Berliner_(doughnut)",
+			"./Dataset/English spoken wikipedia/english/Milgram_experiment",
+			"./Dataset/English spoken wikipedia/english/Split_infinitive"
+		]
+	},
+	{
+		"reader": "[[user:cans48|cans48]]",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bertrand_de_Montredon",
+			"./Dataset/English spoken wikipedia/english/Radha"
+		]
+	},
+	{
+		"reader": "[[user:macusercom|macusercom]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bhutanese_passport"
+		]
+	},
+	{
+		"reader": "thecyberwasp",
+		"frequency": 11,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bicycle",
+			"./Dataset/English spoken wikipedia/english/Camden_Town_tube_station",
+			"./Dataset/English spoken wikipedia/english/East_Finchley_tube_station",
+			"./Dataset/English spoken wikipedia/english/Finchley_Central_tube_station",
+			"./Dataset/English spoken wikipedia/english/Gold_standard",
+			"./Dataset/English spoken wikipedia/english/High_Barnet_tube_station",
+			"./Dataset/English spoken wikipedia/english/Mornington_Crescent_tube_station",
+			"./Dataset/English spoken wikipedia/english/Nick_Bakay",
+			"./Dataset/English spoken wikipedia/english/Pre-production",
+			"./Dataset/English spoken wikipedia/english/West_Finchley_tube_station",
+			"./Dataset/English spoken wikipedia/english/Woodside_Park_tube_station"
+		]
+	},
+	{
+		"reader": "original uploaderpjfwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bidet"
+		]
+	},
+	{
+		"reader": "dmitry brant",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Big_Bang",
+			"./Dataset/English spoken wikipedia/english/Laika",
+			"./Dataset/English spoken wikipedia/english/Xenu"
+		]
+	},
+	{
+		"reader": "scott burley",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Billboard",
+			"./Dataset/English spoken wikipedia/english/Western_(genre)"
+		]
+	},
+	{
+		"reader": "laura s",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Binary_star",
+			"./Dataset/English spoken wikipedia/english/History_of_New_Jersey",
+			"./Dataset/English spoken wikipedia/english/Markup_language"
+		]
+	},
+	{
+		"reader": "pinangjawa",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bintulu"
+		]
+	},
+	{
+		"reader": "somejeff",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bird"
+		]
+	},
+	{
+		"reader": "boweruk",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Birkdale_School",
+			"./Dataset/English spoken wikipedia/english/Maid_caf%c3%a9"
+		]
+	},
+	{
+		"reader": "speaker eric",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Birthday_cake",
+			"./Dataset/English spoken wikipedia/english/Equal_Protection_Clause"
+		]
+	},
+	{
+		"reader": "alanasings",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bitch_(magazine)",
+			"./Dataset/English spoken wikipedia/english/Bud_Shank",
+			"./Dataset/English spoken wikipedia/english/Fleet_vehicle",
+			"./Dataset/English spoken wikipedia/english/Katherine_Jackson",
+			"./Dataset/English spoken wikipedia/english/Science_News"
+		]
+	},
+	{
+		"reader": "[[user:targaryen|targaryen]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Blaaksedijk"
+		]
+	},
+	{
+		"reader": "epolk",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Black"
+		]
+	},
+	{
+		"reader": "[[user:lexlexlex|lexlexlex]] alex kasperavicius",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Black_Russian_Terrier",
+			"./Dataset/English spoken wikipedia/english/Pimple"
+		]
+	},
+	{
+		"reader": "richard taylor",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Blue_whale"
+		]
+	},
+	{
+		"reader": "anaxial",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bobcat",
+			"./Dataset/English spoken wikipedia/english/Cougar",
+			"./Dataset/English spoken wikipedia/english/Jaguar"
+		]
+	},
+	{
+		"reader": "nbierma",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bobsleigh",
+			"./Dataset/English spoken wikipedia/english/Edmund_G._Ross",
+			"./Dataset/English spoken wikipedia/english/Four-minute_mile",
+			"./Dataset/English spoken wikipedia/english/Quantity_theory_of_money",
+			"./Dataset/English spoken wikipedia/english/Sogdian_language",
+			"./Dataset/English spoken wikipedia/english/William_Labov"
+		]
+	},
+	{
+		"reader": "pyrogamer",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bob_Dylan"
+		]
+	},
+	{
+		"reader": "[[user:vulture19|vulture19]] ([[user talk:vulture19|talk]])",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bob_Ferguson_(infielder)"
+		]
+	},
+	{
+		"reader": "warmvoiceover",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bob_Parsons"
+		]
+	},
+	{
+		"reader": "cameltrader",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Braille",
+			"./Dataset/English spoken wikipedia/english/Computer_accessibility"
+		]
+	},
+	{
+		"reader": "caninedoubletake",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Buffalo_buffalo_Buffalo_buffalo_buffalo_buffalo_Buffalo_buffalo",
+			"./Dataset/English spoken wikipedia/english/Interstate_35",
+			"./Dataset/English spoken wikipedia/english/Michio_Kaku"
+		]
+	},
+	{
+		"reader": "fumitol",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Bukkake"
+		]
+	},
+	{
+		"reader": "[[user:pharos|pharos]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Burn"
+		]
+	},
+	{
+		"reader": "original uploaderpopularoutcastwikipediaen",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/But_I%27m_a_Cheerleader",
+			"./Dataset/English spoken wikipedia/english/Flag_of_Canada"
+		]
+	},
+	{
+		"reader": "silsor",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Buzkashi"
+		]
+	},
+	{
+		"reader": "alexbrewer",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Buzz_Out_Loud"
+		]
+	},
+	{
+		"reader": "sethda",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/C._S._Lewis",
+			"./Dataset/English spoken wikipedia/english/J._R._R._Tolkien"
+		]
+	},
+	{
+		"reader": "demi",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Caesar_cipher",
+			"./Dataset/English spoken wikipedia/english/Cladistics",
+			"./Dataset/English spoken wikipedia/english/Evolution",
+			"./Dataset/English spoken wikipedia/english/Lithia_Park"
+		]
+	},
+	{
+		"reader": "chadley99",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Caesium",
+			"./Dataset/English spoken wikipedia/english/Rosetta_Project",
+			"./Dataset/English spoken wikipedia/english/Thomas_Pynchon",
+			"./Dataset/English spoken wikipedia/english/Ys"
+		]
+	},
+	{
+		"reader": "[[user:alexkillby|alexkillby]]",
+		"frequency": 9,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Caetano_Veloso",
+			"./Dataset/English spoken wikipedia/english/Copetown%2c_Ontario",
+			"./Dataset/English spoken wikipedia/english/Economy_of_Ontario",
+			"./Dataset/English spoken wikipedia/english/Omayra_S%c3%a1nchez",
+			"./Dataset/English spoken wikipedia/english/Order_of_Canada",
+			"./Dataset/English spoken wikipedia/english/Parity_of_zero",
+			"./Dataset/English spoken wikipedia/english/Rare_Breeds_Canada",
+			"./Dataset/English spoken wikipedia/english/University_of_Bras%c3%adlia",
+			"./Dataset/English spoken wikipedia/english/Wage_reform_in_the_Soviet_Union%2c_1956%e2%80%9362"
+		]
+	},
+	{
+		"reader": "dwaipayanc",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Calcutta_Flag"
+		]
+	},
+	{
+		"reader": "pokeylicious",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Calvin_and_Hobbes"
+		]
+	},
+	{
+		"reader": "ka-ping yee",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Canada"
+		]
+	},
+	{
+		"reader": "warpig1994",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Cascade_amplifier",
+			"./Dataset/English spoken wikipedia/english/Digital_audio",
+			"./Dataset/English spoken wikipedia/english/MIDI_tuning_standard",
+			"./Dataset/English spoken wikipedia/english/Peak_meter",
+			"./Dataset/English spoken wikipedia/english/Repeating_coil"
+		]
+	},
+	{
+		"reader": "[[user:matthewdgonzalez|matthew david gonzález]]",
+		"frequency": 9,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Catholic_Church",
+			"./Dataset/English spoken wikipedia/english/Catholic_liturgy",
+			"./Dataset/English spoken wikipedia/english/Cory_Booker",
+			"./Dataset/English spoken wikipedia/english/Council_of_Trent",
+			"./Dataset/English spoken wikipedia/english/Eucharistic_theology",
+			"./Dataset/English spoken wikipedia/english/George_Lansbury",
+			"./Dataset/English spoken wikipedia/english/Liturgy_of_the_Hours",
+			"./Dataset/English spoken wikipedia/english/Rosary",
+			"./Dataset/English spoken wikipedia/english/Saint_Peter"
+		]
+	},
+	{
+		"reader": "[[user:mikewhitcombe|mrw]] ([[user talk:mikewhitcombe|talk]]) 22:54, 12 december 2011 (utc)",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Cecina%2c_Tuscany"
+		]
+	},
+	{
+		"reader": "aguerriero",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Central_processing_unit",
+			"./Dataset/English spoken wikipedia/english/Metal_umlaut",
+			"./Dataset/English spoken wikipedia/english/Opaline_glass",
+			"./Dataset/English spoken wikipedia/english/Phil_Collins"
+		]
+	},
+	{
+		"reader": "hkeely",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Chattanooga_Times_Free_Press"
+		]
+	},
+	{
+		"reader": "donbert",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Cheese",
+			"./Dataset/English spoken wikipedia/english/Night"
+		]
+	},
+	{
+		"reader": "rfc1394",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Chess",
+			"./Dataset/English spoken wikipedia/english/Down_to_a_Sunless_Sea",
+			"./Dataset/English spoken wikipedia/english/Tank"
+		]
+	},
+	{
+		"reader": "bmicomp",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Chicago",
+			"./Dataset/English spoken wikipedia/english/Richard_M._Daley"
+		]
+	},
+	{
+		"reader": "user at projecttdxiangwikipediaen.",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/CHIJMES"
+		]
+	},
+	{
+		"reader": "cat1205123",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Child"
+		]
+	},
+	{
+		"reader": "trbleclef",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Choir"
+		]
+	},
+	{
+		"reader": "faxcelestis",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Christopher_O%27Riley",
+			"./Dataset/English spoken wikipedia/english/Cyberpunk"
+		]
+	},
+	{
+		"reader": "jdoorjam",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Chris_Hadfield"
+		]
+	},
+	{
+		"reader": "radio.edit",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Chris_Moyles"
+		]
+	},
+	{
+		"reader": "[[user:laurahale]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Chris_Nunn"
+		]
+	},
+	{
+		"reader": "gallen89",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Civilization_II"
+		]
+	},
+	{
+		"reader": "donnyj",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/CKSY-FM"
+		]
+	},
+	{
+		"reader": "[[user:mikewhitcombe|mrw]] ([[user talk:mikewhitcombe|talk]])",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Claudio_Capone"
+		]
+	},
+	{
+		"reader": "gonzonoir",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Cleveland_Street_scandal"
+		]
+	},
+	{
+		"reader": "brinticus",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Clockwork",
+			"./Dataset/English spoken wikipedia/english/First_Crusade",
+			"./Dataset/English spoken wikipedia/english/Free_will",
+			"./Dataset/English spoken wikipedia/english/Hikaru_Sulu",
+			"./Dataset/English spoken wikipedia/english/USS_Missouri_(BB-63)"
+		]
+	},
+	{
+		"reader": "alabaster constantine iii",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Cock_and_ball_torture"
+		]
+	},
+	{
+		"reader": "puffin",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Coleslaw"
+		]
+	},
+	{
+		"reader": "gonknet",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/College_football"
+		]
+	},
+	{
+		"reader": "[[user:learnerktm|learnerktm]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Columbian_mammoth"
+		]
+	},
+	{
+		"reader": "original uploaderurbanxplorerwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Compact_Cassette"
+		]
+	},
+	{
+		"reader": "slashdottir",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Computational_geometry",
+			"./Dataset/English spoken wikipedia/english/Merkle_tree"
+		]
+	},
+	{
+		"reader": "ljl",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Consonant",
+			"./Dataset/English spoken wikipedia/english/Gemination",
+			"./Dataset/English spoken wikipedia/english/Language",
+			"./Dataset/English spoken wikipedia/english/Milanese_dialect",
+			"./Dataset/English spoken wikipedia/english/Vowel"
+		]
+	},
+	{
+		"reader": "oblong1",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Controversy"
+		]
+	},
+	{
+		"reader": "jamen somasu",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Copa_Libertadores"
+		]
+	},
+	{
+		"reader": "stifle",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Cork_Kent_railway_station"
+		]
+	},
+	{
+		"reader": "iceflow",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Cyw",
+			"./Dataset/English spoken wikipedia/english/S4C"
+		]
+	},
+	{
+		"reader": "[[w:user:alexkillby|alexkillby]]",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/David_Orazietti",
+			"./Dataset/English spoken wikipedia/english/Graveyard_of_the_Atlantic",
+			"./Dataset/English spoken wikipedia/english/Matthew_3%3a17",
+			"./Dataset/English spoken wikipedia/english/Pedr_James",
+			"./Dataset/English spoken wikipedia/english/Seasons_in_the_Sun",
+			"./Dataset/English spoken wikipedia/english/Sosoliso_Airlines_Flight_1145"
+		]
+	},
+	{
+		"reader": "drjacobson",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Davy_Crockett",
+			"./Dataset/English spoken wikipedia/english/Ryanair",
+			"./Dataset/English spoken wikipedia/english/Yosemite_National_Park"
+		]
+	},
+	{
+		"reader": "[[user:chuancheng|chuancheng]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Da_Lat"
+		]
+	},
+	{
+		"reader": "genjix",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Deinosuchus",
+			"./Dataset/English spoken wikipedia/english/E.V.O.%3a_Search_for_Eden",
+			"./Dataset/English spoken wikipedia/english/Jurassic",
+			"./Dataset/English spoken wikipedia/english/Shahreza"
+		]
+	},
+	{
+		"reader": "llamax0r",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Deluxe_Distribution"
+		]
+	},
+	{
+		"reader": "alekjds",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Demetrius_of_Thessaloniki",
+			"./Dataset/English spoken wikipedia/english/Pope_Demetrius_I_of_Alexandria"
+		]
+	},
+	{
+		"reader": "adaru",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Derbyshire_Constabulary"
+		]
+	},
+	{
+		"reader": "cgp",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Dilbert_principle",
+			"./Dataset/English spoken wikipedia/english/Godwin%27s_law",
+			"./Dataset/English spoken wikipedia/english/Light-year",
+			"./Dataset/English spoken wikipedia/english/Maus"
+		]
+	},
+	{
+		"reader": "fuzheado",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Dim_sum",
+			"./Dataset/English spoken wikipedia/english/Pulitzer_Prize"
+		]
+	},
+	{
+		"reader": "[[user:docontheweb|docontheweb]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Dirty_Harry_(1990_video_game)"
+		]
+	},
+	{
+		"reader": "[[user:ama1016|ama1016]]",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Disability",
+			"./Dataset/English spoken wikipedia/english/Disability_etiquette",
+			"./Dataset/English spoken wikipedia/english/Disability_rights_movement"
+		]
+	},
+	{
+		"reader": "kevin f. story",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Dizzy_Gillespie",
+			"./Dataset/English spoken wikipedia/english/Julius_Caesar"
+		]
+	},
+	{
+		"reader": "cupobeans",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/DNA"
+		]
+	},
+	{
+		"reader": "user at projectm4th5wikipediaen",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Doctor_Who",
+			"./Dataset/English spoken wikipedia/english/Harry_Potter",
+			"./Dataset/English spoken wikipedia/english/Harry_Potter_(film_series)"
+		]
+	},
+	{
+		"reader": "lightdarkness",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Douglas_Adams",
+			"./Dataset/English spoken wikipedia/english/Raney_nickel"
+		]
+	},
+	{
+		"reader": "luigi30",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Drum",
+			"./Dataset/English spoken wikipedia/english/Duck_and_cover",
+			"./Dataset/English spoken wikipedia/english/Incident_at_Petrich",
+			"./Dataset/English spoken wikipedia/english/John_of_Ibelin%2c_the_Old_Lord_of_Beirut",
+			"./Dataset/English spoken wikipedia/english/Read-only_memory",
+			"./Dataset/English spoken wikipedia/english/Transliteration"
+		]
+	},
+	{
+		"reader": "vogelstein",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Dumb_iron"
+		]
+	},
+	{
+		"reader": "flyingtoaster",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Dungeons_&_Dragons",
+			"./Dataset/English spoken wikipedia/english/Edgar_Allan_Poe",
+			"./Dataset/English spoken wikipedia/english/Transhumanism"
+		]
+	},
+	{
+		"reader": "user at projecttonylewikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Durian"
+		]
+	},
+	{
+		"reader": "m87",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Economy_of_Africa"
+		]
+	},
+	{
+		"reader": "smith609",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Ediacaran_biota"
+		]
+	},
+	{
+		"reader": "jonjalin",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Edward_Clifford",
+			"./Dataset/English spoken wikipedia/english/Siesta"
+		]
+	},
+	{
+		"reader": "simonxag",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Elizabeth_Needham",
+			"./Dataset/English spoken wikipedia/english/Pegging_(sexual_practice)"
+		]
+	},
+	{
+		"reader": "arbay",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Elworth"
+		]
+	},
+	{
+		"reader": "[[user:matthewdgonzalez|matthew david gonzalez]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Emily_Donelson"
+		]
+	},
+	{
+		"reader": "falconilla red foreman",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Erotic_spanking",
+			"./Dataset/English spoken wikipedia/english/Nipple_stimulation",
+			"./Dataset/English spoken wikipedia/english/Soggy_biscuit"
+		]
+	},
+	{
+		"reader": "genjix + darkweasel. [[:en:user:genjix|genjix]] at [http://en.wikipedia.org en.wikipedia]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Esperanto"
+		]
+	},
+	{
+		"reader": "thorpe",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Eurotunnel"
+		]
+	},
+	{
+		"reader": "[[w:en:user:captaincomedy|james avestruz]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Extension_tube"
+		]
+	},
+	{
+		"reader": "original uploaderthe jacobinwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Facebook"
+		]
+	},
+	{
+		"reader": "american patriot 1776",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Federalist_No._42"
+		]
+	},
+	{
+		"reader": "martin schlederer",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Feldherrnhalle"
+		]
+	},
+	{
+		"reader": "arwel_parry",
+		"frequency": 6,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Felix_von_Luckner",
+			"./Dataset/English spoken wikipedia/english/Plaid_Cymru",
+			"./Dataset/English spoken wikipedia/english/Ruthin",
+			"./Dataset/English spoken wikipedia/english/The_Tay_Bridge_Disaster",
+			"./Dataset/English spoken wikipedia/english/Welsh_language",
+			"./Dataset/English spoken wikipedia/english/William_McGonagall"
+		]
+	},
+	{
+		"reader": "barkingfish",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Fentanyl"
+		]
+	},
+	{
+		"reader": ".v.",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Fetal_trimethadione_syndrome"
+		]
+	},
+	{
+		"reader": "icey",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Film4"
+		]
+	},
+	{
+		"reader": "original uploadermantisianwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Final_Fantasy_VI"
+		]
+	},
+	{
+		"reader": "finnish reader",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Finnish_sauna",
+			"./Dataset/English spoken wikipedia/english/Lego",
+			"./Dataset/English spoken wikipedia/english/S%c3%a1pmi",
+			"./Dataset/English spoken wikipedia/english/The_Adventures_of_Tintin"
+		]
+	},
+	{
+		"reader": "moulder",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/First_Amendment_to_the_United_States_Constitution",
+			"./Dataset/English spoken wikipedia/english/Mootness"
+		]
+	},
+	{
+		"reader": "[[user:tarif7|tarif7]]",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Flame_test",
+			"./Dataset/English spoken wikipedia/english/Menatetrenone",
+			"./Dataset/English spoken wikipedia/english/Phytomenadione",
+			"./Dataset/English spoken wikipedia/english/Quadrupole_mass_analyzer"
+		]
+	},
+	{
+		"reader": "jdhowens90",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Flanders_and_Swann",
+			"./Dataset/English spoken wikipedia/english/Menai_Suspension_Bridge",
+			"./Dataset/English spoken wikipedia/english/Mission_Praise",
+			"./Dataset/English spoken wikipedia/english/The_Most_Honourable",
+			"./Dataset/English spoken wikipedia/english/Winston_Churchill"
+		]
+	},
+	{
+		"reader": "tgies",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Flanging"
+		]
+	},
+	{
+		"reader": "[[user:bluemarine|bluemarine]]",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Flash_(Barry_Allen)",
+			"./Dataset/English spoken wikipedia/english/Humanism",
+			"./Dataset/English spoken wikipedia/english/John_Stewart_(comics)"
+		]
+	},
+	{
+		"reader": "p.b. pilhet",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Florida_Highway_Patrol",
+			"./Dataset/English spoken wikipedia/english/Michelle_Branch",
+			"./Dataset/English spoken wikipedia/english/Taliesin_Orchestra",
+			"./Dataset/English spoken wikipedia/english/Vanessa_Carlton"
+		]
+	},
+	{
+		"reader": "the editor1",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Fork",
+			"./Dataset/English spoken wikipedia/english/Ice_cube",
+			"./Dataset/English spoken wikipedia/english/Sandpit"
+		]
+	},
+	{
+		"reader": "christopherwoods",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Formula_One%3a_Built_to_Win"
+		]
+	},
+	{
+		"reader": "funkyspecs",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Forty_winks",
+			"./Dataset/English spoken wikipedia/english/Wang_Jingwei",
+			"./Dataset/English spoken wikipedia/english/Yan_Xishan"
+		]
+	},
+	{
+		"reader": "user at projectdreamsreignwikipediaen",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Fourth_Crusade",
+			"./Dataset/English spoken wikipedia/english/Yes_(band)"
+		]
+	},
+	{
+		"reader": "the king",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Fr%c3%a9d%c3%a9ric_Bastiat",
+			"./Dataset/English spoken wikipedia/english/Handjob",
+			"./Dataset/English spoken wikipedia/english/Logitech"
+		]
+	},
+	{
+		"reader": "jake wasdin",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/FriendFeed"
+		]
+	},
+	{
+		"reader": "alexmanchester",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Fuck"
+		]
+	},
+	{
+		"reader": "beno1000",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Furry_fandom"
+		]
+	},
+	{
+		"reader": "[[user:cobrafountain|cobrafountain]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Futurist_cooking"
+		]
+	},
+	{
+		"reader": "[[:en:user:oisinisio|oisinisio]] at en.wikipedia",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Gaisce_%e2%80%93_The_President%27s_Award"
+		]
+	},
+	{
+		"reader": "[[:en:user:vulture19|vulture19]] at en.wikipedia",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Garfield_Minus_Garfield"
+		]
+	},
+	{
+		"reader": "leotohill",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Gaucher%27s_disease",
+			"./Dataset/English spoken wikipedia/english/Louis_Slotin",
+			"./Dataset/English spoken wikipedia/english/Management_of_multiple_sclerosis",
+			"./Dataset/English spoken wikipedia/english/Subterranean_Homesick_Blues"
+		]
+	},
+	{
+		"reader": "enormator",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Gedit"
+		]
+	},
+	{
+		"reader": "masonpatriot",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/George_Mason_University"
+		]
+	},
+	{
+		"reader": "original uploadernunh-huhwikipediaen",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/George_Washington",
+			"./Dataset/English spoken wikipedia/english/Thomas_Jefferson"
+		]
+	},
+	{
+		"reader": "derfel73",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/George_Washington%27s_crossing_of_the_Delaware_River"
+		]
+	},
+	{
+		"reader": "[[user:the voice of hassocks|the voice of hassocks]]germany is getting rid of cars",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Germany"
+		]
+	},
+	{
+		"reader": "gilbertosilvafan",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Gilberto_Silva"
+		]
+	},
+	{
+		"reader": "original uploaderreason turns rancidwikipediaen",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Glasses",
+			"./Dataset/English spoken wikipedia/english/Grim_Fandango"
+		]
+	},
+	{
+		"reader": "[[user:jzcl|jzcl]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Goalkeeper_(water_polo)"
+		]
+	},
+	{
+		"reader": "theexistentialist_383",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/God"
+		]
+	},
+	{
+		"reader": "lgsoltek",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Golden_Shield_Project"
+		]
+	},
+	{
+		"reader": "abc27400",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Grace_(style)"
+		]
+	},
+	{
+		"reader": "dukeruckley",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Greatest_Hits_(Lost)"
+		]
+	},
+	{
+		"reader": "[[user:arthurtj|arthurtj]] ([[user talk:arthurtj|talk]])",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Great_Langton",
+			"./Dataset/English spoken wikipedia/english/Suckley"
+		]
+	},
+	{
+		"reader": "londonsista",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Green_Wing_(series_1)"
+		]
+	},
+	{
+		"reader": "[[user:alexkillby|alexkillby]] ([[user talk:alexkillby|talk]])",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Greg_James",
+			"./Dataset/English spoken wikipedia/english/Kandersteg",
+			"./Dataset/English spoken wikipedia/english/Scott_Mills",
+			"./Dataset/English spoken wikipedia/english/United_States_Secretary_of_State"
+		]
+	},
+	{
+		"reader": "etoile",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Guide_dog"
+		]
+	},
+	{
+		"reader": "beck162",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Guitar_Hero_(video_game)",
+			"./Dataset/English spoken wikipedia/english/Quality_of_service",
+			"./Dataset/English spoken wikipedia/english/Through_the_Looking_Glass_(Lost)"
+		]
+	},
+	{
+		"reader": "cbdroege",
+		"frequency": 5,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Gumball_machine",
+			"./Dataset/English spoken wikipedia/english/Oriel_College%2c_Oxford",
+			"./Dataset/English spoken wikipedia/english/Paul_L._Kirk",
+			"./Dataset/English spoken wikipedia/english/The_Illuminatus!_Trilogy",
+			"./Dataset/English spoken wikipedia/english/The_Smashing_Pumpkins"
+		]
+	},
+	{
+		"reader": "[[:en:user:tdxiang|tdxiang]] at en.wikipedia and see [http://en.wikipedia.org/w/index.php?title=habemus_papam&action=history here]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Habemus_Papam"
+		]
+	},
+	{
+		"reader": "original uploaderailes griseswikipediaen",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Haibane_Renmei",
+			"./Dataset/English spoken wikipedia/english/Ocarina"
+		]
+	},
+	{
+		"reader": "rahzel",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Half-Life_2"
+		]
+	},
+	{
+		"reader": "karltalk",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hamlet",
+			"./Dataset/English spoken wikipedia/english/Star_Trek_II%3a_The_Wrath_of_Khan",
+			"./Dataset/English spoken wikipedia/english/Zelda_Fitzgerald"
+		]
+	},
+	{
+		"reader": "do'neil",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hammer_and_sickle",
+			"./Dataset/English spoken wikipedia/english/La_Paz"
+		]
+	},
+	{
+		"reader": "audioman",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hanyu_Shuiping_Kaoshi",
+			"./Dataset/English spoken wikipedia/english/Hong_Kong_Observatory",
+			"./Dataset/English spoken wikipedia/english/Special_administrative_regions_of_China",
+			"./Dataset/English spoken wikipedia/english/Three_men_make_a_tiger"
+		]
+	},
+	{
+		"reader": "user at projectflyingtoasterwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Harvey_Milk"
+		]
+	},
+	{
+		"reader": "andrew d white",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hayley_Westenra"
+		]
+	},
+	{
+		"reader": "mm35173",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Helen_Gandy"
+		]
+	},
+	{
+		"reader": "dbrouse",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Helicobacter_pylori",
+			"./Dataset/English spoken wikipedia/english/NonVisual_Desktop_Access"
+		]
+	},
+	{
+		"reader": "cintoli",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Henry_Purcell"
+		]
+	},
+	{
+		"reader": "[[user:sky harbor|sky harbor]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hepatitis_C"
+		]
+	},
+	{
+		"reader": "dajes13",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hickey"
+		]
+	},
+	{
+		"reader": "pordaria",
+		"frequency": 7,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/History_of_Israel",
+			"./Dataset/English spoken wikipedia/english/History_of_Jordan",
+			"./Dataset/English spoken wikipedia/english/History_of_Lebanon",
+			"./Dataset/English spoken wikipedia/english/History_of_the_Middle_East",
+			"./Dataset/English spoken wikipedia/english/Islamic_feminism",
+			"./Dataset/English spoken wikipedia/english/Middle_East",
+			"./Dataset/English spoken wikipedia/english/Ottoman_Empire"
+		]
+	},
+	{
+		"reader": "[[:en:user:pordaria|pordaria]] at en.wikipedia",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/History_of_Saudi_Arabia",
+			"./Dataset/English spoken wikipedia/english/History_of_Syria"
+		]
+	},
+	{
+		"reader": "original uploadernorvywikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/History_of_the_Grand_Canyon_area"
+		]
+	},
+	{
+		"reader": "charcoal",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hockey_Hall_of_Fame"
+		]
+	},
+	{
+		"reader": "",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hofgarten_(Munich)",
+			"./Dataset/English spoken wikipedia/english/SummerSlam_(2003)",
+			"./Dataset/English spoken wikipedia/english/The_Thriving_Cult_of_Greed_and_Power"
+		]
+	},
+	{
+		"reader": "calvin 1998",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Holly_Short"
+		]
+	},
+	{
+		"reader": "enviroboy",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Homer%27s_Odyssey_(The_Simpsons)",
+			"./Dataset/English spoken wikipedia/english/Simpsons_Roasting_on_an_Open_Fire",
+			"./Dataset/English spoken wikipedia/english/There%27s_No_Disgrace_Like_Home"
+		]
+	},
+	{
+		"reader": "uk-logician-2006",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Homer%27s_Phobia",
+			"./Dataset/English spoken wikipedia/english/Law_Reform_(Year_and_a_Day_Rule)_Act_1996",
+			"./Dataset/English spoken wikipedia/english/Parliament_Acts_1911_and_1949",
+			"./Dataset/English spoken wikipedia/english/Parliament_of_the_United_Kingdom"
+		]
+	},
+	{
+		"reader": "panser born",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hong_Kong_action_cinema",
+			"./Dataset/English spoken wikipedia/english/Star_Wars%3a_Episode_II_%e2%80%93_Attack_of_the_Clones",
+			"./Dataset/English spoken wikipedia/english/Star_Wars%3a_Episode_I_%e2%80%93_The_Phantom_Menace"
+		]
+	},
+	{
+		"reader": "rebelguys2",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hook_%27em_Horns"
+		]
+	},
+	{
+		"reader": "salsasam",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hubble_Space_Telescope",
+			"./Dataset/English spoken wikipedia/english/Space_elevator"
+		]
+	},
+	{
+		"reader": "vr-land",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hubert_Blaine_Wolfeschlegelsteinhausenbergerdorff%2c_Sr%2e"
+		]
+	},
+	{
+		"reader": "author assumed[[user:theboatashore|theboatashore]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Humpback_whale"
+		]
+	},
+	{
+		"reader": "tlogmer",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hundertwasserhaus",
+			"./Dataset/English spoken wikipedia/english/Mill_Ends_Park",
+			"./Dataset/English spoken wikipedia/english/S._A._Andr%c3%a9e%27s_Arctic_Balloon_Expedition_of_1897"
+		]
+	},
+	{
+		"reader": "redbeanpaste",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hungary_at_the_1988_Winter_Olympics"
+		]
+	},
+	{
+		"reader": "gatewaycat",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hunter_College_High_School"
+		]
+	},
+	{
+		"reader": "unknown",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Hydrogen"
+		]
+	},
+	{
+		"reader": "[[:en:user:alexkillby|alexkillby]] at en.wikipedia",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Icos"
+		]
+	},
+	{
+		"reader": "sirlispsalot",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Imagism"
+		]
+	},
+	{
+		"reader": "user at projectkenkuhlwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Ima_Hogg"
+		]
+	},
+	{
+		"reader": "peppage",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Imperial_Airlines_Flight_201%2f8",
+			"./Dataset/English spoken wikipedia/english/Pilot_(House)",
+			"./Dataset/English spoken wikipedia/english/Sigi_Schmid",
+			"./Dataset/English spoken wikipedia/english/Titan_(supercomputer)"
+		]
+	},
+	{
+		"reader": "ambuj.saxena",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Indian_Railways"
+		]
+	},
+	{
+		"reader": "[[user:ashlin|ashlin]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Insect"
+		]
+	},
+	{
+		"reader": "original uploadermangstwikipediaen",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Interactive_voice_response",
+			"./Dataset/English spoken wikipedia/english/Janus_(moon)",
+			"./Dataset/English spoken wikipedia/english/Telesto_(moon)",
+			"./Dataset/English spoken wikipedia/english/Tethys_(moon)"
+		]
+	},
+	{
+		"reader": "a.c. norman",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Isaac_Newton"
+		]
+	},
+	{
+		"reader": "user at projectpinangjawawikipediaen",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Istana_Negara%2c_Jalan_Istana",
+			"./Dataset/English spoken wikipedia/english/Shahnon_Ahmad"
+		]
+	},
+	{
+		"reader": "[[user:madridteacher1|madridteacher1]]",
+		"frequency": 4,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Jack_Sheppard",
+			"./Dataset/English spoken wikipedia/english/Jack_the_Ripper",
+			"./Dataset/English spoken wikipedia/english/John_Hines_(Australian_soldier)",
+			"./Dataset/English spoken wikipedia/english/U2"
+		]
+	},
+	{
+		"reader": "[[w:en:user:dev920|dev920]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Jake_Gyllenhaal"
+		]
+	},
+	{
+		"reader": "reason turns rancid",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Jim_Henson",
+			"./Dataset/English spoken wikipedia/english/LibriVox"
+		]
+	},
+	{
+		"reader": "realgrouchy",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/John_By"
+		]
+	},
+	{
+		"reader": "original uploaderalexkillbywikipediaen",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/John_C._Dvorak",
+			"./Dataset/English spoken wikipedia/english/RMS_Titanic",
+			"./Dataset/English spoken wikipedia/english/Stop_Online_Piracy_Act"
+		]
+	},
+	{
+		"reader": "sctechlaw",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/John_Fraser_(botanist)"
+		]
+	},
+	{
+		"reader": "jules ismail",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Julesburg%2c_Colorado"
+		]
+	},
+	{
+		"reader": "jebjoya",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Julia_set",
+			"./Dataset/English spoken wikipedia/english/Prisoner%27s_dilemma"
+		]
+	},
+	{
+		"reader": "pacian",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Julie_Brown"
+		]
+	},
+	{
+		"reader": "omaryak",
+		"frequency": 8,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Kargil_War",
+			"./Dataset/English spoken wikipedia/english/Read_my_lips%3a_no_new_taxes",
+			"./Dataset/English spoken wikipedia/english/Supreme_Court_of_the_United_States",
+			"./Dataset/English spoken wikipedia/english/Ubuntu_(operating_system)",
+			"./Dataset/English spoken wikipedia/english/Ubuntu_(philosophy)",
+			"./Dataset/English spoken wikipedia/english/United_States_Congress",
+			"./Dataset/English spoken wikipedia/english/United_States_House_of_Representatives",
+			"./Dataset/English spoken wikipedia/english/United_States_Senate"
+		]
+	},
+	{
+		"reader": "nicholasturnbull",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Kenneth_Lay"
+		]
+	},
+	{
+		"reader": "colouredpencils",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Kevin_Bowyer"
+		]
+	},
+	{
+		"reader": "liamkeanedotcom",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Kid_Cudi"
+		]
+	},
+	{
+		"reader": "[[user:oblong1|oblong1]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Kilometre"
+		]
+	},
+	{
+		"reader": "eleaverton",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Kimono",
+			"./Dataset/English spoken wikipedia/english/Sound_Transit"
+		]
+	},
+	{
+		"reader": "dancing raccoon",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Klaip%c4%97da_Revolt"
+		]
+	},
+	{
+		"reader": "slovakjoe",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Ko%c5%a1ice",
+			"./Dataset/English spoken wikipedia/english/Old_Man_of_the_Mountain",
+			"./Dataset/English spoken wikipedia/english/Stoneham%2c_Massachusetts"
+		]
+	},
+	{
+		"reader": "[[user:davumaya|davumaya]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Laissez-faire"
+		]
+	},
+	{
+		"reader": "afrocatz",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Lard"
+		]
+	},
+	{
+		"reader": "pjf",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Larry_Wall"
+		]
+	},
+	{
+		"reader": "honinbou",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Leck_mich_im_Arsch"
+		]
+	},
+	{
+		"reader": "user at projecthassocks5489wikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Leek_Town_F.C%2e"
+		]
+	},
+	{
+		"reader": "original uploaderhkeelywikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Lee_University"
+		]
+	},
+	{
+		"reader": "podpedia",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Lemmings_(video_game)"
+		]
+	},
+	{
+		"reader": "literatpj",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Literary_criticism"
+		]
+	},
+	{
+		"reader": "gigs",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Lolcat"
+		]
+	},
+	{
+		"reader": "willsax",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Longest_word_in_English"
+		]
+	},
+	{
+		"reader": "laurahale",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Luka_Magnotta"
+		]
+	},
+	{
+		"reader": "[[user:sethallen623|sethallen623]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/M._C._Escher"
+		]
+	},
+	{
+		"reader": "aibarr",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Macular_degeneration"
+		]
+	},
+	{
+		"reader": "author assumed[[user:spacecat2~commonswiki|spacecat2~commonswiki]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mail"
+		]
+	},
+	{
+		"reader": "silas s. brown",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mainland_Chinese_Braille",
+			"./Dataset/English spoken wikipedia/english/Schr%c3%b6dinger%27s_cat"
+		]
+	},
+	{
+		"reader": "[[user:ex-nimh-researcher|ex-nimh-researcher]]",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Major_depressive_disorder",
+			"./Dataset/English spoken wikipedia/english/Schizophrenia"
+		]
+	},
+	{
+		"reader": "[[user:simonxag|simonspeed]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mammary_intercourse"
+		]
+	},
+	{
+		"reader": "cinosaur",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mantra-Rock_Dance"
+		]
+	},
+	{
+		"reader": "bluearctos",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mary_Elizabeth_McGlynn"
+		]
+	},
+	{
+		"reader": "sloant",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mary_Wollstonecraft"
+		]
+	},
+	{
+		"reader": "danielholth",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Masala_chai",
+			"./Dataset/English spoken wikipedia/english/Sealed_crustless_sandwich",
+			"./Dataset/English spoken wikipedia/english/Spaghetti-tree_hoax"
+		]
+	},
+	{
+		"reader": "[[user:tdxiang|tdxiang]] at en.wikipedia.",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mass_Rapid_Transit_(Singapore)"
+		]
+	},
+	{
+		"reader": "bellito",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Matthew_Brettingham"
+		]
+	},
+	{
+		"reader": "t j mckenzie",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/McGillicuddy_Serious_Party",
+			"./Dataset/English spoken wikipedia/english/Median_test",
+			"./Dataset/English spoken wikipedia/english/Sola_gratia"
+		]
+	},
+	{
+		"reader": "taestell",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/McJob"
+		]
+	},
+	{
+		"reader": "[[user:stylessan|stylessan]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Medieval_studies"
+		]
+	},
+	{
+		"reader": "erikpatt",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mental_disorder"
+		]
+	},
+	{
+		"reader": "user at projectmasterdirkwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mercury_(planet)"
+		]
+	},
+	{
+		"reader": "bernstein2291",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Meteorological_history_of_Hurricane_Katrina"
+		]
+	},
+	{
+		"reader": "[[user:barkingfish|barkingfish]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Michael_Evans_(bishop)"
+		]
+	},
+	{
+		"reader": "mykreeve",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mitochondrial_Eve",
+			"./Dataset/English spoken wikipedia/english/Westminster_Abbey"
+		]
+	},
+	{
+		"reader": "[[user:sirflashington|sirflashington]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Monkey_Island_(series)"
+		]
+	},
+	{
+		"reader": "zoohouse",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Monofilament_fishing_line"
+		]
+	},
+	{
+		"reader": "vneiomazza",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Montr%c3%a9al%e2%80%93Mirabel_International_Airport"
+		]
+	},
+	{
+		"reader": "montrealais",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Montreal"
+		]
+	},
+	{
+		"reader": "yuendumu",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Mumia_Abu-Jamal"
+		]
+	},
+	{
+		"reader": "[[user:mnntoino|mnntoino]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Munich"
+		]
+	},
+	{
+		"reader": "vulture19",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Museum_of_Bad_Art"
+		]
+	},
+	{
+		"reader": "quas naart",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Myst"
+		]
+	},
+	{
+		"reader": "[[user:rybupsp|rybupsp]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Namibia"
+		]
+	},
+	{
+		"reader": "[[:en:user:coolcat]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/NASA"
+		]
+	},
+	{
+		"reader": "[[user:koman90|koman90]] ([[user talk:koman90|talk]])",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/National_Federation_of_the_Blind_v._Target_Corp%2e"
+		]
+	},
+	{
+		"reader": "original uploaderacather96wikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Need_for_Speed%3a_Hot_Pursuit_(2010_video_game)"
+		]
+	},
+	{
+		"reader": "mnntoino",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Neuschwanstein_Castle"
+		]
+	},
+	{
+		"reader": "the_seraphim",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/New_York_State_Route_174"
+		]
+	},
+	{
+		"reader": "user at projectailes griseswikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Nick_Drake"
+		]
+	},
+	{
+		"reader": "kenjamin",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Nigga"
+		]
+	},
+	{
+		"reader": "soothingr",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Nightwish"
+		]
+	},
+	{
+		"reader": "[[user:monocletophat123|monocletophat123]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Nine-segment_display"
+		]
+	},
+	{
+		"reader": "batmanand",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Not_the_Nine_O%27Clock_News"
+		]
+	},
+	{
+		"reader": "markkasan",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Nuclear_weapon"
+		]
+	},
+	{
+		"reader": "tbonespop",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Oasis_(band)"
+		]
+	},
+	{
+		"reader": "arsia mons",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Oberon_(moon)"
+		]
+	},
+	{
+		"reader": "lordoider",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Oktoberfest"
+		]
+	},
+	{
+		"reader": "phil-hong",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Old_City_Hall_(Toronto)",
+			"./Dataset/English spoken wikipedia/english/This_Is_Wonderland",
+			"./Dataset/English spoken wikipedia/english/Vaughan"
+		]
+	},
+	{
+		"reader": "potteryfreak",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Olympic_flame"
+		]
+	},
+	{
+		"reader": "macaddct1984",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Omnipotence_paradox"
+		]
+	},
+	{
+		"reader": "enochlau",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Open_cluster",
+			"./Dataset/English spoken wikipedia/english/Robert_Garran",
+			"./Dataset/English spoken wikipedia/english/Sydney"
+		]
+	},
+	{
+		"reader": "[[user:jacksalssome|jacksalssome]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Orion_(spacecraft)"
+		]
+	},
+	{
+		"reader": "nzseries1",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Oval_tube_station"
+		]
+	},
+	{
+		"reader": "darrenhusted",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Over_the_Edge_(1999)"
+		]
+	},
+	{
+		"reader": "mrdallaway",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Palladian_architecture",
+			"./Dataset/English spoken wikipedia/english/Planetary_habitability",
+			"./Dataset/English spoken wikipedia/english/Treaty_of_Devol"
+		]
+	},
+	{
+		"reader": "mikael häggström",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Pathogenic_bacteria"
+		]
+	},
+	{
+		"reader": "laganojunior",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Perfect_Dark"
+		]
+	},
+	{
+		"reader": "tmalmjursson",
+		"frequency": 3,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Peter_Maffay",
+			"./Dataset/English spoken wikipedia/english/Slim_Whitman",
+			"./Dataset/English spoken wikipedia/english/Tabaluga"
+		]
+	},
+	{
+		"reader": "it's-is-not-a-genitive",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Pete_Doherty"
+		]
+	},
+	{
+		"reader": "antasevaalya",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Petrozavodsk_State_University"
+		]
+	},
+	{
+		"reader": "jasonlamarche",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Pierre_Trudeau"
+		]
+	},
+	{
+		"reader": "rybupsp",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Pittsfield_Charter_Township%2c_Michigan",
+			"./Dataset/English spoken wikipedia/english/Rynearson_Stadium"
+		]
+	},
+	{
+		"reader": "learnoutloud.com",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Podcast"
+		]
+	},
+	{
+		"reader": "richardhanstock",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Politics_and_the_English_Language",
+			"./Dataset/English spoken wikipedia/english/Privy_Council_of_the_United_Kingdom"
+		]
+	},
+	{
+		"reader": "eleshamc",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Portrait_of_a_Lady_(van_der_Weyden)"
+		]
+	},
+	{
+		"reader": "original uploadercryptic c62wikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Puerto_Rican_amazon"
+		]
+	},
+	{
+		"reader": "mdd4696",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Puff%2c_the_Magic_Dragon"
+		]
+	},
+	{
+		"reader": "pvvni",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Quantum_optics"
+		]
+	},
+	{
+		"reader": "[[w:user:alexkillby|alexkillby]] ([[w:user talk:alexkillby|talk]])",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Race_Against_Time%3a_Searching_for_Hope_in_AIDS-Ravaged_Africa"
+		]
+	},
+	{
+		"reader": "preslethe",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/RAF_Daws_Hill",
+			"./Dataset/English spoken wikipedia/english/RAF_Northolt"
+		]
+	},
+	{
+		"reader": "boricuaeddie",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Ram%c3%b3n_Emeterio_Betances"
+		]
+	},
+	{
+		"reader": "cmat",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Rebatching"
+		]
+	},
+	{
+		"reader": "[[user:animeshadows|animeshadows]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Redbana_Corporation"
+		]
+	},
+	{
+		"reader": "futurenjgov",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Red_vs._Blue"
+		]
+	},
+	{
+		"reader": "[[user:vaslittlecrow|vanesa littlecrow wojtanowicz]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Rice%2c_Minnesota"
+		]
+	},
+	{
+		"reader": "arbitrarily0",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Richard_Scarry%27s_Busytown",
+			"./Dataset/English spoken wikipedia/english/Tropical_Depression_Ten_(2005)"
+		]
+	},
+	{
+		"reader": "gerolsteiner91",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Rinderkennzeichnungs-_und_Rindfleischetikettierungs%c3%bcberwachungsaufgaben%c3%bcbertragungsgesetz"
+		]
+	},
+	{
+		"reader": "spoken by:  hi878  sound editing by:  london rook",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Riven"
+		]
+	},
+	{
+		"reader": "saxsux",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Robert_Muchamore",
+			"./Dataset/English spoken wikipedia/english/Wymondham_College"
+		]
+	},
+	{
+		"reader": "wikifier",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Rock%e2%80%93paper%e2%80%93scissors"
+		]
+	},
+	{
+		"reader": "[[user:xawery|xawery]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Rock_Springs_massacre"
+		]
+	},
+	{
+		"reader": "elizabeyth",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Roe_v._Wade"
+		]
+	},
+	{
+		"reader": "andmott",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Roland_RE-201"
+		]
+	},
+	{
+		"reader": "alr",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Royal_Order_of_Scotland"
+		]
+	},
+	{
+		"reader": "the fwanksta",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Rush_(band)"
+		]
+	},
+	{
+		"reader": "chris roy",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Samantha_Smith"
+		]
+	},
+	{
+		"reader": "witbcoedus",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Sanford_station_(Amtrak)"
+		]
+	},
+	{
+		"reader": "dan carkner",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Sarajevo"
+		]
+	},
+	{
+		"reader": "sixteen left",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/SeaMonkey"
+		]
+	},
+	{
+		"reader": "[[user:popularoutcast]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Search_engine_optimization"
+		]
+	},
+	{
+		"reader": "neosuperblissey",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/SFM_Holiday_Network"
+		]
+	},
+	{
+		"reader": "phoenixowl",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Siege_of_Antioch"
+		]
+	},
+	{
+		"reader": "[[user:thorubon|thorubon]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Siege_of_Tyre_(332_BC)"
+		]
+	},
+	{
+		"reader": "orchid rightgeous",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Silver"
+		]
+	},
+	{
+		"reader": "[[w:user:enviroboy|enviroboy]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Some_Enchanted_Evening_(The_Simpsons)"
+		]
+	},
+	{
+		"reader": "warpig",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Sound_quality"
+		]
+	},
+	{
+		"reader": "chemgarcia",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Space_Shuttle_Challenger_disaster"
+		]
+	},
+	{
+		"reader": "user at projectcharliercdwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Spanish_Armada"
+		]
+	},
+	{
+		"reader": "[[user:walkeraj|walkeraj]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Spinning_Around"
+		]
+	},
+	{
+		"reader": "spongesebastian",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/SpongeBob_SquarePants"
+		]
+	},
+	{
+		"reader": "fang aili",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Spoo"
+		]
+	},
+	{
+		"reader": "jackpotden",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Static-X"
+		]
+	},
+	{
+		"reader": "sedola",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Stuyvesant_High_School"
+		]
+	},
+	{
+		"reader": "kingdon",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Submarine"
+		]
+	},
+	{
+		"reader": "[[:en:user:marcus_bowen|marcus_bowen]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Sunderland_A.F.C%2e"
+		]
+	},
+	{
+		"reader": "supa6661",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Suspension_(body_modification)"
+		]
+	},
+	{
+		"reader": "zeimusu",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Swastika"
+		]
+	},
+	{
+		"reader": "unigolyn",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Tallinn"
+		]
+	},
+	{
+		"reader": "laurenpt015",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Tee"
+		]
+	},
+	{
+		"reader": "[[:en:user:vigeesh|vigeesh]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Thalassery"
+		]
+	},
+	{
+		"reader": "johnrpenner",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Theory_of_Colours"
+		]
+	},
+	{
+		"reader": "[[user:theloveroflove|theloveroflove]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Cat_in_the_Hat_(film)"
+		]
+	},
+	{
+		"reader": "kewpid",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Economist"
+		]
+	},
+	{
+		"reader": "original uploadersophiewikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Game_(mind_game)"
+		]
+	},
+	{
+		"reader": "[[w:en:user:nicholasturnbull]], transwiki approved by: [[w:en:user:dmcdevit]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Giver"
+		]
+	},
+	{
+		"reader": "[[user:khanassassin|khanassassin]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Goat_Puzzle"
+		]
+	},
+	{
+		"reader": "finlay mcwalter",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Gruffalo"
+		]
+	},
+	{
+		"reader": "skiasaurus",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Hitchhiker%27s_Guide_to_the_Galaxy"
+		]
+	},
+	{
+		"reader": "[[user:alexkillby|alexander killby]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Livestock_Conservancy"
+		]
+	},
+	{
+		"reader": "[[:en:user:random2502|random2502]] at en.wikipedia",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Mighty_Boosh"
+		]
+	},
+	{
+		"reader": "whouk",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Quatermass_Experiment"
+		]
+	},
+	{
+		"reader": "theexistentialist686",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Simpsons"
+		]
+	},
+	{
+		"reader": "pashtun ismailiyya",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_Twelve_Imams"
+		]
+	},
+	{
+		"reader": "mjquin_id",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/The_West_Wing"
+		]
+	},
+	{
+		"reader": "spring l eisiminger",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Thought"
+		]
+	},
+	{
+		"reader": "triacylglyceride",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Three_Laws_of_Robotics"
+		]
+	},
+	{
+		"reader": "anonymous",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Timpani"
+		]
+	},
+	{
+		"reader": "[[user:vr-land|vr-land]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Tommy_Wiseau"
+		]
+	},
+	{
+		"reader": "mr senseless",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Tompkins_County%2c_New_York"
+		]
+	},
+	{
+		"reader": "esteffect",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Transport_in_Andorra"
+		]
+	},
+	{
+		"reader": "mayooresan",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Trincomalee"
+		]
+	},
+	{
+		"reader": "slsslssls",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Troye_Sivan"
+		]
+	},
+	{
+		"reader": "acather96",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Undercover_Cops"
+		]
+	},
+	{
+		"reader": "goh_wz",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/United_States_Declaration_of_Independence"
+		]
+	},
+	{
+		"reader": "okso",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/United_States_Marine_Corps"
+		]
+	},
+	{
+		"reader": "hajenso",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Universal_suffrage"
+		]
+	},
+	{
+		"reader": "original uploaderafrocatzwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Vectrex"
+		]
+	},
+	{
+		"reader": "1904.cc",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/VJing"
+		]
+	},
+	{
+		"reader": "user at projectcrazytaleswikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/W00t"
+		]
+	},
+	{
+		"reader": "[[user:redsoxfan274|redsoxfan274]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Wakefield%2c_Massachusetts"
+		]
+	},
+	{
+		"reader": "vonfraginoff",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Watchmen"
+		]
+	},
+	{
+		"reader": "original uploadertristessa de st angewikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Waterfall_Gully%2c_South_Australia"
+		]
+	},
+	{
+		"reader": "yutsi",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/William_Wright_Heard"
+		]
+	},
+	{
+		"reader": "surloc",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Wilmington_insurrection_of_1898"
+		]
+	},
+	{
+		"reader": "theexistentialist_686",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Winter_service_vehicle"
+		]
+	},
+	{
+		"reader": "orthorhombic",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/WOW_Gospel_2000"
+		]
+	},
+	{
+		"reader": "orchid righteous",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Wyvern"
+		]
+	},
+	{
+		"reader": "original uploaderrabiddog51sbwikipediaen",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Yao_Ming"
+		]
+	},
+	{
+		"reader": "acerperi",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Yellow_River_Cantata"
+		]
+	},
+	{
+		"reader": "[[user:99of9|toby hudson]]",
+		"frequency": 2,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Yttrium",
+			"./Dataset/English spoken wikipedia/english/Zinc"
+		]
+	},
+	{
+		"reader": "cchan199206",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Zalman"
+		]
+	},
+	{
+		"reader": "[[:en:user:ralmin|user:ralmin]]",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Zhan_Guo_Ce"
+		]
+	},
+	{
+		"reader": "k9taylor",
+		"frequency": 1,
+		"paths": [
+			"./Dataset/English spoken wikipedia/english/Zorbing"
+		]
+	}
+]

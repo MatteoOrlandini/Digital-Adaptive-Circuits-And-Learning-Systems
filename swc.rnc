@@ -1,0 +1,82 @@
+# NOTE: SWC xml files will *not* validate against this schema as-is,
+# because there is no way to allow non-standard whitespace such as
+# thinspace or non-breaking space between tokens without allowing all
+# kind of text between tokens in RelaxNG (and other validation frameworks).
+#
+# We therefore opted to pre-process the XML files and replace all
+# whitespace with standard whitespace for validation (using temporary
+# files of course!).  See validate-swc-xml.sh for further explanation
+# or just use it for validation.
+
+# Each annotation is wrapped in an article tag, which contains a "meta" section
+# for metadata and a "d" section containing the article and its annotation.
+start = Article
+Article = element article { Meta, D }
+
+## the meta data ist stored in conformance to the Dublin Core schema.
+Meta = element meta {
+     ((element prop {attribute key {text}, attribute value {text}, (attribute group {text})?}) |
+      (element link {attribute key {text}, attribute value {text}, (attribute group {text})?}))* }
+
+# the document may contain different parts, each is explained below.
+D = element d { (Extra|Ignored|P|Section|S)* }
+
+## attribute used by maus to keep track of cut out files (which were
+## fed to maus for phoneme alignment)
+MAUSINFO = attribute mausid {text}, attribute cutoffset {xsd:nonNegativeInteger}
+
+## timing information (in milliseconds)
+TIMING = attribute start {xsd:nonNegativeInteger}, attribute end {xsd:positiveInteger}
+
+# text that we included but is not part of the article.
+# Note that s and t tags must have their text as attribute
+# to keep the CDATA-equivalence
+Extra = element extra { attribute text {text},
+       (element s { attribute text {text}, MAUSINFO?,
+           (element t  { attribute text {text},
+               (N)*
+           })+
+       })+
+}
+
+## stuff that is part of the text but ignored for the alignment, such
+## as info boxes or image captions
+Ignored = element ignored { (P|S|Section)* }
+
+## A section contains a title and content. Sections are nested,
+## e.g. h3 sections are stored in the content of the parent h2
+## section.
+Section = element section {
+    attribute level {xsd:positiveInteger},
+	element sectiontitle { MAUSINFO?, (T | element ignored {(T)*})* },
+	element sectioncontent { (S|P|Section|Ignored)* }
+}
+
+## paragraphs can be nested because in the original html we may have
+## a paragraph in a list in a paragraph.
+## paragraph
+P = element p { (S|Ignored|P)* }
+
+## A sentence contains tokens and whitespace.
+S = element s { MAUSINFO?, (T)+ }
+
+## A token has its original text as well as 0-n normalizations.
+## E.g. puncutaion has no normalization annotation as it is not spoken
+## but 500 has two -- five and hundred.
+## a token itself has no alignment, only its normalization is aligned.
+T = element t { text, (N)* }
+
+## Normalization of a token. Has a pronunciation and may have a
+## timing, if it could be aligned.  Has 0-n phonemes.
+N = element n {
+     attribute pronunciation {text},
+     TIMING?,
+     PH*
+}
+
+## phoneme which has an alignment if the phoneme alignment was
+## successfull.
+PH = element ph {
+     attribute type {text},
+     TIMING?
+}
