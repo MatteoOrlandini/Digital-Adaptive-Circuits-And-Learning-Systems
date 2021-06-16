@@ -4,11 +4,15 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 filename = "./Dataset/English spoken Wikipedia with audio/english/Alice_Ingley/audio.ogg"
+# get the original sampling rate for a given file
+original_sample_rate = librosa.get_samplerate(filename)
+print('Original sample rate:', original_sample_rate)
 # audio recordings are downsampled to a sampling rate of 16 kHz.
 sample_rate = 16000
 # librosa.load loads the audio file as a floating point time series. y: audio time series, sr: sample rate
-y, sr = librosa.load(path = filename, sr = sample_rate) 
-print('Sample rate:', sr)
+y, sr = librosa.load(path = filename, sr = sample_rate)  # try  librosa.stream
+# https://librosa.org/doc/main/generated/librosa.stream.html#librosa.stream
+print('New sample rate:', sr)
 print('Data size:', y.size)
 # We use a window length of 25 ms, hop size of 10 ms and a fast Fourier transform size of 64 ms.
 window_length = int(0.025*sample_rate)
