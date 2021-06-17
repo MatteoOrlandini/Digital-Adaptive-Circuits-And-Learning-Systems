@@ -36,13 +36,19 @@ for reader in readers:
                 if not any (word['word'] == word_per_reader['word'] for word_per_reader in words_per_reader):
                    words_per_reader.append({ 'word' : word['word'], \
                                              'paths' : [path_per_word]}) \
-                                            #{'path' : reader_path, \
-                                            # 'timestamp':\
-                                            #{'start' : [word['start']], \
-                                            # 'end' : [word['end']]}}]})
+
                 else:
                     for word_per_reader in words_per_reader:
-                        word_per_reader
+                        if word['word']==word_per_reader['word']:
+                            if reader_path in word_per_reader['paths']:
+                                for path in word_per_reader['paths']:
+                                    if reader_path == path['path']:
+                                        path['start'] += word['start']
+                                        path['end'] += word['end']
+                            else:
+                                word_per_reader['paths'].append(path_per_word)
+
+
 
                 #    word_per_reader['paths'].append(path_per_word)
 
@@ -103,6 +109,6 @@ for reader in readers:
                                     item['path'] += [path]*word['frequency']
 '''
 f = open("readers_words.json","w")
-f.write(json.dumps(training_readers, indent = 4, sort_keys = False))
+f.write(json.dumps(training_readers, indent = None, sort_keys = False))
 f.close()
 
