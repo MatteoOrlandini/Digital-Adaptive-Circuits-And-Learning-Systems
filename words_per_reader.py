@@ -1,7 +1,7 @@
 import json
 import os
 
-source_path = "./Dataset/English spoken wikipedia with audio/english/"
+source_path = "./Dataset/English spoken wikipedia/english/"
 
 f = open("readers_paths.json", "r")
 readers = json.load(f)
@@ -17,12 +17,18 @@ for reader in readers:
     # for every reader creates a new dict for words
     words_per_reader = [] 
 
+    json_file_exist = False
+
     for reader_folder in reader['folder']:
         if (os.path.exists(source_path + "/" + reader_folder + "/word_count.json")):
+
+            json_file_exist = True
 
             f = open(source_path + "/" + reader_folder + "/word_count.json", "r")
             recording_words = json.load(f)
             f.close()
+            
+            folder_per_word = []
             
             for word in recording_words:
                 folder_per_word = {'folder' : reader_folder, \
@@ -35,7 +41,7 @@ for reader in readers:
 
                 else:
                     for word_per_reader in words_per_reader:
-                        if word['word']==word_per_reader['word']:
+                        if word['word'] == word_per_reader['word']:
                             if reader_folder in word_per_reader['folders']:
                                 for folder in word_per_reader['folders']:
                                     if reader_folder == folder['folder']:
@@ -44,8 +50,9 @@ for reader in readers:
                             else:
                                 word_per_reader['folders'].append(folder_per_word)
                                 
-            new_training_reader['words'] = words_per_reader
-            training_readers.append(new_training_reader)
+    if (json_file_exist):
+        new_training_reader['words'] = words_per_reader
+        training_readers.append(new_training_reader)
 
 f = open("readers_words.json","w")
 f.write(json.dumps(training_readers, indent = 0, sort_keys = False))

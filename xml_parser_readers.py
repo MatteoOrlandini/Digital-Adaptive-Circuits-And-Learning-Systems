@@ -11,12 +11,13 @@ readers = []
 	# 'paths' : []
 # }]
 
-source_path = "./Dataset/English spoken wikipedia with audio/english/"
+source_path = "./Dataset/English spoken wikipedia/english/"
 filename = "aligned.swc"
 
 for audio_path in os.scandir(source_path):
 	if (os.path.exists(audio_path.path + "/" + filename)):
 		# example: audio_path.path = ./Dataset/English spoken wikipedia with audio/english/Revolt_of_the_Admirals
+		# ->  folder = Revolt_of_the_Admirals
 		audio_path_split = audio_path.path.split('/')
 		folder = audio_path_split[len(audio_path_split)-1]
 
