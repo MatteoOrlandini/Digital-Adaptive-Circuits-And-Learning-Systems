@@ -42,6 +42,9 @@ for reader in readers:
                                         path['end'] += word['end']
                             else:
                                 word_per_reader['paths'].append(path_per_word)
+                                
+            new_training_reader['words'] = words_per_reader
+            training_readers.append(new_training_reader)
 
 f = open("readers_words.json","w")
 f.write(json.dumps(training_readers, indent = None, sort_keys = False))
