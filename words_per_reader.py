@@ -54,7 +54,7 @@ for reader in readers:
         new_training_reader['words'] = words_per_reader
         training_readers.append(new_training_reader)
 
-f = open("readers_words.json","w")
+f = open("readers_words.json", "w")
 f.write(json.dumps(training_readers, indent = 0, sort_keys = False))
 f.close()
 
