@@ -50,6 +50,3 @@ print("len(readers): ", str(len(readers)))
 f = open("readers_paths.json", "w")
 f.write(json.dumps(readers, indent = 4, sort_keys = False))
 f.close()
-
-	#for item in target_words:
-	#	print(item)

@@ -5,8 +5,6 @@ import collections
 import pandas as pd
 import json
 
-words = []
-target_words = []
 # target_words = [{
     # 'word': [],
     # 'frequency': 0,
@@ -23,6 +21,8 @@ for path in os.scandir(source_path):
         tree = ET.parse(path.path + "/" + filename)
         # getroot returns the root element for this tree
         root = tree.getroot()
+        
+        words = []
         # root.iter creates a tree iterator with the current element as the root. The iterator iterates over this element and # all elements below it, in document (depth first) order.
         for token_normalization in root.iter(tag = 'n'):
             if 'start' in token_normalization.keys():
@@ -30,6 +30,8 @@ for path in os.scandir(source_path):
                 words.append(token_normalization.attrib['pronunciation'].lower())
         # collections.Counter stores elements as dictionary keys, and their counts are stored as dictionary values.
         unique_words = collections.Counter(words)
+
+        target_words = []
         for key in unique_words.keys():
             # we only consider words that occur at least 10 times in the recording
             if (unique_words[key] > 9):
