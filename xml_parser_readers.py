@@ -11,12 +11,15 @@ readers = []
 	# 'paths' : []
 # }]
 
-folder = []
-source_path = "./Dataset/English spoken wikipedia/english/"
+source_path = "./Dataset/English spoken wikipedia with audio/english/"
 filename = "aligned.swc"
 
 for audio_path in os.scandir(source_path):
 	if (os.path.exists(audio_path.path + "/" + filename)):
+		# example: audio_path.path = ./Dataset/English spoken wikipedia with audio/english/Revolt_of_the_Admirals
+		audio_path_split = audio_path.path.split('/')
+		folder = audio_path_split[len(audio_path_split)-1]
+
 		tree = ET.parse(audio_path.path + "/" + filename)
 		# getroot returns the root element for this tree
 		root = tree.getroot()
@@ -35,14 +38,14 @@ for audio_path in os.scandir(source_path):
 				if not any(reader['reader_name'] == reader_name for reader in readers):
 					dict = {'reader_name': reader_name, \
 							'frequency': 1, \
-							'paths' : [audio_path.path] \
+							'folder' : [folder] \
 						}
 					readers.append(dict)
 				else:
 					for reader in readers:
 						if (reader['reader_name'] == reader_name):
 							reader['frequency'] = reader['frequency'] + 1
-							reader['paths'].append(audio_path.path)
+							reader['folder'].append(folder)
 		
 print("len(readers): ", str(len(readers)))
 
