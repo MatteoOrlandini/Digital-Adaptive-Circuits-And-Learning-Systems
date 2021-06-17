@@ -1,8 +1,8 @@
 /Dataset
 /SWC
 /Esempi CNN
+*.txt
 *.tar
 *.rar
 *.pdf
-readers_words.json
 readers_words.json
