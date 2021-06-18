@@ -17,7 +17,6 @@ def find_valid_readers(C, K):
 
     for reader in readers:    
         valid_words = []
-        number_of_words_per_reader = 0
         is_valid_reader = False
         number_of_valid_words = 0
 
@@ -51,7 +50,6 @@ def find_valid_readers(C, K):
 
 def create_training_validation_test_readers(valid_readers, number_of_training_readers, number_of_test_readers, number_of_validation_readers):
     training_readers = []
-    test_and_validation_readers = []
     test_readers = []
     validation_readers = []
 
@@ -64,9 +62,11 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
     validation_readers = valid_readers[number_of_training_readers + number_of_test_readers : \
                                                      number_of_training_readers + number_of_test_readers + number_of_validation_readers]
 
-    write_json_file("training_readers.json", training_readers)
-    write_json_file("test_readers.json", test_readers)
-    write_json_file("validation_readers.json", validation_readers)
+    #write_json_file("training_readers.json", training_readers)
+    #write_json_file("test_readers.json", test_readers)
+    #write_json_file("validation_readers.json", validation_readers)
+
+    return training_readers, test_readers, validation_readers
 
 
 if __name__ == "__main__":
@@ -84,4 +84,9 @@ if __name__ == "__main__":
         number_of_test_readers = int(30/183*len(valid_readers))
         number_of_validation_readers = int(15/183*len(valid_readers))
 
-    create_training_validation_test_readers(valid_readers, number_of_training_readers, number_of_test_readers, number_of_validation_readers)
+    training_readers, test_readers, validation_readers = create_training_validation_test_readers(valid_readers, \
+                                                                                                number_of_training_readers, \
+                                                                                                number_of_test_readers, \
+                                                                                                number_of_validation_readers)
+
+    
