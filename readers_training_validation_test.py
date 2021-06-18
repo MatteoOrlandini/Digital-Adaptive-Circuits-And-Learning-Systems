@@ -55,15 +55,14 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
     test_readers = []
     validation_readers = []
 
-    training_readers = random.sample(valid_readers, number_of_training_readers)
+    valid_readers = random.sample(valid_readers, number_of_training_readers + number_of_test_readers + number_of_validation_readers)
 
-    for item in valid_readers:
-        if not any(item['reader_name'] == training_reader['reader_name'] for training_reader in training_readers):
-            test_and_validation_readers.append(item)
+    training_readers = valid_readers[0 : number_of_training_readers]
 
-    test_readers = test_and_validation_readers[0:number_of_test_readers]
+    test_readers = valid_readers[number_of_training_readers : number_of_training_readers + number_of_test_readers]
 
-    validation_readers = test_and_validation_readers[number_of_test_readers:number_of_test_readers+number_of_validation_readers]
+    validation_readers = valid_readers[number_of_training_readers + number_of_test_readers : \
+                                                     number_of_training_readers + number_of_test_readers + number_of_validation_readers]
 
     write_json_file("training_readers.json", training_readers)
     write_json_file("test_readers.json", test_readers)
@@ -71,7 +70,7 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
 
 
 if __name__ == "__main__":
-    C = 2 # classes
+    C = 10 # classes
     K = 10 # instances per class
     valid_readers = find_valid_readers(C, K)
 
