@@ -32,8 +32,8 @@ for reader in readers:
             
             for word in recording_words:
                 folder_per_word = {'folder' : reader_folder, \
-                                 'start' : [word['start']], \
-                                 'end' : [word['end']]}
+                                 'start' : word['start'], \
+                                 'end' : word['end']}
 
                 if not any (word['word'] == word_per_reader['word'] for word_per_reader in words_per_reader):
                    words_per_reader.append({ 'word' : word['word'], \
@@ -54,7 +54,7 @@ for reader in readers:
         new_training_reader['words'] = words_per_reader
         training_readers.append(new_training_reader)
 
-f = open("readers_words.json", "w")
+f = open("readers_words.json","w")
 f.write(json.dumps(training_readers, indent = 0, sort_keys = False))
 f.close()
 

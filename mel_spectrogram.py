@@ -42,8 +42,11 @@ if __name__ == "__main__":
     file_name = "audio.ogg"
 
     # word : stone
-    start = 50.350                   # in seconds
-    end = 50.780                     # in seconds
-    word_center = (start + end)/2    # in seconds
+    start = 50350   # in milliseconds
+    end = 50780     # in milliseconds
+
+    start_in_seconds = start/1000    # in seconds
+    end_in_seconds = end/1000        # in seconds
+    word_center = (start_in_seconds + end_in_seconds)/2    # in seconds
 
     compute_melspectrogram(source_path + folder + file_name, word_center)
