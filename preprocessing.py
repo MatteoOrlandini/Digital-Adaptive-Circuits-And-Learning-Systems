@@ -70,38 +70,38 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
 
     return training_readers, test_readers, validation_readers
 
-def find_classes(training_readers, C, K):
-    for training_reader in training_readers:
-        training_reader_words = []
+def find_classes(training_reader, C, K):
+    training_classes = []
 
-        for word in training_reader['words']:
-            # numpy.arange returns evenly spaced values within a given interval.
-            # create an array of index to get the start, end and folder of the same index
-            index_array = list(numpy.arange(0,  len(word['start']), step = 1))
+    # taking only C words
+    training_reader_words = random.sample(training_reader['words'], C)   
 
-            # random sample only K + Q indexes
-            index_array = random.sample(index_array, K + Q)
+    for word in training_reader_words:
+        # numpy.arange returns evenly spaced values within a given interval.
+        # create an array of index to get the start, end and folder of the same index
+        index_array = list(numpy.arange(0, len(word['start']), step = 1))
 
-            instance_start = []
-            instance_end = []
-            instance_folder = []
-            
-            # sample K instances from every C word class
-            for index in index_array:
-                # get the start, end and folder of the same index
-                instance_start.append(word['start'][index])
-                instance_end.append(word['end'][index])
-                instance_folder.append(word['folders'][index])
+        # random sample only K + Q indexes
+        index_array = random.sample(index_array, K + Q)
 
-            training_reader_words.append({'word'  : word['word'], \
-                                        'start'   : instance_start,\
-                                        'end'     : instance_end, \
-                                        'folders' : instance_folder})
+        instance_start = []
+        instance_end = []
+        instance_folder = []
+        
+        # sample K instances from every C word class
+        for index in index_array:
+            # get the start, end and folder of the same index
+            instance_start.append(word['start'][index])
+            instance_end.append(word['end'][index])
+            instance_folder.append(word['folders'][index])
 
-        training_reader_words = random.sample(training_reader_words, C)   
+        training_classes.append({'word'    : word['word'], \
+                                 'start'   : instance_start,\
+                                 'end'     : instance_end, \
+                                 'folders' : instance_folder})
 
-    write_json_file("training_words_of_"+ training_reader['reader_name'] +".json", training_reader_words)
-    return training_reader_words
+    write_json_file("Classi/training_words_of_"+ training_reader['reader_name'] +".json", training_classes)
+    return training_classes
 
 if __name__ == "__main__":
     C = 10 # classes
@@ -123,5 +123,7 @@ if __name__ == "__main__":
                                                                                                 number_of_test_readers, \
                                                                                                 number_of_validation_readers)
 
-    training_reader_words = find_classes(training_readers, C, K)
+    
+    for training_reader in training_readers:
+        training_classes = find_classes(training_reader, C, K)
     # TO DO: find query and support set
