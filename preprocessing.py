@@ -16,15 +16,18 @@ def read_json_file(filename):
     return list_of_dict
 
 def find_valid_readers(C, K):
+    # read the json with the words of each reader
     readers = read_json_file("readers_words.json")
 
     valid_readers = []
 
+    # for each reader find if it's a valid reader only if he reads C words for K + Q instances
     for reader in readers:    
         valid_words = []
         is_valid_reader = False
         number_of_valid_words = 0
 
+        # for each word of a reader find if there are for K + Q instances
         for word in reader['words']:
             start = []
             end = []
@@ -40,13 +43,16 @@ def find_valid_readers(C, K):
                         'end'    : end, \
                         'folders': folders}
 
+            # if there are for K + Q instances append a new valid word
             if (len(new_word['start']) >= K + Q):
                 number_of_valid_words += 1
                 valid_words.append(new_word)
 
+        # if the number of valid words is at least C, then the reader is valid
         if (number_of_valid_words >= C):
             is_valid_reader = True
 
+        # if the reader is valid then add the reader to the valid readers list
         if (is_valid_reader):
             valid_readers.append({'reader_name' : reader['reader_name'],\
                                     'words': valid_words})
@@ -55,12 +61,20 @@ def find_valid_readers(C, K):
 
 def create_training_validation_test_readers(valid_readers, number_of_training_readers, number_of_test_readers, number_of_validation_readers):
 
+    # random sample the valid readers the take a maximum of 
+    # ("number_of_training_readers" + "number_of_test_readers" + "number_of_validation_readers") valid readers
     valid_readers = random.sample(valid_readers, number_of_training_readers + number_of_test_readers + number_of_validation_readers)
 
+    # take the first ("number_of_training_readers") "valid_readers" to create the training readers
     training_readers = valid_readers[0 : number_of_training_readers]
 
+    # take from ("number_of_training_readers") index to ("number_of_training_readers" + "number_of_test_readers") index
+    # of "valid_readers" to create the test readers
     test_readers = valid_readers[number_of_training_readers : number_of_training_readers + number_of_test_readers]
 
+    # take from ("number_of_training_readers" + "number_of_test_readers") index to 
+    # ("number_of_training_readers" + "number_of_test_readers" + "number_of_validation_readers") index
+    # of "valid_readers" to create the validation readers
     validation_readers = valid_readers[number_of_training_readers + number_of_test_readers : \
                                                      number_of_training_readers + number_of_test_readers + number_of_validation_readers]
 
@@ -73,7 +87,7 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
 def find_classes(training_reader, C, K):
     training_classes = []
 
-    # taking only C words
+    # taking only C words from all training readers ones
     training_reader_words = random.sample(training_reader['words'], C)   
 
     for word in training_reader_words:
@@ -95,6 +109,7 @@ def find_classes(training_reader, C, K):
             instance_end.append(word['end'][index])
             instance_folder.append(word['folders'][index])
 
+        # append the new word of K + Q instances
         training_classes.append({'word'    : word['word'], \
                                  'start'   : instance_start,\
                                  'end'     : instance_end, \
@@ -108,6 +123,7 @@ if __name__ == "__main__":
     K = 10 # instances per class
     valid_readers = find_valid_readers(C, K)
 
+    # The readers are partitioned into training, validation, and test sets with a 138:15:30 ratio
     if (len(valid_readers) >= 183):
         number_of_training_readers = 138
         number_of_test_readers = 30
@@ -118,6 +134,7 @@ if __name__ == "__main__":
         number_of_test_readers = int(30/183*len(valid_readers))
         number_of_validation_readers = int(15/183*len(valid_readers))
 
+    # The valid readers are partitioned into training, validation, and test readers
     training_readers, test_readers, validation_readers = create_training_validation_test_readers(valid_readers, \
                                                                                                 number_of_training_readers, \
                                                                                                 number_of_test_readers, \
