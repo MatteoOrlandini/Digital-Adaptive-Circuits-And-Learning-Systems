@@ -8,13 +8,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 n_episodes = 60000
-
-
-
+source_path = "./Dataset/English spoken wikipedia/english/"
+audio_file_name = "audio.ogg"
 
 if __name__ == "__main__":
-    C = 10 # classes
-    K = 10 # instances per class
+    C = 2 # classes
+    K = 1 # instances per class
     valid_readers = pre.find_valid_readers(C, K)
 
     # The readers are partitioned into training, validation, and test sets with a 138:15:30 ratio
@@ -38,21 +37,26 @@ if __name__ == "__main__":
     # sample C word classes from the reader, and sample K instances per class as the support set.
 
     for episode in range(1):
-        x=[] #features
-        y=[] #labels
-        training_reader=random.sample(training_readers)
-        training_classes = pre.find_classes(training_reader, C, K)
-    print(training_classes)
-"""         for idx, class in enumerate(training_classes):
-            for i in range(len(class['start'])):
+        x = np.empty([0, 128, 51])  #features, np.empty returns a new array of shape (0, 128, 51)
+        y = [] #labels
+        training_reader = random.sample(training_readers, 1)
+        training_classes = pre.find_classes(training_reader[0], C, K)
+        for idx, item in enumerate (training_classes):
+            print('word:', item['word'])
+            for i in range(len(item['start'])):
                 y.append(idx)
-                wc=(class['start'][i]+class['end'][i])/2000
-                x.append(mel.compute_melspectrogram(class['folder'][i],wc))
-    
-    print(len(x))
-    print(len(y))
+                start_in_ms = item['start'][i]/1000
+                end_in_ms = item['end'][i]/1000
+                word_center_time = (start_in_ms + end_in_ms)/2
+                item_spectrogram = mel.compute_melspectrogram(source_path + "/" + item['folders'][i] + "/" + audio_file_name, \
+                                                    word_center_time)
 
+                #print(item_spectrogram.shape)
+                x = np.concatenate((x, item_spectrogram[None]), axis=0)
+                print('x.shape:', x.shape)
+'''
     fig, ax = plt.subplots()
     img = librosa.display.specshow(x[3], x_axis = "time", y_axis = "mel", sr = 16000, ax = ax)
     ax.set(title = 'Mel spectrogram display')
-    fig.colorbar(img, ax = ax) """
+    fig.colorbar(img, ax = ax)
+'''

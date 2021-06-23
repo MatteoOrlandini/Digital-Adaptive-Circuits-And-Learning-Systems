@@ -115,7 +115,7 @@ def find_classes(training_reader, C, K):
                                  'end'     : instance_end, \
                                  'folders' : instance_folder})
 
-    write_json_file("Classi/training_words_of_"+ training_reader['reader_name'] +".json", training_classes)
+    #write_json_file("Classi/training_words_of_"+ training_reader['reader_name'] +".json", training_classes)
     return training_classes
 
 """ if __name__ == "__main__":

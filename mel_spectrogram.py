@@ -31,7 +31,7 @@ def compute_melspectrogram(filename, word_center):
     # librosa.power_to_db converts a power spectrogram to a dB-scale spectrogram.
     log_mel_spectrogram = librosa.power_to_db(mel_spectrogram)
     # display the log_mel_spectrogram
-    #img = librosa.display.specshow(log_mel_spectrogram, x_axis = "time", y_axis = "mel", sr = sample_rate, ax = ax)
+    #img = librosa.display.specshow(log_mel_spectrogram, x_axis = "ms", y_axis = "mel", sr = sample_rate, hop_length = hop_size, ax = ax)
     #ax.set(title = 'Mel spectrogram display')
     #fig.colorbar(img, ax = ax)
     
