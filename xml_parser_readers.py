@@ -14,28 +14,35 @@ readers = []
 source_path = "./Dataset/English spoken wikipedia/english/"
 filename = "aligned.swc"
 
+# search for readers for each folder
 for audio_path in os.scandir(source_path):
 	if (os.path.exists(audio_path.path + "/" + filename)):
 		# example: audio_path.path = ./Dataset/English spoken wikipedia with audio/english/Revolt_of_the_Admirals
 		# ->  folder = Revolt_of_the_Admirals
 		audio_path_split = audio_path.path.split('/')
+		# save only the folder name
 		folder = audio_path_split[len(audio_path_split)-1]
-
+		# parse the xml file "aligned.swc"
 		tree = ET.parse(audio_path.path + "/" + filename)
 		# getroot returns the root element for this tree
 		root = tree.getroot()
 		# root.iter creates a tree iterator with the current element as the root. The iterator iterates over this element and all elements below it, in document (depth first) order.
 		for property in root.iter(tag = 'prop'):
+			# if the key "reader.name" exists
 			if (property.attrib['key'] == 'reader.name'):
+				# save the reader name taking the value of the attribute
 				reader_name = property.attrib['value'].lower()
+				# fix readers names that contain "user:"
 				if ("user:" in reader_name):
+					# fix readers names that contain "|""
 					if ("|" in reader_name):
 						# example reader_name = [[:en:user:alexkillby|alexkillby]] -> reader_name = alexkillby
 						reader_name = reader_name[reader_name.find("user:")+5:reader_name.find("|")]
+					# fix readers names that contain "|""
 					elif ("]]" in reader_name):
 						# example reader_name = [[user:popularoutcast]] -> reader_name = popularoutcast
 						reader_name = reader_name[reader_name.find("user:")+5:reader_name.find("]]")]
-					
+				# if the reader is not yet on the list create a dict and append to the readers list
 				if not any(reader['reader_name'] == reader_name for reader in readers):
 					dict = {'reader_name': reader_name, \
 							'frequency': 1, \
@@ -43,14 +50,15 @@ for audio_path in os.scandir(source_path):
 						}
 					readers.append(dict)
 				else:
+					# if the reader is already on the list add the folder name
 					for reader in readers:
 						if (reader['reader_name'] == reader_name):
 							reader['frequency'] = reader['frequency'] + 1
 							reader['folder'].append(folder)
-		
+# print the number of the readers
 print("len(readers): ", str(len(readers)))
 
-# popularoutcast
+# save a "readers_paths.json" with the name of the readers and the relative file audio folders
 f = open("readers_paths.json", "w")
 f.write(json.dumps(readers, indent = 4, sort_keys = False))
 f.close()
