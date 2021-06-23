@@ -1,3 +1,4 @@
+from numpy import dtype
 import torch
 import torch.nn.functional 
 from torch.optim import Optimizer
@@ -64,8 +65,11 @@ def proto_net_episode(model: Module,
     #log_p_y = (-distances).log_softmax(dim=1)
     log_p_y = F.log_softmax(-distances, dim=1).view(k_way, q_queries, -1)
     #loss = CrossEntropyLoss(log_p_y, y_queries)
+    # da: https://github.com/jakesnell/prototypical-networks/blob/master/protonets/models/few_shot.py
     target_inds = torch.arange(0, k_way).view(k_way, 1, 1).expand(k_way, q_queries, 1).long()
-    target_inds = Variable(target_inds, requires_grad=False)
+    # Only Tensors of floating point and complex dtype can require gradients
+    #target_inds = torch.tensor(target_inds, dtype = torch.complex64, requires_grad=True)
+    target_inds = Variable(target_inds)
     loss = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
 
     # Prediction probabilities are softmax over distances

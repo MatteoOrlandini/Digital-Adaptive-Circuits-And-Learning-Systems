@@ -39,6 +39,8 @@ if __name__ == "__main__":
     # To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
     # sample C word classes from the reader, and sample K instances per class as the support set.
 
+    train_loss = []
+
     model = Protonet()
     optim = torch.optim.Adam(model.parameters(),lr=0.001)
 
@@ -55,16 +57,19 @@ if __name__ == "__main__":
                 start_in_ms = item['start'][i]/1000
                 end_in_ms = item['end'][i]/1000
                 word_center_time = (start_in_ms + end_in_ms)/2
-                item_spectrogram = mel.compute_melspectrogram(source_path + "/" + item['folders'][i] + "/" + audio_file_name, \
+                item_spectrogram = mel.compute_melspectrogram(source_path + item['folders'][i] + "/" + audio_file_name, \
                                                     word_center_time)
 
                 #print(item_spectrogram.shape)
-                x = torch.cat((x, torch.tensor([item_spectrogram])), axis=0)
+                x = torch.cat((x, torch.tensor([item_spectrogram])), axis = 0)
                 #print('x.shape:', x.shape)
                 #print('y.shape:', y.shape)
 
         loss, y_pred = pn_episode(model, optim, x, y, K, C, Q, True)
-        #print('loss:', loss, 'y_pred:', y_pred)
+        # da: https://github.com/orobix/Prototypical-Networks-for-Few-shot-Learning-PyTorch/blob/master/src/train.py
+        #loss.backward()
+        #optim.step()
+        #train_loss.append(loss.item())
 
 """     fig, ax = plt.subplots()
     img = librosa.display.specshow(x[3], x_axis = "ms", y_axis = "mel", sr = 16000, hop_length = 160, ax = ax)
