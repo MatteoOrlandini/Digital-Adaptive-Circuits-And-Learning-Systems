@@ -1,5 +1,7 @@
 import preprocessing as pre
 import mel_spectrogram as mel
+from model import Protonet
+from episode import proto_net_episode as pn_episode
 import torch
 import random
 import librosa
@@ -14,6 +16,7 @@ audio_file_name = "audio.ogg"
 if __name__ == "__main__":
     C = 2 # classes
     K = 1 # instances per class
+    Q = 16
     valid_readers = pre.find_valid_readers(C, K)
 
     # The readers are partitioned into training, validation, and test sets with a 138:15:30 ratio
@@ -36,15 +39,19 @@ if __name__ == "__main__":
     # To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
     # sample C word classes from the reader, and sample K instances per class as the support set.
 
+    model=Protonet()
+    optim=torch.optim.Adam(model.parameters(),lr=0.001)
+
     for episode in range(1):
-        x = np.empty([0, 128, 51])  #features, np.empty returns a new array of shape (0, 128, 51)
-        y = [] #labels
+        x = torch.empty([0, 128, 51])  #features, np.empty returns a new array of shape (0, 128, 51)
+        y = torch.empty(0) #labels
         training_reader = random.sample(training_readers, 1)
         training_classes = pre.find_classes(training_reader[0], C, K)
         for idx, item in enumerate (training_classes):
             print('word:', item['word'])
             for i in range(len(item['start'])):
-                y.append(idx)
+                idx=torch.tensor([idx])
+                y=torch.cat((y,idx),axis=0)
                 start_in_ms = item['start'][i]/1000
                 end_in_ms = item['end'][i]/1000
                 word_center_time = (start_in_ms + end_in_ms)/2
@@ -52,11 +59,13 @@ if __name__ == "__main__":
                                                     word_center_time)
 
                 #print(item_spectrogram.shape)
-                x = np.concatenate((x, item_spectrogram[None]), axis=0)
-                print('x.shape:', x.shape)
-'''
-    fig, ax = plt.subplots()
-    img = librosa.display.specshow(x[3], x_axis = "time", y_axis = "mel", sr = 16000, ax = ax)
+                x = torch.cat((x, torch.tensor([item_spectrogram])), axis=0)
+                #print('x.shape:', x.shape)
+
+        loss, y_pred = pn_episode(model,optim,x,y,K,C,Q,True)
+
+"""     fig, ax = plt.subplots()
+    img = librosa.display.specshow(x[3], x_axis = "ms", y_axis = "mel", sr = 16000, hop_length = 160, ax = ax)
     ax.set(title = 'Mel spectrogram display')
     fig.colorbar(img, ax = ax)
-'''
+    plt.show() """
