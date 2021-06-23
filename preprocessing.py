@@ -118,7 +118,7 @@ def find_classes(training_reader, C, K):
     write_json_file("Classi/training_words_of_"+ training_reader['reader_name'] +".json", training_classes)
     return training_classes
 
-if __name__ == "__main__":
+""" if __name__ == "__main__":
     C = 10 # classes
     K = 10 # instances per class
     valid_readers = find_valid_readers(C, K)
@@ -143,4 +143,4 @@ if __name__ == "__main__":
     
     for training_reader in training_readers:
         training_classes = find_classes(training_reader, C, K)
-    # TO DO: find query and support set
+    # TO DO: find query and support set """

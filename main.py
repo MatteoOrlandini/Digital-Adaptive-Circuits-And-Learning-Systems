@@ -1,6 +1,13 @@
 import preprocessing as pre
-import mel_spectrogram
+import mel_spectrogram as mel
+import torch
+import random
+import librosa
+import librosa.display
+import matplotlib.pyplot as plt
+import numpy as np
 
+n_episodes = 60000
 
 
 
@@ -29,7 +36,23 @@ if __name__ == "__main__":
     
     # To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
     # sample C word classes from the reader, and sample K instances per class as the support set.
-    for training_reader in training_readers:
+
+    for episode in range(1):
+        x=[] #features
+        y=[] #labels
+        training_reader=random.sample(training_readers)
         training_classes = pre.find_classes(training_reader, C, K)
-        for class in training_classes:
-            mels = 
+    print(training_classes)
+"""         for idx, class in enumerate(training_classes):
+            for i in range(len(class['start'])):
+                y.append(idx)
+                wc=(class['start'][i]+class['end'][i])/2000
+                x.append(mel.compute_melspectrogram(class['folder'][i],wc))
+    
+    print(len(x))
+    print(len(y))
+
+    fig, ax = plt.subplots()
+    img = librosa.display.specshow(x[3], x_axis = "time", y_axis = "mel", sr = 16000, ax = ax)
+    ax.set(title = 'Mel spectrogram display')
+    fig.colorbar(img, ax = ax) """
