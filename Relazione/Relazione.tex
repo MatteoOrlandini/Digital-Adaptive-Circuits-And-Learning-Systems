@@ -1,0 +1,94 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+\title{Sound Event Detection con la tecnica del “few-shot learning“} 
+\author{Matteo Orlandini}
+\date{\today}
+
+\usepackage[english, italian]{babel} %the last declared language is the one used in the document
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs} %toprule, midrule, bottomrule
+\usepackage{subfig}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{siunitx}
+\usepackage{amsmath}
+%inizio impostazioni bibliografia
+\usepackage[autostyle,italian=guillemets]{csquotes} 
+%autostyle adatta lo stile delle citazioni alla lingua corrente del documento;
+%italian=guillemets racchiude automaticamente tra virgolette caporali
+%i campi che prevedono le virgolette;
+\usepackage[backend=biber, style=numeric, citestyle=numeric,maxcitenames=99,maxbibnames = 99]{biblatex}
+%backend=biber dice a biblatex che s’intende usare Biber come motore bibliografico
+%style:numeric Anno di pubblicazione: in fondo al riferimento.
+%citestyle=numeric Riferimento: numerico ([1], [2], eccetera).
+%fine impostazioni bibliografia
+
+\usepackage{float}
+\usepackage{hyperref}
+\hypersetup{
+	bookmarks=true,         % show bookmarks bar?
+	unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+	pdftoolbar=true,        % show Acrobat’s toolbar?
+	pdfmenubar=true,        % show Acrobat’s menu?
+	pdffitwindow=false,     % window fit to page when opened
+	pdfstartview={FitH},    % fits the width of the page to the window
+	%pdftitle={Relazione di Reti di Sensori Wireless per IOT},    % title
+	pdfauthor={Matteo Orlandini},     % author
+	pdfsubject= {Sound Event Detection con la tecnica del few-shot learning},   % subject of the document
+	pdfcreator={Matteo Orlandini},   % creator of the document
+	%pdfproducer={Producer}, % producer of the document
+	pdfpagemode={UseOutlines},
+	%bookmarksopen,
+	pdfstartview={FitH},
+	colorlinks=false,       % false: boxed links; true: colored links
+	linkcolor={red},
+	citecolor={green},
+	urlcolor={cyan}
+} 
+
+\renewcommand{\lstlistingname}{Codice}
+
+\addbibresource{Bibliografia.bib}
+
+\newcommand{\CoverName}{Cover}
+
+\begin{document}
+
+\begin{titlepage}
+	
+	\centering
+	\includegraphics[width=.2\textwidth]{Immagini/univpmlogo}\par\vspace{1cm}
+	{\scshape\LARGE Università Politecnica delle Marche\par}
+	\vspace{1cm}
+	{\scshape\Large Digital Adaptive Circuits And Learning Systems\par}
+	\vspace{1.5cm}
+	{\huge\bfseries Sound Event Detection con la tecnica del  ``\emph{few-shot learning}''  \par}
+	\vspace{2cm}
+	{\Large\itshape Matteo Orlandini e Jacopo Pagliuca\par}
+	\vfill
+	Prof. Stefano \textsc{Squartini}\\
+	Dott.ssa Michela \textsc{Cantarini}
+	
+	\vfill
+	
+	% Bottom of the page
+	{\large \today\par}
+\end{titlepage}
+
+\thispagestyle{empty}
+\tableofcontents
+
+\newpage
+\setcounter{page}{1}
+\section{Introduzione}
+\label{section:Introduzione}
+
+\clearpage
+
+\nocite{*}
+%Il comando \printbibliography produce la sezione bibliografica con relativi
+%titolo e testatina. Per mandarne il relativo titolo nell’indice generale si
+%usa l’istruzione:
+\printbibliography
+
+\end{document} 

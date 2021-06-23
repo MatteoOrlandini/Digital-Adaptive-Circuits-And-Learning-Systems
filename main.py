@@ -39,8 +39,8 @@ if __name__ == "__main__":
     # To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
     # sample C word classes from the reader, and sample K instances per class as the support set.
 
-    model=Protonet()
-    optim=torch.optim.Adam(model.parameters(),lr=0.001)
+    model = Protonet()
+    optim = torch.optim.Adam(model.parameters(),lr=0.001)
 
     for episode in range(1):
         x = torch.empty([0, 128, 51])  #features, np.empty returns a new array of shape (0, 128, 51)
@@ -50,8 +50,8 @@ if __name__ == "__main__":
         for idx, item in enumerate (training_classes):
             print('word:', item['word'])
             for i in range(len(item['start'])):
-                idx=torch.tensor([idx])
-                y=torch.cat((y,idx),axis=0)
+                idx = torch.tensor([idx])
+                y = torch.cat((y,idx),axis=0)
                 start_in_ms = item['start'][i]/1000
                 end_in_ms = item['end'][i]/1000
                 word_center_time = (start_in_ms + end_in_ms)/2
@@ -61,8 +61,10 @@ if __name__ == "__main__":
                 #print(item_spectrogram.shape)
                 x = torch.cat((x, torch.tensor([item_spectrogram])), axis=0)
                 #print('x.shape:', x.shape)
+                #print('y.shape:', y.shape)
 
-        loss, y_pred = pn_episode(model,optim,x,y,K,C,Q,True)
+        loss, y_pred = pn_episode(model, optim, x, y, K, C, Q, True)
+        #print('loss:', loss, 'y_pred:', y_pred)
 
 """     fig, ax = plt.subplots()
     img = librosa.display.specshow(x[3], x_axis = "ms", y_axis = "mel", sr = 16000, hop_length = 160, ax = ax)

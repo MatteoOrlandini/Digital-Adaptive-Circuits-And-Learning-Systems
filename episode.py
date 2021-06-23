@@ -1,7 +1,10 @@
 import torch
+import torch.nn.functional 
 from torch.optim import Optimizer
 from torch.nn import Module
 from torch.nn import CrossEntropyLoss
+from torch.autograd import Variable
+import torch.nn.functional as F
 
 def proto_net_episode(model: Module,
                       optimiser: Optimizer,
@@ -58,8 +61,12 @@ def proto_net_episode(model: Module,
 
 
     # Calculate log p_{phi} (y = k | x)
-    log_p_y = (-distances).log_softmax(dim=1)
-    loss = CrossEntropyLoss(log_p_y, y_queries)
+    #log_p_y = (-distances).log_softmax(dim=1)
+    log_p_y = F.log_softmax(-distances, dim=1).view(k_way, q_queries, -1)
+    #loss = CrossEntropyLoss(log_p_y, y_queries)
+    target_inds = torch.arange(0, k_way).view(k_way, 1, 1).expand(k_way, q_queries, 1).long()
+    target_inds = Variable(target_inds, requires_grad=False)
+    loss = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
 
     # Prediction probabilities are softmax over distances
     y_pred = (-distances).softmax(dim=1)

@@ -1,0 +1,105 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{snell:prototypical}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=6e4faf0ec15f439e8189ae61eb405d69}{%
+           family={Snell},
+           familyi={S\bibinitperiod},
+           given={Jake},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fe49ec9b6f902b79d166c1f25405c088}{%
+           family={Swersky},
+           familyi={S\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=936deb796814f7b18da88b71fa5ae940}{%
+           family={Zemel},
+           familyi={Z\bibinitperiod},
+           given={Richard\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{fullhash}{0727f715c226912c5a42d2802d420e42}
+      \strng{bibnamehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{authorbibnamehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{authornamehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{authorfullhash}{0727f715c226912c5a42d2802d420e42}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprintclass}{cs.LG}
+      \field{eprinttype}{arXiv}
+      \field{title}{Prototypical Networks for Few-shot Learning}
+      \field{year}{2017}
+      \true{nocite}
+      \verb{eprint}
+      \verb 1703.05175
+      \endverb
+    \endentry
+    \entry{Salamon:Few-Shot}{book}{}
+      \name{author}{4}{}{%
+        {{hash=b2eccb185095fccfeb40fdffd8b2105f}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=6f29e3fb8b241a304c6a9778479b58d2}{%
+           family={Salamon},
+           familyi={S\bibinitperiod},
+           given={Justin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=59ebbe2b242cb94c5adecfc59d91c403}{%
+           family={Bryan},
+           familyi={B\bibinitperiod},
+           given={Nicholas\bibnamedelima J.},
+           giveni={N\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=c6b84e28dafa9afbb1a85604d2a3c91e}{%
+           family={Pablo\bibnamedelima Bello},
+           familyi={P\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Juan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{fullhash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{bibnamehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{authorbibnamehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{authornamehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{authorfullhash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \field{sortinit}{W}
+      \field{sortinithash}{ecb89ff85896a47dc313960773ac311d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{ICASSP 2020 - 2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}
+      \field{title}{Few-Shot Sound Event Detection}
+      \field{year}{2020}
+      \true{nocite}
+      \field{pages}{81\bibrangedash 85}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1109/ICASSP40776.2020.9054708
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
