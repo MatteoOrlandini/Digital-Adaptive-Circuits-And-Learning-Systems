@@ -2,8 +2,6 @@ import json
 import random
 import numpy
 
-Q = 16 # query set size
-
 def write_json_file(filename, list_of_dict):
     f = open(filename, "w")
     f.write(json.dumps(list_of_dict, indent = 4))
@@ -15,7 +13,7 @@ def read_json_file(filename):
     f.close
     return list_of_dict
 
-def find_valid_readers(C, K):
+def find_valid_readers(C, K, Q = 16):
     # read the json with the words of each reader
     readers = read_json_file("readers_words.json")
 
@@ -84,19 +82,23 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
 
     return training_readers, test_readers, validation_readers
 
-def find_classes(training_reader, C, K):
-    training_classes = []
+def find_classes(reader, C = None, K = None, Q = 16):
+    classes = []
 
     # taking only C words from all training readers ones
-    training_reader_words = random.sample(training_reader['words'], C)   
+    if not (C == None and K ==  None):
+        reader_words = random.sample(reader['words'], C)  
+    else:
+        reader_words = reader['words']
 
-    for word in training_reader_words:
+    for word in reader_words:
         # numpy.arange returns evenly spaced values within a given interval.
         # create an array of index to get the start, end and folder of the same index
         index_array = list(numpy.arange(0, len(word['start']), step = 1))
 
         # random sample only K + Q indexes
-        index_array = random.sample(index_array, K + Q)
+        if not (C == None and K ==  None):
+            index_array = random.sample(index_array, K + Q)
 
         instance_start = []
         instance_end = []
@@ -110,13 +112,13 @@ def find_classes(training_reader, C, K):
             instance_folder.append(word['folders'][index])
 
         # append the new word of K + Q instances
-        training_classes.append({'word'    : word['word'], \
-                                 'start'   : instance_start,\
-                                 'end'     : instance_end, \
-                                 'folders' : instance_folder})
+        classes.append( {'word'   : word['word'], \
+                        'start'   : instance_start,\
+                        'end'     : instance_end, \
+                        'folders' : instance_folder})
 
     #write_json_file("Classi/training_words_of_"+ training_reader['reader_name'] +".json", training_classes)
-    return training_classes
+    return classes
 
 """ if __name__ == "__main__":
     C = 10 # classes
