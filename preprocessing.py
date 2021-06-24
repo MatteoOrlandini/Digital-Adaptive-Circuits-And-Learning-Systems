@@ -41,7 +41,7 @@ def find_valid_readers(C, K, Q = 16):
                         'end'    : end, \
                         'folders': folders}
 
-            # if there are for K + Q instances append a new valid word
+            # if there are at least K + Q instances append a new valid word
             if (len(new_word['start']) >= K + Q):
                 number_of_valid_words += 1
                 valid_words.append(new_word)

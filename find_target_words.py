@@ -17,6 +17,7 @@ source_path = "./Dataset/English spoken wikipedia/english/"
 filename = "aligned.swc"
 # iterate in each folder of the dataset
 for folder in os.scandir(source_path):
+    # flag for enable write saving the word_count.json
     enough_words = False
     if (os.path.exists(folder.path + "/" + filename)):  
         # parse the xml file aligned.swc

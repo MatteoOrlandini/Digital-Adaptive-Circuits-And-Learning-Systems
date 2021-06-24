@@ -16,14 +16,11 @@ filename = "aligned.swc"
 
 # search for readers for each folder
 for audio_path in os.scandir(source_path):
-	if (os.path.exists(audio_path.path + "/" + filename)):
-		# example: audio_path.path = ./Dataset/English spoken wikipedia with audio/english/Revolt_of_the_Admirals
-		# ->  folder = Revolt_of_the_Admirals
-		audio_path_split = audio_path.path.split('/')
-		# save only the folder name
-		folder = audio_path_split[len(audio_path_split)-1]
+	# # save only folder name from entire path
+	folder =  os.path.basename(audio_path)
+	if (os.path.exists(source_path + "/" + folder + "/" + filename)):
 		# parse the xml file "aligned.swc"
-		tree = ET.parse(audio_path.path + "/" + filename)
+		tree = ET.parse(source_path + "/" + folder + "/" + filename)
 		# getroot returns the root element for this tree
 		root = tree.getroot()
 		# root.iter creates a tree iterator with the current element as the root. The iterator iterates over this element and all elements below it, in document (depth first) order.

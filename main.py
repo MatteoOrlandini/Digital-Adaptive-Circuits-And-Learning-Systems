@@ -45,7 +45,7 @@ if __name__ == "__main__":
     model = Protonet()
     optim = torch.optim.Adam(model.parameters(),lr=0.001)
 
-    for episode in range(3):
+    for episode_number in range(3):
         x = torch.empty([0, 128, 51])  #features, torch.empty returns a new array of shape (128, 51)
         y = torch.empty(0) #labels
         training_reader = random.sample(training_readers, 1)
@@ -53,9 +53,7 @@ if __name__ == "__main__":
         for idx, item in enumerate (training_classes):
             print('word:', item['word'])
             for i in range(len(item['start'])):
-                start = time.time()
                 idx = torch.tensor([idx])
-                print('time:', time.time() - start)
                 y = torch.cat((y,idx), axis = 0)
                 start_in_sec = item['start'][i]/1000 # conversion from milliseconds to seconds
                 end_in_sec = item['end'][i]/1000    # conversion from milliseconds to seconds
@@ -66,10 +64,10 @@ if __name__ == "__main__":
                 #print('item_spectrogram time:', time.time() - start)
                 #print(item_spectrogram.shape)
                 x = torch.cat((x, torch.tensor([item_spectrogram])), axis = 0)
-                #print('x.shape:', x.shape)
+                print('x.shape:', x.shape)
                 #print('y.shape:', y.shape)
 
-        loss, y_pred = episode(model, optim, x, y, K, C, Q, True)
+        loss, y_pred = proto_net_episode(model, optim, x, y, K, C, Q, True)
         # da: https://github.com/orobix/Prototypical-Networks-for-Few-shot-Learning-PyTorch/blob/master/src/train.py
         train_loss.append(loss.item())
 
