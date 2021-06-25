@@ -35,17 +35,17 @@ def loss(sample, model):
 
     x = torch.cat([xs.view(n_class * n_support, *xs.size()[2:]),
                     xq.view(n_class * n_query, *xq.size()[2:])], 0)
-    print("x.shape",x.shape)
+    #print("x.shape",x.shape)
     z = model(x)
-    print("z.shape",z.shape)
+    #print("z.shape",z.shape)
     z_dim = z.size(-1)
-    print("z_dim",z_dim)
+    #print("z_dim",z_dim)
     z_proto = z[:n_class*n_support].view(n_class, n_support, z_dim).mean(1)    
-    print("z_proto",z_proto.shape)
+    #print("z_proto",z_proto.shape)
     zq = z[n_class*n_support:]
-    print("z_q",zq.shape)
+    #print("z_q",zq.shape)
     dists = euclidean_dist(zq, z_proto)
-    print("dists",dists.shape)
+    #print("dists",dists.shape)
     log_p_y = F.log_softmax(-dists, dim=1).view(n_class, n_query, -1)
 
     loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()

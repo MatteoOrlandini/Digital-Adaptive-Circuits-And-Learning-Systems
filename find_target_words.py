@@ -1,5 +1,5 @@
 import xml.etree.ElementTree as ET
-import operator
+from tqdm import tqdm
 import os
 import collections
 import pandas as pd
@@ -15,11 +15,12 @@ import json
 folder = []
 source_path = "./Dataset/English spoken wikipedia/english/"
 filename = "aligned.swc"
+file_audio_name = "audio.ogg"
 # iterate in each folder of the dataset
-for folder in os.scandir(source_path):
+for folder in tqdm(os.scandir(source_path), desc = "Folder number", position = 0, leave = True):
     # flag for enable write saving the word_count.json
     enough_words = False
-    if (os.path.exists(folder.path + "/" + filename)):  
+    if (os.path.exists(folder.path + "/" + filename) and os.path.exists(folder.path + "/" + file_audio_name)):  
         # parse the xml file aligned.swc
         tree = ET.parse(folder.path + "/" + filename)
         # getroot returns the root element for this tree
@@ -61,5 +62,5 @@ for folder in os.scandir(source_path):
     if (enough_words):
         f = open(folder.path+"/word_count.json", "w")
         f.write(json.dumps(target_words, indent = 4, sort_keys = False))
-        print("Folder:", folder.path)
+        #print("Folder:", folder.path)
         f.close()

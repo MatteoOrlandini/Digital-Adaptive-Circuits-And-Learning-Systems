@@ -1,14 +1,18 @@
 from preprocessing import * 
 from mel_spectrogram import * 
-from model import Protonet
+from model import *
 from episode import *
 import torch
 import random
-import librosa
-import librosa.display
-import matplotlib.pyplot as plt
 import numpy as np
 import time
+from model import *
+from loss import *
+import numpy
+from tqdm import tqdm
+import torch
+import os
+from dataset_manager import *
 
 n_episodes = 60000
 source_path = "./Dataset/English spoken wikipedia/english/"
@@ -41,40 +45,26 @@ if __name__ == "__main__":
     # sample C word classes from the reader, and sample K instances per class as the support set.
 
     train_loss = []
-
+    
     model = Protonet()
-    optim = torch.optim.Adam(model.parameters(),lr=0.001)
+    optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
-    for episode_number in range(3):
-        x = torch.empty([0, 128, 51])  #features, torch.empty returns a new array of shape (128, 51)
-        y = torch.empty(0) #labels
-        training_reader = random.sample(training_readers, 1)
-        training_classes = find_classes(training_reader[0], C, K, Q)
-        for idx, item in enumerate (training_classes):
-            print('word:', item['word'])
-            for i in range(len(item['start'])):
-                idx = torch.tensor([idx])
-                y = torch.cat((y,idx), axis = 0)
-                start_in_sec = item['start'][i]/1000 # conversion from milliseconds to seconds
-                end_in_sec = item['end'][i]/1000    # conversion from milliseconds to seconds
-                word_center_time = (start_in_sec + end_in_sec)/2
-                #start = time.time()
-                item_spectrogram = compute_melspectrogram(source_path + item['folders'][i] + "/" + audio_file_name, \
-                                                    word_center_time)
-                #print('item_spectrogram time:', time.time() - start)
-                #print(item_spectrogram.shape)
-                x = torch.cat((x, torch.tensor([item_spectrogram])), axis = 0)
-                print('x.shape:', x.shape)
-                #print('y.shape:', y.shape)
+    for episode in tqdm(range(int(10)), desc = "episode"):
+        query, support = extract_feature("Features/", C, K, Q)
 
-        loss, y_pred = proto_net_episode(model, optim, x, y, K, C, Q, True)
-        # da: https://github.com/orobix/Prototypical-Networks-for-Few-shot-Learning-PyTorch/blob/master/src/train.py
-        train_loss.append(loss.item())
+        support = torch.FloatTensor(support)
+        query = torch.FloatTensor(query)
+        #print(support.shape)
+        sample = {'xs' : support,    # support
+                  'xq' : query}    # query
+        
+        model.train()
+        optim.zero_grad()
+        loss_out, output = loss(sample, model)
+        #print(loss_out)
+        loss_out.backward()
+        optim.step()
+        # TO DO: EARLY STOPPING
+        train_loss.append(loss_out.item())
 
     print(train_loss)
-
-"""     fig, ax = plt.subplots()
-    img = librosa.display.specshow(x[3], x_axis = "ms", y_axis = "mel", sr = 16000, hop_length = 160, ax = ax)
-    ax.set(title = 'Mel spectrogram display')
-    fig.colorbar(img, ax = ax)
-    plt.show() """

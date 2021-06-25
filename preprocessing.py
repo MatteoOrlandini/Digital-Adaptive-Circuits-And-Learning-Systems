@@ -76,9 +76,9 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
     validation_readers = valid_readers[number_of_training_readers + number_of_test_readers : \
                                                      number_of_training_readers + number_of_test_readers + number_of_validation_readers]
 
-    write_json_file("training_readers.json", training_readers)
-    write_json_file("test_readers.json", test_readers)
-    write_json_file("validation_readers.json", validation_readers)
+    #write_json_file("training_readers.json", training_readers)
+    #write_json_file("test_readers.json", test_readers)
+    #write_json_file("validation_readers.json", validation_readers)
 
     return training_readers, test_readers, validation_readers
 
