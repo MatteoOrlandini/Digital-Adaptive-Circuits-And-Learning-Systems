@@ -10,18 +10,18 @@ def save_dataset(readers, C, K, Q, folder_name, dataset_path, audio_file_name):
             try:
                 os.mkdir(folder_name + reader['reader_name'])
                 classes = find_classes(reader, C, K, Q)
-                for instance in tqdm(classes):
+                for item in tqdm(classes):
                     spectrograms = np.empty([0, 128, 51])
-                    for i in range(len(instance['start'])):
-                        start_in_sec = instance['start'][i]/1000 # conversion from milliseconds to seconds
-                        end_in_sec = instance['end'][i]/1000     # conversion from milliseconds to seconds
+                    for i in range(len(item['start'])):
+                        start_in_sec = item['start'][i]/1000 # conversion from milliseconds to seconds
+                        end_in_sec = item['end'][i]/1000     # conversion from milliseconds to seconds
                         word_center_time = (start_in_sec + end_in_sec)/2
-                        audio_file_path = dataset_path + instance['folders'][i] + "/" + audio_file_name
+                        audio_file_path = dataset_path + item['folders'][i] + "/" + audio_file_name
                         if (os.path.exists(audio_file_path)):
                             item_spectrogram = compute_melspectrogram(audio_file_path, word_center_time)
                             spectrograms = np.concatenate((spectrograms, [item_spectrogram]), axis = 0)
-                    if (spectrograms.shape[0] == C):
-                        numpy.save(folder_name + reader['reader_name'] + "/" + instance['word'] + ".npy", spectrograms)
+                    if (spectrograms.shape[0] == K + Q):
+                        numpy.save(folder_name + reader['reader_name'] + "/" + item['word'] + ".npy", spectrograms)
             except OSError as error:
                 print(error)   
 
