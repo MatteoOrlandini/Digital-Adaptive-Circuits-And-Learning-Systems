@@ -1,18 +1,17 @@
-import json
+from tqdm import tqdm
 import os
+from json_manager import *
 
 source_path = "./Dataset/English spoken wikipedia/english/"
 # read the json that contains the readers name and their audio folders
-f = open("readers_paths.json", "r")
-readers = json.load(f)
-f.close()
+readers = read_json_file("readers_paths.json")
 #initialize a list of dict
-training_readers = []
+readers_words = []
 # for each reader search the word spoken by the reader
-for reader in readers:
+for reader in tqdm(readers):
     # create a dict with 'reader_name' and 'words' keys
-    new_training_reader = {'reader_name' : reader['reader_name'],\
-                           'words' : [] }
+    new_readers_words = {'reader_name' : reader['reader_name'],\
+                         'words' : [] }
 
     # for each reader create a new dict for words
     words_per_reader = [] 
@@ -24,9 +23,7 @@ for reader in readers:
             # "word_count.json" exists
             json_file_exist = True
             # read "word_count.json"
-            f = open(source_path + "/" + reader_folder + "/word_count.json", "r")
-            recording_words = json.load(f)
-            f.close()
+            recording_words = read_json_file(source_path + "/" + reader_folder + "/word_count.json")
             # for each audio folder create a new list of dict
             folder_per_word = []
             # for each word in the audio save the folder, start and end timestamps
@@ -53,10 +50,7 @@ for reader in readers:
                                 word_per_reader['folders'].append(folder_per_word)
     # if "word_count.json" exists add the new reader to "training_readers" list     
     if (json_file_exist):
-        new_training_reader['words'] = words_per_reader
-        training_readers.append(new_training_reader)
+        new_readers_words['words'] = words_per_reader
+        readers_words.append(new_readers_words)
 # save a "readers_words.json" with the name of the readers and the relative words spoken
-f = open("readers_words.json","w")
-f.write(json.dumps(training_readers, indent = 0, sort_keys = False))
-f.close()
-
+write_json_file("readers_words.json", readers_words, indent = 0)

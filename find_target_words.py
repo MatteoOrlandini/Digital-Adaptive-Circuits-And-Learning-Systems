@@ -2,8 +2,9 @@ import xml.etree.ElementTree as ET
 from tqdm import tqdm
 import os
 import collections
-import pandas as pd
-import json
+from json_manager import *
+import numpy
+import random
 
 # target_words = [{
     # 'word': [],
@@ -16,11 +17,14 @@ folder = []
 source_path = "./Dataset/English spoken wikipedia/english/"
 filename = "aligned.swc"
 file_audio_name = "audio.ogg"
+
 # iterate in each folder of the dataset
-for folder in tqdm(os.scandir(source_path), desc = "Folder number", position = 0, leave = True):
-    # flag for enable write saving the word_count.json
-    enough_words = False
-    if (os.path.exists(folder.path + "/" + filename) and os.path.exists(folder.path + "/" + file_audio_name)):  
+for folder in tqdm(os.scandir(source_path), desc = "Folder number"):
+    # initialize the list of dict "target_words"
+    target_words = []
+    if (os.path.exists(folder.path + "/" + filename) \
+        and os.path.exists(folder.path + "/" + file_audio_name) \
+        and os.path.isdir(folder.path)):  
         # parse the xml file aligned.swc
         tree = ET.parse(folder.path + "/" + filename)
         # getroot returns the root element for this tree
@@ -35,13 +39,11 @@ for folder in tqdm(os.scandir(source_path), desc = "Folder number", position = 0
                 words.append(token_normalization.attrib['pronunciation'].lower())
         # collections.Counter stores elements as dictionary keys, and their counts are stored as dictionary values.
         unique_words = collections.Counter(words)
-        # initialize the list of dict "target_words"
-        target_words = []
         # for each key (word) in "unique_words" append a new target_word if the number of occurency is at least 10
         for key in unique_words.keys():
             # we only consider words that occur at least 10 times in the recording
+            # note that unique_words[key] is the word frequency
             if (unique_words[key] >= 10):
-                enough_words = True
                 # add a new target word
                 target_words.append({'word' : key, \
                                      'frequency' : unique_words[key], \
@@ -58,9 +60,11 @@ for folder in tqdm(os.scandir(source_path), desc = "Folder number", position = 0
                         target_word['start'].append(int(token_normalization.attrib['start']))
                         target_word['end'].append(int(token_normalization.attrib['end']))
 
-    # save the "word_count.json" only if there are enough words 
-    if (enough_words):
-        f = open(folder.path+"/word_count.json", "w")
-        f.write(json.dumps(target_words, indent = 4, sort_keys = False))
-        #print("Folder:", folder.path)
-        f.close()
+        write_json_file(folder.path+"/word_count.json", target_words, indent = 4)
+        # If there are more than 10 words that occur at least 10 times in the recording, 
+        # we sort the words by their number of occurrences, divide the sorted list into 
+        # 10 equally sized bins, and sample one keyword per bin.
+        if (len(target_words) >= 10):
+            target_words = random.sample(target_words, 10)
+        # save the "target_words.json"
+        write_json_file(folder.path+"/target_words.json", target_words, indent = 4)

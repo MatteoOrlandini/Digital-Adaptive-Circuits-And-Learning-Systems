@@ -19,6 +19,106 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{minining_spoken_wikipedia}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=dd4441dee198cef69d0e82ddbcf259a7}{%
+           family={K{ö}hn},
+           familyi={K\bibinitperiod},
+           given={Arne},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a6a29e54eadbd83c697710b90073df31}{%
+           family={Stegen},
+           familyi={S\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod}}}%
+        {{hash=44e00333dd91f73923f2790c12e5a066}{%
+           family={Baumann},
+           familyi={B\bibinitperiod},
+           given={Timo},
+           giveni={T\bibinitperiod}}}%
+      }
+      \name{editor}{9}{}{%
+        {{hash=a87b059d1292fb1b175e5f20dbd1d9c5}{%
+           family={Chair)},
+           familyi={C\bibinitperiod},
+           given={Nicoletta\bibnamedelimb Calzolari\bibnamedelima (Conference},
+           giveni={N\bibinitperiod\bibinitdelim C\bibinitperiod\bibinitdelim (\bibinitperiod}}}%
+        {{hash=39867e26feb655084bcaa95ee00ad1b3}{%
+           family={Choukri},
+           familyi={C\bibinitperiod},
+           given={Khalid},
+           giveni={K\bibinitperiod}}}%
+        {{hash=aa314aaff9cde7c75dd1dbefb7df9aee}{%
+           family={Declerck},
+           familyi={D\bibinitperiod},
+           given={Thierry},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3bd5bf87c9e390a1d8f33dd98ef52b98}{%
+           family={Grobelnik},
+           familyi={G\bibinitperiod},
+           given={Marko},
+           giveni={M\bibinitperiod}}}%
+        {{hash=f89d93ac385cd2c8048bd80b6bec272c}{%
+           family={Maegaard},
+           familyi={M\bibinitperiod},
+           given={Bente},
+           giveni={B\bibinitperiod}}}%
+        {{hash=bdf0b8f2adba0ed452d8c7a080e79edb}{%
+           family={Mariani},
+           familyi={M\bibinitperiod},
+           given={Joseph},
+           giveni={J\bibinitperiod}}}%
+        {{hash=bfec001866fc980a5a370b3f8f617c1d}{%
+           family={Moreno},
+           familyi={M\bibinitperiod},
+           given={Asuncion},
+           giveni={A\bibinitperiod}}}%
+        {{hash=663e887ebca3a6dfcd35d2bbf8163b42}{%
+           family={Odijk},
+           familyi={O\bibinitperiod},
+           given={Jan},
+           giveni={J\bibinitperiod}}}%
+        {{hash=9d79dd4fb50589491e453c48e1d3c56a}{%
+           family={Piperidis},
+           familyi={P\bibinitperiod},
+           given={Stelios},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \list{location}{1}{%
+        {Portorož, Slovenia}%
+      }
+      \list{publisher}{1}{%
+        {European Language Resources Association (ELRA)}%
+      }
+      \strng{namehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{fullhash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{bibnamehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{authorbibnamehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{authornamehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{authorfullhash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{editorbibnamehash}{cc7a215b575e9f700cef453f295ba5b9}
+      \strng{editornamehash}{cc7a215b575e9f700cef453f295ba5b9}
+      \strng{editorfullhash}{cc7a215b575e9f700cef453f295ba5b9}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC 2016)}
+      \field{eventday}{23}
+      \field{eventendday}{28}
+      \field{eventendmonth}{5}
+      \field{eventendyear}{2016}
+      \field{eventmonth}{5}
+      \field{eventyear}{2016}
+      \field{isbn}{978-2-9517408-9-1}
+      \field{title}{Mining the Spoken Wikipedia for Speech Data and Beyond}
+      \field{eventenddateera}{ce}
+      \field{eventdateera}{ce}
+      \true{nocite}
+    \endentry
     \entry{snell:prototypical}{misc}{}
       \name{author}{3}{}{%
         {{hash=6e4faf0ec15f439e8189ae61eb405d69}{%

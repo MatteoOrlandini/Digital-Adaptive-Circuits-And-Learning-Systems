@@ -19,28 +19,10 @@ source_path = "./Dataset/English spoken wikipedia/english/"
 audio_file_name = "audio.ogg"
 
 if __name__ == "__main__":
-    C = 2 # classes
-    K = 1 # instances per class
+    C = 10 # classes
+    K = 10 # instances per class
     Q = 16 # query set size
-    valid_readers = find_valid_readers(C, K, Q)
 
-    # The readers are partitioned into training, validation, and test sets with a 138:15:30 ratio
-    if (len(valid_readers) >= 183):
-        number_of_training_readers = 138
-        number_of_test_readers = 30
-        number_of_validation_readers = 15
-
-    else:
-        number_of_training_readers = int(138/183*len(valid_readers))
-        number_of_test_readers = int(30/183*len(valid_readers))
-        number_of_validation_readers = int(15/183*len(valid_readers))
-
-    # The valid readers are partitioned into training, validation, and test readers
-    training_readers, test_readers, validation_readers = create_training_validation_test_readers(valid_readers, \
-                                                                                                number_of_training_readers, \
-                                                                                                number_of_test_readers, \
-                                                                                                number_of_validation_readers)
-    
     # To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
     # sample C word classes from the reader, and sample K instances per class as the support set.
 
@@ -50,7 +32,7 @@ if __name__ == "__main__":
     optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
     for episode in tqdm(range(int(10)), desc = "episode"):
-        query, support = extract_feature("Features/", C, K, Q)
+        query, support = batch_sample("Features/", C, K, Q)
 
         support = torch.FloatTensor(support)
         query = torch.FloatTensor(query)

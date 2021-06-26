@@ -4,13 +4,50 @@ from preprocessing import *
 from mel_spectrogram import * 
 from tqdm import tqdm
 
-def save_dataset(readers, C, K, Q, folder_name, dataset_path, audio_file_name):
+def find_classes(reader, C, K, Q = 16):
+    classes = []
+
+    # taking at most C words from all training readers ones
+    if (C <= len(reader['words'])):
+        reader_words = random.sample(reader['words'], C)  
+    else:
+        reader_words = random.sample(reader['words'], len(reader['words']))  
+
+    for word in reader_words:
+        # numpy.arange returns evenly spaced values within a given interval.
+        # create an array of index to get the start, end and folder of the same index
+        index_array = list(numpy.arange(len(word['start'])))
+
+        # random sample only K + Q indexes
+        index_array = random.sample(index_array, K + Q)
+
+        instance_start = []
+        instance_end = []
+        instance_folder = []
+        
+        # sample K instances from every C word class
+        for index in index_array:
+            # get the start, end and folder of the same index
+            instance_start.append(word['start'][index])
+            instance_end.append(word['end'][index])
+            instance_folder.append(word['folders'][index])
+
+        # append the new word of K + Q instances
+        classes.append( {'word'   : word['word'], \
+                        'start'   : instance_start,\
+                        'end'     : instance_end, \
+                        'folders' : instance_folder})
+
+    write_json_file("Classi/training_words_of_"+ reader['reader_name'] +".json", classes)
+    return classes
+
+def save_training_dataset(readers, C, K, Q, folder_name, dataset_path, audio_file_name):
     for reader in tqdm(readers, position = 0):
         if not (os.path.exists(folder_name + reader['reader_name'])):
             try:
                 os.mkdir(folder_name + reader['reader_name'])
                 classes = find_classes(reader, C, K, Q)
-                for item in tqdm(classes, position = 1):
+                for item in tqdm(classes, position = 1, leave = False):
                     spectrograms = np.empty([0, 128, 51])
                     for i in range(len(item['start'])):
                         start_in_sec = item['start'][i]/1000 # conversion from milliseconds to seconds
@@ -25,7 +62,7 @@ def save_dataset(readers, C, K, Q, folder_name, dataset_path, audio_file_name):
             except OSError as error:
                 print(error)   
 
-def extract_feature(feature_folder, C, K, Q):
+def batch_sample(feature_folder, C, K, Q):
     support =  numpy.empty([0 ,K, 128, 51])
     query = numpy.empty([0, Q, 128, 51])
     #print("support.shape:",support.shape)
@@ -34,18 +71,20 @@ def extract_feature(feature_folder, C, K, Q):
     for entry in os.scandir(feature_folder):
         reader_path.append(entry.path)
         #print(entry.path)
-    folder = random.sample(reader_path, 1)
-    #print("folder:",folder[0])
     words = []
-    for word in os.scandir(folder[0]):
-        words.append(word.path)
+    while (len(words) < C):
+        folder = random.sample(reader_path, 1)
+        #print("folder:",folder[0])
+        words = []
+        for word in os.scandir(folder[0]):
+            words.append(word.path)
     words = random.sample(words, C)
     #print("words:",words)
     for word in words:
         spectrogram = numpy.load(word)
         #print("numpy.shape(spectrogram):",numpy.shape(spectrogram))
-        len = numpy.shape(spectrogram)[0]
-        index = random.sample(list(numpy.arange(len)), K + Q)
+        instances_number = numpy.shape(spectrogram)[0]
+        index = random.sample(list(numpy.arange(instances_number)), K + Q)
         spectrogram_buf = numpy.empty([0, 128, 51])
         for i in index:
             spectrogram_buf = numpy.concatenate((spectrogram_buf, [spectrogram[i, :, :]]), axis = 0)
@@ -60,16 +99,17 @@ if __name__ == "__main__":
     C = 10 # classes
     K = 10 # instances per class
     Q = 16
-    feature_folder_name = "Features/"
+
+    training_feature_folder_name = "Training_features/"
     dataset_path = "./Dataset/English spoken wikipedia/english/"
     audio_file_name = "audio.ogg"
-    valid_readers = find_valid_readers(C, K, Q)
-    if not (os.path.exists(feature_folder_name)):
+
+    training_readers = read_json_file("training_readers.json")
+
+    if not (os.path.exists(training_feature_folder_name)):
         try:
-            os.mkdir(feature_folder_name)
+            os.mkdir(training_feature_folder_name)
         except OSError as error:
             print(error)   
-    save_dataset(valid_readers, C, K, Q, feature_folder_name, dataset_path, audio_file_name)
 
-    
-    
+    save_training_dataset(training_readers, C, K, Q, training_feature_folder_name, dataset_path, audio_file_name)

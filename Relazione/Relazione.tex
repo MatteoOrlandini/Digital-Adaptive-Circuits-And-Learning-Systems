@@ -12,6 +12,74 @@
 \usepackage{listings}
 \usepackage{siunitx}
 \usepackage{amsmath}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+	basicstyle=\normalfont\ttfamily,
+	%numbers=left,
+	tabsize=4,
+	numberstyle=\scriptsize,
+	stepnumber=1,
+	numbersep=8pt,
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	%backgroundcolor=\color{background},
+	literate=
+	%*{0}{{{\color{numb}0}}}{1}
+	%{1}{{{\color{numb}1}}}{1}
+	%{2}{{{\color{numb}2}}}{1}
+	%{3}{{{\color{numb}3}}}{1}
+	%{4}{{{\color{numb}4}}}{1}
+	%{5}{{{\color{numb}5}}}{1}
+	%{6}{{{\color{numb}6}}}{1}
+	%{7}{{{\color{numb}7}}}{1}
+	%{8}{{{\color{numb}8}}}{1}
+	%{9}{{{\color{numb}9}}}{1}
+	%{:}{{{\color{punct}{:}}}}{1}
+	{,}{{{\color{punct}{,}}}}{1}
+	{\{}{{{\color{delim}{\{}}}}{1}
+	{\}}{{{\color{delim}{\}}}}}{1}
+	{[}{{{\color{delim}{[}}}}{1}
+	{]}{{{\color{delim}{]}}}}{1},
+ 	morekeywords = {folder, reader_name, word, frequency, start, end},
+	keywordstyle=\color{blue},
+	commentstyle=\color{black},
+}
+
+\usepackage{color}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+\lstset{literate=% Allow for German characters in lstlistings.
+	{Ö}{{\"O}}1
+	{Ä}{{\"A}}1
+	{Ü}{{\"U}}1
+	{ß}{{\ss}}2
+	{ü}{{\"u}}1
+	{ä}{{\"a}}1
+	{ö}{{\"o}}1
+}
+
+\lstdefinelanguage{XML}
+{
+	frame=lines,
+	morestring=[b]",
+	%morestring=[s]{>}{<},
+	%morecomment=[s]{<?}{?>},
+	stringstyle=\color{darkblue},
+	identifierstyle=\color{cyan},
+	keywordstyle=\bfseries\color{black},
+	morekeywords={key, value, group, text, pronunciation, start, end}
+	moreidentifier = {article, meta, link, prop, d, extra, t, s, n, ignored},
+	%backgroundcolor=\color{background},
+}
 
 %\usepackage[latin1]{inputenc} %l'ho messo io (Jacopo)
 %inizio impostazioni bibliografia
@@ -79,11 +147,14 @@
 
 \thispagestyle{empty}
 \tableofcontents
+\clearpage
 
 %\newpage
 \setcounter{page}{1}
+
 \section{Introduzione}
 \label{section:Introduzione}
+\clearpage
 
 \section{Few-shot learning}
 \label{section:Few-shot}
@@ -109,6 +180,152 @@ Gli approcci al meta-apprendimento sono diversi e non c'è consenso sull'approcc
 	\item Conoscenza a priori dei dati: sfruttiamo le conoscenze a priori sulla struttura e la variabilità dei dati e questo ci consente di apprendere modelli praticabili da pochi esempi.
 \end{itemize}
 
+\clearpage
+
+\section{Dataset Spoken Wikipedia Corpora}
+\label{sec:spoken_wikipedia_corpora}
+Il progetto Spoken Wikipedia unisce lettori volontari di articoli di Wikipedia. Centinaia di articoli in inglese, tedesco e olandese sono disponibili per gli utenti che non sono in grado o non vogliono leggere la versione scritta dell'articolo. Il dataset trasforma i file audio in un corpus allineato nel tempo, rendendolo accessibile per la ricerca.\cite{minining_spoken_wikipedia}
+
+Questo corpus ha diverse caratteristiche importanti:
+\begin{itemize}
+	\item centinaia di ore di audio allineato
+	\item lettori eterogenei
+	\item diversi argomenti
+	\item genere testuale ben studiato
+	\item le annotazioni delle parole possono essere mappate all'html originale
+	\item allineamenti a livello di fonema
+\end{itemize}
+
+Ogni articolo è suddiviso in sezioni, frasi e token. Ogni token è normalizzato e la normalizzazione è allineata all'audio.
+
+INSERIRE SCHEMA SWC.RNC!!
+
+\subsection{Annotazioni}
+\label{subsec:annotazioni}
+\begin{lstlisting}[language=xml,firstnumber=1, caption=Metadati delle annotazioni delle parole in un audio, label=metadati_annotazioni,captionpos=b, basicstyle=\tiny]
+<article>
+<meta>
+<link key="DC.conformsto" value="http://nats.gitlab.io/swc/schema/swc-1.0.rnc"/>
+<prop key="DC.creator" value="Spoken Wikipedia Corpus Collection Software"/>
+<prop key="DC.publisher" value="Universität Hamburg"/>
+<link key="DC.reference" value="http://nbn-resolving.de/urn:nbn:de:gbv:18-228-7-2209"/>
+<prop key="DC.type" value="dataset"/>
+<prop key="DC.license" value="CC-BY-SA"/>
+<prop key="DC.title" value="(I Can't Get No) Satisfaction"/>
+<prop key="DC.language" value="en"/>
+<prop key="DC.identifier" value="(I_Can%27t_Get_No)_Satisfaction"/>
+<prop key="DC.date.read" value="2005-04-20 00:00:00"/>
+<link key="DC.source" value="https://en.wikipedia.org/wiki/(I_Can%27t_Get_No)_Satisfaction"/>
+<prop key="DC.source.wikiID" value="7156876"/>
+<prop key="DC.source.revision" value="786995193"/>
+<link key="DC.source.text" value="https://en.wikipedia.org/w/index.php?title=(I Can't Get No) Satisfaction&oldid=13424379"/>
+<link key="DC.source.audio" value="https://upload.wikimedia.org/wikipedia/commons/3/38/En-%28I_Can%27t_Get_No%29_Satisfaction-article.oga" group="audio1"/>
+<prop key="DC.source.audio.offset" value="0.0" group="audio1"/>
+<link key="DC.source.audio.page" value="https://en.wikipedia.org/w/index.php?title=File%3aEn-(I_Can%27t_Get_No)_Satisfaction-article.oga" group="audio1"/>
+<link key="DC.source.audio.date" value="2007-09-14 19:28:20" group="audio1"/>
+<prop key="reader.name" value="the Epopt"/>
+<prop key="processing.step" value="tokenize" group="tokenize"/>
+<prop key="processing.step.date" value="2017-08-10T07:42:18.769+02:00[Europe/Berlin]" group="tokenize"/>
+<prop key="processing.step.options" value="Namespace(output=articles/(I_Can%27t_Get_No)_Satisfaction/tokenized.swc, all_sections=false, null_normalize=false, raw_output=null, subparser_name=tokenize, lang=en, no_introduction=false, article_dir=articles/(I_Can%27t_Get_No)_Satisfaction)" group="tokenize"/>
+<prop key="processing.step.git.commit.id" value="7431dbf93f212ad828208abaf8f518fb8de11ff3" group="tokenize"/>
+<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="tokenize"/>
+<prop key="processing.step" value="align" group="align"/>
+<prop key="processing.step.date" value="2017-08-11T14:56:44.948+02:00[Europe/Berlin]" group="align"/>
+<prop key="processing.step.options" value="Namespace(output=articles/(I_Can%27t_Get_No)_Satisfaction/aligned.swc, transcript=articles/(I_Can%27t_Get_No)_Satisfaction/tokenized.swc, g2p=../model_en/model.fst.ser, phone=false, subparser_name=align, dict=../model_en/empty.dic, acoustic_model=../model_en/, audio=articles/(I_Can%27t_Get_No)_Satisfaction/audio.wav)" group="align"/>
+<prop key="processing.step.git.commit.id" value="7431dbf93f212ad828208abaf8f518fb8de11ff3" group="align"/>
+<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="align"/>
+</meta>
+\end{lstlisting}
+
+\begin{lstlisting}[language=xml,firstnumber=1, caption=Annotazioni delle parole in un audio, label=annotazioni,captionpos=b, basicstyle=\tiny]
+<d>
+<extra text="(I Can't Get No) SatisfactionFrom wikipedia, the free encyclopedia at e n dot wikipedia dot org.">
+<s text="(I Can't Get No) SatisfactionFrom wikipedia, the free encyclopedia at e n dot wikipedia dot org.">
+<t text="("/>
+<t text="I">
+<n pronunciation="I" start="660" end="870"/>
+</t>
+<t text="Can't">
+<n pronunciation="Cant" start="870" end="1250"/>
+</t>
+<t text="Get">
+<n pronunciation="Get" start="1280" end="1550"/>
+</t>
+<t text="No">
+<n pronunciation="No" start="1550" end="1870"/>
+</t>
+<t text=")"/>
+<t text="SatisfactionFrom">
+<n pronunciation="SatisfactionFrom" start="1870" end="3010"/>
+</t>
+\end{lstlisting}
+
+\subsection{Lettori}
+\label{subsec:lettori}
+
+\begin{lstlisting}[language=json,firstnumber=1, caption=Formato JSON dei lettori, label=JSON_lettori,captionpos=b]
+{
+	"reader_name": "the epopt",
+	"folder": [
+		"(I_Can%27t_Get_No)_Satisfaction",
+		"Ceremonial_ship_launching",
+		"Limerence",
+		"Revolt_of_the_Admirals",
+		"Ship_commissioning"
+	]
+},
+{
+	"reader_name": "wodup",
+	"folder": [
+		"0.999..%2e",
+		"Execution_by_elephant",
+		"Hell_Is_Other_Robots",
+		"Tom_Bosley",
+		"Truthiness"
+	]
+},
+\end{lstlisting}
+
+\subsection{Parole}
+\label{subsec:parole}
+
+\begin{lstlisting}[language=json,firstnumber=1, caption=Formato JSON delle parole allineate, label=JSON_parole,captionpos=b]
+[
+{
+	"word": "i",
+	"frequency": 12,
+	"start": [
+		660,
+		8800,
+		115050,
+		116300,
+		117910,
+		228560,
+		273900,
+		497150,
+		518270,
+		534740,
+		543420,
+		589280
+	],
+	"end": [
+		870,
+		8940,
+		115240,
+		116360,
+		118020,
+		228690,
+		274000,
+		497340,
+		518520,
+		534860,
+		543700,
+		589360
+	]
+},
+\end{lstlisting}
+
+\clearpage
 \nocite{*}
 %Il comando \printbibliography produce la sezione bibliografica con relativi
 %titolo e testatina. Per mandarne il relativo titolo nell’indice generale si
