@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  26 JUN 2021 20:12
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  27 JUN 2021 16:36
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -841,11 +841,11 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip85
 )
-Package hyperref Info: Option `unicode' set `false' on input line 117.
-Package hyperref Info: Option `pdftoolbar' set `true' on input line 117.
-Package hyperref Info: Option `pdfmenubar' set `true' on input line 117.
-Package hyperref Info: Option `pdffitwindow' set `false' on input line 117.
-Package hyperref Info: Option `colorlinks' set `false' on input line 117.
+Package hyperref Info: Option `unicode' set `false' on input line 224.
+Package hyperref Info: Option `pdftoolbar' set `true' on input line 224.
+Package hyperref Info: Option `pdfmenubar' set `true' on input line 224.
+Package hyperref Info: Option `pdffitwindow' set `false' on input line 224.
+Package hyperref Info: Option `colorlinks' set `false' on input line 224.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package biblatex Info: Trying to load language 'italian'...
@@ -860,22 +860,22 @@ File: english.lbx 2018/11/02 v3.12 biblatex localization (PK/MW)
 ) (./Relazione.aux)
 \openout1 = `Relazione.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 125.
-LaTeX Font Info:    ... okay on input line 125.
-LaTeX Info: Redefining \it@ocap on input line 125.
-LaTeX Info: Redefining \it@ccap on input line 125.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 232.
+LaTeX Font Info:    ... okay on input line 232.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 232.
+LaTeX Font Info:    ... okay on input line 232.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 232.
+LaTeX Font Info:    ... okay on input line 232.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 232.
+LaTeX Font Info:    ... okay on input line 232.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 232.
+LaTeX Font Info:    ... okay on input line 232.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 232.
+LaTeX Font Info:    ... okay on input line 232.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 232.
+LaTeX Font Info:    ... okay on input line 232.
+LaTeX Info: Redefining \it@ocap on input line 232.
+LaTeX Info: Redefining \it@ccap on input line 232.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: subfig package v1.3 is loaded.
 Package caption Info: float package is loaded.
@@ -1007,10 +1007,10 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'Relazione.bbl' found.
  (./Relazione.bbl)
-Package biblatex Info: Reference section=0 on input line 125.
-Package biblatex Info: Reference segment=0 on input line 125.
+Package biblatex Info: Reference section=0 on input line 232.
+Package biblatex Info: Reference segment=0 on input line 232.
 \AtBeginShipoutBox=\box61
-Package hyperref Info: Link coloring OFF on input line 125.
+Package hyperref Info: Link coloring OFF on input line 232.
 
 (c:/Program Files/texlive/2019/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -1021,9 +1021,9 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count447
 )
-LaTeX Info: Redefining \ref on input line 125.
-LaTeX Info: Redefining \pageref on input line 125.
-LaTeX Info: Redefining \nameref on input line 125.
+LaTeX Info: Redefining \ref on input line 232.
+LaTeX Info: Redefining \pageref on input line 232.
+LaTeX Info: Redefining \nameref on input line 232.
  (./Relazione.out) (./Relazione.out)
 \@outlinefile=\write4
 \openout4 = `Relazione.out'.
@@ -1031,7 +1031,7 @@ LaTeX Info: Redefining \nameref on input line 125.
 <Immagini/univpmlogo.png, id=40, 602.25pt x 602.25pt>
 File: Immagini/univpmlogo.png Graphic file (type png)
 <use Immagini/univpmlogo.png>
-Package pdftex.def Info: Immagini/univpmlogo.png  used on input line 130.
+Package pdftex.def Info: Immagini/univpmlogo.png  used on input line 237.
 (pdftex.def)             Requested size: 77.99881pt x 77.99199pt.
  [1
 
@@ -1045,16 +1045,16 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.150 \clearpage
+l.257 \clearpage
                  [1]pdfTeX warning (ext4): destination with the same identifier
  (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.157 \clearpage
+l.264 \clearpage
                  [1
 
 ]
-Overfull \hbox (4.70345pt too wide) in paragraph at lines 161--162
+Overfull \hbox (4.70345pt too wide) in paragraph at lines 268--269
 \T1/cmr/m/n/12 (https://www.borealisai.com/en/blog/tutorial-2-few-shot-learning
 -and-meta-
  []
@@ -1062,145 +1062,37 @@ Overfull \hbox (4.70345pt too wide) in paragraph at lines 161--162
 [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 178.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 285.
 
  (c:/Program Files/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 178.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 285.
 
-[3]
-Overfull \hbox (19.10294pt too wide) in paragraph at lines 218--219
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][] 
- []
-
-
-Overfull \hbox (155.47058pt too wide) in paragraph at lines 221--222
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (291.83823pt too wide) in paragraph at lines 222--223
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][] 
- []
-
-
-Overfull \hbox (287.43927pt too wide) in paragraph at lines 224--225
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (67.49146pt too wide) in paragraph at lines 228--229
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[] 
- []
-
-
-Overfull \hbox (951.68167pt too wide) in paragraph at lines 229--230
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (89.48624pt too wide) in paragraph at lines 230--231
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (36.69876pt too wide) in paragraph at lines 231--232
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (54.29459pt too wide) in paragraph at lines 233--234
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[] 
- []
-
-
-Overfull \hbox (1272.80548pt too wide) in paragraph at lines 234--235
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (76.28937pt too wide) in paragraph at lines 235--236
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (23.50189pt too wide) in paragraph at lines 236--237
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][] 
- []
-
-[4
+[3] [4
 
 ]
-Overfull \hbox (98.28415pt too wide) in paragraph at lines 242--243
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][] 
- []
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 379.
 
-
-Overfull \hbox (80.68832pt too wide) in paragraph at lines 243--244
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][]
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][] 
- []
-
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 266.
-
-(c:/Program Files/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
+ (c:/Program Files/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [5]
-[6]
-Overfull \hbox (12.55942pt too wide) in paragraph at lines 334--334
+)
+[5] [6] [7]
+Overfull \hbox (12.55942pt too wide) in paragraph at lines 461--461
 \T1/cmr/m/it/12 Shot Sound Event De-tec-tion\T1/cmr/m/n/12 . 2020, pp. 81^^U85.
  \T1/cmr/m/sc/12 doi\T1/cmr/m/n/12 : []$\T1/cmtt/m/n/12 10 . 1109 / ICASSP40776
  .
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 335.
-[7
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 462.
+[8
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 335.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 462.
  (./Relazione.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 335.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 335.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 462.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 462.
 Package rerunfilecheck Info: File `Relazione.out' has not changed.
 (rerunfilecheck)             Checksum: 669BF6E377CEA00D1CB491C0548B1964;553.
 Package logreq Info: Writing requests to 'Relazione.run.xml'.
@@ -1208,36 +1100,41 @@ Package logreq Info: Writing requests to 'Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 28983 strings out of 492623
- 533485 string characters out of 6126681
- 1002698 words of memory out of 5000000
- 32518 multiletter control sequences out of 15000+600000
- 549987 words of font info for 62 fonts, out of 8000000 for 9000
+ 29304 strings out of 492623
+ 536818 string characters out of 6126681
+ 1191823 words of memory out of 5000000
+ 32817 multiletter control sequences out of 15000+600000
+ 551840 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,6n,63p,801b,2331s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,6n,63p,801b,2463s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Program Files/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t
 1.enc}<c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmsy10.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmsy6.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-
-super/sfbi2488.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public
-/cm-super/sfbx0600.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/pu
-blic/cm-super/sfbx1200.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type
-1/public/cm-super/sfbx1440.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/
-type1/public/cm-super/sfbx1728.pfb><c:/Program Files/texlive/2019/texmf-dist/fo
-nts/type1/public/cm-super/sfbx2488.pfb><c:/Program Files/texlive/2019/texmf-dis
-t/fonts/type1/public/cm-super/sfcc1200.pfb><c:/Program Files/texlive/2019/texmf
--dist/fonts/type1/public/cm-super/sfcc1728.pfb><c:/Program Files/texlive/2019/t
-exmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb><c:/Program Files/texlive/20
-19/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/Program Files/texliv
-e/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/Program Files/te
-xlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><c:/Program File
-s/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/Program 
-Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><c:/Prog
-ram Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on Relazione.pdf (9 pages, 384508 bytes).
+s/cm/cmsy6.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/ams
+fonts/latxfont/lcircle1.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/typ
+e1/public/cm-super/sfbi2488.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts
+/type1/public/cm-super/sfbx0600.pfb><c:/Program Files/texlive/2019/texmf-dist/f
+onts/type1/public/cm-super/sfbx0800.pfb><c:/Program Files/texlive/2019/texmf-di
+st/fonts/type1/public/cm-super/sfbx1200.pfb><c:/Program Files/texlive/2019/texm
+f-dist/fonts/type1/public/cm-super/sfbx1440.pfb><c:/Program Files/texlive/2019/
+texmf-dist/fonts/type1/public/cm-super/sfbx1728.pfb><c:/Program Files/texlive/2
+019/texmf-dist/fonts/type1/public/cm-super/sfbx2488.pfb><c:/Program Files/texli
+ve/2019/texmf-dist/fonts/type1/public/cm-super/sfcc1200.pfb><c:/Program Files/t
+exlive/2019/texmf-dist/fonts/type1/public/cm-super/sfcc1728.pfb><c:/Program Fil
+es/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfcc2074.pfb><c:/Program
+ Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm0600.pfb><c:/Pro
+gram Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm0800.pfb><c:
+/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
+><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfrm1440
+.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti
+1200.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/
+sfti1728.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-su
+per/sftt0800.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/c
+m-super/sftt1200.pfb>
+Output written on Relazione.pdf (10 pages, 474658 bytes).
 PDF statistics:
- 309 PDF objects out of 1000 (max. 8388607)
- 276 compressed objects within 3 object streams
- 131 named destinations out of 1000 (max. 500000)
+ 352 PDF objects out of 1000 (max. 8388607)
+ 313 compressed objects within 4 object streams
+ 150 named destinations out of 1000 (max. 500000)
  78 words of extra memory for PDF output out of 10000 (max. 10000000)
 

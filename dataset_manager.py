@@ -65,8 +65,6 @@ def save_training_dataset(readers, C, K, Q, folder_name, dataset_path, audio_fil
 def batch_sample(feature_folder, C, K, Q):
     support =  numpy.empty([0 ,K, 128, 51])
     query = numpy.empty([0, Q, 128, 51])
-    #print("support.shape:",support.shape)
-    #print("query.shape:",query.shape)
     reader_path = []
     for entry in os.scandir(feature_folder):
         reader_path.append(entry.path)

@@ -2,17 +2,12 @@ from preprocessing import *
 from mel_spectrogram import * 
 from model import *
 from episode import *
-import torch
-import random
-import numpy as np
-import time
+from dataset_manager import *
 from model import *
 from loss import *
 import numpy
 from tqdm import tqdm
 import torch
-import os
-from dataset_manager import *
 
 n_episodes = 60000
 source_path = "./Dataset/English spoken wikipedia/english/"
@@ -29,16 +24,16 @@ if __name__ == "__main__":
     train_loss = []
     
     model = Protonet()
+    #print("Model parameters:",count_parameters(model))
     optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
     for episode in tqdm(range(int(10)), desc = "episode"):
-        query, support = batch_sample("Features/", C, K, Q)
-
+        query, support = batch_sample("Training_features/", C, K, Q)
         support = torch.FloatTensor(support)
         query = torch.FloatTensor(query)
-        #print(support.shape)
+        
         sample = {'xs' : support,    # support
-                  'xq' : query}    # query
+                  'xq' : query}      # query
         
         model.train()
         optim.zero_grad()
@@ -48,5 +43,5 @@ if __name__ == "__main__":
         optim.step()
         # TO DO: EARLY STOPPING
         train_loss.append(loss_out.item())
-
+        
     print(train_loss)

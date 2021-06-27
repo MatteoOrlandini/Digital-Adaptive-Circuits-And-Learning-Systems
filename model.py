@@ -1,5 +1,7 @@
 import torch.nn as nn
 
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
 def conv_block(in_channels,out_channels):
 
@@ -20,7 +22,7 @@ class Protonet(nn.Module):
             conv_block(128,128)
         )
     def forward(self,x):
-        (num_samples,seq_len,mel_bins) = x.shape
-        x = x.view(-1,1,seq_len,mel_bins)
+        (num_samples,mel_bins, seq_len) = x.shape
+        x = x.view(-1,1,mel_bins,seq_len)
         x = self.encoder(x)
         return x.view(x.size(0),-1)

@@ -20,16 +20,15 @@
 \colorlet{numb}{magenta!60!black}
 
 \lstdefinelanguage{json}{
-	basicstyle=\normalfont\ttfamily,
+	basicstyle=\scriptsize,
 	%numbers=left,
 	tabsize=4,
 	numberstyle=\scriptsize,
 	stepnumber=1,
 	numbersep=8pt,
-	showstringspaces=false,
 	breaklines=true,
-	frame=lines,
-	%backgroundcolor=\color{background},
+	frame=single,
+	backgroundcolor=\color{background},
 	literate=
 	%*{0}{{{\color{numb}0}}}{1}
 	%{1}{{{\color{numb}1}}}{1}
@@ -48,8 +47,11 @@
 	{[}{{{\color{delim}{[}}}}{1}
 	{]}{{{\color{delim}{]}}}}{1},
  	morekeywords = {folder, reader_name, word, frequency, start, end},
-	keywordstyle=\color{blue},
+	keywordstyle=\bfseries\color{blue},
 	commentstyle=\color{black},
+	keepspaces=false,
+	showspaces=false,
+	showstringspaces=false,
 }
 
 \usepackage{color}
@@ -57,19 +59,29 @@
 \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
 \definecolor{cyan}{rgb}{0.0,0.6,0.6}
 
-\lstset{literate=% Allow for German characters in lstlistings.
-	{Ö}{{\"O}}1
-	{Ä}{{\"A}}1
-	{Ü}{{\"U}}1
-	{ß}{{\ss}}2
-	{ü}{{\"u}}1
-	{ä}{{\"a}}1
-	{ö}{{\"o}}1
+\lstset{literate=
+		{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+		{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+		{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+		{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+		{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+		{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+		{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+		{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+		{ã}{{\~a}}1 {ẽ}{{\~e}}1 {ĩ}{{\~i}}1 {õ}{{\~o}}1 {ũ}{{\~u}}1
+		{Ã}{{\~A}}1 {Ẽ}{{\~E}}1 {Ĩ}{{\~I}}1 {Õ}{{\~O}}1 {Ũ}{{\~U}}1
+		{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+		{ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+		{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+		{€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+		{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1 {¡}{{!`}}1 
 }
 
 \lstdefinelanguage{XML}
 {
-	frame=lines,
+	basicstyle=\tiny,	
+	tabsize=2,
+	frame=single,
 	morestring=[b]",
 	%morestring=[s]{>}{<},
 	%morecomment=[s]{<?}{?>},
@@ -78,7 +90,102 @@
 	keywordstyle=\bfseries\color{black},
 	morekeywords={key, value, group, text, pronunciation, start, end}
 	moreidentifier = {article, meta, link, prop, d, extra, t, s, n, ignored},
-	%backgroundcolor=\color{background},
+	backgroundcolor=\color{background},
+	emph={key,end},          % Custom highlighting
+	emphstyle=\bfseries\color{black},    % Custom highlighting style
+	keepspaces=false,
+	showspaces=false,
+	showstringspaces=false,
+	breaklines=true,         
+	breakatwhitespace=false,  
+}
+
+\definecolor{maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{halfgray}{gray}{0.55}
+\definecolor{ipython_frame}{RGB}{207, 207, 207}
+\definecolor{ipython_bg}{RGB}{247, 247, 247}
+\definecolor{ipython_red}{RGB}{186, 33, 33}
+\definecolor{ipython_green}{RGB}{0, 128, 0}
+\definecolor{ipython_cyan}{RGB}{64, 128, 128}
+\definecolor{ipython_purple}{RGB}{170, 34, 255}
+
+
+\lstdefinelanguage{iPython}{
+	morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},%
+	%
+	% Built-ins
+	morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern},%
+	%
+	sensitive=true,%
+	morecomment=[l]\#,%
+	morestring=[b]',%
+	morestring=[b]",%
+	%
+	morestring=[s]{'''}{'''},% used for documentation text (mulitiline strings)
+	morestring=[s]{"""}{"""},% added by Philipp Matthias Hahn
+	%
+	morestring=[s]{r'}{'},% `raw' strings
+	morestring=[s]{r"}{"},%
+	morestring=[s]{r'''}{'''},%
+	morestring=[s]{r"""}{"""},%
+	morestring=[s]{u'}{'},% unicode strings
+	morestring=[s]{u"}{"},%
+	morestring=[s]{u'''}{'''},%
+	morestring=[s]{u"""}{"""},%
+	%
+	% {replace}{replacement}{lenght of replace}
+	% *{-}{-}{1} will not replace in comments and so on
+	literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{€}{{\EUR}}1 {£}{{\pounds}}1
+	%
+	{^}{{{\color{ipython_purple}\^{}}}}1
+	{=}{{{\color{ipython_purple}=}}}1
+	%
+	{+}{{{\color{ipython_purple}+}}}1
+	{*}{{{\color{ipython_purple}$^\ast$}}}1
+	{/}{{{\color{ipython_purple}/}}}1
+	%
+	{+=}{{{+=}}}1
+	{-=}{{{-=}}}1
+	{*=}{{{$^\ast$=}}}1
+	{/=}{{{/=}}}1,
+	literate=
+	*{-}{{{\color{ipython_purple}-}}}1
+	{?}{{{\color{ipython_purple}?}}}1,
+	%
+	identifierstyle=\color{black}\ttfamily,
+	commentstyle=\color{ipython_cyan}\ttfamily,
+	stringstyle=\color{ipython_red}\ttfamily,
+	keepspaces=false,
+	showspaces=false,
+	showstringspaces=false,
+	%
+	rulecolor=\color{ipython_frame},
+	frame=single,
+	frameround={t}{t}{t}{t},
+	framexleftmargin=6mm,
+	numbers=left,
+	numberstyle=\tiny\color{halfgray},
+	%
+	%
+	backgroundcolor=\color{ipython_bg},
+	%   extendedchars=true,
+	basicstyle=\scriptsize,
+	tabsize=2,
+	keywordstyle=\color{ipython_green}\ttfamily,
+	morekeywords={typeof, null, catch, switch, in, int, str, float, self, import, def, return, True, False, None},
+	emph={read_json_file,write_json_file},          % Custom highlighting
+	emphstyle=\color{ipython_red}\ttfamily,    % Custom highlighting style
 }
 
 %\usepackage[latin1]{inputenc} %l'ho messo io (Jacopo)
@@ -202,66 +309,86 @@ INSERIRE SCHEMA SWC.RNC!!
 
 \subsection{Annotazioni}
 \label{subsec:annotazioni}
-\begin{lstlisting}[language=xml,firstnumber=1, caption=Metadati delle annotazioni delle parole in un audio, label=metadati_annotazioni,captionpos=b, basicstyle=\tiny]
+\begin{lstlisting}[language=XML,firstnumber=1, caption=Metadati delle annotazioni delle parole in un audio, label=metadati_annotazioni,captionpos=b]
 <article>
-<meta>
-<link key="DC.conformsto" value="http://nats.gitlab.io/swc/schema/swc-1.0.rnc"/>
-<prop key="DC.creator" value="Spoken Wikipedia Corpus Collection Software"/>
-<prop key="DC.publisher" value="Universität Hamburg"/>
-<link key="DC.reference" value="http://nbn-resolving.de/urn:nbn:de:gbv:18-228-7-2209"/>
-<prop key="DC.type" value="dataset"/>
-<prop key="DC.license" value="CC-BY-SA"/>
-<prop key="DC.title" value="(I Can't Get No) Satisfaction"/>
-<prop key="DC.language" value="en"/>
-<prop key="DC.identifier" value="(I_Can%27t_Get_No)_Satisfaction"/>
-<prop key="DC.date.read" value="2005-04-20 00:00:00"/>
-<link key="DC.source" value="https://en.wikipedia.org/wiki/(I_Can%27t_Get_No)_Satisfaction"/>
-<prop key="DC.source.wikiID" value="7156876"/>
-<prop key="DC.source.revision" value="786995193"/>
-<link key="DC.source.text" value="https://en.wikipedia.org/w/index.php?title=(I Can't Get No) Satisfaction&oldid=13424379"/>
-<link key="DC.source.audio" value="https://upload.wikimedia.org/wikipedia/commons/3/38/En-%28I_Can%27t_Get_No%29_Satisfaction-article.oga" group="audio1"/>
-<prop key="DC.source.audio.offset" value="0.0" group="audio1"/>
-<link key="DC.source.audio.page" value="https://en.wikipedia.org/w/index.php?title=File%3aEn-(I_Can%27t_Get_No)_Satisfaction-article.oga" group="audio1"/>
-<link key="DC.source.audio.date" value="2007-09-14 19:28:20" group="audio1"/>
-<prop key="reader.name" value="the Epopt"/>
-<prop key="processing.step" value="tokenize" group="tokenize"/>
-<prop key="processing.step.date" value="2017-08-10T07:42:18.769+02:00[Europe/Berlin]" group="tokenize"/>
-<prop key="processing.step.options" value="Namespace(output=articles/(I_Can%27t_Get_No)_Satisfaction/tokenized.swc, all_sections=false, null_normalize=false, raw_output=null, subparser_name=tokenize, lang=en, no_introduction=false, article_dir=articles/(I_Can%27t_Get_No)_Satisfaction)" group="tokenize"/>
-<prop key="processing.step.git.commit.id" value="7431dbf93f212ad828208abaf8f518fb8de11ff3" group="tokenize"/>
-<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="tokenize"/>
-<prop key="processing.step" value="align" group="align"/>
-<prop key="processing.step.date" value="2017-08-11T14:56:44.948+02:00[Europe/Berlin]" group="align"/>
-<prop key="processing.step.options" value="Namespace(output=articles/(I_Can%27t_Get_No)_Satisfaction/aligned.swc, transcript=articles/(I_Can%27t_Get_No)_Satisfaction/tokenized.swc, g2p=../model_en/model.fst.ser, phone=false, subparser_name=align, dict=../model_en/empty.dic, acoustic_model=../model_en/, audio=articles/(I_Can%27t_Get_No)_Satisfaction/audio.wav)" group="align"/>
-<prop key="processing.step.git.commit.id" value="7431dbf93f212ad828208abaf8f518fb8de11ff3" group="align"/>
-<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="align"/>
-</meta>
+	<meta>
+		<link key="DC.conformsto" value="http://nats.gitlab.io/swc/schema/swc-1.0.rnc"/>
+		<prop key="DC.creator" value="Spoken Wikipedia Corpus Collection Software"/>
+		<prop key="DC.publisher" value="Universität Hamburg"/>
+		<link key="DC.reference" value="http://nbn-resolving.de/urn:nbn:de:gbv:18-228-7-2209"/>
+		<prop key="DC.type" value="dataset"/>
+		<prop key="DC.license" value="CC-BY-SA"/>
+		<prop key="DC.title" value="Limerence"/>
+		<prop key="DC.language" value="en"/>
+		<prop key="DC.identifier" value="Limerence"/>
+		<prop key="DC.date.read" value="2005-04-29 00:00:00"/>
+		<link key="DC.source" value="https://en.wikipedia.org/wiki/Limerence"/>
+		<prop key="DC.source.wikiID" value="154147"/>
+		<prop key="DC.source.revision" value="791627969"/>
+		<link key="DC.source.text" value="https://en.wikipedia.org/w/index.php?title=Limerence&oldid=13811989"/>
+		<link key="DC.source.audio" value="https://upload.wikimedia.org/wikipedia/commons/a/aa/Limerence.ogg" group="audio1"/>
+		<prop key="DC.source.audio.offset" value="0.0" group="audio1"/>
+		<link key="DC.source.audio.page" value="https://en.wikipedia.org/w/index.php?title=File%3aLimerence.ogg" group="audio1"/>
+		<link key="DC.source.audio.date" value="2007-09-14 19:23:05" group="audio1"/>
+		<prop key="reader.name" value="the Epopt"/>
+		<prop key="processing.step" value="tokenize" group="tokenize"/>
+		<prop key="processing.step.date" value="2017-08-10T07:44:44.095+02:00[Europe/Berlin]" group="tokenize"/>
+		<prop key="processing.step.options" value="Namespace(output=articles/Limerence/tokenized.swc, all_sections=false, null_normalize=false, raw_output=null, subparser_name=tokenize, lang=en, no_introduction=false, article_dir=articles/Limerence)" group="tokenize"/>
+		<prop key="processing.step.git.commit.id" value="7431dbf93f212ad828208abaf8f518fb8de11ff3" group="tokenize"/>
+		<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="tokenize"/>
+		<prop key="processing.step" value="align" group="align"/>
+		<prop key="processing.step.date" value="2017-08-11T16:12:18.423+02:00[Europe/Berlin]" group="align"/>
+		<prop key="processing.step.options" value="Namespace(output=articles/Limerence/aligned.swc, transcript=articles/Limerence/tokenized.swc, g2p=../model_en/model.fst.ser, phone=false, subparser_name=align, dict=../model_en/empty.dic, acoustic_model=../model_en/, audio=articles/Limerence/audio.wav)" group="align"/>
+		<prop key="processing.step.git.commit.id" value="7431dbf93f212ad828208abaf8f518fb8de11ff3" group="align"/>
+		<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="align"/>
+	</meta>
 \end{lstlisting}
 
-\begin{lstlisting}[language=xml,firstnumber=1, caption=Annotazioni delle parole in un audio, label=annotazioni,captionpos=b, basicstyle=\tiny]
+\begin{lstlisting}[language=XML,firstnumber=1, caption=Annotazioni delle parole in un audio, label=annotazioni,captionpos=b]
 <d>
-<extra text="(I Can't Get No) SatisfactionFrom wikipedia, the free encyclopedia at e n dot wikipedia dot org.">
-<s text="(I Can't Get No) SatisfactionFrom wikipedia, the free encyclopedia at e n dot wikipedia dot org.">
-<t text="("/>
-<t text="I">
-<n pronunciation="I" start="660" end="870"/>
-</t>
-<t text="Can't">
-<n pronunciation="Cant" start="870" end="1250"/>
-</t>
-<t text="Get">
-<n pronunciation="Get" start="1280" end="1550"/>
-</t>
-<t text="No">
-<n pronunciation="No" start="1550" end="1870"/>
-</t>
-<t text=")"/>
-<t text="SatisfactionFrom">
-<n pronunciation="SatisfactionFrom" start="1870" end="3010"/>
-</t>
+	<extra text="LimerenceFrom wikipedia, the free encyclopedia at e n dot wikipedia dot org.">
+		<s text="LimerenceFrom wikipedia, the free encyclopedia at e n dot wikipedia dot org.">
+			<t text="LimerenceFrom">
+				<n pronunciation="LimerenceFrom" start="140" end="1190"/>
+			</t>
+			<t text="wikipedia">
+				<n pronunciation="wikipedia" start="1250" end="1950"/>
+			</t>
+			<t text=","/>
+			<t text="the">
+				<n pronunciation="the" start="1950" end="2070"/>
+			</t>
+			<t text="free">
+				<n pronunciation="free" start="2070" end="2300"/>
+			</t>
+			<t text="encyclopedia">
+				<n pronunciation="encyclopedia" start="2300" end="3220"/>
+			</t>
+			<t text="at">
+				<n pronunciation="at"/>
+			</t>
+			<t text="e">
+				<n pronunciation="e" start="3490" end="3710"/>
+			</t>
 \end{lstlisting}
 
 \subsection{Lettori}
 \label{subsec:lettori}
+
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=json\_manager.py, label=json_manager,captionpos=b]
+import json
+	
+def write_json_file(filename, list_of_dict, indent = 0):
+	f = open(filename, "w")
+	f.write(json.dumps(list_of_dict, indent = indent))
+	f.close
+	
+def read_json_file(filename):
+	f = open(filename, "r")
+	list_of_dict = json.load(f)
+	f.close
+	return list_of_dict
+\end{lstlisting}
 
 \begin{lstlisting}[language=json,firstnumber=1, caption=Formato JSON dei lettori, label=JSON_lettori,captionpos=b]
 {
