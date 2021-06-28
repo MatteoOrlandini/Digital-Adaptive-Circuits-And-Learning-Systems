@@ -2,7 +2,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+import time
 from torch.autograd import Variable
 
 def euclidean_dist(x, y):
@@ -35,8 +35,10 @@ def loss(sample, model):
 
     x = torch.cat([xs.view(n_class * n_support, *xs.size()[2:]),
                     xq.view(n_class * n_query, *xq.size()[2:])], 0)
-    #print("x.shape",x.shape)
+    #print("x.shape",x.shape)4
+    #start = time.time()
     z = model(x)
+    #print("model(x):",time.time() - start)
     #print("z.shape",z.shape)
     z_dim = z.size(-1)
     #print("z_dim",z_dim)

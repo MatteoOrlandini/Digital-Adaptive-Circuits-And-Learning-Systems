@@ -23,6 +23,9 @@ class Protonet(nn.Module):
         )
     def forward(self,x):
         (num_samples,mel_bins, seq_len) = x.shape
+        #print("x.shape:",x.shape)
         x = x.view(-1,1,mel_bins,seq_len)
+        #print("x.view:",x.shape)
         x = self.encoder(x)
+        #print("x.encoder:",x.shape)
         return x.view(x.size(0),-1)
