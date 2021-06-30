@@ -9,6 +9,7 @@ The dataset [Spoken Wikipedia Corpora](https://nats.gitlab.io/swc/) is saved in 
 * [Numpy 1.20.0](https://numpy.org/)
 * [PySoundFile 0.9.0](https://pypi.org/project/PySoundFile/)
 * [Librosa 0.8.1](https://librosa.org/doc/latest/index.html)
+* [PyTorch 1.9.0](https://pytorch.org/)
 
 ## How to run 
 1. Install the libraries
@@ -32,23 +33,45 @@ Open a command window and type:
 
     `pip install librosa`
 
-2. Run
+* Install pytorch
 
-    Open a command window and type in order:
+	`pip3 install torch torchvision torchaudio`
+	
+2. Run
+	
+	2.1.a If you don't have the training and validation features please download them from the following links:
+	
+	* [Training features.rar](https://drive.google.com/file/d/1OnZlLCr9q7Hzr63PFDbNNHE1DmdyWra6/view?usp=sharing)
+	* [Validation features.rar](https://drive.google.com/file/d/1HStvInZJgHhDgPgBJqeSGnapShO4kpPI/view?usp=sharing)
+	
+	Next unzip them.
+	
+	2.1.b. If don't want to download the training and validation features, you can create your own training and validation features. 
+	Please open a command window and type in order:
     
         `python xml_parser_readers.py`
         `python find_target_words.py`
         `python words_per_reader.py`
         `python preprocessing.py`
-
+		`python dataset_manager.py`
+		
+	2.2 Run the training script 
+	
+		`python training.py`
+	
+	2.3 Run the validation script
+	
+		`python validation.py`
+	
 ## The code
+[json_manager.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/json_manager.py) is used to read and write json files.
+
 [xml_parser_readers.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/xml_parser_readers.py) creates [readers_paths.json](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/readers_paths.json).
 
 ```
 [
     {
         "reader_name": "the epopt",
-        "frequency": 5,
         "folder": [
             "(I_Can%27t_Get_No)_Satisfaction",
             "Ceremonial_ship_launching",
@@ -59,7 +82,6 @@ Open a command window and type:
     },
     {
         "reader_name": "wodup",
-        "frequency": 5,
         "folder": [
             "0.999..%2e",
             "Execution_by_elephant",
@@ -332,3 +354,61 @@ Open a command window and type:
 ```
 
 [mel_spectrogram.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/mel_spectrogram.py) computes the 128 bin log-mel spectrogram to a 0.5 second window centered in the middle of the word.
+
+[dataset_manager.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/dataset_manager.py) creates the training, validation and test features. They will be saved in `Training_features`, `Validation_features` and `Test_features` folders. Each of these folders has directories, named after the reader name, which contain the features saved in numpy format like `word_name.npy` (examples: `as.npy`, `and.npy`, `with.npy`, etc) with dimension 26 x 128 x 51.
+
+[loss.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/loss.py) is used to calculate the loss for each episode in the prototypical network.
+
+[model.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/model.py) is used to create the prototypical network model: four CNN blocks, each of which has a convolutional layer with a 3 x 3 kernel, a batch normalization layer, a ReLU activation layer, and a 2 x 2 maxpooling layer.
+
+[training.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/training.py) is used for training the neural network.
+
+Average training loss for each network:
+
+| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
+|--------|----------------------|-----------------|------------------|------------------|
+| 2, 1   | 0.38632819493522547  |                 |                  |                  |
+| 2, 5   |                      |                 |                  |                  |
+| 5, 1   |                      |                 |                  |                  |
+| 5, 5   |                      |                 |                  |                  |
+| 10, 1  |                      |                 |                  |                  |
+| 10, 5  |                      |                 |                  |                  |
+| 10, 10 |                      |                 |                  |                  |
+
+Average training accuracy for each network:
+
+| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
+|--------|----------------------|-----------------|------------------|------------------|
+| 2, 1   | 0.844255729166666    |                 |                  |                  |
+| 2, 5   |                      |                 |                  |                  |
+| 5, 1   |                      |                 |                  |                  |
+| 5, 5   |                      |                 |                  |                  |
+| 10, 1  |                      |                 |                  |                  |
+| 10, 5  |                      |                 |                  |                  |
+| 10, 10 |                      |                 |                  |                  |
+
+[validation.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/validation.py) is used for the validation of the neural network.
+
+Average validation loss for each network:
+
+| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
+|--------|----------------------|-----------------|------------------|------------------|
+| 2, 1   | 0.37211547262442374  |                 |                  |                  |
+| 2, 5   |                      |                 |                  |                  |
+| 5, 1   |                      |                 |                  |                  |
+| 5, 5   |                      |                 |                  |                  |
+| 10, 1  |                      |                 |                  |                  |
+| 10, 5  |                      |                 |                  |                  |
+| 10, 10 |                      |                 |                  |                  |
+
+Average validation accuracy for each network:
+
+| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
+|--------|----------------------|-----------------|------------------|------------------|
+| 2, 1   | 0.8423802083333334   |                 |                  |                  |
+| 2, 5   |                      |                 |                  |                  |
+| 5, 1   |                      |                 |                  |                  |
+| 5, 5   |                      |                 |                  |                  |
+| 10, 1  |                      |                 |                  |                  |
+| 10, 5  |                      |                 |                  |                  |
+| 10, 10 |                      |                 |                  |                  |
