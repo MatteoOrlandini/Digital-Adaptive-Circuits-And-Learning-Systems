@@ -11,7 +11,7 @@ def compute_melspectrogram(filename, word_center):
     #librosa.load loads the audio file as a floating point time series. y: audio time series, sr: sample rate
     y, _ = librosa.load(path = filename, sr = sample_rate, offset = word_center - 0.25, duration = 0.5)
 
-    #soundfile.write("audio.wav", y, sample_rate)
+    #soundfile.write("test_audio_training/"+word_name+".wav", y, sample_rate)
 
     # We use a window length of 25 ms, hop size of 10 ms and a fast Fourier transform size of 64 ms.
     window_length = int(0.025*sample_rate)

@@ -38,7 +38,7 @@ def find_classes(reader, C, K, Q = 16):
                         'end'     : instance_end, \
                         'folders' : instance_folder})
 
-    write_json_file("Classi/training_words_of_"+ reader['reader_name'] +".json", classes)
+    #write_json_file("Classi/training_words_of_"+ reader['reader_name'] +".json", classes)
     return classes
 
 def save_training_dataset(readers, C, K, Q, folder_name, dataset_path, audio_file_name):
@@ -99,10 +99,12 @@ if __name__ == "__main__":
     Q = 16
 
     training_feature_folder_name = "Training_features/"
+    validation_feature_folder_name = "Validation_features/"
     dataset_path = "./Dataset/English spoken wikipedia/english/"
     audio_file_name = "audio.ogg"
 
-    training_readers = read_json_file("training_readers.json")
+    #training_readers = read_json_file("training_readers.json")
+    validation_readers = read_json_file("validation_readers.json")
 
     if not (os.path.exists(training_feature_folder_name)):
         try:
@@ -110,4 +112,12 @@ if __name__ == "__main__":
         except OSError as error:
             print(error)   
 
-    save_training_dataset(training_readers, C, K, Q, training_feature_folder_name, dataset_path, audio_file_name)
+    #save_training_dataset(training_readers, C, K, Q, training_feature_folder_name, dataset_path, audio_file_name)
+    
+    if not (os.path.exists(validation_feature_folder_name)):
+        try:
+            os.mkdir(validation_feature_folder_name)
+        except OSError as error:
+            print(error) 
+
+    save_training_dataset(validation_readers, C, K, Q, validation_feature_folder_name, dataset_path, audio_file_name)

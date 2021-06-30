@@ -55,7 +55,8 @@ def loss(sample, model):
     _, y_hat = log_p_y.max(2)
     acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
 
-    return loss_val, {
-        'loss': loss_val.item(),
-        'acc': acc_val.item()
-    }
+    return loss_val, acc_val
+    #{
+        #'loss': loss_val.item(),
+        #'acc': acc_val.item()
+    #}

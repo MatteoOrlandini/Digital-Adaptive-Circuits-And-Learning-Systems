@@ -16,10 +16,10 @@ class Protonet(nn.Module):
     def __init__(self):
         super(Protonet,self).__init__()
         self.encoder = nn.Sequential(
-            conv_block(1,128),
-            conv_block(128,128),
-            conv_block(128,128),
-            conv_block(128,128)
+            conv_block(1,64),
+            conv_block(64,64),
+            conv_block(64,64),
+            conv_block(64,64)
         )
     def forward(self,x):
         (num_samples,mel_bins, seq_len) = x.shape
