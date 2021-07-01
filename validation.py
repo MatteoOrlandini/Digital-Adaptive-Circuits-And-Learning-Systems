@@ -4,6 +4,7 @@ from tqdm import tqdm
 from model import *
 from loss import *
 from dataset_manager import *
+from scipy import io
 
 C = 2
 K = 1
@@ -85,3 +86,5 @@ torch.save({
             'avg_loss_val' : np.mean(valid_loss),
             'avg_acc_val' : np.mean(valid_acc),
             }, "model_valid_C{}_K{}_60000epi.pt".format(C, K))
+			
+scipy.io.savemat('Results_C{}_K{}.mat'.format(C, K), {'train_loss': train_loss , 'train_acc' : train_acc, 'valid_loss':valid_loss,'valid_acc':valid_acc})
