@@ -41,8 +41,8 @@ Open a command window and type:
 	
 	2.1.a If you don't have the training and validation features please download them from the following links:
 	
-	* [Training features.rar](https://drive.google.com/file/d/1OnZlLCr9q7Hzr63PFDbNNHE1DmdyWra6/view?usp=sharing)
-	* [Validation features.rar](https://drive.google.com/file/d/1HStvInZJgHhDgPgBJqeSGnapShO4kpPI/view?usp=sharing)
+	* [Training features.rar](https://drive.google.com/file/d/1I1-ZbjGOJQ6BCQ8j46q9QEXiIF8niolJ/view?usp=sharing)
+	* [Validation features.rar](https://drive.google.com/file/d/1VmfXc_pQ9REtoPkAb1zC1QhAtSD8yFsY/view?usp=sharing)
 	
 	Next unzip them.
 	
