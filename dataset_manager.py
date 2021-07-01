@@ -1,5 +1,6 @@
 import os
 import numpy
+import torch
 from preprocessing import * 
 from mel_spectrogram import * 
 from tqdm import tqdm
@@ -41,7 +42,7 @@ def find_classes(reader, C, K, Q = 16):
     #write_json_file("Classi/training_words_of_"+ reader['reader_name'] +".json", classes)
     return classes
 
-def save_training_dataset(readers, C, K, Q, folder_name, dataset_path, audio_file_name):
+def save_dataset(readers, C, K, Q, folder_name, dataset_path, audio_file_name):
     for reader in tqdm(readers, position = 0):
         if not (os.path.exists(folder_name + reader['reader_name'])):
             try:
@@ -58,13 +59,14 @@ def save_training_dataset(readers, C, K, Q, folder_name, dataset_path, audio_fil
                             item_spectrogram = compute_melspectrogram(audio_file_path, word_center_time)
                             spectrograms = np.concatenate((spectrograms, [item_spectrogram]), axis = 0)
                     if (spectrograms.shape[0] == K + Q):
-                        numpy.save(folder_name + reader['reader_name'] + "/" + item['word'] + ".npy", spectrograms)
+                        torch_tensor = torch.FloatTensor(spectrograms)
+                        torch.save(torch_tensor, folder_name + reader['reader_name'] + "/" + item['word'] + ".pt")
             except OSError as error:
                 print(error)   
 
 def batch_sample(feature_folder, C, K, Q):
-    support =  numpy.empty([0 ,K, 128, 51])
-    query = numpy.empty([0, Q, 128, 51])
+    support =  torch.empty([0 ,K, 128, 51])
+    query = torch.empty([0, Q, 128, 51])
     reader_path = []
     for entry in os.scandir(feature_folder):
         reader_path.append(entry.path)
@@ -79,17 +81,15 @@ def batch_sample(feature_folder, C, K, Q):
     words = random.sample(words, C)
     #print("words:",words)
     for word in words:
-        spectrogram = numpy.load(word)
-        #print("numpy.shape(spectrogram):",numpy.shape(spectrogram))
-        instances_number = numpy.shape(spectrogram)[0]
-        index = random.sample(list(numpy.arange(instances_number)), K + Q)
-        spectrogram_buf = numpy.empty([0, 128, 51])
+        spectrogram = torch.load(word)
+        x_dim, y_dim, z_dim = spectrogram.shape
+        instances_number = (spectrogram.shape)[0]
+        index = random.sample(list(torch.arange(instances_number)), K + Q)
+        spectrogram_buf = torch.empty([0, 128, 51])
         for i in index:
-            spectrogram_buf = numpy.concatenate((spectrogram_buf, [spectrogram[i, :, :]]), axis = 0)
-        support =  numpy.concatenate((support, [spectrogram_buf[:K]]), axis = 0)
-        query = numpy.concatenate((query, [spectrogram_buf[K:K+Q]]), axis = 0)
-        #print("support.shape:",support.shape)
-        #print("query.shape:",query.shape)
+            spectrogram_buf = torch.cat((spectrogram_buf, (spectrogram[i, :, :]).view(1, y_dim, z_dim)), axis = 0)
+        support =  torch.cat((support, (spectrogram_buf[:K]).view(1, K, y_dim, z_dim)), axis = 0)
+        query = torch.cat((query, (spectrogram_buf[K:K+Q]).view(1, Q, y_dim, z_dim)), axis = 0)
     return query, support
 
 
@@ -103,7 +103,7 @@ if __name__ == "__main__":
     dataset_path = "./Dataset/English spoken wikipedia/english/"
     audio_file_name = "audio.ogg"
 
-    #training_readers = read_json_file("training_readers.json")
+    training_readers = read_json_file("training_readers.json")
     validation_readers = read_json_file("validation_readers.json")
 
     if not (os.path.exists(training_feature_folder_name)):
@@ -112,7 +112,7 @@ if __name__ == "__main__":
         except OSError as error:
             print(error)   
 
-    #save_training_dataset(training_readers, C, K, Q, training_feature_folder_name, dataset_path, audio_file_name)
+    #save_dataset(training_readers, C, K, Q, training_feature_folder_name, dataset_path, audio_file_name)
     
     if not (os.path.exists(validation_feature_folder_name)):
         try:
@@ -120,4 +120,4 @@ if __name__ == "__main__":
         except OSError as error:
             print(error) 
 
-    save_training_dataset(validation_readers, C, K, Q, validation_feature_folder_name, dataset_path, audio_file_name)
+    #save_dataset(validation_readers, C, K, Q, validation_feature_folder_name, dataset_path, audio_file_name)

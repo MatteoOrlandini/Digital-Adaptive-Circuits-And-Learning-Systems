@@ -50,8 +50,8 @@ Q = 16
 
 for episode in tqdm(range(int(60000)), desc = "episode"):
     query, support = batch_sample("/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Validation_features/", C, K, Q)
-    support = torch.FloatTensor(support)
-    query = torch.FloatTensor(query)
+    #support = torch.FloatTensor(support)
+    #query = torch.FloatTensor(query)
     if torch.cuda.is_available():
       support = support.to(device='cuda')
       query = query.to(device='cuda')

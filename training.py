@@ -38,8 +38,8 @@ optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 #for episode in tqdm(range(60000), desc = "episode", position=0, leave=True):
 for episode in trange(60000, desc = "episode", position = 0, leave = True):
     query, support = batch_sample("Training_features/", C, K, Q)
-    support = torch.FloatTensor(support)
-    query = torch.FloatTensor(query)
+    #support = torch.FloatTensor(support)
+    #query = torch.FloatTensor(query)
     if torch.cuda.is_available():
       support = support.to(device='cuda')
       query = query.to(device='cuda')
