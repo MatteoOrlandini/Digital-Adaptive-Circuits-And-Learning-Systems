@@ -2,7 +2,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import time
 from torch.autograd import Variable
 
 def euclidean_dist(x, y):
@@ -18,23 +17,36 @@ def euclidean_dist(x, y):
 
     return torch.pow(x - y, 2).sum(2)
 
-def loss(sample, model):
-    xs = Variable(sample['xs']) # support
-    xq = Variable(sample['xq']) # query
+def loss(xs, xq, model):
+    """
+    loss returns the loss and accuracy value. It calculates p_y, the loss 
+    softmax over distances to the prototypes in the embedding space. We need to 
+    minimize the negative log-probability of p_y to proceed the learning process.
 
+    Parameters:
+    xs (torch.FloatTensor): support set
+    xq (torch.FloatTensor): query set
+    model (torch.nn.Module): neural network model
+
+    Returns:
+    loss_val (double): loss value
+    acc_val (double): accuracy value
+    """
+    # xs = Variable()
     n_class = xs.size(0)
     assert xq.size(0) == n_class
     n_support = xs.size(1)
     n_query = xq.size(1)
 
     target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
-    target_inds = Variable(target_inds, requires_grad=False)
+    #target_inds = Variable(target_inds, requires_grad=False)
 
-    if xq.is_cuda:
-        target_inds = target_inds.cuda()
+    if torch.cuda.is_available():
+        target_inds = target_inds.to(device='cuda')
 
     x = torch.cat([xs.view(n_class * n_support, *xs.size()[2:]),
                     xq.view(n_class * n_query, *xq.size()[2:])], 0)
+    
     #print("x.shape",x.shape)4
     #start = time.time()
     z = model(x)
@@ -49,14 +61,10 @@ def loss(sample, model):
     dists = euclidean_dist(zq, z_proto)
     #print("dists",dists.shape)
     log_p_y = F.log_softmax(-dists, dim=1).view(n_class, n_query, -1)
-
+    
     loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
 
     _, y_hat = log_p_y.max(2)
     acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
-
+    
     return loss_val, acc_val
-    #{
-        #'loss': loss_val.item(),
-        #'acc': acc_val.item()
-    #}

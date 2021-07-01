@@ -1,19 +1,19 @@
 from preprocessing import * 
 from mel_spectrogram import * 
 from model import *
-from episode import *
 from dataset_manager import *
 from loss import *
 from tqdm import tqdm
 import torch
-from tqdm import tqdm
+from tqdm import tqdm, trange
 import torch
 import numpy as np
 
 
 if torch.cuda.is_available():
   device = torch.device("cuda")
-  print('Device:', torch.device('cuda'))
+  print("Device: {}".format(device))
+  print("Device name: {}".format(torch.cuda.get_device_properties(device).name))
 else:
   device = torch.device("cpu")
 
@@ -29,27 +29,24 @@ train_acc = []
 
 model = Protonet()
 if torch.cuda.is_available():
-  model.cuda()
+  model.to(device='cuda')
 
-print("Model parameters:",count_parameters(model))
+print("Model parameters: {}".format(count_parameters(model)))
+
 optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
-for episode in tqdm(range(int(60000)), desc = "episode"):
+#for episode in tqdm(range(60000), desc = "episode", position=0, leave=True):
+for episode in trange(60000, desc = "episode", position = 0, leave = True):
     query, support = batch_sample("Training_features/", C, K, Q)
     support = torch.FloatTensor(support)
     query = torch.FloatTensor(query)
     if torch.cuda.is_available():
       support = support.to(device='cuda')
       query = query.to(device='cuda')
-    #support = torch.as_tensor(support, dtype = torch.float)
-    #query = torch.as_tensor(query, dtype = torch.float)
-    
-    sample = {'xs' : support,    # support
-              'xq' : query}      # query
     
     model.train()
     optim.zero_grad()
-    loss_out, acc_val = loss(sample, model)
+    loss_out, acc_val = loss(support, query, model)
     #print(loss_out)
     #start = time.time()
     loss_out.backward()
@@ -59,8 +56,8 @@ for episode in tqdm(range(int(60000)), desc = "episode"):
     train_loss.append(loss_out.item())
     train_acc.append(acc_val.item())
     
-print("Training loss:", train_loss)
-print("Training accuracy:", train_acc)
+print("Training loss: {}".format(train_loss))
+print("Training accuracy: {}".format(train_acc))
 
 avg_loss_tr = np.mean(train_loss)
 avg_acc_tr = np.mean(train_acc)
@@ -74,4 +71,4 @@ torch.save({
             'acc' : train_acc,
             'avg_loss_tr' : np.mean(train_loss),
             'avg_acc_tr' : np.mean(train_acc),
-            }, "model_C" + C + "_K" + K + "60000epi.pt")
+            }, "model_C{}_K{}_60000epi.pt".format(C, K))
