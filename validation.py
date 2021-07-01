@@ -4,7 +4,7 @@ from tqdm import tqdm
 from model import *
 from loss import *
 from dataset_manager import *
-from scipy import io
+import scipy.io
 
 C = 2
 K = 1
@@ -50,7 +50,7 @@ K = 1
 Q = 16
 
 for episode in tqdm(range(int(60000)), desc = "episode"):
-    query, support = batch_sample("/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Validation_features/", C, K, Q)
+    query, support = batch_sample("Validation_features/", C, K, Q)
     #support = torch.FloatTensor(support)
     #query = torch.FloatTensor(query)
     if torch.cuda.is_available():

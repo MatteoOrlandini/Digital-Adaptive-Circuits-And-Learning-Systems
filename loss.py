@@ -5,6 +5,16 @@ import torch.nn.functional as F
 from torch.autograd import Variable
 
 def euclidean_dist(x, y):
+    """ 
+    euclidean_dist computes the euclidean distance from two arrays x and y
+
+    Parameters:
+    x (torch.FloatTensor): query array 
+    y (torch.FloatTensor): prototype array
+
+    Returns:
+    torch.pow(x - y, 2).sum(2) (double): the euclidean distance from x and y
+    """
     # x: N x D
     # y: M x D
     n = x.size(0)
