@@ -355,7 +355,7 @@ Open a command window and type:
 
 [mel_spectrogram.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/mel_spectrogram.py) computes the 128 bin log-mel spectrogram to a 0.5 second window centered in the middle of the word.
 
-[dataset_manager.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/dataset_manager.py) creates the training, validation and test features. They will be saved in `Training_features`, `Validation_features` and `Test_features` folders. Each of these folders has directories, named after the reader name, which contain the features saved in numpy format like `word_name.npy` (examples: `as.npy`, `and.npy`, `with.npy`, etc) with dimension 26 x 128 x 51.
+[dataset_manager.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/dataset_manager.py) creates the training, validation and test features. They will be saved in `Training_features`, `Validation_features` and `Test_features` folders. Each of these folders has directories, named after the reader name, which contain the features saved in torch tensor format like `word_name.pt` (examples: `as.pt`, `and.pt`, `with.pt`, etc) with dimension 26 x 128 x 51.
 
 [loss.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/loss.py) is used to calculate the loss for each episode in the prototypical network.
 
