@@ -81,7 +81,7 @@ def save_dataset(readers, folder_name, dataset_path, audio_file_name, max_class_
 
     Returns:
     """
-    for reader in tqdm(readers, position = 0):
+    for reader in tqdm(reversed(readers), position = 0):
         if not (os.path.exists(folder_name + reader['reader_name'])):
             try:
                 os.mkdir(folder_name + reader['reader_name'])
