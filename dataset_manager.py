@@ -5,21 +5,20 @@ from preprocessing import *
 from mel_spectrogram import * 
 from tqdm import tqdm
 
-def find_classes(reader, C, K, Q = 16):
+def find_classes(reader, max_class_number, max_instances_number):
     
     """
     find_classes returns classes, a list of dict that has 'word', 'start', 'end', 'folders' keys.
     'word' value is a string, the word name.
     'start', 'end', 'folders' values are lists. The i-th element of 'start' and 'end' value
     corresponds to the i-th element of 'folder' value.
-    If the reader contains less words than C random sample the words, otherwise random sample 
-    C words.
+    If the reader contains less words than max_class_number then random sample the words, 
+    otherwise random sample max_class_number words.
 
     Parameters:
     reader (string): one reader from the json file of readers 
-    C (int): class size
-    K (int): support set size
-    Q (int): query set size (default: 16)
+    max_class_number (int): maximum class size
+    max_instances_number (int): maximum instance size
 
     Returns:
     classes (list): 
@@ -28,8 +27,8 @@ def find_classes(reader, C, K, Q = 16):
 
     # taking at most C words from the reader
     # If the reader contains more words than C, random sample C words
-    if (C <= len(reader['words'])):
-        reader_words = random.sample(reader['words'], C)
+    if (len(reader['words']) >= max_class_number):
+        reader_words = random.sample(reader['words'], max_class_number)
     # If the reader contains less words than C, random sample the words
     else:
         reader_words = random.sample(reader['words'], len(reader['words']))  
@@ -38,9 +37,14 @@ def find_classes(reader, C, K, Q = 16):
         # numpy.arange returns evenly spaced values within a given interval.
         # create an array of index to get the start, end and folder of the same index
         index_array = list(numpy.arange(len(word['start'])))
-
-        # random sample only K + Q indexes
-        index_array = random.sample(index_array, K + Q)
+        
+        # taking at most max_instances_number instances from each word
+        # If the word contains more instances than max_instances_number, random sample max_instances_number instances
+        if (len(index_array) >= max_instances_number):
+            index_array = random.sample(index_array, max_instances_number)
+        # If the word contains less instances than max_instances_number, random sample the index_array
+        else:
+            index_array = random.sample(index_array, len(index_array))  
 
         instance_start = []
         instance_end = []
@@ -54,7 +58,7 @@ def find_classes(reader, C, K, Q = 16):
             instance_folder.append(word['folders'][index])
 
         # append the new word of K + Q instances
-        classes.append( {'word'   : word['word'], \
+        classes.append({'word'    : word['word'], \
                         'start'   : instance_start,\
                         'end'     : instance_end, \
                         'folders' : instance_folder})
@@ -62,7 +66,7 @@ def find_classes(reader, C, K, Q = 16):
     #write_json_file("Classi/training_words_of_"+ reader['reader_name'] +".json", classes)
     return classes
 
-def save_dataset(readers, folder_name, dataset_path, audio_file_name, C, K, Q = 16):
+def save_dataset(readers, folder_name, dataset_path, audio_file_name, max_class_number, max_instances_number):
     """
     save_dataset saves a pytorch tensor for each word of a reader in a folder named as the 
     reader name.
@@ -72,9 +76,8 @@ def save_dataset(readers, folder_name, dataset_path, audio_file_name, C, K, Q = 
     folder_name (string): name of the folder in which save the features
     dataset_path (string): path of the Spoken Wikipedia Corpora dataset
     audio_file_name (string): name of the ".ogg" audio file 
-    C (int): class size
-    K (int): support set size
-    Q (int): query set size (default: 16)
+    max_class_number (int): maximum class size
+    max_instances_number (int): maximum instance size
 
     Returns:
     """
@@ -82,7 +85,7 @@ def save_dataset(readers, folder_name, dataset_path, audio_file_name, C, K, Q = 
         if not (os.path.exists(folder_name + reader['reader_name'])):
             try:
                 os.mkdir(folder_name + reader['reader_name'])
-                classes = find_classes(reader, C, K, Q)
+                classes = find_classes(reader, max_class_number, max_instances_number)
                 for item in tqdm(classes, position = 1, leave = False):
                     spectrograms = np.empty([0, 128, 51])
                     for i in range(len(item['start'])):
@@ -97,9 +100,9 @@ def save_dataset(readers, folder_name, dataset_path, audio_file_name, C, K, Q = 
                             item_spectrogram = compute_melspectrogram(audio_file_path, word_center_time)
                             # construction of a spectrogram tensor
                             spectrograms = np.concatenate((spectrograms, [item_spectrogram]), axis = 0)
-                    # save the spectrograms tensor only if the first dimension is K + Q, that is
-                    # when the word has K + Q instances
-                    if (spectrograms.shape[0] == K + Q):
+                    # save the spectrograms tensor only if the first dimension is higher than K + Q, 
+                    # that is when the word has at least K + Q instances
+                    #if (spectrograms.shape[0] >= K + Q):
                         # conversion from numpy array to torch.FloatTensor
                         torch_tensor = torch.FloatTensor(spectrograms)
                         # save the torch tensor
@@ -172,9 +175,8 @@ def batch_sample(feature_folder, C, K, Q = 16):
 
 
 if __name__ == "__main__":
-    C = 10 # classes
-    K = 10 # instances per class
-    Q = 16
+    max_class_number = 32
+    max_instances_number = 64
 
     training_feature_folder_name = "Training_features/"
     validation_feature_folder_name = "Validation_features/"
@@ -190,7 +192,7 @@ if __name__ == "__main__":
         except OSError as error:
             print(error)   
 
-    #save_dataset(training_readers, training_feature_folder_name, dataset_path, audio_file_name, C, K, Q)
+    save_dataset(training_readers, training_feature_folder_name, dataset_path, audio_file_name, max_class_number, max_instances_number)
     
     if not (os.path.exists(validation_feature_folder_name)):
         try:
@@ -198,4 +200,4 @@ if __name__ == "__main__":
         except OSError as error:
             print(error) 
 
-    #save_dataset(validation_readers, validation_feature_folder_name, dataset_path, audio_file_name, C, K, Q)
+    save_dataset(validation_readers, validation_feature_folder_name, dataset_path, audio_file_name, max_class_number, max_instances_number)

@@ -6,8 +6,8 @@ from loss import *
 from dataset_manager import *
 import scipy.io
 
-C = 2
-K = 1
+C = 10
+K = 10
 
 model = Protonet()
 optim = torch.optim.Adam(model.parameters(), lr = 0.001)
@@ -45,8 +45,8 @@ if torch.cuda.is_available():
 valid_loss = []
 valid_acc = []
 
-C = 2
-K = 1
+C = 10
+K = 10
 Q = 16
 
 for episode in tqdm(range(int(60000)), desc = "episode"):

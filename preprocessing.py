@@ -49,10 +49,6 @@ def find_valid_readers(C, K, Q = 16):
 
 def create_training_validation_test_readers(valid_readers, number_of_training_readers, number_of_test_readers, number_of_validation_readers):
 
-    # random sample the valid readers the take a maximum of 
-    # ("number_of_training_readers" + "number_of_test_readers" + "number_of_validation_readers") valid readers
-    valid_readers = random.sample(valid_readers, number_of_training_readers + number_of_test_readers + number_of_validation_readers)
-
     # take the first ("number_of_training_readers") "valid_readers" to create the training readers
     training_readers = valid_readers[0 : number_of_training_readers]
 
@@ -79,16 +75,10 @@ if __name__ == "__main__":
     
     valid_readers = find_valid_readers(C, K, Q)
     
-    # The readers are partitioned into training, validation, and test sets with a 138:15:30 ratio
-    if (len(valid_readers) >= 183):
-        number_of_training_readers = 138
-        number_of_test_readers = 30
-        number_of_validation_readers = 15
-
-    else:
-        number_of_training_readers = int(138/183*len(valid_readers))
-        number_of_test_readers = int(30/183*len(valid_readers))
-        number_of_validation_readers = int(15/183*len(valid_readers))
+# The readers are partitioned into training, validation, and test sets with a 138:15:30 ratio
+    number_of_training_readers = int(138/183*len(valid_readers))
+    number_of_test_readers = int(30/183*len(valid_readers))
+    number_of_validation_readers = int(15/183*len(valid_readers))
 
     # The valid readers are partitioned into training, validation, and test readers
     training_readers, test_readers, validation_readers = create_training_validation_test_readers(valid_readers, \
