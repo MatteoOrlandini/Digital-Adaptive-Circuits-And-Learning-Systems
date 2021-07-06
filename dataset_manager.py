@@ -81,7 +81,7 @@ def save_dataset(readers, folder_name, dataset_path, audio_file_name, max_class_
 
     Returns:
     """
-    for reader in tqdm(reversed(readers), position = 0):
+    for reader in tqdm(readers, position = 0):
         if not (os.path.exists(folder_name + reader['reader_name'])):
             try:
                 os.mkdir(folder_name + reader['reader_name'])
@@ -129,7 +129,7 @@ def batch_sample(feature_folder, C, K, Q = 16):
     query (torch.FloatTensor): query set
     """
     # initialize support tensor of dimension 0 x K x 128 x 51
-    support =  torch.empty([0 ,K, 128, 51])
+    support =  torch.empty([0, K, 128, 51])
     # initialize query tensor of dimension 0 x Q x 128 x 51
     query = torch.empty([0, Q, 128, 51])
     reader_path = []
