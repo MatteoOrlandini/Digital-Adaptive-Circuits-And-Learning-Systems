@@ -3,7 +3,7 @@ import torch
 from tqdm import tqdm
 from model import *
 from loss import *
-from dataset_manager import *
+from training import *
 import scipy.io
 
 C = 10
@@ -13,9 +13,9 @@ model = Protonet()
 optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
 if torch.cuda.is_available():
-    checkpoint = torch.load("model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
+    checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
 else:
-    checkpoint = torch.load("model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
+    checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
 model.load_state_dict(checkpoint['model_state_dict'])
 optim.load_state_dict(checkpoint['optimizer_state_dict'])
 epoch = checkpoint['epoch']
@@ -45,12 +45,12 @@ if torch.cuda.is_available():
 valid_loss = []
 valid_acc = []
 
-C = 10
-K = 10
+C = 2
+K = 1
 Q = 16
 
 for episode in tqdm(range(int(60000)), desc = "episode"):
-    query, support = batch_sample("Validation_features/", C, K, Q)
+    query, support = batch_sample(validation_readers, C, K, Q)
     #support = torch.FloatTensor(support)
     #query = torch.FloatTensor(query)
     if torch.cuda.is_available():
@@ -85,6 +85,6 @@ torch.save({
             'valid_acc' : valid_acc,
             'avg_loss_val' : np.mean(valid_loss),
             'avg_acc_val' : np.mean(valid_acc),
-            }, "model_valid_C{}_K{}_60000epi.pt".format(C, K))
+            }, "Models/model_valid_C{}_K{}_60000epi.pt".format(C, K))
 			
-scipy.io.savemat('Results_C{}_K{}.mat'.format(C, K), {'train_loss': train_loss , 'train_acc' : train_acc, 'valid_loss':valid_loss,'valid_acc':valid_acc})
+scipy.io.savemat('Models/Results_C{}_K{}.mat'.format(C, K), {'train_loss': train_loss , 'train_acc' : train_acc, 'valid_loss':valid_loss,'valid_acc':valid_acc})

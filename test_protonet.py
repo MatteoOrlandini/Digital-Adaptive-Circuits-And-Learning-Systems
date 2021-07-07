@@ -5,6 +5,7 @@ import numpy as np
 from model import *
 from loss import *
 from tqdm import tqdm
+import sklearn.metrics
 
 p = 5
 n = 10
@@ -15,17 +16,19 @@ K = 1
 test_loss = []
 test_acc = []
 prob_list = []
+target_inds_iter = []
 
 model = Protonet()
 optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
 if torch.cuda.is_available():
-    checkpoint = torch.load("model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
+    checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
 else:
-    checkpoint = torch.load("model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
+    checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
 model.load_state_dict(checkpoint['model_state_dict'])
 optim.load_state_dict(checkpoint['optimizer_state_dict'])
 
+prob_pos_iter = []
 for audio in tqdm(os.scandir("Test_features/")):
     # initialize support tensor of dimension p x 128 x 51
     positive_set =  torch.empty([0, 128, 51])
@@ -86,13 +89,15 @@ for audio in tqdm(os.scandir("Test_features/")):
     n_support = n + p
     n_query = query_set.size(0)
 
-    target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
+    target_inds = torch.tensor([1, 0])
+    target_inds = target_inds.view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
     #print(target_inds)
     #target_inds = Variable(target_inds, requires_grad=False)
 
     if torch.cuda.is_available():
         target_inds = target_inds.to(device='cuda')
 
+    #print(target_inds)
     xs = torch.cat((positive_set, negative_set), 0)
     x = torch.cat((xs, query_set), 0)
     
@@ -106,13 +111,12 @@ for audio in tqdm(os.scandir("Test_features/")):
     z_proto_p = z[:p].view(1, p, z_dim).mean(1)    
     z_proto_n = z[p:p+n].view(1, n, z_dim).mean(1)   
     z_proto =  torch.cat((z_proto_p, z_proto_n), 0)
-    
     zq = z[p+n:]
     #print("z_q",zq.shape)
     dists = euclidean_dist(zq, z_proto)
-    #print("dists",dists.shape)
+    #print("dists",dists)
     log_p_y = F.log_softmax(-dists, dim=1).view(n_class, n_query, -1)
-    
+    #print('log_p_y', log_p_y)
     loss_val = -log_p_y.gather(1, target_inds).squeeze().view(-1).mean()
 
     _, y_hat = log_p_y.max(1)
@@ -123,15 +127,25 @@ for audio in tqdm(os.scandir("Test_features/")):
     '''  Probability array for positive class'''
     prob_pos = prob[:,0]
     prob_pos = prob_pos.detach().cpu().tolist()
+    #print('len(prob_pos)', len(prob_pos))
+    #print('(prob_pos)', (prob_pos))
     test_loss.append(loss_val.item())
     test_acc.append(acc_val.item())
-    prob_list.append(prob_pos)
+    prob_pos_iter.extend(prob_pos)
+    target_inds = target_inds.reshape(-1)
+    target_inds_iter.extend(target_inds)
+    #print(target_inds)
+    #print("shape(target_inds)", target_inds.shape)
+    #print(prob_pos)
 
 #print("Test loss: {}".format(test_loss))
 #print("Test accuracy: {}".format(test_acc))
 
 avg_test_loss = np.mean(test_loss)
 avg_test_acc = np.mean(test_acc)
-avg_prob = np.mean(prob_list)
+avg_prob = np.mean(np.array(prob_pos_iter),axis=0)
 print('Average test loss: {}  Average test accuracy: {}'.format(avg_test_loss, avg_test_acc))
 print('Average test prob: {}'.format(avg_prob))
+
+average_precision = sklearn.metrics.average_precision_score(target_inds_iter, prob_pos_iter)
+print('average_precision', average_precision)
