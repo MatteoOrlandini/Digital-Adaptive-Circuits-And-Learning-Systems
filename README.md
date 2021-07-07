@@ -10,6 +10,7 @@ The dataset [Spoken Wikipedia Corpora](https://nats.gitlab.io/swc/) is saved in 
 * [PySoundFile 0.9.0](https://pypi.org/project/PySoundFile/)
 * [Librosa 0.8.1](https://librosa.org/doc/latest/index.html)
 * [PyTorch 1.9.0](https://pytorch.org/)
+* [scikit-learn 0.24](https://scikit-learn.org/stable/index.html)
 
 ## How to run 
 1. Install the libraries
@@ -37,30 +38,41 @@ Open a command window and type:
 
 	`pip3 install torch torchvision torchaudio`
 	
+* Install scikit-learn
+	
+	`pip install -U scikit-learn`
+	
 2. Run
 	
-	2.1.a If you don't have the training and validation features please download them from the following link:
+	2.1.a If you don't have the training, validation and test features please download them from the following links:
 	
-	* [Training_validation_features.rar](https://drive.google.com/file/d/1Eta9WrOY2Acq1-upCGOVrg3etVprvqAO/view?usp=sharing)
+	* [Training_validation_features.rar](https://drive.google.com/file/d/1KiUxCfgUCW8U7Gfk1AoeGjCBG4nC4dRd/view?usp=sharing)
+	* [Test_features.rar](https://drive.google.com/file/d/1ewkcJ7r0KMQ_6RxJPs8ITuQmv3OYSMAK/view?usp=sharing)
 	
 	Next unzip them.
 	
-	2.1.b. If don't want to download the training and validation features, you can create your own training and validation features. 
-	Please open a command window and type in order:
-    
-        `python xml_parser_readers.py`
-        `python find_target_words.py`
-        `python words_per_reader.py`
-        `python preprocessing.py`
-		`python dataset_manager.py`
+	2.1.b. If don't want to download the features, you can create your own training, validation and test features. 
+	Please open a command window and type in order:  
+	
+    ` python xml_parser_readers.py `
+	
+	` python find_target_words.py `
+        
+	` python words_per_reader.py `
+        
+	` python preprocessing.py `
 		
 	2.2 Run the training script 
 	
-		`python training.py`
+	` python training.py `
 	
 	2.3 Run the validation script
 	
-		`python validation.py`
+	` python validation.py `
+		
+	2.4 Run the test script
+	
+	` python test_protonet.py `
 	
 ## The code
 [json_manager.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/json_manager.py) is used to read and write json files.
@@ -203,7 +215,7 @@ Open a command window and type:
                             .
 ```
 
-[preprocessing.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/preprocessing.py) creates `training_readers.json`, `test_readers.json` and `validation_readers.json`.
+[preprocessing.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/preprocessing.py) splits the valid readers into training and validation readers and test readers saving the two json files `training_validation_readers.json` and `validation_readers.json`, respectively. Next, it creates the training, validation and test features. They will be saved in `Training_validation_features` and `Test_features` folders. Each of these folders has directories, named after the reader name, which contain the features saved in torch tensor format like `word_name.pt` (examples: `as.pt`, `and.pt`, `with.pt`, etc) with dimension 26 x 128 x 51.
 
 ```
 [
@@ -353,8 +365,6 @@ Open a command window and type:
 ```
 
 [mel_spectrogram.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/mel_spectrogram.py) computes the 128 bin log-mel spectrogram to a 0.5 second window centered in the middle of the word.
-
-[dataset_manager.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/dataset_manager.py) creates the training, validation and test features. They will be saved in `Training_features`, `Validation_features` and `Test_features` folders. Each of these folders has directories, named after the reader name, which contain the features saved in torch tensor format like `word_name.pt` (examples: `as.pt`, `and.pt`, `with.pt`, etc) with dimension 26 x 128 x 51.
 
 [loss.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/loss.py) is used to calculate the loss for each episode in the prototypical network.
 
