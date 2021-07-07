@@ -41,7 +41,7 @@ Open a command window and type:
 	
 	2.1.a If you don't have the training and validation features please download them from the following link:
 	
-	* [Training validation_features.rar](https://drive.google.com/file/d/1Eta9WrOY2Acq1-upCGOVrg3etVprvqAO/view?usp=sharing)
+	* [Training_validation_features.rar](https://drive.google.com/file/d/1Eta9WrOY2Acq1-upCGOVrg3etVprvqAO/view?usp=sharing)
 	
 	Next unzip them.
 	
@@ -52,7 +52,7 @@ Open a command window and type:
         `python find_target_words.py`
         `python words_per_reader.py`
         `python preprocessing.py`
-	`python dataset_manager.py`
+		`python dataset_manager.py`
 		
 	2.2 Run the training script 
 	
