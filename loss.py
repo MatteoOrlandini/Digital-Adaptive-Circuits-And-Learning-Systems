@@ -66,34 +66,31 @@ def loss(xs, xq, model, distance_type):
     x = torch.cat([xs.view(n_class * n_support, *xs.size()[2:]),
                     xq.view(n_class * n_query, *xq.size()[2:])], 0)
     
-    z = model(x)
+    embeddings = model(x)
     
-    #print("z.shape",z.shape)
-    z_dim = z.size(-1)
-    #print("z_dim",z_dim)
+    embeddings_dim = embeddings.size(-1)
+    
     if (distance_type == "euclidean_dist"):
         target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
-        z_proto = z[:n_class*n_support].view(n_class, n_support, z_dim).mean(1)    
-        #print("z_proto",z_proto.shape)
-        zq = z[n_class*n_support:]
-        #print("z_q",zq.shape)
-        dists = euclidean_dist(zq, z_proto)
+        prototypes = embeddings[:n_class*n_support].view(n_class, n_support, embeddings_dim).mean(1)  
+        queries = embeddings[n_class*n_support:]
+        dists = euclidean_dist(queries, prototypes)
 
     elif (distance_type == "cosine_dist"):
         target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query*n_support, 1).long()
         #target_inds = torch.Tensor([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
-        z_sup = z[:n_class*n_support]
-        zq = z[n_class*n_support:]
+        supports = embeddings[:n_class*n_support]
+        queries = embeddings[n_class*n_support:]
         dists = torch.empty(n_class, 0)
         for i in range(n_query*n_class):
-            temp_dist = []
+            distances = []
             for j in range(n_support*n_class):
-                cos_dists = cosine_dist(zq[i], z_sup[j])
+                cosine_distance = cosine_dist(queries[i], supports[j])
                 #andare a capo a metà e poi concatenare
-                temp_dist.append(cos_dists)
-            temp_dist = torch.tensor(temp_dist)
-            temp_dist = temp_dist.view(n_class, n_support)
-            dists = torch.cat((dists, temp_dist), 1)
+                distances.append(cosine_distance)
+            distances = torch.tensor(distances)
+            distances = distances.view(n_class, n_support)
+            dists = torch.cat((dists, distances), 1)
     else:
         raise ValueError("Please use distance_type = \"euclidean_dist\" or distance_type == \"cosine_dist\"")
     
