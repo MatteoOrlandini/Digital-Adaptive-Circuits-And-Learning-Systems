@@ -126,7 +126,7 @@ for episode in trange(60000, desc = "episode", position = 0, leave = True):
     
     model.train()
     optim.zero_grad()
-    loss_out, acc_val = loss(support, query, model, "euclidean_dist")
+    loss_out, acc_val = loss(support, query, model, "cosine_dist")
     loss_out.backward()
     optim.step()
     # TO DO: EARLY STOPPING

@@ -53,7 +53,7 @@ def loss(xs, xq, model, distance_type):
     n_support = xs.size(1)
     n_query = xq.size(1)
 
-    target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
+    
     #print('target_inds.shape', target_inds.shape)
     #target_inds = Variable(target_inds, requires_grad=False)
 
@@ -64,24 +64,33 @@ def loss(xs, xq, model, distance_type):
                     xq.view(n_class * n_query, *xq.size()[2:])], 0)
     
     z = model(x)
-    
+    block=1536
     #print("z.shape",z.shape)
     z_dim = z.size(-1)
     #print("z_dim",z_dim)
-    z_proto = z[:n_class*n_support].view(n_class, n_support, z_dim).mean(1)    
-    print("z_proto",z_proto.shape)
-    zq = z[n_class*n_support:]
-    print("z_q",zq.shape)
     if (distance_type == "euclidean_dist"):
+        target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
+        z_proto = z[:n_class*n_support].view(n_class, n_support, z_dim).mean(1)    
+        print("z_proto",z_proto.shape)
+        zq = z[n_class*n_support:]
+        print("z_q",zq.shape)
+   
         dists = euclidean_dist(zq, z_proto)
     elif (distance_type == "cosine_dist"):
-        #target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class*n_support, n_query, 1).long()
-        target_inds = torch.Tensor([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
-        for query in z_query:
-            dists = []
-            for support in z_support:
-                cos_dists = cosine_dist(query, support)
-                dists = cos_dists.append(cos_dists)
+        target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query*n_support, 1).long()
+        #target_inds = torch.Tensor([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
+        z_sup = z[:n_class*n_support]
+        zq = z[n_class*n_support:]
+        dists=torch.empty(0,0)
+        for i in range(n_query*n_class):
+            temp_dist=[]
+            for j in range(n_support*n_class):
+                cos_dists = cosine_dist(zq[i], z_sup[j])
+                #andare a capo a metà e poi concatenare
+                temp_dist.append(cos_dists)
+            temp_dist=torch.tensor(temp_dist)
+            temp_dist=temp_dist.view(n_class,n_support)
+            dists=torch.cat((dists,temp_dist),1)
     else:
         raise ValueError("Please use distance_type = \"euclidean_dist\" or distance_type == \"euclidean_dist\"")
 
