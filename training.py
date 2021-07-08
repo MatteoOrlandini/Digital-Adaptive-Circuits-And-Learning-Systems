@@ -98,8 +98,8 @@ if torch.cuda.is_available():
 else:
   device = torch.device("cpu")
 
-C = 10 # classes
-K = 10 # instances per class
+C = 2 # classes
+K = 1 # instances per class
 Q = 16 # query set size
 
 # To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
@@ -116,7 +116,7 @@ print("Model parameters: {}".format(count_parameters(model)))
 
 optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
-training_readers, validation_readers = get_training_validation_readers("Training_features/", C)
+training_readers, validation_readers = get_training_validation_readers("Training_validation_features/", C)
 
 for episode in trange(60000, desc = "episode", position = 0, leave = True):
     query, support = batch_sample(training_readers, C, K, Q)
@@ -126,7 +126,7 @@ for episode in trange(60000, desc = "episode", position = 0, leave = True):
     
     model.train()
     optim.zero_grad()
-    loss_out, acc_val = loss(support, query, model)
+    loss_out, acc_val = loss(support, query, model, "euclidean_dist")
     loss_out.backward()
     optim.step()
     # TO DO: EARLY STOPPING

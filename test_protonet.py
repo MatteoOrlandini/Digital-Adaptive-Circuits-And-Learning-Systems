@@ -29,7 +29,7 @@ model.load_state_dict(checkpoint['model_state_dict'])
 optim.load_state_dict(checkpoint['optimizer_state_dict'])
 
 prob_pos_iter = []
-for audio in tqdm(os.scandir("Test_features/")):
+for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
     # initialize support tensor of dimension p x 128 x 51
     positive_set =  torch.empty([0, 128, 51])
     negative_set =  torch.empty([0, 128, 51])
@@ -132,7 +132,7 @@ for audio in tqdm(os.scandir("Test_features/")):
     test_loss.append(loss_val.item())
     test_acc.append(acc_val.item())
     prob_pos_iter.extend(prob_pos)
-    target_inds = target_inds.reshape(-1)
+    target_inds = target_inds.reshape(-1).to(device='cpu')
     target_inds_iter.extend(target_inds)
     #print(target_inds)
     #print("shape(target_inds)", target_inds.shape)
@@ -145,7 +145,8 @@ avg_test_loss = np.mean(test_loss)
 avg_test_acc = np.mean(test_acc)
 avg_prob = np.mean(np.array(prob_pos_iter),axis=0)
 print('Average test loss: {}  Average test accuracy: {}'.format(avg_test_loss, avg_test_acc))
+
 print('Average test prob: {}'.format(avg_prob))
 
-average_precision = sklearn.metrics.average_precision_score(target_inds_iter, prob_pos_iter)
-print('average_precision', average_precision)
+average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
+print('Average precision: {}'.format(average_precision))
