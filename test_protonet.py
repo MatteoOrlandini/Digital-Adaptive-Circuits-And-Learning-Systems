@@ -7,32 +7,57 @@ from loss import *
 from tqdm import tqdm
 import sklearn.metrics
 
-p = 5
-n = 10
+def test_loss(model, negative_set, positive_set, query_set, n, p):
+    n_class = 2
+    n_support = n + p
+    n_query = query_set.size(0)
 
-C = 2
-K = 1
+    target_inds = torch.tensor([1, 0])
+    target_inds = target_inds.view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
+    #print(target_inds)
+    #target_inds = Variable(target_inds, requires_grad=False)
 
-test_loss = []
-test_acc = []
-prob_list = []
-target_inds_iter = []
+    if torch.cuda.is_available():
+        target_inds = target_inds.to(device='cuda')
 
-model = Protonet()
-optim = torch.optim.Adam(model.parameters(), lr = 0.001)
+    #print(target_inds)
+    xs = torch.cat((positive_set, negative_set), 0)
+    x = torch.cat((xs, query_set), 0)
+    
+    #print("x.shape",x.shape)4
+    #start = time.time()
+    embeddings = model(x)
+    #print("model(x):",time.time() - start)
+    #print("z.shape",z.shape)
+    embeddings_dim = embeddings.size(-1)
+    #print("z_dim",z_dim)
+    positive_embeddings = embeddings[:p].view(1, p, embeddings_dim).mean(1)    
+    negative_embeddings = embeddings[p:p+n].view(1, n, embeddings_dim).mean(1)   
+    pos_neg_embeddings =  torch.cat((positive_embeddings, negative_embeddings), 0)
+    query_embeddings = embeddings[p+n:]
+    #print("z_q",zq.shape)
+    dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
+    #print("dists",dists)
+    log_p_y = F.log_softmax(-dists, dim=1).view(n_class, n_query, -1)
+    #print('log_p_y', log_p_y)
+    loss_val = -log_p_y.gather(1, target_inds).squeeze().view(-1).mean()
 
-if torch.cuda.is_available():
-    checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
-else:
-    checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
-model.load_state_dict(checkpoint['model_state_dict'])
-optim.load_state_dict(checkpoint['optimizer_state_dict'])
+    _, y_hat = log_p_y.max(1)
+    acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
 
-prob_pos_iter = []
-for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
+    inverse_dist = torch.div(1.0, dists)
+    prob = torch.log_softmax(inverse_dist, dim = 1)
+    #prob = torch.log_softmax(-dists, dim = 1)
+
+    return loss_val, prob, target_inds, {
+        'loss': loss_val.item(),
+        'acc': acc_val.item()
+    }
+
+def get_negative_positive_query_set(p, n, audio):
     # initialize support tensor of dimension p x 128 x 51
-    positive_set =  torch.empty([0, 128, 51])
-    negative_set =  torch.empty([0, 128, 51])
+    positive_set = torch.empty([0, 128, 51])
+    negative_set = torch.empty([0, 128, 51])
     # initialize query tensor of dimension n x 128 x 51
     query_set = torch.empty([0, 128, 51])
     
@@ -79,74 +104,62 @@ for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
     print('positive_set', positive_set.shape)
     print('query_set', query_set.shape)
     """
+    return negative_set, positive_set, query_set
+
+def main():
+    p = 5
+    n = 10
+
+    C = 2
+    K = 1
+
+    model = Protonet()
+    optim = torch.optim.Adam(model.parameters(), lr = 0.001)
+
+    if torch.cuda.is_available():
+        checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
+    else:
+        checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
+    model.load_state_dict(checkpoint['model_state_dict'])
+    optim.load_state_dict(checkpoint['optimizer_state_dict'])
+
 
     model.eval()
 
     if torch.cuda.is_available():
         model.to(device='cuda')
 
-    n_class = 2
-    n_support = n + p
-    n_query = query_set.size(0)
+    prob_pos_iter = []
+    test_loss_values = []
+    test_acc_values = []
+    target_inds_iter = []
 
-    target_inds = torch.tensor([1, 0])
-    target_inds = target_inds.view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
-    #print(target_inds)
-    #target_inds = Variable(target_inds, requires_grad=False)
+    for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
+        negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, audio)  
 
-    if torch.cuda.is_available():
-        target_inds = target_inds.to(device='cuda')
+        _, prob, target_inds, output = test_loss(model, negative_set, positive_set, query_set, n, p)
 
-    #print(target_inds)
-    xs = torch.cat((positive_set, negative_set), 0)
-    x = torch.cat((xs, query_set), 0)
-    
-    #print("x.shape",x.shape)4
-    #start = time.time()
-    z = model(x)
-    #print("model(x):",time.time() - start)
-    #print("z.shape",z.shape)
-    z_dim = z.size(-1)
-    #print("z_dim",z_dim)
-    z_proto_p = z[:p].view(1, p, z_dim).mean(1)    
-    z_proto_n = z[p:p+n].view(1, n, z_dim).mean(1)   
-    z_proto =  torch.cat((z_proto_p, z_proto_n), 0)
-    zq = z[p+n:]
-    #print("z_q",zq.shape)
-    dists = euclidean_dist(zq, z_proto)
-    #print("dists",dists)
-    log_p_y = F.log_softmax(-dists, dim=1).view(n_class, n_query, -1)
-    #print('log_p_y', log_p_y)
-    loss_val = -log_p_y.gather(1, target_inds).squeeze().view(-1).mean()
+        test_loss_values.append(output['loss'])
+        test_acc_values.append(output['acc'])
 
-    _, y_hat = log_p_y.max(1)
-    acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
+        '''  Probability array for positive class'''
+        prob_pos = prob[:,1] # TO DO: 0 or 1?
+        prob_pos = prob_pos.detach().cpu().tolist()
+        #print('len(prob_pos)', len(prob_pos))
+        #print('(prob_pos)', (prob_pos))
+        prob_pos_iter.extend(prob_pos)
+        target_inds = target_inds.reshape(-1).to(device='cpu')
+        target_inds_iter.extend(target_inds)
 
-    inverse_dist = torch.div(1.0, dists)
-    prob = torch.softmax(inverse_dist, dim=1)
-    '''  Probability array for positive class'''
-    prob_pos = prob[:,0]
-    prob_pos = prob_pos.detach().cpu().tolist()
-    #print('len(prob_pos)', len(prob_pos))
-    #print('(prob_pos)', (prob_pos))
-    test_loss.append(loss_val.item())
-    test_acc.append(acc_val.item())
-    prob_pos_iter.extend(prob_pos)
-    target_inds = target_inds.reshape(-1).to(device='cpu')
-    target_inds_iter.extend(target_inds)
-    #print(target_inds)
-    #print("shape(target_inds)", target_inds.shape)
-    #print(prob_pos)
+    avg_test_loss = np.mean(test_loss_values)
+    avg_test_acc = np.mean(test_acc_values)
+    avg_prob = np.mean(np.array(prob_pos_iter),axis=0)
+    #print('Average test loss: {}  Average test accuracy: {}'.format(avg_test_loss, avg_test_acc))
 
-#print("Test loss: {}".format(test_loss))
-#print("Test accuracy: {}".format(test_acc))
+    #print('Average test prob: {}'.format(avg_prob))
 
-avg_test_loss = np.mean(test_loss)
-avg_test_acc = np.mean(test_acc)
-avg_prob = np.mean(np.array(prob_pos_iter),axis=0)
-print('Average test loss: {}  Average test accuracy: {}'.format(avg_test_loss, avg_test_acc))
+    average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
+    print('Average precision: {}'.format(average_precision))
 
-print('Average test prob: {}'.format(avg_prob))
-
-average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
-print('Average precision: {}'.format(average_precision))
+if __name__ == "__main__":
+    main()
