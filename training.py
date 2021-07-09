@@ -99,7 +99,7 @@ else:
   device = torch.device("cpu")
 
 C = 2 # classes
-K = 1 # instances per class
+K = 5 # instances per class
 Q = 16 # query set size
 
 # To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
