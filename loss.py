@@ -72,38 +72,64 @@ def loss(xs, xq, model, distance_type):
     
     if (distance_type == "euclidean_dist"):
         target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
+        print("targ ind", target_inds)
+        print("eu ind shape", target_inds.shape)
         prototypes = embeddings[:n_class*n_support].view(n_class, n_support, embeddings_dim).mean(1)  
         queries = embeddings[n_class*n_support:]
         dists = euclidean_dist(queries, prototypes)
+        print("dists",dists)
+        print("eu dist shape", dists.shape)
+
+        if torch.cuda.is_available():
+            target_inds = target_inds.to(device='cuda')
+
+        #print("dists", dists.shape)
+        log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, n_query, -1)
+        print('log_p_yshape', log_p_y.shape)
+        
+        loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
+
+        _, y_hat = log_p_y.max(2)
+        acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
 
     elif (distance_type == "cosine_dist"):
         target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query*n_support, 1).long()
+        print("targ ind", target_inds)
+        print("eu ind shape", target_inds.shape)
         #target_inds = torch.Tensor([0, 0, 0, 0, 0, 1, 1, 1, 1, 1])
         supports = embeddings[:n_class*n_support]
         queries = embeddings[n_class*n_support:]
-        dists = torch.empty(n_class, 0)
-        for i in range(n_query*n_class):
+        dists = torch.empty(n_query*n_support*n_class,0)
+        for i in range(n_class):
             distances = []
-            for j in range(n_support*n_class):
-                cosine_distance = cosine_dist(queries[i], supports[j])
-                #andare a capo a metà e poi concatenare
-                distances.append(cosine_distance)
-            distances = torch.tensor(distances)
-            distances = distances.view(n_class, n_support)
+            for k in range(n_query):
+                
+                for j in range(n_support*n_class):
+                    cosine_distance = cosine_dist(queries[i*k], supports[j])
+                    #andare a capo a metà e poi concatenare
+                    distances.append(cosine_distance)
+            distances = torch.Tensor(distances)
+            distances = distances.view(-1,1)
+            print("cat shapes",dists.shape,distances.shape)
             dists = torch.cat((dists, distances), 1)
+        #dists=torch.transpose(dists, 0, 1)
+        print("dists",dists)
+        print("cosine dist shape", dists.shape)
+
+        if torch.cuda.is_available():
+            target_inds = target_inds.to(device='cuda')
+
+        #print("dists", dists.shape)
+        log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, n_support*n_query, -1)
+        print('log_p_yshape', log_p_y.shape)
+        
+        loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
+
+        _, y_hat = log_p_y.max(2)
+        acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
     else:
         raise ValueError("Please use distance_type = \"euclidean_dist\" or distance_type == \"cosine_dist\"")
     
-    if torch.cuda.is_available():
-        target_inds = target_inds.to(device='cuda')
 
-    #print("dists", dists.shape)
-    log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, n_query, -1)
-    #print('log_p_yshape', log_p_y.shape)
-    
-    loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
-
-    _, y_hat = log_p_y.max(2)
-    acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
     
     return loss_val, acc_val
