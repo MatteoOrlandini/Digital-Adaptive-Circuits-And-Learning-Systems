@@ -1,10 +1,7 @@
-from model import *
-import os
-from loss import *
+
 import random
+import os
 import torch
-from tqdm import tqdm, trange
-import numpy as np
 
 def batch_sample(features, C, K, Q = 16):
     """
@@ -89,63 +86,3 @@ def get_training_validation_readers(features_folder, C):
   training_readers = train_val_readers[:int(138/153*len(train_val_readers))]
   validation_readers = train_val_readers[int(138/153*len(train_val_readers)):]
   return training_readers, validation_readers
-
-
-if torch.cuda.is_available():
-  device = torch.device("cuda")
-  print("Device: {}".format(device))
-  print("Device name: {}".format(torch.cuda.get_device_properties(device).name))
-else:
-  device = torch.device("cpu")
-
-C = 2 # classes
-K = 5 # instances per class
-Q = 16 # query set size
-
-# To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
-# sample C word classes from the reader, and sample K instances per class as the support set.
-
-train_loss = []
-train_acc = []
-
-model = Protonet()
-if torch.cuda.is_available():
-  model.to(device='cuda')
-
-print("Model parameters: {}".format(count_parameters(model)))
-
-optim = torch.optim.Adam(model.parameters(), lr = 0.001)
-
-training_readers, validation_readers = get_training_validation_readers("Training_validation_features/", C)
-
-for episode in trange(60000, desc = "episode", position = 0, leave = True):
-    query, support = batch_sample(training_readers, C, K, Q)
-    if torch.cuda.is_available():
-      support = support.to(device='cuda')
-      query = query.to(device='cuda')
-    
-    model.train()
-    optim.zero_grad()
-    loss_out, acc_val = loss(support, query, model, "cosine_dist")
-    loss_out.backward()
-    optim.step()
-    # TO DO: EARLY STOPPING
-    train_loss.append(loss_out.item())
-    train_acc.append(acc_val.item())
-    
-print("Training loss: {}".format(train_loss))
-print("Training accuracy: {}".format(train_acc))
-
-avg_loss_tr = np.mean(train_loss)
-avg_acc_tr = np.mean(train_acc)
-print('Average train loss: {}  Average training accuracy: {}'.format(avg_loss_tr,avg_acc_tr))
-
-torch.save({
-            'epoch': 60000,
-            'model_state_dict': model.state_dict(),
-            'optimizer_state_dict': optim.state_dict(),
-            'loss': train_loss,
-            'acc' : train_acc,
-            'avg_loss_tr' : np.mean(train_loss),
-            'avg_acc_tr' : np.mean(train_acc),
-            }, "Models/model_C{}_K{}_60000epi.pt".format(C, K))

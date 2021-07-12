@@ -2,8 +2,9 @@ import torch
 import os
 import random
 import numpy as np
-from model import *
-from loss import *
+from protonet import *
+from utils import *
+from protonet_loss import *
 from tqdm import tqdm
 import sklearn.metrics
 

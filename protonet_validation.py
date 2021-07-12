@@ -1,9 +1,9 @@
 import numpy as np
 import torch
 from tqdm import tqdm
-from model import *
-from loss import *
-from training import *
+from protonet import *
+from utils import *
+from protonet_loss import *
 import scipy.io
 
 C = 10

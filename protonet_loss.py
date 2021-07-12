@@ -65,7 +65,7 @@ def loss(xs, xq, model, distance_type):
 
     x = torch.cat([xs.view(n_class * n_support, *xs.size()[2:]),
                     xq.view(n_class * n_query, *xq.size()[2:])], 0)
-    
+                    
     embeddings = model(x)
     
     embeddings_dim = embeddings.size(-1)
