@@ -34,7 +34,7 @@ args = parser.parse_args()
 
 
 # Hyper Parameters
-FEATURE_DIM = 128
+FEATURE_DIM = 192
 RELATION_DIM = 8
 CLASS_NUM = 5
 SAMPLE_NUM_PER_CLASS = 5
@@ -62,8 +62,8 @@ class CNNEncoder(nn.Module):
         self.layer3 = nn.Sequential(
                         nn.Conv2d(64,64,kernel_size=3,padding=1),
                         nn.BatchNorm2d(64, momentum=1, affine=True),
-                        nn.ReLU())
-                        #nn.MaxPool2d(2))
+                        nn.ReLU(),
+                        nn.MaxPool2d(2))
         self.layer4 = nn.Sequential(
                         nn.Conv2d(64,64,kernel_size=3,padding=1),
                         nn.BatchNorm2d(64, momentum=1, affine=True),
@@ -83,7 +83,7 @@ class RelationNetwork(nn.Module):
     def __init__(self,input_size,hidden_size):
         super(RelationNetwork, self).__init__()
         self.layer1 = nn.Sequential(
-                        nn.Conv2d(128,64,kernel_size=3,padding=1),
+                        nn.Conv2d(FEATURE_DIM*2,64,kernel_size=3,padding=1),
                         nn.BatchNorm2d(64, momentum=1, affine=True),
                         nn.ReLU(),
                         nn.MaxPool2d(2))
@@ -96,11 +96,17 @@ class RelationNetwork(nn.Module):
         self.fc2 = nn.Linear(hidden_size,1)
 
     def forward(self,x):
+        print(x.shape)
         out = self.layer1(x)
+        print(out.shape)
         out = self.layer2(out)
+        print(out.shape)
         out = out.view(out.size(0),-1)
+        print(out.shape)
         out = F.relu(self.fc1(out))
+        print(out.shape)
         out = F.sigmoid(self.fc2(out))
+        print(out.shape)
         return out
 
 def weights_init(m):
@@ -266,11 +272,16 @@ def main():
         batch_labels = torch.arange(0, CLASS_NUM).view(CLASS_NUM, 1, 1).expand(CLASS_NUM, BATCH_NUM_PER_CLASS, 1).long()
         # calculate features
         sample_features = feature_encoder(Variable(samples)) # 5x64*5*5
+        print("sample_f size:",sample_features.shape)
         if torch.cuda.is_available():
             sample_features = sample_features.cuda(GPU)
-        sample_features = sample_features.view(CLASS_NUM,SAMPLE_NUM_PER_CLASS,FEATURE_DIM,5,5)
+        sample_features = sample_features.view(CLASS_NUM,SAMPLE_NUM_PER_CLASS,FEATURE_DIM,5,5) #-1
         sample_features = torch.sum(sample_features,1).squeeze(1)
+        print("qui:",sample_features.shape)
         batch_features = feature_encoder(Variable(batches)) # 20x64*5*5
+        print("batch size:",batch_features.shape)
+        #batch_features = batch_features.view(SAMPLE_NUM_PER_CLASS,FEATURE_DIM,5,5) #aggiunta!!!
+        print("batch size:",batch_features.shape)
         if torch.cuda.is_available():
             batch_features = batch_features.cuda(GPU)
 
@@ -278,8 +289,13 @@ def main():
         # each batch sample link to every samples to calculate relations
         # to form a 100x128 matrix for relation network
         sample_features_ext = sample_features.unsqueeze(0).repeat(BATCH_NUM_PER_CLASS*CLASS_NUM,1,1,1,1)
+        print("sample_ext_f size:",sample_features_ext.shape)
         batch_features_ext = batch_features.unsqueeze(0).repeat(CLASS_NUM,1,1,1,1)
+        print("batch_ext_f size:",batch_features_ext.shape)
         batch_features_ext = torch.transpose(batch_features_ext,0,1)
+        print("batch_ext_f size:",batch_features_ext.shape)
+        batch_features_ext = batch_features_ext.view(BATCH_NUM_PER_CLASS*CLASS_NUM,CLASS_NUM,FEATURE_DIM,5,5)
+        print("batch_ext_f size:",batch_features_ext.shape)
 
         relation_pairs = torch.cat((sample_features_ext,batch_features_ext),2).view(-1,FEATURE_DIM*2,5,5)
         relations = relation_network(relation_pairs).view(-1,CLASS_NUM)
