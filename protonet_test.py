@@ -12,10 +12,11 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     n_class = 2
     n_support = n + p
     n_query = query_set.size(0)
+    print("n_query", n_query)
 
     target_inds = torch.tensor([1, 0])
     target_inds = target_inds.view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
-    #print(target_inds)
+    print(target_inds)
     #target_inds = Variable(target_inds, requires_grad=False)
 
     if torch.cuda.is_available():
@@ -36,18 +37,22 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     negative_embeddings = embeddings[p:p+n].view(1, n, embeddings_dim).mean(1)   
     pos_neg_embeddings =  torch.cat((positive_embeddings, negative_embeddings), 0)
     query_embeddings = embeddings[p+n:]
-    #print("z_q",zq.shape)
+    print("query_embeddings",query_embeddings.shape)
+    print("pos_neg_embeddings",pos_neg_embeddings.shape)
     dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
-    #print("dists",dists)
-    log_p_y = F.log_softmax(-dists, dim=1).view(n_class, n_query, -1)
-    #print('log_p_y', log_p_y)
-    loss_val = -log_p_y.gather(1, target_inds).squeeze().view(-1).mean()
+    print("dists",dists)
+    log_p_y = F.log_softmax(-dists, dim=1).view(n_class, int(n_query/2), -1)
+    print('log_p_y', log_p_y)
+    loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
+    print('log_p_y.gather(2, target_inds)', log_p_y.gather(2, target_inds))
+    print("loss_val", loss_val)
 
-    _, y_hat = log_p_y.max(1)
+    _, y_hat = log_p_y.max(2)
     acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
 
     inverse_dist = torch.div(1.0, dists)
     prob = torch.log_softmax(inverse_dist, dim = 1)
+    print("prob", prob)
     #prob = torch.log_softmax(-dists, dim = 1)
 
     return loss_val, prob, target_inds, {
@@ -55,7 +60,7 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
         'acc': acc_val.item()
     }
 
-def get_negative_positive_query_set(p, n, audio):
+def get_negative_positive_query_set(p, n, i, audio):
     # initialize support tensor of dimension p x 128 x 51
     positive_set = torch.empty([0, 128, 51])
     negative_set = torch.empty([0, 128, 51])
@@ -66,9 +71,10 @@ def get_negative_positive_query_set(p, n, audio):
     for word in os.scandir(audio.path):
         words.append(word.path)
         
-    pos_word = random.sample(words, 1)
+    #pos_word = random.sample(words, 1)
+    pos_word = words[i]
 
-    spectrograms = torch.load(pos_word[0])
+    spectrograms = torch.load(pos_word)
     #print('spectrograms shape', spectrograms.shape)
     index = np.arange(spectrograms.shape[0])
     pos_index = random.sample(list(index), p)
@@ -83,7 +89,7 @@ def get_negative_positive_query_set(p, n, audio):
     query_label = [1]*query_set.shape[0]
     query_label += [0]*query_set.shape[0]
 
-    words.remove(pos_word[0])
+    words.remove(pos_word)
 
     for i in range(n):
         neg = random.sample(words, 1)
@@ -118,9 +124,9 @@ def main():
     optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
     if torch.cuda.is_available():
-        checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
+        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
     else:
-        checkpoint = torch.load("Models/model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
+        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint['model_state_dict'])
     optim.load_state_dict(checkpoint['optimizer_state_dict'])
 
@@ -136,21 +142,26 @@ def main():
     target_inds_iter = []
 
     for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
-        negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, audio)  
+        # getting the number of target keywords in each audio
+        target_keywords_number = len([name for name in os.listdir(audio) if os.path.isfile(os.path.join(audio, name))])
+        print(target_keywords_number)
+        for i in range (target_keywords_number):
+            for j in range (10):
+                negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
 
-        _, prob, target_inds, output = test_loss(model, negative_set, positive_set, query_set, n, p)
+                _, prob, target_inds, output = test_loss(model, negative_set, positive_set, query_set, n, p)
 
-        test_loss_values.append(output['loss'])
-        test_acc_values.append(output['acc'])
+                test_loss_values.append(output['loss'])
+                test_acc_values.append(output['acc'])
 
-        '''  Probability array for positive class'''
-        prob_pos = prob[:,1] # TO DO: 0 or 1?
-        prob_pos = prob_pos.detach().cpu().tolist()
-        #print('len(prob_pos)', len(prob_pos))
-        #print('(prob_pos)', (prob_pos))
-        prob_pos_iter.extend(prob_pos)
-        target_inds = target_inds.reshape(-1).to(device='cpu')
-        target_inds_iter.extend(target_inds)
+                '''  Probability array for positive class'''
+                prob_pos = prob[:,1] # TO DO: 0 or 1?
+                prob_pos = prob_pos.detach().cpu().tolist()
+                #print('len(prob_pos)', len(prob_pos))
+                #print('(prob_pos)', (prob_pos))
+                prob_pos_iter.extend(prob_pos)
+                target_inds = target_inds.reshape(-1).to(device='cpu')
+                target_inds_iter.extend(target_inds)
 
     avg_test_loss = np.mean(test_loss_values)
     avg_test_acc = np.mean(test_acc_values)
