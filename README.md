@@ -107,7 +107,7 @@ Open a command window and type:
 ]
 ```
 
-[find_target_words.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/find_target_words.py) creates a ```word_count.json``` for each audio.
+[find_target_words.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/find_target_words.py) creates a `word_count.json` for each audio with all the words that appears at least 10 times. Then, we pick up to 10 target words and we save them in `target_words.json`. For target words, we only consider words that occur at least 10 times in the recording. If there are more than 10 words that satisfy this condition, we sort the words by their number of occurrences, divide the sorted list into 10 equally sized bins, and sample one keyword per bin. In this way, we avoid only selecting words that are either very common or very rare.
 
 ```
 [
@@ -215,7 +215,7 @@ Open a command window and type:
                             .
 ```
 
-[preprocessing.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/preprocessing.py) splits the valid readers into training and validation readers and test readers saving the two json files `training_validation_readers.json` and `validation_readers.json`, respectively. Next, it creates the training, validation and test features. They will be saved in `Training_validation_features` and `Test_features` folders. Each of these folders has directories, named after the reader name, which contain the features saved in torch tensor format like `word_name.pt` (examples: `as.pt`, `and.pt`, `with.pt`, etc) with dimension 26 x 128 x 51.
+[preprocessing.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/preprocessing.py) splits the valid readers into training and validation readers and test readers saving the two json files `training_validation_readers.json` and `validation_readers.json`, respectively. Next, it creates the training, validation and test features. They will be saved in `Training_validation_features` and `Test_features` folders. Each of these folders has directories, named after the reader name, which contain the features saved in torch tensor format like `word_name.pt` (examples: `as.pt`, `and.pt`, `with.pt`, etc) with dimension K x 128 x 51, where K >= 26.
 
 ```
 [
@@ -366,58 +366,68 @@ Open a command window and type:
 
 [mel_spectrogram.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/mel_spectrogram.py) computes the 128 bin log-mel spectrogram to a 0.5 second window centered in the middle of the word.
 
-[loss.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/loss.py) is used to calculate the loss for each episode in the prototypical network.
+[protonet_loss.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/protonet_loss.py) is used to calculate the loss for each episode in the prototypical network.
 
-[model.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/model.py) is used to create the prototypical network model: four CNN blocks, each of which has a convolutional layer with a 3 x 3 kernel, a batch normalization layer, a ReLU activation layer, and a 2 x 2 maxpooling layer.
+[protonet.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/protonet.py) is used to create the prototypical neural network model: four CNN blocks, each of which has a convolutional layer with a 3 x 3 kernel, a batch normalization layer, a ReLU activation layer, and a 2 x 2 maxpooling layer.
 
-[training.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/training.py) is used for training the neural network.
+[protonet_training.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/training.py) is used for training the prototypical neural network.
+
+[protonet_validation.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/protonet_validation.py) is used for the validation of the prototypical neural network.
+
+[protonet_test.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/protonet_test.py) is used for the test of the prototypical neural network.
+
+[relation_network.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_network.py) is used to create the relation neural network model with the embedding module and the relation module. The embedding module architecture consists of 4 convolutional block contains a 64-filter 3 X 3 convolution, a batch normalisation and a ReLU nonlinearity layer respectively. The first 3 blocks also contain a 2 X 2 max-pooling layer while the last two do not. We do so because we need the output feature maps for further convolutional layers in the relation module. The relation module consists of two convolutional blocks and two fully-connected layers. Each of convolutional block is a 3 X 3 convolution with 64 filters followed by batch normalisation, ReLU non-linearity and 2 X 2 max-pooling. The two fully-connected layers are 8 and 1 dimensional, respectively. All fully-connected layers are ReLU except the output layer is Sigmoid in order to generate relation scores in a reasonable range for all versions of our network architecture.
+
+[relation_training.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_training.py) is used for training the relation neural network.
+
+[relation_validation.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_validation.py) is used for the validation of the relation neural network.
+
 
 Average training loss for each network:
 
-| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
-|--------|----------------------|-----------------|------------------|------------------|
-| 2, 1   | 0.38632819493522547  |                 |                  |                  |
-| 2, 5   |                      |                 |                  |                  |
-| 5, 1   |                      |                 |                  |                  |
-| 5, 5   |                      |                 |                  |                  |
-| 10, 1  |                      |                 |                  |                  |
-| 10, 5  |                      |                 |                  |                  |
-| 10, 10 |                      |                 |                  |                  |
+| C, K   | Prototypical Network | Relation Network| 
+|--------|----------------------|-----------------|
+| 2, 1   | 0.38632819493522547  |                 |               
+| 2, 5   |                      |                 |          
+| 5, 1   |                      |                 |      
+| 5, 5   |                      |                 |                                    
+| 10, 1  |                      |                 |                                    
+| 10, 5  |                      |                 |                                    
+| 10, 10 |                      |                 |                                    
 
 Average training accuracy for each network:
 
-| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
-|--------|----------------------|-----------------|------------------|------------------|
-| 2, 1   | 0.844255729166666    |                 |                  |                  |
-| 2, 5   |                      |                 |                  |                  |
-| 5, 1   |                      |                 |                  |                  |
-| 5, 5   |                      |                 |                  |                  |
-| 10, 1  |                      |                 |                  |                  |
-| 10, 5  |                      |                 |                  |                  |
-| 10, 10 |                      |                 |                  |                  |
+| C, K   | Prototypical Network | Relation Network|
+|--------|----------------------|-----------------|
+| 2, 1   | 0.844255729166666    |                 |                                    
+| 2, 5   |                      |                 |                                    
+| 5, 1   |                      |                 |                                   
+| 5, 5   |                      |                 |                                    
+| 10, 1  |                      |                 |                                    
+| 10, 5  |                      |                 |                                    
+| 10, 10 |                      |                 |      
 
-[validation.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/validation.py) is used for the validation of the neural network.
 
 Average validation loss for each network:
 
-| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
-|--------|----------------------|-----------------|------------------|------------------|
-| 2, 1   | 0.37211547262442374  |                 |                  |                  |
-| 2, 5   |                      |                 |                  |                  |
-| 5, 1   |                      |                 |                  |                  |
-| 5, 5   |                      |                 |                  |                  |
-| 10, 1  |                      |                 |                  |                  |
-| 10, 5  |                      |                 |                  |                  |
-| 10, 10 |                      |                 |                  |                  |
+| C, K   | Prototypical Network | Relation Network|
+|--------|----------------------|-----------------|
+| 2, 1   | 0.37211547262442374  |                 |                                  
+| 2, 5   |                      |                 |                                    
+| 5, 1   |                      |                 |                                    
+| 5, 5   |                      |                 |                                    
+| 10, 1  |                      |                 |                                    
+| 10, 5  |                      |                 |                                    
+| 10, 10 |                      |                 |                                    
 
 Average validation accuracy for each network:
 
-| C, K   | Prototypical Network | Siamese Network | Matching Network | Relation Network |
-|--------|----------------------|-----------------|------------------|------------------|
-| 2, 1   | 0.8423802083333334   |                 |                  |                  |
-| 2, 5   |                      |                 |                  |                  |
-| 5, 1   |                      |                 |                  |                  |
-| 5, 5   |                      |                 |                  |                  |
-| 10, 1  |                      |                 |                  |                  |
-| 10, 5  |                      |                 |                  |                  |
-| 10, 10 |                      |                 |                  |                  |
+| C, K   | Prototypical Network | Relation Network| 
+|--------|----------------------|-----------------|
+| 2, 1   | 0.8423802083333334   |                 |                                    
+| 2, 5   |                      |                 |                                    
+| 5, 1   |                      |                 |                                    
+| 5, 5   |                      |                 |                                    
+| 10, 1  |                      |                 |                                    
+| 10, 5  |                      |                 |                                    
+| 10, 10 |                      |                 |                                    
