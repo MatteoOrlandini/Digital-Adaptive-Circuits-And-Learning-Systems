@@ -52,8 +52,8 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
     #print("dists",dists)
 
-    inverse_dist = torch.div(1.0, dists)
-    prob = torch.log_softmax(inverse_dist, dim = 1)
+    #inverse_dist = torch.div(1.0, dists)
+    prob = torch.log_softmax(-dists, dim = 1)
 
     return prob, target_inds
 
@@ -141,7 +141,7 @@ def main():
         target_keywords_number = len([name for name in os.listdir(audio) if os.path.isfile(os.path.join(audio, name))])
 
         for i in range (target_keywords_number):
-            for j in range (10):
+            for j in range (1):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
 
                 prob, target_inds = test_loss(model, negative_set, positive_set, query_set, n, p)
@@ -152,8 +152,10 @@ def main():
                 #print('len(prob_pos)', len(prob_pos))
                 #print('(prob_pos)', (prob_pos))
                 prob_pos_iter.extend(prob_pos)
+                #print("prob_pos_iter",prob_pos_iter)
                 target_inds = target_inds.to(device='cpu')
                 target_inds_iter.extend(target_inds)
+                #print("target_inds",np.array(target_inds_iter))
 
     avg_prob = np.mean(np.array(prob_pos_iter),axis=0)
     print('Average test prob: {}'.format(avg_prob))
