@@ -140,8 +140,8 @@ def main():
 
         if (episode+1)%5000 == 0:
             total_rewards = 0
-            for i in trange(TEST_EPISODE, desc = "validation episode", position = 1, leave = True):
-
+            #for i in trange(TEST_EPISODE, desc = "validation episode", position = 1, leave = True):
+            for i in range(TEST_EPISODE):
                 # sample datas
                 batches, samples = batch_sample(validation_readers, CLASS_NUM, SAMPLE_NUM_PER_CLASS, BATCH_NUM_PER_CLASS) # samples: C X K X 128 X 51,  batches: C X Q X 128 X 51
                 
@@ -207,7 +207,7 @@ def main():
 
             if test_accuracy > last_accuracy:
                 torch.save({
-                            'epoch': episode,
+                            'epoch': episode+1,
                             'feature_encoder_state_dict': feature_encoder.state_dict(),
                             'relation_network_state_dict' : relation_network.state_dict(),
                             'feature_encoder_optim_state_dict': feature_encoder_optim.state_dict(),
@@ -215,7 +215,7 @@ def main():
                             'loss': train_loss,
                             'avg_loss_tr' : np.mean(train_loss),
                             'valid_accuracy' : test_accuracy,
-                            }, "Models/Relation/relation_model_C{}_K{}_60000epi.pt".format(CLASS_NUM, SAMPLE_NUM_PER_CLASS))
+                            }, "Models/Relation/relation_model_C{}_K{}.pt".format(CLASS_NUM, SAMPLE_NUM_PER_CLASS))
                 last_accuracy = test_accuracy
             
 if __name__ == '__main__':
