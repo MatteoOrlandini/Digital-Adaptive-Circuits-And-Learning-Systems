@@ -43,16 +43,27 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
     #print("dists",dists)
 
-    #inverse_dist = torch.div(1.0, dists)
-    #prob = torch.log_softmax(inverse_dist, dim = 1)
-    prob = -F.log_softmax(-dists, dim = 1)
-    #max, _ = torch.max(-dists, dim = 1)s
-    #prob_query_pos = prob[0:int(n_query/2)]
-    #prob_query_neg = prob[int(n_query/2):]
-    prob_query_pos = prob[0:int(n_query/2), :]
-    prob_query_neg = prob[int(n_query/2):, :]
+    target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
+    if torch.cuda.is_available():
+            target_inds = target_inds.to(device='cuda')
 
-    return prob_query_pos, prob_query_neg
+    log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, int(n_query/2), -1)
+    print('log_p_y.shape', log_p_y.shape)
+    print('log_p_y', log_p_y)
+    """ non serve per il test 
+    loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
+    print('target_inds)', target_inds)
+    print('log_p_y.gather(2, target_inds)', log_p_y.gather(2, target_inds))
+    print('log_p_y.gather(2, target_inds).shape', log_p_y.gather(2, target_inds).shape)
+    """ 
+    # see https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics
+    # y_hat containes the indices of the minimum softmax between positive and negative embeddings mean
+    _, y_hat = log_p_y.max(2)
+    print("y_hat", y_hat)
+    # acc_val is an array that contains 1 if y_hat == target_inds, 0 otherwise
+    acc_val = torch.eq(y_hat, target_inds.squeeze()).float()
+    print("acc_val", acc_val)
+    return acc_val
 
 def get_negative_positive_query_set(p, n, i, audio):
     # initialize support tensor of dimension p x 128 x 51
@@ -111,16 +122,16 @@ def main():
     p = 5
     n = 10
 
-    C = 2
+    C = 5
     K = 1
 
     model = Protonet()
     optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
     if torch.cuda.is_available():
-        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
+        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}.pt".format(C, K), map_location=torch.device('cuda'))
     else:
-        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
+        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}.pt".format(C, K), map_location=torch.device('cpu'))
     model.load_state_dict(checkpoint['model_state_dict'])
     optim.load_state_dict(checkpoint['optimizer_state_dict'])
 
@@ -141,7 +152,7 @@ def main():
             for j in range (1):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
 
-                prob_query_pos, prob_query_neg = test_loss(model, negative_set, positive_set, query_set, n, p)
+                scores = test_loss(model, negative_set, positive_set, query_set, n, p)
 
                 '''  Probability array for positive class'''
                 prob_query_pos = prob_query_pos[:,0] 
