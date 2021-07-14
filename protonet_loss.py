@@ -133,6 +133,7 @@ def loss(xs, xq, model, distance_type):
         print('log_p_y.gather(2, target_inds).shape', log_p_y.gather(2, target_inds).shape)
 
         _, y_hat = log_p_y.max(2)
+        print(y_hat)
         acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
     else:
         raise ValueError("Please use distance_type = \"euclidean_dist\" or distance_type == \"cosine_dist\"")

@@ -11,7 +11,7 @@
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{siunitx}
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb}
 \usepackage{xcolor}
 
 \colorlet{punct}{red!60!black}
@@ -267,14 +267,17 @@
 \label{section:Few-shot}
 (https://www.borealisai.com/en/blog/tutorial-2-few-shot-learning-and-meta-learning-i/)
 \subsection{Introduzione}
-Gli esseri umani possono riconoscere nuove classi di oggetti da pochissime istanze. Tuttavia, la maggior parte delle tecniche di apprendimento automatico richiedono migliaia di esempi per ottenere prestazioni simili. L'obiettivo dell'apprendimento a breve termine è classificare i nuovi dati dopo aver visto solo pochi esempi di allenamento. All'estremo, potrebbe esserci solo un singolo esempio di ogni classe (one shot learning). In pratica, l'apprendimento a breve termine è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando il costo dell'etichettatura dei dati è elevato.
+Gli esseri umani possono riconoscere nuove classi di oggetti partendo da pochissimi esempi. Tuttavia, la maggior parte delle tecniche di machine learning richiedono migliaia di esempi per ottenere prestazioni simili a quelle umane. L'obiettivo del \emph{few-shot learning} è classificare i nuovi dati dopo aver visto solo pochi esempi di training. Nel caso estremo, potrebbe esserci solo un singolo esempio per ogni classe (\emph{one shot learning}). In pratica, il few-shot learning è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando il costo dell'etichettatura dei dati è elevato.
 
-L'apprendimento a pochi colpi viene solitamente studiato utilizzando la classificazione N-way-K-shot. Qui, miriamo a discriminare tra N classi con K esempi di ciascuno. Una tipica dimensione del problema potrebbe essere quella di discriminare tra N=10 classi con solo K=5 campioni da ciascuno da cui allenarsi. Non possiamo addestrare un classificatore usando metodi convenzionali qui; qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
+L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \emph{N-way-K-shot}. L'obiettivo è quello di discriminare le N classi composte da K esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $N=10$ classi con solo $K=5$ campioni ciascuno di training. Non possiamo allenare un classificatore usando metodi convenzionali; qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
+
 Se i dati non sono sufficienti per ridurre il problema, una possibile soluzione è acquisire esperienza da altri problemi simili. A tal fine, la maggior parte degli approcci caratterizza l'apprendimento a breve termine con un problema di meta-apprendimento.
 
 \subsection{The meta learning framework}
-Nel framework di apprendimento classico, impariamo come classificare dai dati di addestramento e valutiamo i risultati utilizzando i dati di test. Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{training task} e valutiamo utilizzando una serie di test task; In altre parole, usiamo un insieme di problemi di classificazione per aiutare a risolvere altri insiemi non correlati.
-Qui, ogni attività imita lo scenario few-shot, quindi per la classificazione N-way-K-shot, ogni attività include N classi con K esempi di ciascuno. Questi sono noti come support set per il task e vengono utilizzati per apprendere come risolvere questa task. Inoltre, esistono ulteriori esempi delle stesse classi, note come set di query, utilizzate per valutare le prestazioni del task corrente. Ogni task può essere completamente unico; potremmo non vedere mai le classi di un task in nessuno degli altri. L'idea è che il sistema veda ripetutamente istanze (task) durante l'addestramento che corrispondono alla struttura dell'attività finale di few-shot, ma che contengono classi diverse.
+Nel framework di apprendimento classico, impariamo come classificare dai dati di training e valutiamo i risultati utilizzando i dati di test. Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{training task} e valutiamo utilizzando una serie di test task; In altre parole, usiamo un insieme di problemi di classificazione per aiutare a risolvere altri insiemi non correlati.
+
+Qui, ogni attività imita lo scenario few-shot, quindi per la classificazione N-way-K-shot, ogni attività include N classi con K esempi ciascuna. Questi sono noti come support set per il task e vengono utilizzati per apprendere come risolvere il task. Inoltre, esistono ulteriori esempi delle stesse classi, note come set di query, utilizzate per valutare le prestazioni del task corrente. Ogni task può essere completamente unico; potremmo non vedere mai le classi di un task in nessuno degli altri. L'idea è che il sistema veda ripetutamente istanze (task) durante l'addestramento che corrispondono alla struttura dell'attività finale di few-shot, ma che contengono classi diverse.
+
 Ad ogni fase del meta-apprendimento, aggiorniamo i parametri del modello in base ad un training task selezionato casualmente. La funzione di loss è determinata dalle prestazioni di classificazione sul set di query del task, in base alla conoscenza acquisita dal relativo set di supporto. Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
 
 Per valutare le prestazioni in pochi colpi, utilizziamo una serie di attività di test. Ciascuno contiene solo classi invisibili che non erano in nessuna delle attività di formazione. Per ciascuno, misuriamo le prestazioni sul set di query in base alla conoscenza del loro set di supporto.
@@ -288,18 +291,18 @@ Gli approcci al meta-apprendimento sono diversi e non c'è consenso sull'approcc
 \end{itemize}
 
 \section{Prototypical Network}
-Nella classificazione few-shot è fornito per ogni episodio un support set costituito da C classi con K istanze $S=\{(x_1,y_1),...,(x_K,y_K)\}$ dove $x_i\in {R}^D$ rappresenta il vettore D-dimensionale della feature (nel nostro caso spettrogrammi 128x51) e $y_i$ la rispettiva label.
+Nella classificazione few-shot per ogni episodio viene fornito un support set di $N$ esempi etichettati  $S=\{(\mathbf{x}_1,y_1), \dots,(\mathbf{x}_N,y_N)\}$ dove $\mathbf{x}_i\in \mathbb{R}^D$ rappresenta il vettore $D$-dimensionale della feature (nel nostro caso spettrogrammi di dimensione $128 \times 51$) e $y_i \in \{1, \dots, K\}$ la rispettiva label. $S_k$ denota il set di esempi etichettati con la classe $k$.
 
-La rete Prototypical calcola una rappresentazione M-dimensionale $c_k$, o prototipo, di ogni classe tramite una funzione di embedding $f_\Phi$ rappresentata da una rete convoluzionale. Ogni prototipo è il vettore media tra gli embedding delle istanze della stessa classe.
-\[
-c_k=\frac{1}{|S_k|}\sum_{(x_i,y_i)\in S_k}f_\Phi (x_i)
-\]
-Data una funzione distanza $d$, la rete Protypical calcola la relazione di una query $x$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
-\[
-p_\Phi(y=k|x)=\frac{exp(-d(f_\Phi(x),c_k))}{\sum_k' exp(-d(f_Phi(x),c_k'))}
-\]
-Il processo di training avviene minimizzando il negativo della log-probabilità $J(\Phi)=-log(p_\Phi(y=k|x))$ considerando la distanza fra query e il prototipo della sua classe.
-Gli episodi di training sono formati campionando C classi di parole da un audio e selezionando per ognuna casualmente K istanze e Q query.
+La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k$, o \emph{prototipo}, di ogni classe tramite una funzione di embedding $f_\phi : \mathbb{R}^D \rightarrow \mathbb{R}^M$ con parametri da allenare $\phi$. La funzione di embedding è rappresentata da una rete convoluzionale. Ogni prototipo è il vettore media tra gli embedding delle istanze della stessa classe.
+\begin{equation}
+	\mathbf{c}_k=\frac{1}{|S_k|}\sum_{(\mathbf{x}_i,y_i)\in S_k}f_\phi (\mathbf{x}_i)
+\end{equation}
+Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Protypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
+\begin{equation}
+p_\phi(y=k|\mathbf{x})=\dfrac{\exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k))}{\sum_k' \exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k'))}
+\end{equation}
+Il processo di training avviene minimizzando il negativo della log-probabilità $J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)$ considerando la distanza fra query e il prototipo della sua classe.
+Gli episodi di training sono formati campionando C classi di parole da un lettore e selezionando per ognuna casualmente K istanze e Q query.
 \section{Relation Network}
 La Relation Network è costituita da due moduli: un modulo di embedding $f_\varphi$ (equivalente a quello nella Prototypical) e un modulo di relation $g_\phi$.
 Le istanze del query set $x_i$ e quelle del support set $x_j$ vengono date in ingresso al modulo di embedding producendo dei vettori (feature maps) $f_\varphi(x_i)$ e $f_\varphi(x_j)$.
@@ -307,9 +310,9 @@ Questi ultimi vengono poi concatenati: $C(f_\varphi(x_i),f_\varphi(x_j))$.
 Le feature map concatenate passano poi attraverso il modulo di decisione che restituisce uno scalare da 0 a 1 che rappresenta la somiglianza tra $x_i$ e $x_j$.
 Per il caso C-way one-shot, viene concatenata la query con le istanze dele C classi producendo C punteggi di somiglianza.
 Nel caso C-way K-shot invece, la query viene concatenata con la somma elemento per elemento degli embedding di ogni instanza delle classi. Quindi, in ogni caso i confronti $r_{i,j}$ sono C per ogni query.
-\[
+\begin{equation}
 r_{i,j}=g_\phi(C(f_\varphi(x_i),f_\varphi(x_j))
-\]
+\end{equation}
 Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che l'uscita del modulo di decisone produca 1 se i vettori concatenati sono della stessa classe e 0 altrimenti.
 \section{Dataset Spoken Wikipedia Corpora}
 \label{sec:spoken_wikipedia_corpora}

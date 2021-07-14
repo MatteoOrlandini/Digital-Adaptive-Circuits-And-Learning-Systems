@@ -156,6 +156,65 @@
       \verb 1703.05175
       \endverb
     \endentry
+    \entry{DBLP:journals/corr/abs-1711-06025}{article}{}
+      \name{author}{6}{}{%
+        {{hash=dbe76b500b71e2176fd1b050b0b31525}{%
+           family={Sung},
+           familyi={S\bibinitperiod},
+           given={Flood},
+           giveni={F\bibinitperiod}}}%
+        {{hash=7e9b1d0ad76c6c1d68c2b6e5d6f0daad}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yongxin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=32a08717e0d6dcde59bc98b96800ed6c}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Li},
+           giveni={L\bibinitperiod}}}%
+        {{hash=20de9f859b0b9bfb12fa85f3513c2fc1}{%
+           family={Xiang},
+           familyi={X\bibinitperiod},
+           given={Tao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3269ee96fb4b61a52f4c01b02fc0751c}{%
+           family={Torr},
+           familyi={T\bibinitperiod},
+           given={Philip\bibnamedelimb H.\bibnamedelimi S.},
+           giveni={P\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=925f77faddc6019beb9b26a56fe09e0c}{%
+           family={Hospedales},
+           familyi={H\bibinitperiod},
+           given={Timothy\bibnamedelima M.},
+           giveni={T\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{fullhash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{bibnamehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{authorbibnamehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{authornamehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{authorfullhash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{CoRR}
+      \field{title}{Learning to Compare: Relation Network for Few-Shot Learning}
+      \field{volume}{abs/1711.06025}
+      \field{year}{2017}
+      \true{nocite}
+      \verb{eprint}
+      \verb 1711.06025
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1711.06025
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1711.06025
+      \endverb
+    \endentry
     \entry{Salamon:Few-Shot}{book}{}
       \name{author}{4}{}{%
         {{hash=b2eccb185095fccfeb40fdffd8b2105f}{%

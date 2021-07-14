@@ -14,15 +14,6 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     n_query = query_set.size(0)
     #print("n_query", n_query)
 
-    target_inds = torch.tensor([1, 0])
-    target_inds = target_inds.view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
-    target_inds = target_inds.reshape(-1)
-    #print(target_inds)
-    #target_inds = Variable(target_inds, requires_grad=False)
-
-    if torch.cuda.is_available():
-        target_inds = target_inds.to(device='cuda')
-
     #print(target_inds)
     xs = torch.cat((positive_set, negative_set), 0)   
     #print("xs.shape", xs.shape)     
@@ -53,9 +44,15 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     #print("dists",dists)
 
     #inverse_dist = torch.div(1.0, dists)
-    prob = torch.log_softmax(-dists, dim = 1)
+    #prob = torch.log_softmax(inverse_dist, dim = 1)
+    prob = -F.log_softmax(-dists, dim = 1)
+    #max, _ = torch.max(-dists, dim = 1)s
+    #prob_query_pos = prob[0:int(n_query/2)]
+    #prob_query_neg = prob[int(n_query/2):]
+    prob_query_pos = prob[0:int(n_query/2), :]
+    prob_query_neg = prob[int(n_query/2):, :]
 
-    return prob, target_inds
+    return prob_query_pos, prob_query_neg
 
 def get_negative_positive_query_set(p, n, i, audio):
     # initialize support tensor of dimension p x 128 x 51
@@ -133,8 +130,8 @@ def main():
     if torch.cuda.is_available():
         model.to(device='cuda')
 
-    prob_pos_iter = []
-    target_inds_iter = []
+    prob_query_pos_iter = []
+    prob_query_neg_iter = []
 
     for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
         # getting the number of target keywords in each audio
@@ -144,24 +141,31 @@ def main():
             for j in range (1):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
 
-                prob, target_inds = test_loss(model, negative_set, positive_set, query_set, n, p)
+                prob_query_pos, prob_query_neg = test_loss(model, negative_set, positive_set, query_set, n, p)
 
                 '''  Probability array for positive class'''
-                prob_pos = prob[:,0] 
-                prob_pos = prob_pos.detach().cpu().tolist()
-                #print('len(prob_pos)', len(prob_pos))
-                #print('(prob_pos)', (prob_pos))
-                prob_pos_iter.extend(prob_pos)
-                #print("prob_pos_iter",prob_pos_iter)
-                target_inds = target_inds.to(device='cpu')
-                target_inds_iter.extend(target_inds)
-                #print("target_inds",np.array(target_inds_iter))
+                prob_query_pos = prob_query_pos[:,0] 
+                #print("prob_query_pos", prob_query_pos)
+                prob_query_neg = prob_query_neg[:,0] 
+                #print("prob_query_neg", prob_query_neg)
+                prob_query_pos = prob_query_pos.detach().cpu().tolist()
+                prob_query_neg = prob_query_neg.detach().cpu().tolist()
+                
+                prob_query_pos_iter.extend(prob_query_pos)
+                prob_query_neg_iter.extend(prob_query_neg)
 
-    avg_prob = np.mean(np.array(prob_pos_iter),axis=0)
-    print('Average test prob: {}'.format(avg_prob))
+    prob_query_pos_iter.extend(prob_query_neg_iter)
+    prob_pos_iter = prob_query_pos_iter
 
-    average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
-    print('Average precision: {}'.format(average_precision))
+    target_inds_iter = np.ones(int(len(prob_pos_iter)/2))
+    target_inds_iter = np.append(target_inds_iter, np.zeros(int(len(prob_pos_iter)/2)))
+
+    precision, recall, thresholds = sklearn.metrics.precision_recall_curve(target_inds_iter, prob_pos_iter)
+    auc = sklearn.metrics.auc(recall, precision)
+    print("Area under precision recall curve: {}".format(auc))
+
+    #average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
+    #print('Average precision: {}'.format(average_precision))
 
 if __name__ == "__main__":
     main()

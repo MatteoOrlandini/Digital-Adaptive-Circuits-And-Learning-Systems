@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {2.3}Approcci al meta-apprendimento}{3}{subsection.2.3}% 
 \contentsline {section}{\numberline {3}Prototypical Network}{3}{section.3}% 
 \contentsline {section}{\numberline {4}Relation Network}{4}{section.4}% 
-\contentsline {section}{\numberline {5}Dataset Spoken Wikipedia Corpora}{4}{section.5}% 
+\contentsline {section}{\numberline {5}Dataset Spoken Wikipedia Corpora}{5}{section.5}% 
 \contentsline {subsection}{\numberline {5.1}Annotazioni}{5}{subsection.5.1}% 
 \contentsline {subsection}{\numberline {5.2}Lettori}{6}{subsection.5.2}% 
 \contentsline {subsection}{\numberline {5.3}Parole}{7}{subsection.5.3}% 
