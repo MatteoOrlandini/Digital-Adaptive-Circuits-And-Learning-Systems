@@ -339,6 +339,7 @@ Gli approcci al meta-apprendimento sono diversi e non c'è consenso sull'approcc
 \end{itemize}
 
 \section{Prototypical Network}
+L'approccio si basa sull'idea che esiste un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione prototipo per ogni classe.
 Nella classificazione few-shot per ogni episodio viene fornito un support set di $N$ esempi etichettati  $S=\{(\mathbf{x}_1,y_1), \dots,(\mathbf{x}_N,y_N)\}$ dove $\mathbf{x}_i\in \mathbb{R}^D$ rappresenta il vettore $D$-dimensionale della feature (nel nostro caso spettrogrammi di dimensione $128 \times 51$) e $y_i \in \{1, \dots, K\}$ la rispettiva label. $S_k$ denota il set di esempi etichettati con la classe $k$.
 
 La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k$, o \emph{prototipo}, di ogni classe tramite una funzione di embedding $f_\phi : \mathbb{R}^D \rightarrow \mathbb{R}^M$ con parametri da allenare $\phi$. La funzione di embedding è rappresentata da una rete convoluzionale. Ogni prototipo è il vettore media tra gli embedding delle istanze della stessa classe.
@@ -363,6 +364,8 @@ Gli episodi di training sono formati campionando C classi di parole da un lettor
 \clearpage
 
 \section{Relation Network}
+La rete Relation ha lo scopo di associare due istanze alla volta per determinare la loro similarità.
+Questo viene effettuato concatenando gli embedding di più istanze in un unico elemento che sarà dato in ingresso a una rete decisionale i cui parametri saranno aggiornati in modo che una concatenazione di elementi simili restituisca un risultato vicino a 1.
 La Relation Network è costituita da due moduli: un modulo di \emph{embedding} $f_\varphi$ (equivalente a quello nella Prototypical) e un modulo di \emph{relation} $g_\phi$, come illustrato in figura~\ref{fig:relation_network}.
 Le istanze $x_i$ del query set $\mathcal{Q}$ e quelle $x_j$ del support set $\mathcal{S}$ vengono date in ingresso al modulo di embedding producendo dei vettori (feature maps) $f_\varphi(x_i)$ e $f_\varphi(x_j)$.
 Questi ultimi vengono poi dati all'operatore $\mathcal{C}(\cdot ,\cdot)$ che ne fa la concatenazione: $\mathcal{C}(f_\varphi(x_i),f_\varphi(x_j))$.
@@ -619,11 +622,73 @@ write_json_file("readers_paths.json", readers, indent = 4)
 },
 \end{lstlisting}
 
+
+
+\section{Protonet codice}
+\subsection{Protonet training}
+La funzione \texttt{get\_training\_validation\_readers}, a partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo il rapporto usato in [ARTICOLO RIFERIMENTO]: 138/153 e 15/153.
+Per fare ciò scorre l'elenco delle directory dei lettori e salva su un array le parole a loro associate. Al termine di questa operazione, se il numero di parole è almeno C il lettore è ritenuto valido e il suo nome viene aggiunto a una lista. Infine la lista viene scissa come spiegato sopra.
+
+
+Il primo for rappresenta l'inizio degli episodi.
+Il numero totale di iterazioni è 60000 come in [ARTICOLO]; per ogni episodio viene richiamata la funzione \texttt{batch\_sample}.
+Essa campiona a caso uno dei lettori di training e di questo seleziona casualmente C parole.
+Per ognuna di queste parole si ricava il numero di istanze presenti del dataset.
+Viene inizializzato un vettore con gli indici di queste e ne vengono campionati K+Q in \texttt{index}. Poi, iterando, gli spettrogrammi il cui indice è presente in \texttt{index} vengono salvati e divisi in K istanze del support set e Q istanze del query set.
+
+
+Una volta ottenute, le feature del support set e query set vengono date in ingresso alla funzione \texttt{loss}.
+Queste ultime vengono messe in fila e concatenate per poter essere passate al modello che calcolerà gli embedding per ogni istanza.
+Gli elementi del support set che fanno parte della stessa classe andranno a costituire i prototipi tramite una media dei loro valori: \texttt{prototypes = embeddings[:n\_class*n\_support].view(n\_class, n\_support, embeddings\_dim).mean(1)}.
+
+
+Il parametro \texttt{target\_inds} viene costruito ripetendo l'indice di ogni classe per il numero di query e sarà utilizzato per poter ricordare a che classe appartiene ogni query.
+
+Per ogni elemento del query set vengono calcolate le distanze rispetto ai prototipi di ogni classe tramite la funzione \texttt{euclidean\_dist} che rappresenta la distanza euclidea.
+Per ogni query viene poi usata la funzione di attivazione \texttt{log\_softmax} fra tutte le sue distanze.
+La funzione loss da minimizzare è costituita dalla media dei \texttt{log\_softmax} della classe corrispondente alla query presi con segno negativo. Infatti, nel caso ideale in cui la distanza delle query della stessa classe dal prototipo è 0, la media dei softmax delle distanze dal prototipo assegnato sarà nulla.
+La accuracy invece è determinata dal numero dei casi in cui il prototipo a distanza minima da una query (o il massimo del softmax) corrisponde con il prototipo della classe associata alla query.
+
+
+Con \texttt{loss\_out.backward()} viene utilizzata la loss per la retropropagazione che aggiorna i parametri della rete.
+\subsection{Protonet validation}
+Ogni 5000 episodi del training vengono effettuati 1000 episodi di validation.
+Come nel training vengono ricavati support set e query set ma in questo caso dai lettori di validation.
+Per questi vengono calcolati con la funzione \texttt{loss} allo stesso modo loss e accuracy e vengono salvati.
+In questo caso però i parametri del modello non vengono aggiornati.
+Questo processo è necessario per verificare l'effettività del modello su ingressi mai visti in fase di training.
+Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel batch precedente il modello viene salvato e sovrascritto al precedente, altrimenti viene ignorato.
+In questo modo si aggira il problema dell'overfitting fungendo da pseudo early stopping. 
+\subsection{Protonet test}
+Nella fase di test, seguendo l'articolo di riferimento, l'oggetto di interesse non sono i lettori come nel caso di training e validation. Vengono infatti presi in considerazione i singoli audio. Da questi sarà necessario identificare un gruppo di istanze di una parola (il positive\_set) e, campionando nell'audio, si potrà verificare se la rete è in grado di riconoscere la parola designata.
+
+
+Per ogni audio quindi viene ricavato il numero di parole con spettrogramma (in base al contenuto di Test\_features).
+Per ognuna di esse viene ricavato un positive set e un negative set con i quali è possibile verificare la rete.
+Questo processo viene ripetuto 10 volte come in [ARTICOLO] in modo da generalizzare il più possibile il test.
+Infatti il positive set è  ricavato campionando casualmente p istanze della parola che si sta analizzando, mentre il negative set è ottenuto campionando n istanze fra tutte le altre parole dello stesso audio.
+Per fare questo viene usata la funzione \texttt{get\_negative\_positive\_query\_set}.
+Tramite un indice che indica le istanze della parola "positiva" vengono campionati p spettrogrammi che vanno a costituire il positive set. Le restanti istanze della stessa parola vengono inserite invece nel query set come esempio di spettrogramma che la rete dovrebbe riconoscere.
+Tra l'elenco delle parole viene quindi rimossa la parola postiva con \texttt{words.remove(pos\_word)}.
+Usando le restanti vengono ricavate n esempi di negative set campionando a caso una delle parole e una delle istanze di essa.
+Allo stesso modo viene formata la seconda metà del query set che rappresenta gli esempi negativi. Il numeri di query negative viene preso uguale a quello delle positive.
+
+
+A questo punto, i tre set e il modello sono parametri della funzione \texttt{test\_loss}.
+Allo stesso modo di training e validation vengono calcolati gli embedding per ogni istanza e i prototipi delle due classi: positive set e negative set.
+Vengono calcolate le distanze che sono passate con segno negativo alla funzione \texttt{log\_softmax}.
+Tra i risulati viene selezionato il maggiore che rappresenta la predizione della rete: ovvero la classe a cui viene assegnata la query.
+Queste predizioni sono contenute nel vettore \texttt{y\_pred\_tmp}, mentre in \texttt{y\_true\_tmp} sono presenti le label reali di ogni query.
+
+Prima di essere utilizzati per calcolare precision e recall, questi due vettori vengono sottoposti a una operazione di complemento a 2 che inverte 0 e 1 in quanto la funzione \texttt{precision\_recall\_curve} richiede che con la label 1 sia identificata la classe positiva.
+Infine, \texttt{sklearn.metrics.auc} calcola la AUPRC.
+Questo calcolo avviene al termine delle operazioni per ogni audio.
+Una volta terminati gli audio viene calcolata media e varianza degli AUPRC.
+
 \clearpage
 \nocite{*}
 %Il comando \printbibliography produce la sezione bibliografica con relativi
 %titolo e testatina. Per mandarne il relativo titolo nell’indice generale si
 %usa l’istruzione:
 \printbibliography
-
 \end{document} 
