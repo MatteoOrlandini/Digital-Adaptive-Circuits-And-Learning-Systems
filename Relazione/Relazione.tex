@@ -168,6 +168,7 @@
 	stringstyle=\color{ipython_red}\ttfamily,
 	keepspaces=false,
 	showspaces=false,
+	breaklines=true,
 	showstringspaces=false,
 	%
 	rulecolor=\color{ipython_frame},
@@ -184,8 +185,8 @@
 	tabsize=2,
 	keywordstyle=\color{ipython_green}\ttfamily,
 	morekeywords={typeof, null, catch, switch, in, int, str, float, self, import, def, return, True, False, None},
-	emph={read_json_file,write_json_file},          % Custom highlighting
-	emphstyle=\color{ipython_red}\ttfamily,    % Custom highlighting style
+	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir},          % Custom highlighting
+	emphstyle=\color{ipython_purple}\ttfamily,    % Custom highlighting style
 }
 
 %\usepackage[latin1]{inputenc} %l'ho messo io (Jacopo)
@@ -394,7 +395,7 @@ Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che 
 
 \section{Dataset Spoken Wikipedia Corpora}
 \label{sec:spoken_wikipedia_corpora}
-Il progetto Spoken Wikipedia unisce lettori volontari di articoli di Wikipedia. Centinaia di articoli in inglese, tedesco e olandese sono disponibili per gli utenti che non sono in grado o non vogliono leggere la versione scritta dell'articolo. Il dataset trasforma i file audio in un corpus allineato nel tempo, rendendolo accessibile per la ricerca.\cite{minining_spoken_wikipedia}
+Il progetto Spoken Wikipedia unisce lettori volontari di articoli di Wikipedia. Sono disponibili centinaia di articoli in inglese, tedesco e olandese per gli utenti che non sono in grado o non vogliono leggere la versione scritta dell'articolo. Il dataset trasforma i file audio in un corpus, cioè una raccolta ordinata e completa di opere o di autori, allineato nel tempo, rendendolo accessibile per la ricerca.\cite{minining_spoken_wikipedia}
 
 Questo corpus ha diverse caratteristiche importanti:
 \begin{itemize}
@@ -408,9 +409,9 @@ Questo corpus ha diverse caratteristiche importanti:
 
 Ogni articolo è suddiviso in sezioni, frasi e token. Ogni token è normalizzato e la normalizzazione è allineata all'audio.
 
-INSERIRE SCHEMA SWC.RNC!!
-
 \subsection{Annotazioni}
+Ogni annotazione è racchiusa in un tag chiamato ``\texttt{article}'', che contiene una sezione ``\texttt{meta}'' per i metadati, come si può vedere in~\ref{metadati_annotazioni} e una sezione ``\texttt{d}'', come in~\ref{annotazioni}, contenente l'articolo e le relative annotazioni.
+
 \label{subsec:annotazioni}
 \begin{lstlisting}[language=XML,firstnumber=1, caption=Metadati delle annotazioni delle parole in un audio, label=metadati_annotazioni,captionpos=b]
 <article>
@@ -446,6 +447,7 @@ INSERIRE SCHEMA SWC.RNC!!
 		<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="align"/>
 	</meta>
 \end{lstlisting}
+Il documento, contrassegnato dal tag ``\texttt{d}'', può contenere parti diverse, ciascuna spiegata di seguito. La sezione ``\texttt{extra}'' contiene il testo che abbiamo incluso ma non fa parte dell'articolo, ``\texttt{ignored}'' contiene ciò che fa parte del testo ma viene ignorato per l'allineamento, ``\texttt{section}'' contiene un titolo e un contenuto, ``\texttt{p}'' contiene un paragrafo  e ``\texttt{s}'' una frase che a sua volta contiene dei token ``\texttt{t}''. In quest'ultimo è contenuta la singola parola originale e le normalizzazioni. Per esempio, la punteggiatura non ha annotazioni di normalizzazione in quanto non è pronunciata, ma il numero 500 ne ha due - ``cinque'' e ``cento''. un token stesso non ha allineamento, solo la sua normalizzazione ``\texttt{n}'' è allineata. La normalizzazione ha una ``\texttt{pronunciation}'' e può avere un tempo di ``\texttt{start}'' ed ``\texttt{end}'', se è allineata. La normalizzazione, a sua volta, può contenere dei fonemi ``\texttt{ph}''.
 
 \begin{lstlisting}[language=XML,firstnumber=1, caption=Annotazioni delle parole in un audio, label=annotazioni,captionpos=b]
 <d>
@@ -477,7 +479,7 @@ INSERIRE SCHEMA SWC.RNC!!
 
 \subsection{Lettori}
 \label{subsec:lettori}
-
+Il dataset Spoken Wikipedia Corpora contiene un totale di 1340 audio di diversi lettori, ma nel progetto vengono presi solo gli audio che contengono annotazioni a livello di parola. In questo modo vengono presi solo 208 lettori e partizionati come in~\cite{Salamon:Few-Shot} con un rapporto $138:15:30$ tra lettori di training, validation e test. I lettori e le parole sono state estratte dai file ``aligned.swc'' contenuti in ogni audio e, successivamente, salvati in diversi file json. Per la gestione dei json sono state create due funzioni utili per la lettura e scrittura come mostrato nel codice~\ref{json_manager}.
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=json\_manager.py, label=json_manager,captionpos=b]
 import json
 	
@@ -491,6 +493,68 @@ def read_json_file(filename):
 	list_of_dict = json.load(f)
 	f.close
 	return list_of_dict
+\end{lstlisting}
+
+Il codice~\ref{xml_parser_readers} salva un file json chiamato ``readers\_paths.json'' formato dalle chiavi ``reader\_name'' e ``folder'' i cui valori sono rispettivamente il nome del lettore e le cartelle in cui sono salvati i file audio registrati dal relativo lettore, come si può vedere nel json~\ref{JSON_lettori}. Questo codice, usando la libreria \texttt{xml.etree.ElementTree} e la funzione \texttt{ET.parse}, rappresenta l'intero documento XML come un albero. La funzione \texttt{getroot} ne trova la radice e, successivamente, si scorre l'albero iterando finché non si trova il tag ``\texttt{prop}'' in cui è contenuta la chiave ``\texttt{reader.name}''. Inoltre, si effettua un controllo sul nome del lettore perché può capitare che viene salvato nel file ``aligned.swc'' con nomi diversi. Ad esempio, in alcuni file si può trovare nella chiave ``reader.name'' il valore ``:en:user:alexkillby|alexkillby'', mentre in altri solo ``alexkillby'' oppure si può trovare ``user:popularoutcast'', mentre in altri solo ``popularoutcast''. Una volta noto il nome del lettore si vede se è già presente nella lista di dizionari e se è un lettore nuovo lo si aggiunge con il relativo nome del file audio, mentre se il lettore era già presente si aggiunge solamente il nome del file audio.
+
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=xml\_parser\_readers.py, label=xml_parser_readers,captionpos=b]
+import xml.etree.ElementTree as ET
+from tqdm import tqdm
+import os
+import json
+from json_manager import *
+
+# Initialize list with empty dictionaries
+readers = []
+
+source_path = "./Dataset/English spoken wikipedia/english/"
+filename = "aligned.swc"
+
+# search for readers for each folder
+for audio_path in os.scandir(source_path):
+	# save only folder name from entire path
+	folder =  os.path.basename(audio_path)
+	if (os.path.exists(source_path + "/" + folder + "/" + filename)):
+		# parse the xml file "aligned.swc"
+		tree = ET.parse(source_path + "/" + folder + "/" + filename)
+		# getroot returns the root element for this tree
+		root = tree.getroot()
+		#root.iter creates a tree iterator with the current element as the root.
+		# The iterator iterates over this element and all elements below it, in 
+		# document (depth first) order.
+		for property in root.iter(tag = 'prop'):
+			# if the key "reader.name" exists
+			if (property.attrib['key'] == 'reader.name'):
+				# save the reader name taking the value of the attribute
+				reader_name = property.attrib['value'].lower()
+				# fix readers names that contain "user:"
+				if ("user:" in reader_name):
+				# fix readers names that contain "|""
+					if ("|" in reader_name):
+						# example reader_name = [[:en:user:alexkillby|alexkillby]] -> 
+						# reader_name = alexkillby
+						reader_name = reader_name[reader_name.find("user:")+5:reader_name.find("|")]
+						# fix readers names that contain "|""
+					elif ("]]" in reader_name):
+						# example reader_name = [[user:popularoutcast]] -> 
+						# reader_name = popularoutcast
+						reader_name = reader_name[reader_name.find("user:")+5:reader_name.find("]]")]
+				# if the reader is not yet on the list create a dict and append to
+				# the readers list
+				if not any(reader['reader_name'] == reader_name for reader in readers):
+					dictionary = {'reader_name': reader_name, 'folder' : [folder]}
+					readers.append(dictionary)
+				else:
+					# if the reader is already on the list add the folder name
+					for reader in readers:
+						if (reader['reader_name'] == reader_name):
+							reader['folder'].append(folder)
+# print the number of the readers
+print("The readers are:", str(len(readers)))
+
+# save a "readers_paths.json" with the name of the readers and the relative
+# file audio folders
+write_json_file("readers_paths.json", readers, indent = 4)
 \end{lstlisting}
 
 \begin{lstlisting}[language=json,firstnumber=1, caption=Formato JSON dei lettori, label=JSON_lettori,captionpos=b]

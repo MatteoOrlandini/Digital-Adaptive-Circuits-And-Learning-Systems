@@ -12,5 +12,5 @@
 \contentsline {section}{\numberline {6}Relation Network}{7}{section.6}% 
 \contentsline {section}{\numberline {7}Dataset Spoken Wikipedia Corpora}{9}{section.7}% 
 \contentsline {subsection}{\numberline {7.1}Annotazioni}{9}{subsection.7.1}% 
-\contentsline {subsection}{\numberline {7.2}Lettori}{10}{subsection.7.2}% 
-\contentsline {subsection}{\numberline {7.3}Parole}{11}{subsection.7.3}% 
+\contentsline {subsection}{\numberline {7.2}Lettori}{11}{subsection.7.2}% 
+\contentsline {subsection}{\numberline {7.3}Parole}{13}{subsection.7.3}% 
