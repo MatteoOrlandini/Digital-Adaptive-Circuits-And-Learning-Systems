@@ -2,26 +2,19 @@ import torch
 import os
 import random
 import numpy as np
-from protonet import *
+from relation_network import *
 from utils import *
 from protonet_loss import *
 from tqdm import tqdm
 import sklearn.metrics
 
-def test_loss(model, negative_set, positive_set, query_set, n, p):
+def test_loss(feature_encoder,relation_network, negative_set, positive_set, query_set, n, p):
     n_class = 2
+    FEATURE_DIM = 64
+    RELATION_DIM = 8
     n_support = n + p
     n_query = query_set.size(0)
     #print("n_query", n_query)
-
-    target_inds = torch.tensor([1, 0])
-    target_inds = target_inds.view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
-    target_inds = target_inds.reshape(-1)
-    #print(target_inds)
-    #target_inds = Variable(target_inds, requires_grad=False)
-
-    if torch.cuda.is_available():
-        target_inds = target_inds.to(device='cuda')
 
     #print(target_inds)
     xs = torch.cat((positive_set, negative_set), 0)   
@@ -30,32 +23,50 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     x = torch.cat((xs, query_set), 0)
     #print("x.shape", x.shape)  
     #print("x", x)  
+
+    pos_embeddings = feature_encoder(Variable(positive_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+
+    # resize the images from 15 X 5 to 5 X 5 to get square images
+    # interpolate down samples the input to the given size
+    pos_embeddings = F.interpolate(pos_embeddings, size = 5)
+    pos_embeddings = pos_embeddings.view(1, p, FEATURE_DIM, 5, 5) # CLASS_NUM X SAMPLE_NUM_PER_CLASS X FEATURE_DIM X 5 X 5
+    pos_embeddings = torch.sum(pos_embeddings,1).squeeze(1)   # CLASS_NUM X FEATURE_DIM X 5 X 5
+
+    neg_embeddings = feature_encoder(Variable(negative_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+
+    # resize the images from 15 X 5 to 5 X 5 to get square images
+    # interpolate down samples the input to the given size
+    neg_embeddings = F.interpolate(neg_embeddings, size = 5)
+    neg_embeddings = neg_embeddings.view(1, n, FEATURE_DIM, 5, 5) # CLASS_NUM X SAMPLE_NUM_PER_CLASS X FEATURE_DIM X 5 X 5
+    neg_embeddings = torch.sum(neg_embeddings,1).squeeze(1)   # CLASS_NUM X FEATURE_DIM X 5 X 5
     
-    embeddings = model(x)
-    #print("embeddings", embeddings)
-    embeddings_dim = embeddings.size(-1)
-    #print("embeddings.shape", embeddings.shape)
-    #print("embeddings_dim", embeddings_dim)
+    batch_features = feature_encoder(Variable(query_set)) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+    batch_features = F.interpolate(batch_features, size = 5)
     
-    #print("embeddings_sum", torch.sum(embeddings))
+    pos_neg_embeddings =  torch.cat((pos_embeddings, neg_embeddings), 0)
+
+    # calculate relations
+    # each batch sample link to every samples to calculate relations
+    pos_neg_embeddings_ext = pos_neg_embeddings.unsqueeze(0).repeat(int(n_class * n_query/2), 1, 1, 1, 1) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X 5 X FEATURE_DIM X 5 X 5
+    #print(pos_neg_embeddings_ext.shape)
+    batch_features_ext = batch_features.unsqueeze(0).repeat(n_class, 1, 1, 1, 1)  # 5 X (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+    batch_features_ext = torch.transpose(batch_features_ext, 0, 1)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X 5 X FEATURE_DIM X 5 X 5
+    #print(batch_features_ext.shape)
+
+
+    relation_pairs = torch.cat((pos_neg_embeddings_ext,batch_features_ext), 2).view(-1, FEATURE_DIM*2, 5, 5)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X (FEATURE_DIM * 2) X 5 X 5
+    relations = relation_network(relation_pairs).view(-1,n_class) #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X CLASS_NUM
+    #print(relations)
     
-    positive_embeddings = embeddings[:p].view(1, p, embeddings_dim).mean(1)    
-    #print("embeddings[:p]", embeddings[:p])  
-    #print("positive_embeddings", positive_embeddings)
-    negative_embeddings = embeddings[p:p+n].view(1, n, embeddings_dim).mean(1)     
-    #print("embeddings[p:p+n]", embeddings[p:p+n])
-    #print("negative_embeddings", negative_embeddings)
-    pos_neg_embeddings =  torch.cat((positive_embeddings, negative_embeddings), 0)
-    #print("pos_neg_embeddings", pos_neg_embeddings)
-    query_embeddings = embeddings[p+n:]
+    target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
     #print("query_embeddings",query_embeddings)
-    dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
+    _, y_hat = relations.max(1)
     #print("dists",dists)
 
-    inverse_dist = torch.div(1.0, dists)
-    prob = torch.log_softmax(inverse_dist, dim = 1)
-
-    return prob, target_inds
+    #print("returns")
+    #print(y_hat.view(1,-1).squeeze())
+    #print(target_inds.reshape(1, -1).squeeze())
+    return y_hat.view(1,-1).squeeze(), target_inds.reshape(1, -1).squeeze()
 
 def get_negative_positive_query_set(p, n, i, audio):
     # initialize support tensor of dimension p x 128 x 51
@@ -115,51 +126,92 @@ def main():
     n = 10
 
     C = 2
-    K = 1
+    K = 5
 
-    model = Protonet()
-    optim = torch.optim.Adam(model.parameters(), lr = 0.001)
+    FEATURE_DIM = 64
+    RELATION_DIM = 8
+
+    feature_encoder = CNNEncoder()
+    relation_network = RelationNetwork(FEATURE_DIM, RELATION_DIM)
+    #optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
     if torch.cuda.is_available():
-        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cuda'))
+        checkpoint = torch.load("Models/Relation/relation_model_C{}_K{}.pt".format(C, K), map_location=torch.device('cuda'))
     else:
-        checkpoint = torch.load("Models/Prototypical/prototypical_model_C{}_K{}_60000epi.pt".format(C, K), map_location=torch.device('cpu'))
-    model.load_state_dict(checkpoint['model_state_dict'])
-    optim.load_state_dict(checkpoint['optimizer_state_dict'])
+        checkpoint = torch.load("Models/Relation/relation_model_C{}_K{}.pt".format(C, K), map_location=torch.device('cpu'))
+    feature_encoder.load_state_dict(checkpoint['feature_encoder_state_dict'])
+    relation_network.load_state_dict(checkpoint['relation_network_state_dict'])
 
 
-    model.eval()
+    feature_encoder.eval()
+    relation_network.eval()
 
     if torch.cuda.is_available():
-        model.to(device='cuda')
+        feature_encoder.to(device='cuda')
+        relation_network.to(device='cuda')
 
-    prob_pos_iter = []
-    target_inds_iter = []
-
+    auc_list = []
     for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
+        y_pred = []
+        y_true = []
         # getting the number of target keywords in each audio
         target_keywords_number = len([name for name in os.listdir(audio) if os.path.isfile(os.path.join(audio, name))])
 
         for i in range (target_keywords_number):
-            for j in range (10):
-                negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
+            for j in range (1):
+                negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)
 
-                prob, target_inds = test_loss(model, negative_set, positive_set, query_set, n, p)
-
+                negative_set = negative_set.view(1 * n, 1, *negative_set.size()[1:])  
+                positive_set = positive_set.view(1 * p, 1, *positive_set.size()[1:]) 
+                query_set = query_set.view(int(C * query_set.size()[0]/2), 1, *query_set.size()[1:])   # (C X Q) X 1 X 51 X 51
+                
+                y_pred_tmp, y_true_tmp = test_loss(feature_encoder,relation_network, negative_set, positive_set, query_set, n, p)
+                for i in range(len(y_pred_tmp)):
+                    if y_pred_tmp[i] == 1:
+                        y_pred_tmp[i] = 0
+                    else:
+                        y_pred_tmp[i] = 1
+                    if y_true_tmp[i] == 1:
+                        y_true_tmp[i] = 0
+                    else:
+                        y_true_tmp[i] = 1
+                #(y_pred_tmp)
+                #print(y_true_tmp)
                 '''  Probability array for positive class'''
-                prob_pos = prob[:,0] 
-                prob_pos = prob_pos.detach().cpu().tolist()
-                #print('len(prob_pos)', len(prob_pos))
-                #print('(prob_pos)', (prob_pos))
-                prob_pos_iter.extend(prob_pos)
-                target_inds = target_inds.to(device='cpu')
-                target_inds_iter.extend(target_inds)
+                """
+                prob_query_pos = prob_query_pos[:,0] 
+                #print("prob_query_pos", prob_query_pos)
+                prob_query_neg = prob_query_neg[:,0] 
+                #print("prob_query_neg", prob_query_neg)
+                prob_query_pos = prob_query_pos.detach().cpu().tolist()
+                prob_query_neg = prob_query_neg.detach().cpu().tolist()
+                
+                prob_query_pos_iter.extend(prob_query_pos)
+                prob_query_neg_iter.extend(prob_query_neg)
+                """
+                y_pred.extend(y_pred_tmp)
+                y_true.extend(y_true_tmp)
 
-    avg_prob = np.mean(np.array(prob_pos_iter),axis=0)
-    print('Average test prob: {}'.format(avg_prob))
+        precision, recall, thresholds = sklearn.metrics.precision_recall_curve(y_true, y_pred)
+        auc_tmp = sklearn.metrics.auc(recall, precision)
+        print("auc_tmp: {}".format(auc_tmp))
+        auc_list.append(auc_tmp)
+    """
+    prob_query_pos_iter.extend(prob_query_neg_iter)
+    prob_pos_iter = prob_query_pos_iter
 
-    average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
-    print('Average precision: {}'.format(average_precision))
+    target_inds_iter = np.ones(int(len(prob_pos_iter)/2))
+    target_inds_iter = np.append(target_inds_iter, np.zeros(int(len(prob_pos_iter)/2)))
+
+    precision, recall, thresholds = sklearn.metrics.precision_recall_curve(target_inds_iter, prob_pos_iter)
+    """
+    auc = np.mean(auc_list)
+    print("Area under precision recall curve: {}".format(auc))
+    auc_std_dev = np.std(auc_list)
+    print("Standard deviation area under precision recall curve: {}".format(auc_std_dev))
+
+    #average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
+    #print('Average precision: {}'.format(average_precision))
 
 if __name__ == "__main__":
     main()
