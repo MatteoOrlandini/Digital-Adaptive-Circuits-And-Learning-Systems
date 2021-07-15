@@ -276,6 +276,40 @@
 \end{figure}
 \clearpage
 
+\section{Convolutional Neural Network (CNN)}
+Una rete neurale convoluzionale è una rete feedforward pensata per applicazioni che richiedono l'elaborazione di immagini o di grandi moli di dati.
+L'ingresso della rete è costituito da una o più matrici che attraversano delle fasi di convoluzione che ne riducono le dimensioni. I filtri di convoluzione sono detti kernel o di pooling. Infine, il risultato viene passato a una rete fully connected che ha il compito di classificazione.
+
+La prima parte del filtro consiste nella convoluzione dell'immagine in ingresso con una serie di kernel i cui parametri vengono allenati.
+Il filtro viene traslato in entrambe le dimensioni della matrice producendo una serie di feature bidimensionali.
+Il parametro \textit{stride} definisce il passo con cui il kernel viene traslato sulla matrice di ingresso.
+Solitamente, viene effettuato uno zero-padding sui contorni del volume in modo da poter caratterizzare anche i valori che si trovano ai bordi delle matrici.
+In seguito alla convoluzione viene applicata una funzione non-lineare come ad esempio una sigmoide o una ReLu con lo scopo di aumentare la proprietà di non linearità.
+
+Il pooling layer è uno strato della rete che ha lo scopo di ridurre le dimensioni della matrice prodotta dal convolutional layer. Combinando gruppi di elementi della matrice (solitamente 2x2) restituisce il valore massimo tra essi, che andrà a sostituire il blocco stesso.
+
+\section{Area under precision-recall curve (AUPRC)}
+Nella fase di test, la rete elabora una predizione dell'output a partire da un ingresso noto che poi viene confrontata con il valore effettivo.
+Nel nostro caso è presente un positive set e un negative set, si tratta quindi di classificazione binaria.
+Il confronto tra predizione e label può produrre quattro risultati:
+\begin{itemize}
+	\item Vero Negativo (TN): il valore reale è negativo e il valore predetto è negativo;
+	\item Vero Positivo (TP): il valore reale è positivo e il valore predetto	è positivo;
+	\item Falso Negativo (FN): il valore reale è positivo e il valore predetto è negativo;
+	\item Falso Positivo (FP): il valore reale è negativo e il valore predetto	è positivo;
+\end{itemize}
+Questi valori vanno a comporre la confusion matrix.
+Nel nostro caso siamo interessati a Precision e Recall.
+
+Il parametro Precision rappresenta quanti tra i casi predetti come positivi sono realmente positivi.
+
+Il parametro Recall indica quanti tra i casi realmente positivi è stato predetto in modo corretto.
+\begin{equation}
+Precision=\frac{TP}{TP+FP}
+\end{equation}
+\begin{equation}
+Recall=\frac{TP}{TP+FN}
+\end{equation}
 \section{Few-shot learning}
 \label{section:Few-shot}
 (https://www.borealisai.com/en/blog/tutorial-2-few-shot-learning-and-meta-learning-i/)
