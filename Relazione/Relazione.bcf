@@ -1995,7 +1995,17 @@
     <bcf:datasource type="file" datatype="bibtex">Bibliografia.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="1">minining_spoken_wikipedia</bcf:citekey>
+    <bcf:citekey order="1">Salamon:Few-Shot</bcf:citekey>
+    <bcf:citekey order="2">Salamon:Few-Shot</bcf:citekey>
+    <bcf:citekey order="3">Salamon:Few-Shot</bcf:citekey>
+    <bcf:citekey order="4">Salamon:Few-Shot</bcf:citekey>
+    <bcf:citekey order="5">snell:prototypical</bcf:citekey>
+    <bcf:citekey order="6">snell:prototypical</bcf:citekey>
+    <bcf:citekey order="7">DBLP:journals/corr/abs-1711-06025</bcf:citekey>
+    <bcf:citekey order="8">DBLP:journals/corr/abs-1711-06025</bcf:citekey>
+    <bcf:citekey order="9">DBLP:journals/corr/abs-1711-06025</bcf:citekey>
+    <bcf:citekey order="10">DBLP:journals/corr/abs-1711-06025</bcf:citekey>
+    <bcf:citekey order="11">minining_spoken_wikipedia</bcf:citekey>
     <bcf:citekey order="0" nocite="1">*</bcf:citekey>
   </bcf:section>
   <!-- SORTING TEMPLATES -->

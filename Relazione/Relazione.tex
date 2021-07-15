@@ -261,6 +261,19 @@
 
 \section{Introduzione}
 \label{section:Introduzione}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=.5\textwidth]{Immagini/few_shot_sound_event_detection_method}
+	\caption{Metodo proposto per il few-shot sound event detection. (a) Applicazione del modello few-shot, (b) costruzione del set di esempi negativi, in blu, e (c) data augmentation per la generazioni di più esempi positivi, in arancione.~\cite{Salamon:Few-Shot}}
+	\label{fig:few_shot_sound_event_detection_method}
+\end{figure}
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=.5\textwidth]{Immagini/few_shot_learning_model}
+	\caption{Modello few-shot learning nel caso 5\emph{-way} 2\emph{-shot}.~\cite{Salamon:Few-Shot}}
+	\label{fig:few-shot_learning_model}
+\end{figure}
 \clearpage
 
 \section{Few-shot learning}
@@ -301,19 +314,50 @@ Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, 
 \begin{equation}
 p_\phi(y=k|\mathbf{x})=\dfrac{\exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k))}{\sum_k' \exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k'))}
 \end{equation}
-Il processo di training avviene minimizzando il negativo della log-probabilità $J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)$ considerando la distanza fra query e il prototipo della sua classe.
+Il processo di training avviene minimizzando il negativo del logaritmo della probabilità $J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)$ considerando la distanza fra query e il prototipo della sua classe.
 Gli episodi di training sono formati campionando C classi di parole da un lettore e selezionando per ognuna casualmente K istanze e Q query.
+
+\begin{figure}[h]
+	\centering
+	\subfloat[Few-shot\label{fig:proto_few_shot}]{\includegraphics[width=0.3\textwidth]{Immagini/proto_few_shot}}
+	\qquad
+	\subfloat[Zero-shot\label{fig:proto_zero_shot}]{\includegraphics[width=0.35\textwidth]{Immagini/proto_zero_shot}}
+	\label{fig:proto_few_zero_shot}	
+	\caption{Reti Prototypical negli scenari few-shot e zero-shot. (a): i prototipi few-shot $\mathbf{c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. (b): i prototipi zero-shot $\mathbf{c}_k$ sono prodotti facendo l'embedding dei metadati $\mathbf{v}_k$. In entrambi i casi i punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi(y = k|\mathbf{x}) \propto \exp \left(-d(f_\phi(\mathbf{x}),\mathbf{c}_k) \right)$.~\cite{snell:prototypical}}
+\end{figure}
+\clearpage
+
 \section{Relation Network}
-La Relation Network è costituita da due moduli: un modulo di embedding $f_\varphi$ (equivalente a quello nella Prototypical) e un modulo di relation $g_\phi$.
-Le istanze del query set $x_i$ e quelle del support set $x_j$ vengono date in ingresso al modulo di embedding producendo dei vettori (feature maps) $f_\varphi(x_i)$ e $f_\varphi(x_j)$.
-Questi ultimi vengono poi concatenati: $C(f_\varphi(x_i),f_\varphi(x_j))$.
-Le feature map concatenate passano poi attraverso il modulo di decisione che restituisce uno scalare da 0 a 1 che rappresenta la somiglianza tra $x_i$ e $x_j$.
-Per il caso C-way one-shot, viene concatenata la query con le istanze dele C classi producendo C punteggi di somiglianza.
-Nel caso C-way K-shot invece, la query viene concatenata con la somma elemento per elemento degli embedding di ogni instanza delle classi. Quindi, in ogni caso i confronti $r_{i,j}$ sono C per ogni query.
+La Relation Network è costituita da due moduli: un modulo di \emph{embedding} $f_\varphi$ (equivalente a quello nella Prototypical) e un modulo di \emph{relation} $g_\phi$, come illustrato in figura~\ref{fig:relation_network}.
+Le istanze $x_i$ del query set $\mathcal{Q}$ e quelle $x_j$ del support set $\mathcal{S}$ vengono date in ingresso al modulo di embedding producendo dei vettori (feature maps) $f_\varphi(x_i)$ e $f_\varphi(x_j)$.
+Questi ultimi vengono poi dati all'operatore $\mathcal{C}(\cdot ,\cdot)$ che ne fa la concatenazione: $\mathcal{C}(f_\varphi(x_i),f_\varphi(x_j))$.
+Le feature map concatenate passano poi attraverso il modulo di decisione che restituisce uno scalare da 0 a 1, il quale rappresenta la somiglianza tra $x_i$ e $x_j$.
+Per il caso $C$-way one-shot, viene concatenata la query con le istanze delle $C$ classi producendo $C$ punteggi di somiglianza.
 \begin{equation}
-r_{i,j}=g_\phi(C(f_\varphi(x_i),f_\varphi(x_j))
+	r_{i,j}=g_\phi(\mathcal{C}(f_\varphi(x_i),f_\varphi(x_j))),  \qquad i = 1, 2, \dots, C
 \end{equation}
-Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che l'uscita del modulo di decisone produca 1 se i vettori concatenati sono della stessa classe e 0 altrimenti.
+Nel caso $C$-way K-shot invece, la query viene concatenata con la somma elemento per elemento degli embedding di ogni istanza delle classi. Quindi, in entrambi i casi i confronti $r_{i,j}$ sono $C$ per ogni query.
+
+Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che l'uscita del modulo di decisione produca 1 se i vettori concatenati sono della stessa classe e 0 altrimenti.
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=.8\textwidth]{Immagini/relation_network}
+	\caption{Architettura della Relation Network nel caso 5\emph{-way} 1\emph{-shot} con un esempio di query.~\cite{DBLP:journals/corr/abs-1711-06025}}
+	\label{fig:relation_network}
+\end{figure}
+
+\begin{figure}[h]
+	\centering
+	\subfloat[Blocco convoluzionale\label{fig:relation_network_architecture_a}]{\includegraphics[width=0.3\textwidth]{Immagini/relation_network_conv_block}}
+	\qquad
+	\subfloat[Relation Network per few-shot learning\label{fig:relation_network_architecture_b}]{\includegraphics[width=0.3\textwidth]{Immagini/relation_network_architecture}}
+	\label{fig:relation_network_architecture}	
+	\caption{Architettura della Relation Network per few-shot learning (b) composta dagli elementi inclusi nel blocco convoluzionale (a).~\cite{DBLP:journals/corr/abs-1711-06025}}
+\end{figure}
+
+\clearpage
+
 \section{Dataset Spoken Wikipedia Corpora}
 \label{sec:spoken_wikipedia_corpora}
 Il progetto Spoken Wikipedia unisce lettori volontari di articoli di Wikipedia. Centinaia di articoli in inglese, tedesco e olandese sono disponibili per gli utenti che non sono in grado o non vogliono leggere la versione scritta dell'articolo. Il dataset trasforma i file audio in un corpus allineato nel tempo, rendendolo accessibile per la ricerca.\cite{minining_spoken_wikipedia}

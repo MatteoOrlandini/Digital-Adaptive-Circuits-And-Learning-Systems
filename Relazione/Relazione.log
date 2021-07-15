@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  14 JUL 2021 19:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  15 JUL 2021 12:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1065,15 +1065,31 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.257 \clearpage
-                 [1]pdfTeX warning (ext4): destination with the same identifier
- (name{page.1}) has been already used, duplicate ignored
+                 [1]
+<Immagini/few_shot_sound_event_detection_method.png, id=81, 353.06906pt x 204.0
+1219pt>
+File: Immagini/few_shot_sound_event_detection_method.png Graphic file (type png
+)
+<use Immagini/few_shot_sound_event_detection_method.png>
+Package pdftex.def Info: Immagini/few_shot_sound_event_detection_method.png  us
+ed on input line 266.
+(pdftex.def)             Requested size: 195.0pt x 112.67711pt.
+<Immagini/few_shot_learning_model.png, id=84, 527.72156pt x 223.58531pt>
+File: Immagini/few_shot_learning_model.png Graphic file (type png)
+<use Immagini/few_shot_learning_model.png>
+Package pdftex.def Info: Immagini/few_shot_learning_model.png  used on input li
+ne 273.
+(pdftex.def)             Requested size: 195.0pt x 82.61609pt.
+pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
+been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.264 \clearpage
+l.277 \clearpage
                  [1
 
-]
-Overfull \hbox (4.70345pt too wide) in paragraph at lines 268--269
+ <./Immagini/few_shot_sound_event_detection_method.png> <./Immagini/few_shot_le
+arning_model.png>]
+Overfull \hbox (4.70345pt too wide) in paragraph at lines 281--282
 \T1/cmr/m/n/12 (https://www.borealisai.com/en/blog/tutorial-2-few-shot-learning
 -and-meta-
  []
@@ -1081,34 +1097,76 @@ Overfull \hbox (4.70345pt too wide) in paragraph at lines 268--269
 [2
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 288.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 301.
 
  (c:/Program Files/texlive/2019/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 288.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 301.
 
-[3] [4] [5]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 404.
+[3]
+<Immagini/proto_few_shot.png, id=110, 268.00125pt x 163.3603pt>
+File: Immagini/proto_few_shot.png Graphic file (type png)
+<use Immagini/proto_few_shot.png>
+Package pdftex.def Info: Immagini/proto_few_shot.png  used on input line 322.
+(pdftex.def)             Requested size: 117.00119pt x 71.31789pt.
+<Immagini/proto_zero_shot.png, id=111, 316.18124pt x 164.11313pt>
+File: Immagini/proto_zero_shot.png Graphic file (type png)
+<use Immagini/proto_zero_shot.png>
+Package pdftex.def Info: Immagini/proto_zero_shot.png  used on input line 324.
+(pdftex.def)             Requested size: 136.50238pt x 70.85274pt.
+ [4 <./Immagini/proto_few_shot.png> <./Immagini/proto_zero_shot.png>]
+<Immagini/relation_network.png, id=130, 847.66687pt x 422.32782pt>
+File: Immagini/relation_network.png Graphic file (type png)
+<use Immagini/relation_network.png>
+Package pdftex.def Info: Immagini/relation_network.png  used on input line 345.
 
- (c:/Program Files/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
+(pdftex.def)             Requested size: 312.00119pt x 155.44687pt.
+<Immagini/relation_network_conv_block.png, id=133, 101.62968pt x 54.9553pt>
+File: Immagini/relation_network_conv_block.png Graphic file (type png)
+<use Immagini/relation_network_conv_block.png>
+Package pdftex.def Info: Immagini/relation_network_conv_block.png  used on inpu
+t line 352.
+(pdftex.def)             Requested size: 117.00119pt x 63.26936pt.
+<Immagini/relation_network_architecture.png, id=134, 124.96687pt x 405.01312pt>
+
+File: Immagini/relation_network_architecture.png Graphic file (type png)
+<use Immagini/relation_network_architecture.png>
+Package pdftex.def Info: Immagini/relation_network_architecture.png  used on in
+put line 354.
+(pdftex.def)             Requested size: 117.00119pt x 379.21063pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[5
+
+ <./Immagini/relation_network.png>] [6 <./Immagini/relation_network_conv_block.
+png> <./Immagini/relation_network_architecture.png>] [7
+
+]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 448.
+
+
+(c:/Program Files/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [6] [7] [8]
-Overfull \hbox (12.55942pt too wide) in paragraph at lines 486--486
+) [8]
+[9] [10]
+Overfull \hbox (12.55942pt too wide) in paragraph at lines 530--530
 \T1/cmr/m/it/12 Shot Sound Event De-tec-tion\T1/cmr/m/n/12 . 2020, pp. 81^^U85.
  \T1/cmr/m/sc/12 doi\T1/cmr/m/n/12 : []$\T1/cmtt/m/n/12 10 . 1109 / ICASSP40776
  .
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 487.
-[9
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 531.
+[11
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 487.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 531.
  (./Relazione.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 487.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 487.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 531.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 531.
 Package rerunfilecheck Info: File `Relazione.out' has not changed.
 (rerunfilecheck)             Checksum: 34C018CFA3C41872B73D1DF0A14F325D;661.
 Package logreq Info: Writing requests to 'Relazione.run.xml'.
@@ -1116,13 +1174,13 @@ Package logreq Info: Writing requests to 'Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 29611 strings out of 492623
- 540446 string characters out of 6126681
- 1192391 words of memory out of 5000000
- 33094 multiletter control sequences out of 15000+600000
- 554730 words of font info for 77 fonts, out of 8000000 for 9000
+ 29679 strings out of 492623
+ 542468 string characters out of 6126681
+ 1193760 words of memory out of 5000000
+ 33143 multiletter control sequences out of 15000+600000
+ 555493 words of font info for 78 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 44i,6n,63p,801b,2463s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 44i,10n,63p,801b,2463s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Program Files/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t
 1.enc}<c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/amsfont
@@ -1151,16 +1209,17 @@ pe1/public/cm-super/sfcc1728.pfb><c:/Program Files/texlive/2019/texmf-dist/font
 s/type1/public/cm-super/sfcc2074.pfb><c:/Program Files/texlive/2019/texmf-dist/
 fonts/type1/public/cm-super/sfrm0600.pfb><c:/Program Files/texlive/2019/texmf-d
 ist/fonts/type1/public/cm-super/sfrm0800.pfb><c:/Program Files/texlive/2019/tex
-mf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/Program Files/texlive/2019
-/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><c:/Program Files/texlive/
-2019/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/Program Files/texl
-ive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><c:/Program Files/
-texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb><c:/Program Fi
-les/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on Relazione.pdf (11 pages, 566478 bytes).
+mf-dist/fonts/type1/public/cm-super/sfrm1000.pfb><c:/Program Files/texlive/2019
+/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb><c:/Program Files/texlive/
+2019/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb><c:/Program Files/texl
+ive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb><c:/Program Files/
+texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><c:/Program Fi
+les/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0800.pfb><c:/Progra
+m Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on Relazione.pdf (13 pages, 884979 bytes).
 PDF statistics:
- 415 PDF objects out of 1000 (max. 8388607)
- 365 compressed objects within 4 object streams
- 157 named destinations out of 1000 (max. 500000)
- 94 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 456 PDF objects out of 1000 (max. 8388607)
+ 391 compressed objects within 4 object streams
+ 168 named destinations out of 1000 (max. 500000)
+ 129 words of extra memory for PDF output out of 10000 (max. 10000000)
 
