@@ -14,7 +14,7 @@
 \contentsline {subsection}{\numberline {7.1}Annotazioni}{9}{subsection.7.1}% 
 \contentsline {subsection}{\numberline {7.2}Lettori}{11}{subsection.7.2}% 
 \contentsline {subsection}{\numberline {7.3}Parole}{13}{subsection.7.3}% 
-\contentsline {section}{\numberline {8}Protonet codice}{14}{section.8}% 
-\contentsline {subsection}{\numberline {8.1}Protonet training}{14}{subsection.8.1}% 
-\contentsline {subsection}{\numberline {8.2}Protonet validation}{15}{subsection.8.2}% 
-\contentsline {subsection}{\numberline {8.3}Protonet test}{15}{subsection.8.3}% 
+\contentsline {section}{\numberline {8}Protonet codice}{17}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Protonet training}{17}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}Protonet validation}{18}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Protonet test}{18}{subsection.8.3}% 

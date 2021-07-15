@@ -22,7 +22,7 @@
 \lstdefinelanguage{json}{
 	basicstyle=\scriptsize,
 	%numbers=left,
-	tabsize=4,
+	tabsize=2,
 	numberstyle=\scriptsize,
 	stepnumber=1,
 	numbersep=8pt,
@@ -46,7 +46,7 @@
 	{\}}{{{\color{delim}{\}}}}}{1}
 	{[}{{{\color{delim}{[}}}}{1}
 	{]}{{{\color{delim}{]}}}}{1},
- 	morekeywords = {folder, reader_name, word, frequency, start, end},
+ 	morekeywords = {folder, reader_name, word, frequency, start, end, words, folders},
 	keywordstyle=\bfseries\color{blue},
 	commentstyle=\color{black},
 	keepspaces=false,
@@ -185,7 +185,7 @@
 	tabsize=2,
 	keywordstyle=\color{ipython_green}\ttfamily,
 	morekeywords={typeof, null, catch, switch, in, int, str, float, self, import, def, return, True, False, None},
-	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir},          % Custom highlighting
+	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample},          % Custom highlighting
 	emphstyle=\color{ipython_purple}\ttfamily,    % Custom highlighting style
 }
 
@@ -560,7 +560,7 @@ print("The readers are:", str(len(readers)))
 write_json_file("readers_paths.json", readers, indent = 4)
 \end{lstlisting}
 
-\begin{lstlisting}[language=json,firstnumber=1, caption=Formato JSON dei lettori, label=JSON_lettori,captionpos=b]
+\begin{lstlisting}[language=json,firstnumber=1, caption=Formato del file readers\_paths.json, label=JSON_lettori,captionpos=b]
 {
 	"reader_name": "the epopt",
 	"folder": [
@@ -585,41 +585,209 @@ write_json_file("readers_paths.json", readers, indent = 4)
 
 \subsection{Parole}
 \label{subsec:parole}
+Il codice~\ref{find_target_words}..............................
 
-\begin{lstlisting}[language=json,firstnumber=1, caption=Formato JSON delle parole allineate, label=JSON_parole,captionpos=b]
-[
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=find\_target\_words.py, label=find_target_words,captionpos=b]
+import xml.etree.ElementTree as ET
+from tqdm import tqdm
+import os
+import collections
+from json_manager import *
+import random
+
+folder = []
+source_path = "./Dataset/English spoken wikipedia/english/"
+filename = "aligned.swc"
+file_audio_name = "audio.ogg"
+
+# iterate in each folder of the dataset
+for folder in tqdm(os.scandir(source_path), desc = "Folder number"):
+    # initialize the list of dict "target_words"
+    target_words = []
+    if (os.path.exists(folder.path + "/" + filename) \
+        and os.path.exists(folder.path + "/" + file_audio_name) \
+        and os.path.isdir(folder.path)):  
+        # parse the xml file aligned.swc
+        tree = ET.parse(folder.path + "/" + filename)
+        # getroot returns the root element for this tree
+        root = tree.getroot()
+        # initialize the list "words"
+        words = []
+        # root.iter creates a tree iterator with the current element as the 
+        # root. The iterator iterates over this element and # all elements 
+        # below it, in document (depth first) order.
+        for token_normalization in root.iter(tag = 'n'):
+            # we take only the words with the timestamp, so only if there is
+            # 'start' (or 'end') tag
+            if 'start' in token_normalization.keys():
+                # add every word with "start" key
+                words.append(token_normalization.attrib['pronunciation'].lower())
+        # collections.Counter stores elements as dictionary keys, and their
+        # counts are stored as dictionary values.
+        unique_words = collections.Counter(words)
+        # for each key (word) in "unique_words" append a new target_word if
+        # the number of occurency is at least 10
+        for key in unique_words.keys():
+            # we only consider words that occur at least 10 times in the
+            # recording. Note that unique_words[key] is the word frequency
+            if (unique_words[key] >= 10):
+                # add a new target word
+                target_words.append({'word' : key, \
+                                     'frequency' : unique_words[key], \
+                                     'start' : [], \
+                                     'end' : []})
+        # for each "target_words" append the relative "start" and "end"
+        # timestamp
+        for token_normalization in root.iter(tag = 'n'):
+            # we take only the words with the timestamp, so only if there is 'start' (or 'end') tag
+            if 'start' in token_normalization.keys():
+                # iterate over the "target_words"
+                for target_word in target_words:
+                    # add start and end timestamp only to the relative
+                    # "target_word"
+                    if target_word['word'] == token_normalization.attrib['pronunciation'].lower():
+                        target_word['start'].append(int(token_normalization.attrib['start']))
+                        target_word['end'].append(int(token_normalization.attrib['end']))
+
+        write_json_file(folder.path+"/word_count.json", target_words, indent = 4)
+        # If there are more than 10 words that occur at least 10 times in
+        # the recording, we sort the words by their number of occurrences,
+        # divide the sorted list into 10 equally sized bins, and sample 
+        # one keyword per bin.
+        if (len(target_words) >= 10):
+            target_words = random.sample(target_words, 10)
+        # save the "target_words.json"
+        write_json_file(folder.path+"/target_words.json", target_words, indent = 4)
+
+\end{lstlisting}
+
+\begin{lstlisting}[language=json,firstnumber=1, caption=Formato del file word\_count.json, label=word_count,captionpos=b]
 {
-	"word": "i",
-	"frequency": 12,
-	"start": [
-		660,
-		8800,
-		115050,
-		116300,
-		117910,
-		228560,
-		273900,
-		497150,
-		518270,
-		534740,
-		543420,
-		589280
-	],
-	"end": [
-		870,
-		8940,
-		115240,
-		116360,
-		118020,
-		228690,
-		274000,
-		497340,
-		518520,
-		534860,
-		543700,
-		589360
-	]
-},
+        "word": "i",
+        "frequency": 12,
+        "start": [
+            660,
+            8800,
+            115050,
+            ...
+        ],
+        "end": [
+            870,
+            8940,
+            115240,
+            ...
+        ]
+    },
+    {
+        "word": "the",
+        "frequency": 75,
+        "start": [
+            4160,
+            49930,
+            53680,
+            ...
+        ],
+        "end": [
+            4320,
+            50030,
+            53710,
+			...
+   		]                
+    },
+\end{lstlisting}
+            
+Il file ``readers\_paths.json'' viene successivamente usato per salvare le parole di ogni lettore, il nome della relativa cartella in cui vengono pronunciate e i timestamp di inizio e fine della parola per ogni cartella come mostrato nel json~\ref{readers_words}. Il codice~\ref{words_per_reader} legge il nome di ogni lettore dal json precedentemente salvato, successivamente per ognuna delle cartelle del lettore si....................................
+
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=words_per_reader,captionpos=b]
+from tqdm import tqdm
+import os
+from json_manager import *
+
+source_path = "./Dataset/English spoken wikipedia/english/"
+# read the json that contains the readers name and their audio folders
+readers = read_json_file("readers_paths.json")
+#initialize a list of dict
+readers_words = []
+# for each reader search the word spoken by the reader
+for reader in tqdm(readers):
+    # create a dict with 'reader_name' and 'words' keys
+    new_readers_words = {'reader_name' : reader['reader_name'],\
+                         'words' : [] }
+
+    # for each reader create a new dict for words
+    words_per_reader = [] 
+    # flag to signal if "word_count.json" exists
+    json_file_exist = False
+    # search for each folder the file "word_count.json"
+    for reader_folder in reader['folder']:
+        if (os.path.exists(source_path + "/" + reader_folder + "/word_count.json")):
+            # "word_count.json" exists
+            json_file_exist = True
+            # read "word_count.json"
+            recording_words = read_json_file(source_path + "/" + reader_folder + "/word_count.json")
+            # for each audio folder create a new list of dict
+            folder_per_word = []
+            # for each word in the audio save the folder, start and end 
+            # timestamps
+            for word in recording_words:
+                 # create a dict with 'folder', 'start' and 'end' keys
+                folder_per_word = {'folder' : reader_folder, \
+                                   'start' : word['start'], \
+                                   'end' : word['end']}
+                # if the word is not yet in the list add the word
+                if not any (word['word'] == word_per_reader['word'] for word_per_reader in words_per_reader):
+                   words_per_reader.append({ 'word' : word['word'], \
+                                             'folders' : [folder_per_word]}) \
+                # otherwise add 'start' and 'end' if the "reader_folder" is 
+                # in word_per_reader['folders'] or add the "folder_per_word"  
+                else:
+                    for word_per_reader in words_per_reader:
+                        if word['word'] == word_per_reader['word']:
+                            if reader_folder in word_per_reader['folders']:
+                                for folder in word_per_reader['folders']:
+                                    if reader_folder == folder['folder']:
+                                        folder['start'] += word['start']
+                                        folder['end'] += word['end']
+                            else:
+                                word_per_reader['folders'].append(folder_per_word)
+    # if "word_count.json" exists add the new reader to "training_readers"
+    # list     
+    if (json_file_exist):
+        new_readers_words['words'] = words_per_reader
+        readers_words.append(new_readers_words)
+# save a "readers_words.json" with the name of the readers and the relative 
+# words spoken
+write_json_file("readers_words.json", readers_words, indent = 0)
+
+\end{lstlisting}
+	
+\begin{lstlisting}[language=json,firstnumber=1, caption=Formato del file readers\_words.json, label=readers_words,captionpos=b]
+"reader_name": "wodup",
+		"words": [
+			{
+				"word": "the",
+				"folders": [
+					{
+						"folder": "0.999..%2e",
+						"start": [
+							6950,
+							1029740,
+							1032520,
+							...
+						],
+						"end": [
+							7190,
+							1029880,
+							1032620,
+							...
+						]
+					},
+					{
+						"folder": "Execution_by_elephant",
+						"start": [
+							3600,
+							10680,
+							...
 \end{lstlisting}
 
 
