@@ -48,8 +48,8 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
             target_inds = target_inds.to(device='cuda')
 
     log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, int(n_query/2), -1)
-    print('log_p_y.shape', log_p_y.shape)
-    print('log_p_y', log_p_y)
+    #print('log_p_y.shape', log_p_y.shape)
+    #print('log_p_y', log_p_y)
     """ non serve per il test 
     loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
     print('target_inds)', target_inds)
@@ -59,11 +59,12 @@ def test_loss(model, negative_set, positive_set, query_set, n, p):
     # see https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-f-measure-metrics
     # y_hat containes the indices of the minimum softmax between positive and negative embeddings mean
     _, y_hat = log_p_y.max(2)
-    print("y_hat", y_hat)
+    #print("y_hat", y_hat.view(1,-1).squeeze())
+    #print("target_inds.squeeze()", target_inds.reshape(1, -1).squeeze())
     # acc_val is an array that contains 1 if y_hat == target_inds, 0 otherwise
-    acc_val = torch.eq(y_hat, target_inds.squeeze()).float()
-    print("acc_val", acc_val)
-    return acc_val
+    #acc_val = torch.eq(y_hat, target_inds.squeeze()).float()
+    #print("acc_val", acc_val)
+    return y_hat.view(1,-1).squeeze(), target_inds.reshape(1, -1).squeeze()
 
 def get_negative_positive_query_set(p, n, i, audio):
     # initialize support tensor of dimension p x 128 x 51
@@ -122,7 +123,7 @@ def main():
     p = 5
     n = 10
 
-    C = 5
+    C = 2
     K = 1
 
     model = Protonet()
@@ -141,10 +142,10 @@ def main():
     if torch.cuda.is_available():
         model.to(device='cuda')
 
-    prob_query_pos_iter = []
-    prob_query_neg_iter = []
-
+    auc_list = []
     for audio in tqdm(os.scandir("Test_features/"), desc = "Test features"):
+        y_pred = []
+        y_true = []
         # getting the number of target keywords in each audio
         target_keywords_number = len([name for name in os.listdir(audio) if os.path.isfile(os.path.join(audio, name))])
 
@@ -152,9 +153,20 @@ def main():
             for j in range (1):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
 
-                scores = test_loss(model, negative_set, positive_set, query_set, n, p)
-
+                y_pred_tmp, y_true_tmp = test_loss(model, negative_set, positive_set, query_set, n, p)
+                for i in range(len(y_pred_tmp)):
+                    if y_pred_tmp[i] == 1:
+                        y_pred_tmp[i] = 0
+                    else:
+                        y_pred_tmp[i] = 1
+                    if y_true_tmp[i] == 1:
+                        y_true_tmp[i] = 0
+                    else:
+                        y_true_tmp[i] = 1
+                #(y_pred_tmp)
+                #print(y_true_tmp)
                 '''  Probability array for positive class'''
+                """
                 prob_query_pos = prob_query_pos[:,0] 
                 #print("prob_query_pos", prob_query_pos)
                 prob_query_neg = prob_query_neg[:,0] 
@@ -164,7 +176,15 @@ def main():
                 
                 prob_query_pos_iter.extend(prob_query_pos)
                 prob_query_neg_iter.extend(prob_query_neg)
+                """
+                y_pred.extend(y_pred_tmp)
+                y_true.extend(y_true_tmp)
 
+        precision, recall, thresholds = sklearn.metrics.precision_recall_curve(y_true, y_pred)
+        auc_tmp = sklearn.metrics.auc(recall, precision)
+        print("auc_tmp: {}".format(auc_tmp))
+        auc_list.append(auc_tmp)
+    """
     prob_query_pos_iter.extend(prob_query_neg_iter)
     prob_pos_iter = prob_query_pos_iter
 
@@ -172,8 +192,11 @@ def main():
     target_inds_iter = np.append(target_inds_iter, np.zeros(int(len(prob_pos_iter)/2)))
 
     precision, recall, thresholds = sklearn.metrics.precision_recall_curve(target_inds_iter, prob_pos_iter)
-    auc = sklearn.metrics.auc(recall, precision)
+    """
+    auc = np.mean(auc_list)
     print("Area under precision recall curve: {}".format(auc))
+    auc_std_dev = np.std(auc_list)
+    print("Standard deviation area under precision recall curve: {}".format(auc_std_dev))
 
     #average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
     #print('Average precision: {}'.format(average_precision))
