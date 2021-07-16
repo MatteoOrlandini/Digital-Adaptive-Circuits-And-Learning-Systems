@@ -2,26 +2,27 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
 \contentsline {section}{\numberline {1}Introduzione}{1}{section.1}% 
-\contentsline {section}{\numberline {2}Convolutional Neural Network (CNN)}{2}{section.2}% 
-\contentsline {section}{\numberline {3}Area under precision-recall curve (AUPRC)}{2}{section.3}% 
-\contentsline {section}{\numberline {4}Few-shot learning}{3}{section.4}% 
-\contentsline {subsection}{\numberline {4.1}Introduzione}{3}{subsection.4.1}% 
-\contentsline {subsection}{\numberline {4.2}The meta learning framework}{4}{subsection.4.2}% 
-\contentsline {subsection}{\numberline {4.3}Approcci al meta-apprendimento}{4}{subsection.4.3}% 
-\contentsline {section}{\numberline {5}Prototypical Network}{5}{section.5}% 
-\contentsline {section}{\numberline {6}Relation Network}{7}{section.6}% 
-\contentsline {section}{\numberline {7}Preprocessing del dataset}{9}{section.7}% 
-\contentsline {subsection}{\numberline {7.1}Dataset Spoken Wikipedia Corpora}{9}{subsection.7.1}% 
-\contentsline {subsection}{\numberline {7.2}Le annotazioni del dataset}{9}{subsection.7.2}% 
-\contentsline {subsection}{\numberline {7.3}Lettori del dataset}{11}{subsection.7.3}% 
-\contentsline {subsection}{\numberline {7.4}Parole degli audio}{13}{subsection.7.4}% 
-\contentsline {subsection}{\numberline {7.5}Associazione delle parole con il rispettivo lettore}{16}{subsection.7.5}% 
-\contentsline {subsection}{\numberline {7.6}Calcolo dello spettrogramma delle parole}{17}{subsection.7.6}% 
-\contentsline {subsection}{\numberline {7.7}Salvataggio degli spettrogrammi}{18}{subsection.7.7}% 
-\contentsline {section}{\numberline {8}Protonet codice}{20}{section.8}% 
-\contentsline {subsection}{\numberline {8.1}Protonet training}{21}{subsection.8.1}% 
-\contentsline {subsection}{\numberline {8.2}Protonet validation}{26}{subsection.8.2}% 
-\contentsline {subsection}{\numberline {8.3}Protonet test}{27}{subsection.8.3}% 
-\contentsline {section}{\numberline {9}Relation codice}{28}{section.9}% 
-\contentsline {subsection}{\numberline {9.1}Relation training}{29}{subsection.9.1}% 
-\contentsline {subsection}{\numberline {9.2}Relation validation}{29}{subsection.9.2}% 
+\contentsline {section}{\numberline {2}Convolutional Neural Network (CNN)}{3}{section.2}% 
+\contentsline {section}{\numberline {3}Area under precision-recall curve (AUPRC)}{3}{section.3}% 
+\contentsline {section}{\numberline {4}Few-shot learning}{4}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}Introduzione}{4}{subsection.4.1}% 
+\contentsline {subsection}{\numberline {4.2}The meta learning framework}{5}{subsection.4.2}% 
+\contentsline {subsection}{\numberline {4.3}Approcci al meta-apprendimento}{5}{subsection.4.3}% 
+\contentsline {section}{\numberline {5}Prototypical Network}{6}{section.5}% 
+\contentsline {section}{\numberline {6}Relation Network}{8}{section.6}% 
+\contentsline {section}{\numberline {7}Preprocessing del dataset}{10}{section.7}% 
+\contentsline {subsection}{\numberline {7.1}Dataset Spoken Wikipedia Corpora}{10}{subsection.7.1}% 
+\contentsline {subsection}{\numberline {7.2}Le annotazioni del dataset}{10}{subsection.7.2}% 
+\contentsline {subsection}{\numberline {7.3}Lettori del dataset}{12}{subsection.7.3}% 
+\contentsline {subsection}{\numberline {7.4}Parole degli audio}{14}{subsection.7.4}% 
+\contentsline {subsection}{\numberline {7.5}Associazione delle parole con il rispettivo lettore}{17}{subsection.7.5}% 
+\contentsline {subsection}{\numberline {7.6}Calcolo dello spettrogramma delle parole}{18}{subsection.7.6}% 
+\contentsline {subsection}{\numberline {7.7}Salvataggio degli spettrogrammi}{19}{subsection.7.7}% 
+\contentsline {section}{\numberline {8}Codice Prototypical network}{21}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Protypical training}{22}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}Prototypical validation}{28}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Prototypical test}{28}{subsection.8.3}% 
+\contentsline {section}{\numberline {9}Codice Relation network}{31}{section.9}% 
+\contentsline {subsection}{\numberline {9.1}Relation training}{34}{subsection.9.1}% 
+\contentsline {subsection}{\numberline {9.2}Relation validation}{38}{subsection.9.2}% 
+\contentsline {subsection}{\numberline {9.3}Relation test}{39}{subsection.9.3}% 

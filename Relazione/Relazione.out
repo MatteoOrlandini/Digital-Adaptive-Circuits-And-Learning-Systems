@@ -15,10 +15,11 @@
 \BOOKMARK [2][-]{subsection.7.5}{Associazione delle parole con il rispettivo lettore}{section.7}% 15
 \BOOKMARK [2][-]{subsection.7.6}{Calcolo dello spettrogramma delle parole}{section.7}% 16
 \BOOKMARK [2][-]{subsection.7.7}{Salvataggio degli spettrogrammi}{section.7}% 17
-\BOOKMARK [1][-]{section.8}{Protonet codice}{}% 18
-\BOOKMARK [2][-]{subsection.8.1}{Protonet training}{section.8}% 19
-\BOOKMARK [2][-]{subsection.8.2}{Protonet validation}{section.8}% 20
-\BOOKMARK [2][-]{subsection.8.3}{Protonet test}{section.8}% 21
-\BOOKMARK [1][-]{section.9}{Relation codice}{}% 22
+\BOOKMARK [1][-]{section.8}{Codice Prototypical network}{}% 18
+\BOOKMARK [2][-]{subsection.8.1}{Protypical training}{section.8}% 19
+\BOOKMARK [2][-]{subsection.8.2}{Prototypical validation}{section.8}% 20
+\BOOKMARK [2][-]{subsection.8.3}{Prototypical test}{section.8}% 21
+\BOOKMARK [1][-]{section.9}{Codice Relation network}{}% 22
 \BOOKMARK [2][-]{subsection.9.1}{Relation training}{section.9}% 23
 \BOOKMARK [2][-]{subsection.9.2}{Relation validation}{section.9}% 24
+\BOOKMARK [2][-]{subsection.9.3}{Relation test}{section.9}% 25
