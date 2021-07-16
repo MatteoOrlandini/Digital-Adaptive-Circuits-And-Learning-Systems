@@ -8,21 +8,11 @@ from protonet_loss import *
 from tqdm import tqdm
 import sklearn.metrics
 
-def test_loss(feature_encoder,relation_network, negative_set, positive_set, query_set, n, p):
+def test_predictions(feature_encoder,relation_network, positive_set, negative_set, query_set, n, p):
     n_class = 2
-    FEATURE_DIM = 64
-    RELATION_DIM = 8
-    n_support = n + p
     n_query = query_set.size(0)
-    #print("n_query", n_query)
 
-    #print(target_inds)
-    xs = torch.cat((positive_set, negative_set), 0)   
-    #print("xs.shape", xs.shape)     
-    #print("xs", xs)  
-    x = torch.cat((xs, query_set), 0)
-    #print("x.shape", x.shape)  
-    #print("x", x)  
+    FEATURE_DIM = 64
 
     pos_embeddings = feature_encoder(Variable(positive_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
 
@@ -48,25 +38,16 @@ def test_loss(feature_encoder,relation_network, negative_set, positive_set, quer
     # calculate relations
     # each batch sample link to every samples to calculate relations
     pos_neg_embeddings_ext = pos_neg_embeddings.unsqueeze(0).repeat(int(n_class * n_query/2), 1, 1, 1, 1) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X 5 X FEATURE_DIM X 5 X 5
-    #print(pos_neg_embeddings_ext.shape)
+    
     batch_features_ext = batch_features.unsqueeze(0).repeat(n_class, 1, 1, 1, 1)  # 5 X (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
     batch_features_ext = torch.transpose(batch_features_ext, 0, 1)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X 5 X FEATURE_DIM X 5 X 5
-    #print(batch_features_ext.shape)
-
 
     relation_pairs = torch.cat((pos_neg_embeddings_ext,batch_features_ext), 2).view(-1, FEATURE_DIM*2, 5, 5)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X (FEATURE_DIM * 2) X 5 X 5
     relations = relation_network(relation_pairs).view(-1,n_class) #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X CLASS_NUM
-    #print(relations)
     
-    target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, int(n_query/2), 1).long()
-    #print("query_embeddings",query_embeddings)
-    _, y_hat = relations.max(1)
-    #print("dists",dists)
-
-    #print("returns")
-    #print(y_hat.view(1,-1).squeeze())
-    #print(target_inds.reshape(1, -1).squeeze())
-    return y_hat.view(1,-1).squeeze(), target_inds.reshape(1, -1).squeeze()
+    target_inds = torch.arange(n_class-1, -1, step = -1).view(n_class, 1).expand(n_class, int(n_query/2)).long()
+    
+    return relations[:,0].view(-1).detach(), target_inds.reshape(1, -1).squeeze()
 
 def get_negative_positive_query_set(p, n, i, audio):
     # initialize support tensor of dimension p x 128 x 51
@@ -79,11 +60,9 @@ def get_negative_positive_query_set(p, n, i, audio):
     for word in os.scandir(audio.path):
         words.append(word.path)
         
-    #pos_word = random.sample(words, 1)
     pos_word = words[i]
 
     spectrograms = torch.load(pos_word)
-    #print('spectrograms shape', spectrograms.shape)
     index = np.arange(spectrograms.shape[0])
     pos_index = random.sample(list(index), p)
     for i in pos_index:
@@ -114,11 +93,7 @@ def get_negative_positive_query_set(p, n, i, audio):
         query_index = random.sample(list(index), 1)
         query = spectrograms[query_index, :, :]
         query_set = torch.cat((query_set, query.view(1, 128, 51)), axis = 0)
-    """
-    print('negative_set', negative_set.shape)
-    print('positive_set', positive_set.shape)
-    print('query_set', query_set.shape)
-    """
+        
     return negative_set, positive_set, query_set
 
 def main():
@@ -133,7 +108,6 @@ def main():
 
     feature_encoder = CNNEncoder()
     relation_network = RelationNetwork(FEATURE_DIM, RELATION_DIM)
-    #optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
     if torch.cuda.is_available():
         checkpoint = torch.load("Models/Relation/relation_model_C{}_K{}.pt".format(C, K), map_location=torch.device('cuda'))
@@ -165,30 +139,8 @@ def main():
                 positive_set = positive_set.view(1 * p, 1, *positive_set.size()[1:]) 
                 query_set = query_set.view(int(C * query_set.size()[0]/2), 1, *query_set.size()[1:])   # (C X Q) X 1 X 51 X 51
                 
-                y_pred_tmp, y_true_tmp = test_loss(feature_encoder,relation_network, negative_set, positive_set, query_set, n, p)
-                for i in range(len(y_pred_tmp)):
-                    if y_pred_tmp[i] == 1:
-                        y_pred_tmp[i] = 0
-                    else:
-                        y_pred_tmp[i] = 1
-                    if y_true_tmp[i] == 1:
-                        y_true_tmp[i] = 0
-                    else:
-                        y_true_tmp[i] = 1
-                #(y_pred_tmp)
-                #print(y_true_tmp)
-                '''  Probability array for positive class'''
-                """
-                prob_query_pos = prob_query_pos[:,0] 
-                #print("prob_query_pos", prob_query_pos)
-                prob_query_neg = prob_query_neg[:,0] 
-                #print("prob_query_neg", prob_query_neg)
-                prob_query_pos = prob_query_pos.detach().cpu().tolist()
-                prob_query_neg = prob_query_neg.detach().cpu().tolist()
-                
-                prob_query_pos_iter.extend(prob_query_pos)
-                prob_query_neg_iter.extend(prob_query_neg)
-                """
+                y_pred_tmp, y_true_tmp = test_predictions(feature_encoder,relation_network, positive_set, negative_set, query_set, n, p)
+
                 y_pred.extend(y_pred_tmp)
                 y_true.extend(y_true_tmp)
 
