@@ -36,8 +36,8 @@ args = parser.parse_args()
 # Hyper Parameters
 FEATURE_DIM = 64
 RELATION_DIM = 8
-CLASS_NUM = 5
-SAMPLE_NUM_PER_CLASS = 5
+CLASS_NUM = 2
+SAMPLE_NUM_PER_CLASS = 10
 BATCH_NUM_PER_CLASS = 16
 EPISODE = 60000
 TEST_EPISODE = 1000
@@ -201,7 +201,7 @@ def main():
 
                 validation_loss.append(loss.item())
                 '''
-            test_accuracy = total_rewards/1.0/CLASS_NUM/SAMPLE_NUM_PER_CLASS/TEST_EPISODE
+            test_accuracy = total_rewards/1.0/CLASS_NUM/BATCH_NUM_PER_CLASS/TEST_EPISODE
 
             print("test accuracy:",test_accuracy)
 

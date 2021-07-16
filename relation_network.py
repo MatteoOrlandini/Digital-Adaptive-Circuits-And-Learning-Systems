@@ -67,11 +67,16 @@ class RelationNetwork(nn.Module):
 
     def forward(self,x):
         out = self.layer1(x)    #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X FEATURE_DIM X 2 X 2
+        print(out.shape)
         out = self.layer2(out)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X FEATURE_DIM X 1 X 1
+        print(out.shape)
         out = out.view(out.size(0),-1)   #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X FEATURE_DIM
+        print(out.shape)
         out = F.relu(self.fc1(out))      #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X RELATION_DIM
+        print(out.shape)
         #out = F.sigmoid(self.fc2(out)) # deprecated
         out = torch.sigmoid(self.fc2(out))  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X 1
+        print(out.shape)
         return out
 
 def weights_init(m):

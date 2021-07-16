@@ -793,18 +793,246 @@ write_json_file("readers_words.json", readers_words, indent = 0)
 
 
 \section{Protonet codice}
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=words_per_reader,captionpos=b]
+import torch.nn as nn
+
+def count_parameters(model):
+return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def conv_block(in_channels,out_channels):
+
+return nn.Sequential(
+nn.Conv2d(in_channels,out_channels,3,padding=1),
+nn.BatchNorm2d(out_channels),
+nn.ReLU(),
+nn.MaxPool2d(2)
+)
+
+class Protonet(nn.Module):
+def __init__(self):
+super(Protonet,self).__init__()
+self.encoder = nn.Sequential(
+conv_block(1,64),
+conv_block(64,64),
+conv_block(64,64),
+conv_block(64,64)
+)
+def forward(self,x):
+(num_samples,mel_bins, seq_len) = x.shape
+#print("x.shape:",x.shape)
+# tensor 3D to tensor 4D with 3rd dimension = 1
+x = x.view(-1,1,mel_bins,seq_len) 
+#print("x.view:",x.shape)
+x = self.encoder(x)
+#print("x.encoder:",x.shape)
+return x.view(x.size(0),-1)
+\end{lstlisting}
+La CNN al che funge da rete di embedding per la Prototypical Network è costituita da 4 strati convoluzionali. Il primo di essi ha come ingresso un singolo canale e come uscita 64 mentre i tre successivi traspongono 64 canali in altri 64.
+Ogni blocco convoluzionale ha 4 fasi:
+\begin{itemize}
+	\item \texttt{nn.Conv2d(in\_channels,out\_channels,3,padding=1)}: Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
+	\item \texttt{nn.BatchNorm2d(out\_channels)}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
+	\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
+	\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un’immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
+\end{itemize}
+Al termine dei blocchi viene effettuato il reshape dell'uscita schiacciandola in una sola dimensione, in modo da avere embedding vettoriali.
+
 \subsection{Protonet training}
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=words_per_reader,captionpos=b]
+def get_training_validation_readers(features_folder, C):
+"""
+get_training_validation_readers returns training and validation readers from the . 
+From the training and validation readers, it takes only the readers with at least C words
+and split the list in training readers and validation readers.
+
+Parameters:
+features_folder (list of string): list of the path of the training and validation
+C (int): number of classes
+
+Returns:
+training_readers (list of string): list of the training readers paths
+validation_readers (list of string): list of the validation readers paths
+"""
+readers_path = []
+train_val_readers = []
+# scan each reader folder in the feature_folder
+for entry in os.scandir(features_folder):
+# create a list of reader names
+readers_path.append(entry.path)
+for reader_path in readers_path:
+words = []
+for word in os.scandir(reader_path):
+# create a list containing the path of the words
+words.append(word.path)
+if (len(words) >= C):
+train_val_readers.append(reader_path)
+train_val_readers = random.sample(train_val_readers, len(train_val_readers))
+training_readers = train_val_readers[:int(138/153*len(train_val_readers))]
+validation_readers = train_val_readers[int(138/153*len(train_val_readers)):]
+return training_readers, validation_readers
+\end{lstlisting}
 La funzione \texttt{get\_training\_validation\_readers}, a partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo il rapporto usato in [ARTICOLO RIFERIMENTO]: 138/153 e 15/153.
 Per fare ciò scorre l'elenco delle directory dei lettori e salva su un array le parole a loro associate. Al termine di questa operazione, se il numero di parole è almeno C il lettore è ritenuto valido e il suo nome viene aggiunto a una lista. Infine la lista viene scissa come spiegato sopra.
 
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=words_per_reader,captionpos=b]
+from tqdm import trange, tqdm
+import torch
+import numpy as np
+import scipy
+from scipy import io
 
+
+if torch.cuda.is_available():
+device = torch.device("cuda")
+print("Device: {}".format(device))
+print("Device name: {}".format(torch.cuda.get_device_properties(device).name))
+else:
+device = torch.device("cpu")
+
+C = 10 # classes
+K = 1 # instances per class
+Q = 16 # query set size
+
+model = Protonet()
+if torch.cuda.is_available():
+model.to(device='cuda')
+
+print("Model parameters: {}".format(count_parameters(model)))
+
+optim = torch.optim.Adam(model.parameters(), lr = 0.001)
+
+training_readers, validation_readers = get_training_validation_readers("/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Training_validation_features/", C)
+
+print ("Training...")
+
+last_accuracy = 0.0
+train_loss = []
+train_acc = []
+
+
+# To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
+# sample C word classes from the reader, and sample K instances per class as the support set.
+
+for episode in trange(60000, desc = "episode", position = 0, leave = True):
+query, support = batch_sample(training_readers, C, K, Q)
+if torch.cuda.is_available():
+support = support.to(device='cuda')
+query = query.to(device='cuda')
+
+model.train()
+optim.zero_grad()
+loss_out, acc_val = loss(support, query, model)
+
+loss_out.backward()
+optim.step()
+
+train_loss.append(loss_out.item())
+train_acc.append(acc_val.item())
+
+if (episode+1)%5000 == 0:
+valid_loss = []
+valid_acc = []
+print ("\nValidation...")
+
+model.eval()
+
+for validation_episode in range(1000):
+query, support = batch_sample(validation_readers, C, K, Q)
+if torch.cuda.is_available():
+support = support.to(device='cuda')
+query = query.to(device='cuda')
+
+val_loss, acc_val = loss(support, query, model)
+optim.step()
+
+valid_loss.append(val_loss.item())
+valid_acc.append(acc_val.item())
+
+print("\nValidation accuracy: {}".format(np.mean(valid_acc)))
+
+if np.mean(valid_acc) > last_accuracy: 
+
+torch.save({
+	'epoch': episode+1,
+	'model_state_dict': model.state_dict(),
+	'optimizer_state_dict': optim.state_dict(),
+	'train_loss': train_loss,
+	'train_acc' : train_acc,              
+	'valid_loss': valid_loss,
+	'valid_acc' : valid_acc,
+	'avg_loss_tr' : np.mean(train_loss),
+	'avg_acc_tr' : np.mean(train_acc),
+	'avg_loss_val' : np.mean(valid_loss),
+	'avg_acc_val' : np.mean(valid_acc),
+}, "/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Modelli-Prototypical-Network/prototypical_model_C{}_K{}.pt".format(C, K))
+
+last_accuracy = np.mean(valid_acc)
+
+scipy.io.savemat('/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Modelli-Prototypical-Network/prototypical_results_C{}_K{}.mat'.format(C, K), {'train_loss': train_loss , 'train_acc' : train_acc, 'valid_loss':valid_loss,'valid_acc':valid_acc})
+\end{lstlisting}
 Il primo for rappresenta l'inizio degli episodi.
 Il numero totale di iterazioni è 60000 come in [ARTICOLO]; per ogni episodio viene richiamata la funzione \texttt{batch\_sample}.
 Essa campiona a caso uno dei lettori di training e di questo seleziona casualmente C parole.
 Per ognuna di queste parole si ricava il numero di istanze presenti del dataset.
 Viene inizializzato un vettore con gli indici di queste e ne vengono campionati K+Q in \texttt{index}. Poi, iterando, gli spettrogrammi il cui indice è presente in \texttt{index} vengono salvati e divisi in K istanze del support set e Q istanze del query set.
 
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=words_per_reader,captionpos=b]
+import os
+import numpy
+import random
 
+def batch_sample(features, C, K, Q = 16):
+"""
+batch_sample returns the support and query set. 
+It reads each folder in feature_folder and  load the tensor with the spectrograms of the word.
+Then random sample the instances (spectrograms) of the word to get only K+Q spectrograms. 
+The first K spectrograms compose the support set and the last Q ones compose the query set.
+
+Parameters:
+features (list): training/validation features paths
+C (int): class size
+K (int): support set size
+Q (int): query set size (default: 16)
+
+Returns:
+support (torch.FloatTensor): support set
+query (torch.FloatTensor): query set
+"""
+# initialize support tensor of dimension 0 x K x 128 x 51
+support = torch.empty([0, K, 128, 51])
+# initialize query tensor of dimension 0 x Q x 128 x 51
+query = torch.empty([0, Q, 128, 51])
+# random sample a reader
+reader = random.sample(features, 1)[0]
+words = []
+# scan the torch tensor saved in each reader folder
+for word in os.scandir(reader):
+# create a list containing the path of the words
+words.append(word.path)
+# random sample C paths of the words of a reader
+words = random.sample(words, C)
+# randomize the instances of each word
+for word in words:
+# load the tensor containing the spectrograms of the instances of one word
+spectrogram_buf = torch.load(word)
+# get the spectrogram tensor shape
+x_dim, y_dim, z_dim = spectrogram_buf.shape
+# get the number of instances
+instances_number = (spectrogram_buf.shape)[0]
+# random sample K + Q indices
+index = random.sample(list(torch.arange(instances_number)), K + Q)
+# initialize the spectrogram tensor
+spectrogram = torch.empty([0, 128, 51])
+for i in index:
+# concatenate spectrogram_buf with spectrogram to get a new tensor 
+# of random sampled instances of the word
+spectrogram = torch.cat((spectrogram, (spectrogram_buf[i, :, :]).view(1, y_dim, z_dim)), axis = 0)
+# concatenate the first K spectrograms with the support set
+support =  torch.cat((support, (spectrogram[:K]).view(1, K, y_dim, z_dim)), axis = 0)
+# concatenate the last Q spectrograms with the query set
+query = torch.cat((query, (spectrogram[K:K+Q]).view(1, Q, y_dim, z_dim)), axis = 0)
+return query, support
+\end{lstlisting}
 Una volta ottenute, le feature del support set e query set vengono date in ingresso alla funzione \texttt{loss}.
 Queste ultime vengono messe in fila e concatenate per poter essere passate al modello che calcolerà gli embedding per ogni istanza.
 Gli elementi del support set che fanno parte della stessa classe andranno a costituire i prototipi tramite una media dei loro valori: \texttt{prototypes = embeddings[:n\_class*n\_support].view(n\_class, n\_support, embeddings\_dim).mean(1)}.
@@ -817,7 +1045,83 @@ Per ogni query viene poi usata la funzione di attivazione \texttt{log\_softmax} 
 La funzione loss da minimizzare è costituita dalla media dei \texttt{log\_softmax} della classe corrispondente alla query presi con segno negativo. Infatti, nel caso ideale in cui la distanza delle query della stessa classe dal prototipo è 0, la media dei softmax delle distanze dal prototipo assegnato sarà nulla.
 La accuracy invece è determinata dal numero dei casi in cui il prototipo a distanza minima da una query (o il massimo del softmax) corrisponde con il prototipo della classe associata alla query.
 
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=loss function,captionpos=b]
+import torch
+import torch.nn.functional as F
+from torch.autograd import Variable
 
+def euclidean_dist(x, y):
+""" 
+euclidean_dist computes the euclidean distance from two arrays x and y
+
+Parameters:
+x (torch.FloatTensor): query array 
+y (torch.FloatTensor): prototype array
+
+Returns:
+torch.pow(x - y, 2).sum(2) (double): the euclidean distance from x and y
+"""
+# x: N x D
+# y: M x D
+n = x.size(0)
+m = y.size(0)
+d = x.size(1)
+assert d == y.size(1)
+
+x = x.unsqueeze(1).expand(n, m, d)
+y = y.unsqueeze(0).expand(n, m, d)
+
+return torch.pow(x - y, 2).sum(2)
+
+def loss(xs, xq, model):
+"""
+loss returns the loss and accuracy value. It calculates p_y, the loss 
+softmax over distances to the prototypes in the embedding space. We need to 
+minimize the negative log-probability of p_y to proceed the learning process.
+
+Parameters:
+xs (torch.FloatTensor): support set
+xq (torch.FloatTensor): query set
+model (torch.nn.Module): neural network model
+
+Returns:
+loss_val (double): loss value
+acc_val (double): accuracy value
+"""
+# xs = Variable()
+n_class = xs.size(0)
+assert xq.size(0) == n_class
+n_support = xs.size(1)
+n_query = xq.size(1)
+
+target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
+#target_inds = Variable(target_inds, requires_grad=False)
+
+if torch.cuda.is_available():
+target_inds = target_inds.to(device='cuda')
+
+x = torch.cat([xs.view(n_class * n_support, *xs.size()[2:]),
+xq.view(n_class * n_query, *xq.size()[2:])], 0)
+
+embeddings = model(x)
+
+embeddings_dim = embeddings.size(-1)
+
+prototypes = embeddings[:n_class*n_support].view(n_class, n_support, embeddings_dim).mean(1)   
+
+queries = embeddings[n_class*n_support:]
+
+dists = euclidean_dist(queries, prototypes)
+
+log_p_y = F.log_softmax(-dists, dim=1).view(n_class, n_query, -1)
+
+loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
+
+_, y_hat = log_p_y.max(2)
+acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
+
+return loss_val, acc_val
+\end{lstlisting}
 Con \texttt{loss\_out.backward()} viene utilizzata la loss per la retropropagazione che aggiorna i parametri della rete.
 \subsection{Protonet validation}
 Ogni 5000 episodi del training vengono effettuati 1000 episodi di validation.
@@ -853,6 +1157,44 @@ Infine, \texttt{sklearn.metrics.auc} calcola la AUPRC.
 Questo calcolo avviene al termine delle operazioni per ogni audio.
 Una volta terminati gli audio viene calcolata media e varianza degli AUPRC.
 
+\section{Relation codice}
+Le reti neurali necessarie per la relation network sono effettivamente due.
+
+La prima, chiamata \texttt{CNNEncoder} ha lo stesso scopo della rete nella prototypical, ovvero a partire dalle feature in ingresso produce degli embedding monodimensionali che possono essere confrontati.
+Anche in questo caso i layer sono 4 e sono costituiti da:
+\begin{itemize}
+	\item \texttt{nn.Conv2d()}: Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
+	\item \texttt{nn.BatchNorm2d()}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
+	\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
+	\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un’immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
+\end{itemize}
+Seguendo le indicazioni in [ARTICOLO RELATION] i primi due blocchi hanno padding pari a 0 mentre negli ultimi due padding=1.
+Inoltre, per soddisfare le dimensioni necessarie in ingresso alla seconda rete neurale, il Max Pooling è presente solo nei primi 3 layer. Questo concetto sarà approfondito nel capitolo di training.
+
+La seconda rete è detta \texttt{RelationNetwork} e ha lo scopo di confrontare le concatenazioni di embedding per predirre o meno la loro somiglianza.
+Essa è costituita da 2 layer di \texttt{nn.Conv2d()}, \texttt{nn.BatchNorm2d()}, \texttt{nn.ReLU()} e \texttt{nn.MaxPool2d(2)} al termine dei quali viene eseguito un flattening che riduce l'uscita a un vettore.
+In seguito vengono applicati una ulteriore relu e una sigmoide.
+\subsection{Relation training}
+Come nella rete precedente, il primo passo consiste nel campionare i lettori di training e validation con la funzione \texttt{get\_training\_validation\_readers}.
+Le due reti \texttt{CNNEncoder} e \texttt{RelationNetwork} con i rispettivi pesi vengono inizializzate.
+Per ogni episodio viene poi campionato un support set e query set per un lettore designato.
+Le istanze complessive vengono poi passate alla prima rete per costruire gli embedding.
+Gli embedding del support set hanno ora dimensione C*Kx64x15x5 mentre quelli del query set sono C*Qx64x15x5.
+
+Prima di essere passati alla seconda rete questi tensori necessitano di avere le ultime due dimensioni pari a 5.
+In questo modo, attraversando due volte lo strato di max pooling passeranno da 5x5 a 2x2 a 1x1.
+In seguito al flattening le ultime due dimensioni scompaiono e l'ingresso alla relu ha la dimensione corretta: C*Q*Cx64.
+Le concatenazioni hanno dimensione C*Q*Cx64x5x5, infatti ogni query (CxQ) va concetenata con il vettore che rappresenta ognuna delle classi (C).
+Quest'ultimo vettore è ottenuto sommando elemento per elemento gli embedding delle istanze di ogni classe usando \texttt{torch.sum(sample\_features,1).squeeze(1)}.
+La rete decisionale restituisce quindi un vettore \texttt{relations} C*Q*Cx1 che viene poi suddiviso in una matrice C*QxC in cui in ogni riga sono presenti le probabilità che una data query appartenga alle varie classi.
+La matrice \texttt{one\_hot\_labels} ha la stessa forma di \texttt{relations} ma è costituito da zeri tranne nelle colonne in cui la classe corrisponde realmente alla query, in cui il valore è pari a 1.
+Questa rappresenta il risultato ideale che vogliamo in uscita dalla rete.
+Usando quindi la funzione \texttt{mse} con parametri \texttt{relations} e \texttt{one\_hot\_labels} otteniamo la loss che viene utilizzata per aggiornare i parametri delle due reti con \texttt{loss.backward()}.
+\subsection{Relation validation}
+Ogni 5000 episodi di training ne vengono effettuati 1000 di validation.
+Come nella prototypical network vengono utilizzati lettori di validation sconosciuti alla rete e, nel caso in cui il batch produca una accuracy migliore di quello precedente, il modello viene salvato.
+Per fare ciò viene utilizzato un vettore \texttt{reward} che conta il numero di volte in cui il valore massimo tra le predizioni della classe da associare a una query corrisponde con quello reale.
+L'accuracy infatti equivale al numero di reward diviso il totale delle query, mediato nei 1000 episodi del batch di validation.
 \clearpage
 \nocite{*}
 %Il comando \printbibliography produce la sezione bibliografica con relativi
