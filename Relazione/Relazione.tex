@@ -264,19 +264,19 @@
 \label{section:Introduzione}
 Lo scopo della tesina è quello di riprodurre i risultati ottenuti nel paper "\textit{Few-Shot Event Detection}"\cite{Salamon:Few-Shot}. 
 L'argomento centrale dello studio è l'individuazione di eventi sonori percettivamente simili all'interno di una registrazione.
-Varie applicazioni di questo algoritmo possono essere la rilevazioni di particolari suoni nella musica o la rimozioni di parole di riempimento nei podcast.
+Varie applicazioni di questo algoritmo possono essere la rilevazione di particolari suoni nella musica o la rimozione di parole di riempimento nei podcast.
 Solitamente questo processo avviene manualmente risultando in un compito difficile e tedioso.
 
-I classici modelli di deep-learning per la determinazione di suoni richiede una grande mole di dati che funge da esempio. In questo modo la rete è capace di riconoscere parole sulle quali si è allenata.
+I classici modelli di deep-learning per la determinazione di suoni richiedono una grande mole di dati che funge da esempio. In questo modo la rete è capace di riconoscere parole sulle quali si è allenata.
 
 Nell'approccio few-shot invece, è necessario un piccolo dataset di riferimento. La rete non sarà allenata a riconoscere i suoni che ha ascoltato nel training ma assumerà la capacità di riconoscere la somiglianza fra due suoni che sta analizzando.
 
 Le reti few-shot di solito sono state utilizzate per un set chiuso dove in un \textit{task} di classificazione veniva presentata una query e confrontata con K istanze di C classi, con C fisso.
 Questo metodo è chiamato C-way K-shot.
 
-Il paper di riferimento invece, cerca di applicare una rete few-shot in un contesto più ampio in cui è necessario riconoscere una parola non vista in precendenza in una sequenza di suoni non classificati e non visti in precedenza dalla rete.
+Il paper di riferimento invece, cerca di applicare una rete few-shot in un contesto più ampio in cui è necessario riconoscere una parola non vista in precendenza in una sequenza di suoni non classificati in precedenza dalla rete.
 
-Per fare questo, l'idea è quella di costruire un set positivo e un set negativo con i quali confrontare la query. Mentre il set positivo è costituito da istanze della stessa parola, il set negativo comprende vari campioni di parole diverse e rappresenta un generico esempio di tutto ciò che non comprende la parola da cercare.
+Per fare questo, l'idea è quella di costruire un set positivo e un set negativo con i quali confrontare la query, come mostrato in \ref{fig:few_shot_sound_event_detection_method}. Mentre il set positivo è costituito da istanze della stessa parola, il set negativo comprende vari campioni di parole diverse e rappresenta un generico esempio di tutto ciò che non comprende la parola da cercare.
 
 Prima di fare questo però, la rete deve "imparare ad imparare": verrà quindi sottoposta a una serie di task classici di few shot nei quali la rete deve riconoscere a quale classe appartiene una query avendo come riferimento K istanze di C classi, che costituiscono il support set.
 
@@ -332,6 +332,18 @@ Precision=\frac{TP}{TP+FP}
 \begin{equation}
 Recall=\frac{TP}{TP+FN}
 \end{equation}
+
+Consideriamo un vettore contenente le probabilità che una serie di query appartengono a una classe.
+
+Considerando una soglia di decisione e confrontando con un altro vettore contenente i valori desiderati (1 se la query corrisponde alla classe e 0 altrimenti) è possibile ottenere una coppia di valori di precision e recall.
+
+A questo punto ordiniamo il vettore con valori decrescenti.
+Consideriamo come soglia il valore di probabilità presente al primo elemento e calcoliamo precision e recall.
+Poi, spostiamo la soglia al valore del secondo elemento e calcoliamo altri valori.
+Continuando in questo modo si può ottenere una curva considerando alle ascisse i valori di recall e come ordinate i valori di precision.
+
+Calcolando l'area sottesa dalla curva si riceva il valore detto Area under precision-recall curve (AUPRC).
+Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
 \section{Few-shot learning}
 \label{section:Few-shot}
 (https://www.borealisai.com/en/blog/tutorial-2-few-shot-learning-and-meta-learning-i/)
