@@ -17,12 +17,12 @@
 \contentsline {subsection}{\numberline {7.4}Parole degli audio}{14}{subsection.7.4}% 
 \contentsline {subsection}{\numberline {7.5}Associazione delle parole con il rispettivo lettore}{17}{subsection.7.5}% 
 \contentsline {subsection}{\numberline {7.6}Calcolo dello spettrogramma delle parole}{18}{subsection.7.6}% 
-\contentsline {subsection}{\numberline {7.7}Salvataggio degli spettrogrammi}{19}{subsection.7.7}% 
-\contentsline {section}{\numberline {8}Codice Prototypical network}{21}{section.8}% 
-\contentsline {subsection}{\numberline {8.1}Protypical training}{22}{subsection.8.1}% 
-\contentsline {subsection}{\numberline {8.2}Prototypical validation}{28}{subsection.8.2}% 
-\contentsline {subsection}{\numberline {8.3}Prototypical test}{28}{subsection.8.3}% 
-\contentsline {section}{\numberline {9}Codice Relation network}{31}{section.9}% 
-\contentsline {subsection}{\numberline {9.1}Relation training}{34}{subsection.9.1}% 
-\contentsline {subsection}{\numberline {9.2}Relation validation}{38}{subsection.9.2}% 
-\contentsline {subsection}{\numberline {9.3}Relation test}{39}{subsection.9.3}% 
+\contentsline {subsection}{\numberline {7.7}Creazione delle feature}{19}{subsection.7.7}% 
+\contentsline {section}{\numberline {8}Codice Prototypical network}{28}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Protypical training}{29}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}Prototypical validation}{35}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Prototypical test}{35}{subsection.8.3}% 
+\contentsline {section}{\numberline {9}Codice Relation network}{38}{section.9}% 
+\contentsline {subsection}{\numberline {9.1}Relation training}{41}{subsection.9.1}% 
+\contentsline {subsection}{\numberline {9.2}Relation validation}{45}{subsection.9.2}% 
+\contentsline {subsection}{\numberline {9.3}Relation test}{46}{subsection.9.3}% 
