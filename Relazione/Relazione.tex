@@ -185,7 +185,7 @@
 	tabsize=2,
 	keywordstyle=\color{ipython_green}\ttfamily,
 	morekeywords={typeof, null, catch, switch, in, int, str, float, self, import, def, return, True, False, None},
-	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample},          % Custom highlighting
+	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample, isdir, compute_melspectrogram, load, melspectrogram,power_to_db},          % Custom highlighting
 	emphstyle=\color{ipython_purple}\ttfamily,    % Custom highlighting style
 }
 
@@ -396,8 +396,10 @@ Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che 
 
 \clearpage
 
-\section{Dataset Spoken Wikipedia Corpora}
-\label{sec:spoken_wikipedia_corpora}
+\section{Preprocessing del dataset}
+\label{sec:preprocessing_dataset}
+\subsection{Dataset Spoken Wikipedia Corpora}
+\label{subsec:spoken_wikipedia_corpora}
 Il progetto Spoken Wikipedia unisce lettori volontari di articoli di Wikipedia. Sono disponibili centinaia di articoli in inglese, tedesco e olandese per gli utenti che non sono in grado o non vogliono leggere la versione scritta dell'articolo. Il dataset trasforma i file audio in un corpus, cioè una raccolta ordinata e completa di opere o di autori, allineato nel tempo, rendendolo accessibile per la ricerca.\cite{minining_spoken_wikipedia}
 
 Questo corpus ha diverse caratteristiche importanti:
@@ -412,10 +414,10 @@ Questo corpus ha diverse caratteristiche importanti:
 
 Ogni articolo è suddiviso in sezioni, frasi e token. Ogni token è normalizzato e la normalizzazione è allineata all'audio.
 
-\subsection{Annotazioni}
+\subsection{Le annotazioni del dataset}
+\label{subsec:annotazioni}
 Ogni annotazione è racchiusa in un tag chiamato ``\texttt{article}'', che contiene una sezione ``\texttt{meta}'' per i metadati, come si può vedere in~\ref{metadati_annotazioni} e una sezione ``\texttt{d}'', come in~\ref{annotazioni}, contenente l'articolo e le relative annotazioni.
 
-\label{subsec:annotazioni}
 \begin{lstlisting}[language=XML,firstnumber=1, caption=Metadati delle annotazioni delle parole in un audio, label=metadati_annotazioni,captionpos=b]
 <article>
 	<meta>
@@ -480,7 +482,7 @@ Il documento, contrassegnato dal tag ``\texttt{d}'', può contenere parti divers
 			</t>
 \end{lstlisting}
 
-\subsection{Lettori}
+\subsection{Lettori del dataset}
 \label{subsec:lettori}
 Il dataset Spoken Wikipedia Corpora contiene un totale di 1340 audio di diversi lettori, ma nel progetto vengono presi solo gli audio che contengono annotazioni a livello di parola. In questo modo vengono presi solo 208 lettori e partizionati come in~\cite{Salamon:Few-Shot} con un rapporto $138:15:30$ tra lettori di training, validation e test. I lettori e le parole sono state estratte dai file ``aligned.swc'' contenuti in ogni audio e, successivamente, salvati in diversi file json. Per la gestione dei json sono state create due funzioni utili per la lettura e scrittura come mostrato nel codice~\ref{json_manager}.
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=json\_manager.py, label=json_manager,captionpos=b]
@@ -498,7 +500,7 @@ def read_json_file(filename):
 	return list_of_dict
 \end{lstlisting}
 
-Il codice~\ref{xml_parser_readers} salva un file json chiamato ``readers\_paths.json'' formato dalle chiavi ``reader\_name'' e ``folder'' i cui valori sono rispettivamente il nome del lettore e le cartelle in cui sono salvati i file audio registrati dal relativo lettore, come si può vedere nel json~\ref{JSON_lettori}. Questo codice, usando la libreria \texttt{xml.etree.ElementTree} e la funzione \texttt{ET.parse}, rappresenta l'intero documento XML come un albero. La funzione \texttt{getroot} ne trova la radice e, successivamente, si scorre l'albero iterando finché non si trova il tag ``\texttt{prop}'' in cui è contenuta la chiave ``\texttt{reader.name}''. Inoltre, si effettua un controllo sul nome del lettore perché può capitare che viene salvato nel file ``aligned.swc'' con nomi diversi. Ad esempio, in alcuni file si può trovare nella chiave ``reader.name'' il valore ``:en:user:alexkillby|alexkillby'', mentre in altri solo ``alexkillby'' oppure si può trovare ``user:popularoutcast'', mentre in altri solo ``popularoutcast''. Una volta noto il nome del lettore si vede se è già presente nella lista di dizionari e se è un lettore nuovo lo si aggiunge con il relativo nome del file audio, mentre se il lettore era già presente si aggiunge solamente il nome del file audio.
+Il codice~\ref{xml_parser_readers} salva un file json chiamato ``readers\_paths.json'' formato dalle chiavi ``reader\_name'' e ``folder'' i cui valori sono rispettivamente il nome del lettore e le cartelle in cui sono salvati i file audio registrati dal relativo lettore, come si può vedere nel json~\ref{JSON_lettori}. Questo codice, usando la libreria \texttt{xml.etree.ElementTree} e la funzione \texttt{ET.parse}, rappresenta l'intero documento XML come un albero. La funzione \texttt{getroot} ne trova la radice e, successivamente, si scorre l'albero iterando finché non si trova il tag ``\texttt{prop}'', in cui è contenuta la chiave ``\texttt{reader.name}''. Inoltre, si effettua un controllo sul nome del lettore perché può capitare che questo venga salvato nel file ``aligned.swc'' in modi diversi. Ad esempio, in alcuni file si può trovare nella chiave ``reader.name'' il valore ``:en:user:alexkillby|alexkillby'', mentre in altri solo ``alexkillby'' oppure si può trovare ``user:popularoutcast'', mentre in altri solo ``popularoutcast''. Una volta noto il nome del lettore si vede se è già presente nella lista di dizionari e se è un lettore nuovo lo si aggiunge con il relativo nome del file audio, mentre se il lettore era già presente si aggiunge solamente il nome del file audio.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=xml\_parser\_readers.py, label=xml_parser_readers,captionpos=b]
 import xml.etree.ElementTree as ET
@@ -583,9 +585,15 @@ write_json_file("readers_paths.json", readers, indent = 4)
 },
 \end{lstlisting}
 
-\subsection{Parole}
+\subsection{Parole degli audio}
 \label{subsec:parole}
-Il codice~\ref{find_target_words}..............................
+Il codice~\ref{find_target_words} mostra come viene creato il json~\ref{word_count}, formato dalle chiavi ``word'', ``frequency'', ``start'' ed ``end'', le quali, a loro volta, contengono la parola, il numero di volte in cui è stata ripetuta e il timestamp di inizio e fine.
+
+Per ogni cartella del dataset SWC, se esistono i file ``audio.ogg'' e ``aligned.swc'', si procede con il parsing del file XML, iterando l'albero fino al tag  ``\texttt{n}'', cioè fino al tag che contiene la normalizzazione della parola come spiegato in~\ref{subsec:annotazioni}. Se è presente la chiave ``\texttt{start}'' (o, in modo equivalente, ``\texttt{end}''), la parola viene aggiunta alla lista \texttt{words}.
+
+Per trovare quante volte viene ripetuta la singola parola abbiamo usato la sottoclasse \texttt{Counter} della classe \texttt{dict} di Python, la quale restituisce una raccolta in cui gli elementi sono le chiavi del dizionario e il numero di ripetizioni è il loro valore. Si costruisce dunque una lista di dizionari chiamata \texttt{target\_words}, che contiene le \emph{target words}, cioè le parole che si ripetono almeno 10 volte nel testo.~\cite{Salamon:Few-Shot}
+
+Si rifà un parsing del file XML per aggiungere i timestamp di ``start'' e ``end'' ad ogni parola. Il file ``word\_count.json'' contiene tutte le parole che si ripetono almeno 10 volte e viene salvato all'interno di ogni cartella del dataset. Infine, si filtrano le target words, utili poi in fase di test della rete: se ci sono più di 10 parole che soddisfano la condizione di target word, si prendono tra queste solo 10 scelte in modo random. In questo modo, si cerca di evitare di scegliere parole molto comuni o molto rare. Le target words vengono salvate nel file ``target\_words.json'' contenuto all'interno di ogni cartella del dataset. 
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=find\_target\_words.py, label=find_target_words,captionpos=b]
 import xml.etree.ElementTree as ET
@@ -605,8 +613,7 @@ for folder in tqdm(os.scandir(source_path), desc = "Folder number"):
     # initialize the list of dict "target_words"
     target_words = []
     if (os.path.exists(folder.path + "/" + filename) \
-        and os.path.exists(folder.path + "/" + file_audio_name) \
-        and os.path.isdir(folder.path)):  
+        and os.path.exists(folder.path + "/" + file_audio_name)):  
         # parse the xml file aligned.swc
         tree = ET.parse(folder.path + "/" + filename)
         # getroot returns the root element for this tree
@@ -695,8 +702,13 @@ for folder in tqdm(os.scandir(source_path), desc = "Folder number"):
    		]                
     },
 \end{lstlisting}
-            
-Il file ``readers\_paths.json'' viene successivamente usato per salvare le parole di ogni lettore, il nome della relativa cartella in cui vengono pronunciate e i timestamp di inizio e fine della parola per ogni cartella come mostrato nel json~\ref{readers_words}. Il codice~\ref{words_per_reader} legge il nome di ogni lettore dal json precedentemente salvato, successivamente per ognuna delle cartelle del lettore si....................................
+
+
+\subsection{Associazione delle parole con il rispettivo lettore}
+\label{subsec:unione}
+I file ``readers\_paths.json'' e ``word\_count.json'' vengono successivamente usati per salvare le parole di ogni lettore, il nome della relativa cartella in cui vengono pronunciate e i timestamp di inizio e fine della parola per ogni cartella come mostrato nel json~\ref{readers_words}. Il codice~\ref{words_per_reader} legge il nome di ogni lettore dal json precedentemente salvato, successivamente per ognuna delle cartelle del lettore viene usato ``word\_count.json'' per ottenere tutte le parole dell'audio e i relativi timestamp.
+
+Viene salvato infine il file ``readers\_words.json'' che contiene per ogni lettore le parole pronunciate, per ognuna di queste l'audio in cui vengono enunciate e per ogni audio i timestamp di inizio e fine.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=words_per_reader,captionpos=b]
 from tqdm import tqdm
@@ -789,6 +801,51 @@ write_json_file("readers_words.json", readers_words, indent = 0)
 							10680,
 							...
 \end{lstlisting}
+
+\subsection{Calcolo dello spettrogramma delle parole}
+\label{subsec:spettrogramma}
+Per ogni istanza delle parole, prendiamo una finestra di mezzo secondo centrata sulla parola, calcoliamo lo spettrogramma mel da 128 bin e lo portiamo scala logaritmica. La funzione \texttt{compute\_melspectrogram}, mostrata nel codice~\ref{mel_spectrogram}, usando la libreria \emph{librosa}, calcola gli spettrogrammi da dare in input ai modelli della rete neurale. I file audio, originalmente campionati ad una frequenza di \SI{44.1}{\kilo \hertz}, sono sottocampionati a \SI{16}{\kilo \hertz}. Per calcolare lo spettrogramma, usiamo una lunghezza della finestra di \SI{25}{\milli \second}, un hop size di \SI{10}{\milli \second} e una FFT di \SI{64}{\milli \second}. Lo spettrogramma è contenuto in una matrice di dimensioni $128 \times 51$, poiché il numero di bande mel è 128 e la parola di mezzo secondo viene divisa in finestre da \SI{10}{\milli \second}.
+
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=mel\_spectrogram.py, label=mel_spectrogram,captionpos=b]
+import librosa
+
+def compute_melspectrogram(filename, word_center):
+    # audio recordings are downsampled to a sampling rate of 16 kHz.
+    sample_rate = 16000
+    #librosa.load loads the audio file as a floating point time series.
+    # y: audio time series, sr: sample rate
+    y, _ = librosa.load(path = filename, sr = sample_rate, offset = word_center - 0.25, duration = 0.5)
+
+    # We use a window length of 25 ms, hop size of 10 ms and a fast Fourier
+    # transform size of 64 ms.
+    window_length = int(0.025*sample_rate)
+    hop_size = int(0.01*sample_rate)
+    fft_size = int(0.064*sample_rate)
+    # For each word instance, we take a half-second context window centered
+    # on the word and compute a 128 bin log-mel-spectrogram
+    mels_number = 128
+    # librosa.feature.melspectrogram computes a mel-scaled spectrogram.
+    mel_spectrogram = librosa.feature.melspectrogram(y, sr = sample_rate, n_fft = fft_size, hop_length = hop_size, win_length = window_length, n_mels = mels_number)
+    # librosa.power_to_db converts a power spectrogram to a dB-scale
+    # spectrogram.
+    log_mel_spectrogram = librosa.power_to_db(mel_spectrogram)
+    
+    return log_mel_spectrogram
+\end{lstlisting}
+
+Il risultato della funzione \texttt{log\_mel\_spectrogram} applicato alla parola ``stones'' pronunciata tra \SI{50.35}{\second} e \SI{50.78}{\second} nell'audio contenuto nella cartella ``I can't get no satisfaction'' è mostrato nella figura~\ref{fig:stones_spec}. Come ingresso della funzione viene dato il percorso del file ``audio.ogg'' contenuto nella cartella ``I can't get no satisfaction'' e come centro della parola ``stones'' il tempo $\SI[parse-numbers=false]{\frac{50.78 + 50.35}{2}}{\second}$.
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{../Stones_spectrogram}
+	\caption{Spettrogramma di mezzo secondo centrato sulla parola ``stones'' pronunciata nell'audio ``I can't get no satisfaction'' dopo 50.35 secondi.}
+	\label{fig:stones_spec}
+\end{figure}
+
+
+\subsection{Salvataggio degli spettrogrammi}
+\label{subsec:salvataggio_spettrogrammi}
+\clearpage
 
 
 

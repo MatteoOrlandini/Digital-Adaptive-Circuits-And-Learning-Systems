@@ -7,14 +7,18 @@
 \BOOKMARK [2][-]{subsection.4.3}{Approcci al meta-apprendimento}{section.4}% 7
 \BOOKMARK [1][-]{section.5}{Prototypical Network}{}% 8
 \BOOKMARK [1][-]{section.6}{Relation Network}{}% 9
-\BOOKMARK [1][-]{section.7}{Dataset Spoken Wikipedia Corpora}{}% 10
-\BOOKMARK [2][-]{subsection.7.1}{Annotazioni}{section.7}% 11
-\BOOKMARK [2][-]{subsection.7.2}{Lettori}{section.7}% 12
-\BOOKMARK [2][-]{subsection.7.3}{Parole}{section.7}% 13
-\BOOKMARK [1][-]{section.8}{Protonet codice}{}% 14
-\BOOKMARK [2][-]{subsection.8.1}{Protonet training}{section.8}% 15
-\BOOKMARK [2][-]{subsection.8.2}{Protonet validation}{section.8}% 16
-\BOOKMARK [2][-]{subsection.8.3}{Protonet test}{section.8}% 17
-\BOOKMARK [1][-]{section.9}{Relation codice}{}% 18
-\BOOKMARK [2][-]{subsection.9.1}{Relation training}{section.9}% 19
-\BOOKMARK [2][-]{subsection.9.2}{Relation validation}{section.9}% 20
+\BOOKMARK [1][-]{section.7}{Preprocessing del dataset}{}% 10
+\BOOKMARK [2][-]{subsection.7.1}{Dataset Spoken Wikipedia Corpora}{section.7}% 11
+\BOOKMARK [2][-]{subsection.7.2}{Le annotazioni del dataset}{section.7}% 12
+\BOOKMARK [2][-]{subsection.7.3}{Lettori del dataset}{section.7}% 13
+\BOOKMARK [2][-]{subsection.7.4}{Parole degli audio}{section.7}% 14
+\BOOKMARK [2][-]{subsection.7.5}{Associazione delle parole con il rispettivo lettore}{section.7}% 15
+\BOOKMARK [2][-]{subsection.7.6}{Calcolo dello spettrogramma delle parole}{section.7}% 16
+\BOOKMARK [2][-]{subsection.7.7}{Salvataggio degli spettrogrammi}{section.7}% 17
+\BOOKMARK [1][-]{section.8}{Protonet codice}{}% 18
+\BOOKMARK [2][-]{subsection.8.1}{Protonet training}{section.8}% 19
+\BOOKMARK [2][-]{subsection.8.2}{Protonet validation}{section.8}% 20
+\BOOKMARK [2][-]{subsection.8.3}{Protonet test}{section.8}% 21
+\BOOKMARK [1][-]{section.9}{Relation codice}{}% 22
+\BOOKMARK [2][-]{subsection.9.1}{Relation training}{section.9}% 23
+\BOOKMARK [2][-]{subsection.9.2}{Relation validation}{section.9}% 24
