@@ -107,7 +107,7 @@
 \begin{frame}
 	\frametitle{Metodo proposto per il few-shot sound event detection}
 	\begin{figure}[h]
-	\includegraphics[width=.8\textwidth]{Immagini/few_shot_sound_event_detection_method}
+	\includegraphics[width=.7\textwidth]{Immagini/few_shot_sound_event_detection_method}
 	\caption{Metodo proposto per il few-shot sound event detection. (a) Applicazione del modello few-shot, (b) costruzione del set di esempi negativi, in blu, e (c) data augmentation per la generazioni di più esempi positivi, in arancione.}
 	\end{figure}
 \end{frame}
@@ -143,6 +143,14 @@
 
 \section{Relation}
 \begin{frame}
+\frametitle{Relation Network}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=\textwidth]{Immagini/relation_network}
+	\caption{Architettura della Relation Network nel caso 5\emph{-way} 1\emph{-shot} con un esempio di query.}
+\end{figure}
+\end{frame}
+\begin{frame}
 	\frametitle{Training}
 \end{frame}
 \begin{frame}
@@ -154,7 +162,51 @@
 
 \section{Risultati}
 \begin{frame}
+	\frametitle{Matrice di confusione}
+	Nella fase di test, la rete elabora una predizione dell'output a partire da un ingresso noto che poi viene confrontata con il valore effettivo.
+	Nel nostro caso è presente un positive set e un negative set, si tratta quindi di classificazione binaria.
+	Il confronto tra predizione e label può produrre quattro risultati:
+	\begin{itemize}
+		\item Vero Negativo (TN): il valore reale è negativo e il valore predetto è negativo;
+		\item Vero Positivo (TP): il valore reale è positivo e il valore predetto	è positivo;
+		\item Falso Negativo (FN): il valore reale è positivo e il valore predetto è negativo;
+		\item Falso Positivo (FP): il valore reale è negativo e il valore predetto	è positivo;
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Precision e Recall}
+	\begin{block}{Precision}
+	Il parametro Precision rappresenta quanti tra i casi predetti come positivi sono realmente positivi.
+	\end{block}
+	\begin{block}{Recall}
+	Il parametro Recall indica quanti tra i casi realmente positivi è stato predetto in modo corretto.
+	\end{block}
+	\begin{equation}
+	Precision=\frac{TP}{TP+FP}
+	\end{equation}
+	\begin{equation}
+	Recall=\frac{TP}{TP+FN}
+	\end{equation}
+\end{frame}
+\begin{frame}
 	\frametitle{AUPRC}
+	\begin{block}{Area under precision-recall curve (AUPRC)}
+	Area sottessa dalla curva precision-recall.
+	Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
+	\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Calcolo AUPRC}
+	\begin{enumerate}
+	\item Consideriamo i valori di probabilità delle query di appartenere alla classe positiva.
+	\item Ordiniamo il vettore in ordine decrescente.
+	\item Consideriamo come soglia il valore di probabilità presente al primo elemento e calcoliamo precision e recall.
+	\item Spostiamo la soglia al valore del secondo elemento e calcoliamo un'altra coppia di parametri.
+	\item Ripetiamo il passo 3 e 4 per tutti gli elementi.
+	\item Otteniamo una curva considerando alle ascisse i valori di recall e come ordinate i valori di precision.
+	\item Calcolando l'area sottesa dalla curva ricaviamo il parametro AUPRC.
+	\end{enumerate}
+
 \end{frame}
 \begin{frame}
 	\frametitle{Risultati}
