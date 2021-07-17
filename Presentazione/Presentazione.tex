@@ -1,10 +1,12 @@
 \documentclass[11pt]{beamer}
-\title[DIgital Adaptive Circuits for Learning Systems]{Sound Event Detection con la tecnica del ``few-shot learning''}
-\author{Matteo Orlandini}
-\date{15 giugno 2020}
-\institute[UnivPM]{Università  Politecnica delle Marche}
-\logo{\includegraphics[width=15mm]{Immagini/univpmlogo}}
-
+\title[Digital Adaptive Circuits for Learning Systems]{Sound Event Detection con la tecnica del ``few-shot learning''}
+\author{Matteo Orlandini e Jacopo Pagliuca}
+\date{\today}
+\institute[UnivPM]{Università Politecnica delle Marche}
+%\logo{\includegraphics[width=15mm]{Immagini/univpmlogo}}
+\titlegraphic{
+\includegraphics[width=2cm]{Immagini/univpmlogo}
+}
 \usepackage[english, italian]{babel} %l?ultima lingua dichiarata è la lingua principale del documento
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
@@ -57,8 +59,8 @@
 	{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
 }  
 
-\usetheme{PaloAlto}
-\usecolortheme{dolphin} %https://hartwork.org/beamer-theme-matrix/
+\usetheme{Antibes}
+\usecolortheme{default} %https://hartwork.org/beamer-theme-matrix/
 %\useoutertheme[right,color=red]{sidebar} %{infolines}
 %\setbeamertemplate{sidebar canvas right}[vertical shading][top=red,bottom=white]
 \setbeamercovered{dynamic}
@@ -73,7 +75,7 @@
 	\tableofcontents
 \end{frame}
 
-\section{Bluetooth}
+\section{Introduzione}
 \begin{frame}
 	\frametitle{Bluetooth Low Energy}
 	\begin{columns}
@@ -97,6 +99,69 @@
 	%\begin{block}
 		
 	%\end{block}
+\end{frame}
+\begin{frame}
+	\frametitle{Sound Event Detection}
+	Individuazione di eventi sonori percettivamente simili all'interno di una registrazione.
+\end{frame}
+\begin{frame}
+	\frametitle{Metodo proposto per il few-shot sound event detection}
+	\begin{figure}[h]
+	\includegraphics[width=.8\textwidth]{Immagini/few_shot_sound_event_detection_method}
+	\caption{Metodo proposto per il few-shot sound event detection. (a) Applicazione del modello few-shot, (b) costruzione del set di esempi negativi, in blu, e (c) data augmentation per la generazioni di più esempi positivi, in arancione.}
+	\end{figure}
+\end{frame}
+\begin{frame}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=.8\textwidth]{Immagini/few_shot_learning_model}
+	\caption{Modello few-shot learning nel caso 5\emph{-way} 2\emph{-shot}}
+\end{figure}
+\end{frame}
+\section{Few-shot learning}
+
+\begin{frame}
+	\frametitle{Few-shot learning}
+\end{frame}
+
+\section{Creazione del Dataset}
+
+\begin{frame}
+	\frametitle{esempio titolo: lettori validi}
+\end{frame}
+
+\section{Prototypical}
+\begin{frame}
+	\frametitle{Training}
+\end{frame}
+\begin{frame}
+	\frametitle{Validation}
+\end{frame}
+\begin{frame}
+	\frametitle{Test}
+\end{frame}
+
+\section{Relation}
+\begin{frame}
+	\frametitle{Training}
+\end{frame}
+\begin{frame}
+	\frametitle{Validation}
+\end{frame}
+\begin{frame}
+	\frametitle{Test}
+\end{frame}
+
+\section{Risultati}
+\begin{frame}
+	\frametitle{AUPRC}
+\end{frame}
+\begin{frame}
+	\frametitle{Risultati}
+\end{frame}
+\section{Conclusioni}
+\begin{frame}
+	\frametitle{Conclusioni}
 \end{frame}
 
 

@@ -1,0 +1,5 @@
+[0] Config.pm:304> INFO - This is Biber 2.12
+[0] Config.pm:307> INFO - Logfile is 'Presentazione.blg'
+[61] biber-MSWIN32:315> INFO - === 
+[1024] Utils.pm:209> ERROR - Cannot find control file 'Presentazione.bcf'! - Did latex run successfully on your .tex file before you ran biber?
+[1024] Biber.pm:114> INFO - ERRORS: 1

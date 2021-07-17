@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.13)  17 JUL 2021 10:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.13)  17 JUL 2021 11:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1227,7 +1227,7 @@ Package logreq Info: Writing requests to 'Relazione.run.xml'.
 Here is how much of TeX's memory you used:
  31948 strings out of 492623
  572571 string characters out of 6133290
- 1243776 words of memory out of 5000000
+ 1243794 words of memory out of 5000000
  33937 multiletter control sequences out of 15000+600000
  556259 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191

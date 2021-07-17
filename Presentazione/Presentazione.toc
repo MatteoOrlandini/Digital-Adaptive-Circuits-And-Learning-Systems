@@ -1,3 +1,9 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
-\beamer@sectionintoc {1}{Bluetooth}{3}{0}{1}
+\beamer@sectionintoc {1}{Introduzione}{3}{0}{1}
+\beamer@sectionintoc {2}{Few-shot learning}{7}{0}{2}
+\beamer@sectionintoc {3}{Creazione del Dataset}{8}{0}{3}
+\beamer@sectionintoc {4}{Prototypical}{9}{0}{4}
+\beamer@sectionintoc {5}{Relation}{12}{0}{5}
+\beamer@sectionintoc {6}{Risultati}{15}{0}{6}
+\beamer@sectionintoc {7}{Conclusioni}{17}{0}{7}
