@@ -6,8 +6,7 @@
 \contentsline {section}{\numberline {3}Area under precision-recall curve (AUPRC)}{3}{section.3}% 
 \contentsline {section}{\numberline {4}Few-shot learning}{4}{section.4}% 
 \contentsline {subsection}{\numberline {4.1}Introduzione}{4}{subsection.4.1}% 
-\contentsline {subsection}{\numberline {4.2}The meta learning framework}{5}{subsection.4.2}% 
-\contentsline {subsection}{\numberline {4.3}Approcci al meta-apprendimento}{6}{subsection.4.3}% 
+\contentsline {subsection}{\numberline {4.2}Struttura del meta learning}{5}{subsection.4.2}% 
 \contentsline {section}{\numberline {5}Prototypical Network}{6}{section.5}% 
 \contentsline {section}{\numberline {6}Relation Network}{8}{section.6}% 
 \contentsline {section}{\numberline {7}Preprocessing del dataset}{10}{section.7}% 

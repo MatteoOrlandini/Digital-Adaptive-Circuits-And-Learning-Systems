@@ -342,7 +342,7 @@ Consideriamo come soglia il valore di probabilità presente al primo elemento e 
 Poi, spostiamo la soglia al valore del secondo elemento e calcoliamo altri valori.
 Continuando in questo modo si può ottenere una curva considerando alle ascisse i valori di recall e come ordinate i valori di precision.
 
-Calcolando l'area sottesa dalla curva si riceva il valore detto Area under precision-recall curve (AUPRC).
+Calcolando l'area sottesa dalla curva si ricava il valore detto Area under precision-recall curve (AUPRC).
 Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
 \section{Few-shot learning}
 \label{section:Few-shot}
@@ -350,26 +350,27 @@ Questo valore è molto utile quando i dati sono sbilanciati e, in una classifica
 \subsection{Introduzione}
 Gli esseri umani possono riconoscere nuove classi di oggetti partendo da pochissimi esempi. Tuttavia, la maggior parte delle tecniche di machine learning richiedono migliaia di esempi per ottenere prestazioni simili a quelle umane. L'obiettivo del \emph{few-shot learning} è classificare i nuovi dati dopo aver visto solo pochi esempi di training. Nel caso estremo, potrebbe esserci solo un singolo esempio per ogni classe (\emph{one shot learning}). In pratica, il few-shot learning è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando il costo dell'etichettatura dei dati è elevato.
 
-L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \emph{N-way-K-shot}. L'obiettivo è quello di discriminare le N classi composte da K esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $N=10$ classi con solo $K=5$ campioni ciascuno di training. Non possiamo allenare un classificatore usando metodi convenzionali; qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
+L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \emph{C-way-K-shot}. L'obiettivo è quello di discriminare le N classi composte da K esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $C=10$ classi con solo $K=5$ campioni ciascuno di training. Non possiamo allenare un classificatore usando metodi convenzionali; qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
 
 Se i dati non sono sufficienti per ridurre il problema, una possibile soluzione è acquisire esperienza da altri problemi simili. A tal fine, la maggior parte degli approcci caratterizza l'apprendimento a breve termine con un problema di meta-apprendimento.
 
-\subsection{The meta learning framework}
-Nel framework di apprendimento classico, impariamo come classificare dai dati di training e valutiamo i risultati utilizzando i dati di test. Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{training task} e valutiamo utilizzando una serie di test task; In altre parole, usiamo un insieme di problemi di classificazione per aiutare a risolvere altri insiemi non correlati.
+\subsection{Struttura del meta learning}
+Nell'apprendimento classico, impariamo come classificare dai dati di training e valutiamo i risultati utilizzando i dati di test. Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{episodi di training} e valutiamo utilizzando una serie di episodi di test; In altre parole, usiamo un insieme di problemi di classificazione per aiutare a risolvere altri insiemi non correlati.
 
-Qui, ogni attività imita lo scenario few-shot, quindi per la classificazione N-way-K-shot, ogni attività include N classi con K esempi ciascuna. Questi sono noti come support set per il task e vengono utilizzati per apprendere come risolvere il task. Inoltre, esistono ulteriori esempi delle stesse classi, note come set di query, utilizzate per valutare le prestazioni del task corrente. Ogni task può essere completamente unico; potremmo non vedere mai le classi di un task in nessuno degli altri. L'idea è che il sistema veda ripetutamente istanze (task) durante l'addestramento che corrispondono alla struttura dell'attività finale di few-shot, ma che contengono classi diverse.
+Qui, ogni attività imita lo scenario few-shot, quindi per la classificazione C-way-K-shot, ogni attività include C classi con K esempi ciascuna. Questi sono noti come support set e vengono utilizzati per apprendere come risolvere il task. Inoltre, esistono ulteriori esempi delle stesse classi, note come set di query, utilizzate per valutare le prestazioni dell'episodio corrente. Ogni episodio può essere completamente unico; potremmo non vedere mai le classi di un episodio in nessuno degli altri. L'idea è che il sistema veda ripetutamente istanze durante l'addestramento che corrispondono alla struttura dell'attività finale di few-shot, ma che contengono classi diverse.
 
-Ad ogni fase del meta-apprendimento, aggiorniamo i parametri del modello in base ad un training task selezionato casualmente. La funzione di loss è determinata dalle prestazioni di classificazione sul set di query del task, in base alla conoscenza acquisita dal relativo set di supporto. Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
+Ad ogni fase del meta-apprendimento, aggiorniamo i parametri del modello in base ad un episodio di training selezionato casualmente. La funzione di loss è determinata dalle prestazioni di classificazione sul set di query dell'episodio, in base alla conoscenza acquisita dal relativo support set. Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
 
-Per valutare le prestazioni in pochi colpi, utilizziamo una serie di attività di test. Ciascuno contiene solo classi invisibili che non erano in nessuna delle attività di formazione. Per ciascuno, misuriamo le prestazioni sul set di query in base alla conoscenza del loro set di supporto.
+Per valutare le prestazioni nel few-shot, utilizziamo una serie di attività di test. Ciascuna contiene solo classi invisibili che non erano in nessuna delle attività di formazione. Per ciascuno, misuriamo le prestazioni sul query set in base alla conoscenza del loro support set.
 
-\subsection{Approcci al meta-apprendimento}
-Gli approcci al meta-apprendimento sono diversi e non c'è consenso sull'approccio migliore. Tuttavia, esistono tre famiglie distinte, ognuna delle quali sfrutta un diverso tipo di conoscenza a priori:
-\begin{itemize}
-	\item Conoscenze a priori sulla somiglianza: apprendiamo degli embedding nei training task che tendono a separare classi diverse anche quando non sono visibili.
-	\item Conoscenze a priori sull'apprendimento: utilizziamo le conoscenze a priori per vincolare l'algoritmo di apprendimento a scegliere parametri che generalizzino bene da pochi esempi.
-	\item Conoscenza a priori dei dati: sfruttiamo le conoscenze a priori sulla struttura e la variabilità dei dati e questo ci consente di apprendere modelli praticabili da pochi esempi.
-\end{itemize}
+
+%\subsection{Approcci al meta-apprendimento}
+%Gli approcci al meta-apprendimento sono diversi e non c'è consenso sull'approccio migliore. Tuttavia, esistono tre famiglie distinte, ognuna delle quali sfrutta un diverso tipo di conoscenza a priori:
+%\begin{itemize}
+%	\item Conoscenze a priori sulla somiglianza: apprendiamo degli embedding nei training task che tendono a separare classi diverse anche quando non sono visibili.
+%	\item Conoscenze a priori sull'apprendimento: utilizziamo le conoscenze a priori per vincolare l'algoritmo di apprendimento a scegliere parametri che generalizzino bene da pochi esempi.
+%	\item Conoscenza a priori dei dati: sfruttiamo le conoscenze a priori sulla struttura e la variabilità dei dati e questo ci consente di apprendere modelli praticabili da pochi esempi.
+%\end{itemize}
 
 \section{Prototypical Network}
 L'approccio si basa sull'idea che esiste un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione prototipo per ogni classe.
@@ -413,7 +414,7 @@ Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che 
 
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=.8\textwidth]{Immagini/relation_network}
+	\includegraphics[width=0.8\textwidth]{Immagini/relation_network}
 	\caption{Architettura della Relation Network nel caso 5\emph{-way} 1\emph{-shot} con un esempio di query.~\cite{DBLP:journals/corr/abs-1711-06025}}
 	\label{fig:relation_network}
 \end{figure}
