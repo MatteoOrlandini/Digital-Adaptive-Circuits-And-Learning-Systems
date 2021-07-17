@@ -1,24 +1,28 @@
 \BOOKMARK [1][-]{section.1}{Introduzione}{}% 1
 \BOOKMARK [1][-]{section.2}{Convolutional Neural Network \(CNN\)}{}% 2
-\BOOKMARK [1][-]{section.3}{Area under precision-recall curve \(AUPRC\)}{}% 3
-\BOOKMARK [1][-]{section.4}{Few-shot learning}{}% 4
-\BOOKMARK [2][-]{subsection.4.1}{Introduzione}{section.4}% 5
-\BOOKMARK [2][-]{subsection.4.2}{Struttura del meta learning}{section.4}% 6
-\BOOKMARK [1][-]{section.5}{Prototypical Network}{}% 7
-\BOOKMARK [1][-]{section.6}{Relation Network}{}% 8
-\BOOKMARK [1][-]{section.7}{Preprocessing del dataset}{}% 9
-\BOOKMARK [2][-]{subsection.7.1}{Dataset Spoken Wikipedia Corpora}{section.7}% 10
-\BOOKMARK [2][-]{subsection.7.2}{Le annotazioni del dataset}{section.7}% 11
-\BOOKMARK [2][-]{subsection.7.3}{Lettori del dataset}{section.7}% 12
-\BOOKMARK [2][-]{subsection.7.4}{Parole degli audio}{section.7}% 13
-\BOOKMARK [2][-]{subsection.7.5}{Associazione delle parole con il rispettivo lettore}{section.7}% 14
-\BOOKMARK [2][-]{subsection.7.6}{Calcolo dello spettrogramma delle parole}{section.7}% 15
-\BOOKMARK [2][-]{subsection.7.7}{Creazione delle feature}{section.7}% 16
-\BOOKMARK [1][-]{section.8}{Codice Prototypical network}{}% 17
-\BOOKMARK [2][-]{subsection.8.1}{Protypical training}{section.8}% 18
-\BOOKMARK [2][-]{subsection.8.2}{Prototypical validation}{section.8}% 19
-\BOOKMARK [2][-]{subsection.8.3}{Prototypical test}{section.8}% 20
-\BOOKMARK [1][-]{section.9}{Codice Relation network}{}% 21
-\BOOKMARK [2][-]{subsection.9.1}{Relation training}{section.9}% 22
-\BOOKMARK [2][-]{subsection.9.2}{Relation validation}{section.9}% 23
-\BOOKMARK [2][-]{subsection.9.3}{Relation test}{section.9}% 24
+\BOOKMARK [1][-]{section.3}{Few-shot learning}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Introduzione}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Struttura del meta learning}{section.3}% 5
+\BOOKMARK [1][-]{section.4}{Prototypical Network}{}% 6
+\BOOKMARK [1][-]{section.5}{Relation Network}{}% 7
+\BOOKMARK [1][-]{section.6}{Preprocessing del dataset}{}% 8
+\BOOKMARK [2][-]{subsection.6.1}{Dataset Spoken Wikipedia Corpora}{section.6}% 9
+\BOOKMARK [2][-]{subsection.6.2}{Le annotazioni del dataset}{section.6}% 10
+\BOOKMARK [2][-]{subsection.6.3}{Lettori del dataset}{section.6}% 11
+\BOOKMARK [2][-]{subsection.6.4}{Parole degli audio}{section.6}% 12
+\BOOKMARK [2][-]{subsection.6.5}{Associazione delle parole con il rispettivo lettore}{section.6}% 13
+\BOOKMARK [2][-]{subsection.6.6}{Calcolo dello spettrogramma delle parole}{section.6}% 14
+\BOOKMARK [2][-]{subsection.6.7}{Creazione delle feature}{section.6}% 15
+\BOOKMARK [1][-]{section.7}{Implementazione della Prototypical network}{}% 16
+\BOOKMARK [2][-]{subsection.7.1}{Definizione della rete}{section.7}% 17
+\BOOKMARK [2][-]{subsection.7.2}{Training}{section.7}% 18
+\BOOKMARK [2][-]{subsection.7.3}{Validation}{section.7}% 19
+\BOOKMARK [2][-]{subsection.7.4}{Test}{section.7}% 20
+\BOOKMARK [1][-]{section.8}{Implementazione della Relation network}{}% 21
+\BOOKMARK [2][-]{subsection.8.1}{Definizione della rete}{section.8}% 22
+\BOOKMARK [2][-]{subsection.8.2}{Training}{section.8}% 23
+\BOOKMARK [2][-]{subsection.8.3}{Validation}{section.8}% 24
+\BOOKMARK [2][-]{subsection.8.4}{Test}{section.8}% 25
+\BOOKMARK [1][-]{section.9}{Risultati}{}% 26
+\BOOKMARK [2][-]{subsection.9.1}{Area under precision-recall curve \(AUPRC\)}{section.9}% 27
+\BOOKMARK [1][-]{section.10}{Conclusioni}{}% 28

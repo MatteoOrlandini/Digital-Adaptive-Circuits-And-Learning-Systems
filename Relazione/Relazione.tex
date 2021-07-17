@@ -1,5 +1,5 @@
 \documentclass[12pt,a4paper,titlepage]{article}
-\title{Sound Event Detection con la tecnica del “few-shot learning“} 
+\title{Sound Event Detection con la tecnica del ``few-shot learning''} 
 \author{Matteo Orlandini e Jacopo Pagliuca}
 \date{\today}
 
@@ -114,7 +114,7 @@
 	morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},%
 	%
 	% Built-ins
-	morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,max,memoryview,min,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern},%
+	morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,memoryview,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern, F, nn, np},%
 	%
 	sensitive=true,%
 	morecomment=[l]\#,%
@@ -185,7 +185,7 @@
 	tabsize=1,
 	keywordstyle=\color{ipython_green}\ttfamily,
 	morekeywords={typeof, null, catch, switch, in, int, str, float, self, import, def, return, True, False, None},
-	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample, isdir, compute_melspectrogram, load, melspectrogram,power_to_db, mkdir, save_dataset, save_test_dataset, OSError, find_valid_readers, create_training_validation_test_readers, find_classes, concatenate, FloatTensor, save, load},          % Custom highlighting
+	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample, isdir, compute_melspectrogram, load, melspectrogram,power_to_db, mkdir, save_dataset, save_test_dataset, OSError, find_valid_readers, create_training_validation_test_readers, find_classes, concatenate, FloatTensor, save, load, tqdm, empty, count_parameters, conv_block, Protonet, Module, init,Sequential, forward, is_available, Adam, get_training_validation_readers, trange, batch_sample, to, train, zero_grad, loss, backward, step, batch_sample, mean, savemat,get_training_validation_readers, empty, shape, cat, unsqueeze, expand, squeeze, size, arange, view, expand, mean, euclidean_dist, log_softmax, gather, eq, max, min, Adam, load_state_dict, isfile, listdir, get_negative_positive_query_set, test_predictions, cpu, tolist, precision_recall_curve, auc, std, get_negative_positive_query_set, test_predictions, size, softmax, detach, reshape, squeeze, Sequential, Conv2d, BatchNorm2d, ReLU, MaxPool2d, Linear, normal_,sigmoid,relu,zero_,fill_,sqrt,get_device_properties, interpolate, repeat, unsqueeze, transpose, },          % Custom highlighting
 	emphstyle=\color{ipython_purple}\ttfamily,    % Custom highlighting style
 }
 
@@ -262,25 +262,25 @@
 
 \section{Introduzione}
 \label{section:Introduzione}
-Lo scopo della tesina è quello di riprodurre i risultati ottenuti nel paper "\textit{Few-Shot Event Detection}"\cite{Salamon:Few-Shot}. 
+Lo scopo della tesina è quello di riprodurre i risultati ottenuti nel paper ``\textit{Few-Shot Event Detection}''~\cite{Salamon:Few-Shot}.
 L'argomento centrale dello studio è l'individuazione di eventi sonori percettivamente simili all'interno di una registrazione.
 Varie applicazioni di questo algoritmo possono essere la rilevazione di particolari suoni nella musica o la rimozione di parole di riempimento nei podcast.
 Solitamente questo processo avviene manualmente risultando in un compito difficile e tedioso.
 
-I classici modelli di deep-learning per la determinazione di suoni richiedono una grande mole di dati che funge da esempio. In questo modo la rete è capace di riconoscere parole sulle quali si è allenata.
+I classici modelli di deep-learning per la determinazione di suoni richiedono una grande mole di dati per fare il training. In questo modo la rete è capace di riconoscere parole sulle quali si è allenata.
 
-Nell'approccio few-shot invece, è necessario un piccolo dataset di riferimento. La rete non sarà allenata a riconoscere i suoni che ha ascoltato nel training ma assumerà la capacità di riconoscere la somiglianza fra due suoni che sta analizzando.
+Nell'approccio few-shot invece, è necessario un piccolo dataset di riferimento. La rete non sarà allenata a riconoscere i suoni che ha ascoltato nel training, ma assumerà la capacità di riconoscere la somiglianza fra due suoni che sta analizzando.
 
 Le reti few-shot di solito sono state utilizzate per un set chiuso dove in un \textit{task} di classificazione veniva presentata una query e confrontata con K istanze di C classi, con C fisso.
 Questo metodo è chiamato C-way K-shot.
 
-Il paper di riferimento invece, cerca di applicare una rete few-shot in un contesto più ampio in cui è necessario riconoscere una parola non vista in precendenza in una sequenza di suoni non classificati in precedenza dalla rete.
+Il paper di riferimento invece, cerca di applicare una rete few-shot in un contesto più ampio in cui è necessario riconoscere una parola non vista in precedenza in una sequenza di suoni non classificati precedentemente dalla rete.
 
-Per fare questo, l'idea è quella di costruire un set positivo e un set negativo con i quali confrontare la query, come mostrato in \ref{fig:few_shot_sound_event_detection_method}. Mentre il set positivo è costituito da istanze della stessa parola, il set negativo comprende vari campioni di parole diverse e rappresenta un generico esempio di tutto ciò che non comprende la parola da cercare.
+Per fare questo, l'idea è quella di costruire un set positivo e un set negativo con i quali confrontare la query, come mostrato in~\ref{fig:few_shot_sound_event_detection_method}. Mentre il set positivo è costituito da istanze della stessa parola, quello negativo comprende vari campioni di parole diverse e rappresenta un generico esempio di tutto ciò che non comprende la parola da cercare.
 
-Prima di fare questo però, la rete deve "imparare ad imparare": verrà quindi sottoposta a una serie di task classici di few shot nei quali la rete deve riconoscere a quale classe appartiene una query avendo come riferimento K istanze di C classi, che costituiscono il support set.
+Prima di fare questo però, la rete deve ``\textit{imparare ad imparare}'': verrà quindi sottoposta a una serie di task classici di few shot nei quali la rete deve riconoscere a quale classe appartiene una query avendo come riferimento K istanze di C classi, che costituiscono il support set.
 
-Il support set e la query può essere diverso ad ogni episodio, generalizzando il più possibile l'evento e allenando la capacità della rete di \textit{riconoscere la somiglianza} e non di riconoscere le parole.
+Il support set e la query può essere diverso ad ogni episodio, generalizzando il più possibile l'evento e allenando la capacità della rete di \textit{riconoscere la somiglianza} tra le parole, ma non le parole stesse.
 
 
 \begin{figure}[h]
@@ -300,7 +300,7 @@ Il support set e la query può essere diverso ad ogni episodio, generalizzando i
 
 \section{Convolutional Neural Network (CNN)}
 Una rete neurale convoluzionale è una rete feedforward pensata per applicazioni che richiedono l'elaborazione di immagini o di grandi moli di dati.
-L'ingresso della rete è costituito da una o più matrici che attraversano delle fasi di convoluzione che ne riducono le dimensioni. I filtri di convoluzione sono detti kernel o di pooling. Infine, il risultato viene passato a una rete fully connected che ha il compito di classificazione.
+L'ingresso della rete è costituito da una o più matrici che attraversano dei blocchi convoluzionali che ne riducono le dimensioni. I filtri di convoluzione sono detti kernel. Infine, il risultato viene passato a una rete fully connected che ha il compito di classificazione.
 
 La prima parte del filtro consiste nella convoluzione dell'immagine in ingresso con una serie di kernel i cui parametri vengono allenati.
 Il filtro viene traslato in entrambe le dimensioni della matrice producendo una serie di feature bidimensionali.
@@ -308,49 +308,14 @@ Il parametro \textit{stride} definisce il passo con cui il kernel viene traslato
 Solitamente, viene effettuato uno zero-padding sui contorni del volume in modo da poter caratterizzare anche i valori che si trovano ai bordi delle matrici.
 In seguito alla convoluzione viene applicata una funzione non-lineare come ad esempio una sigmoide o una ReLu con lo scopo di aumentare la proprietà di non linearità.
 
-Il pooling layer è uno strato della rete che ha lo scopo di ridurre le dimensioni della matrice prodotta dal convolutional layer. Combinando gruppi di elementi della matrice (solitamente 2x2) restituisce il valore massimo tra essi, che andrà a sostituire il blocco stesso.
+Il pooling layer è uno strato della rete che ha lo scopo di ridurre le dimensioni della matrice prodotta dal convolutional layer. Combinando gruppi di elementi della matrice (solitamente $2 \times 2$) restituisce il valore massimo tra essi, che andrà a sostituire il blocco stesso.
 
-\section{Area under precision-recall curve (AUPRC)}
-Nella fase di test, la rete elabora una predizione dell'output a partire da un ingresso noto che poi viene confrontata con il valore effettivo.
-Nel nostro caso è presente un positive set e un negative set, si tratta quindi di classificazione binaria.
-Il confronto tra predizione e label può produrre quattro risultati:
-\begin{itemize}
-	\item Vero Negativo (TN): il valore reale è negativo e il valore predetto è negativo;
-	\item Vero Positivo (TP): il valore reale è positivo e il valore predetto	è positivo;
-	\item Falso Negativo (FN): il valore reale è positivo e il valore predetto è negativo;
-	\item Falso Positivo (FP): il valore reale è negativo e il valore predetto	è positivo;
-\end{itemize}
-Questi valori vanno a comporre la confusion matrix.
-Nel nostro caso siamo interessati a Precision e Recall.
-
-Il parametro Precision rappresenta quanti tra i casi predetti come positivi sono realmente positivi.
-
-Il parametro Recall indica quanti tra i casi realmente positivi è stato predetto in modo corretto.
-\begin{equation}
-Precision=\frac{TP}{TP+FP}
-\end{equation}
-\begin{equation}
-Recall=\frac{TP}{TP+FN}
-\end{equation}
-
-Consideriamo un vettore contenente le probabilità che una serie di query appartengono a una classe.
-
-Considerando una soglia di decisione e confrontando con un altro vettore contenente i valori desiderati (1 se la query corrisponde alla classe e 0 altrimenti) è possibile ottenere una coppia di valori di precision e recall.
-
-A questo punto ordiniamo il vettore con valori decrescenti.
-Consideriamo come soglia il valore di probabilità presente al primo elemento e calcoliamo precision e recall.
-Poi, spostiamo la soglia al valore del secondo elemento e calcoliamo altri valori.
-Continuando in questo modo si può ottenere una curva considerando alle ascisse i valori di recall e come ordinate i valori di precision.
-
-Calcolando l'area sottesa dalla curva si ricava il valore detto Area under precision-recall curve (AUPRC).
-Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
 \section{Few-shot learning}
 \label{section:Few-shot}
-(https://www.borealisai.com/en/blog/tutorial-2-few-shot-learning-and-meta-learning-i/)
 \subsection{Introduzione}
-Gli esseri umani possono riconoscere nuove classi di oggetti partendo da pochissimi esempi. Tuttavia, la maggior parte delle tecniche di machine learning richiedono migliaia di esempi per ottenere prestazioni simili a quelle umane. L'obiettivo del \emph{few-shot learning} è classificare i nuovi dati dopo aver visto solo pochi esempi di training. Nel caso estremo, potrebbe esserci solo un singolo esempio per ogni classe (\emph{one shot learning}). In pratica, il few-shot learning è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando il costo dell'etichettatura dei dati è elevato.
+Gli esseri umani possono riconoscere nuove classi di oggetti partendo da pochissimi esempi. Tuttavia, la maggior parte delle tecniche di machine learning richiedono migliaia di esempi per ottenere prestazioni simili a quelle umane. L'obiettivo del \textit{few-shot learning} è classificare i nuovi dati dopo aver visto solo pochi esempi di training. Nel caso estremo, potrebbe esserci solo un singolo esempio per ogni classe (\textit{one shot learning}). In pratica, il few-shot learning è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando l'etichettatura dei dati è onerosa.
 
-L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \emph{C-way-K-shot}. L'obiettivo è quello di discriminare le N classi composte da K esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $C=10$ classi con solo $K=5$ campioni ciascuno di training. Non possiamo allenare un classificatore usando metodi convenzionali; qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
+L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \emph{C-way K-shot}. L'obiettivo è quello di discriminare le $C$ classi composte da $K$ esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $C=10$ classi con solo $K=5$ campioni ciascuno di training. Non possiamo allenare un classificatore usando metodi convenzionali; qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
 
 Se i dati non sono sufficienti per ridurre il problema, una possibile soluzione è acquisire esperienza da altri problemi simili. A tal fine, la maggior parte degli approcci caratterizza l'apprendimento a breve termine con un problema di meta-apprendimento.
 
@@ -373,27 +338,29 @@ Per valutare le prestazioni nel few-shot, utilizziamo una serie di attività di 
 %\end{itemize}
 
 \section{Prototypical Network}
-L'approccio si basa sull'idea che esiste un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione prototipo per ogni classe.
+L'approccio si basa sull'idea che esista un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione per ogni classe, chiamata \textit{prototipo}. 
 Nella classificazione few-shot per ogni episodio viene fornito un support set di $N$ esempi etichettati  $S=\{(\mathbf{x}_1,y_1), \dots,(\mathbf{x}_N,y_N)\}$ dove $\mathbf{x}_i\in \mathbb{R}^D$ rappresenta il vettore $D$-dimensionale della feature (nel nostro caso spettrogrammi di dimensione $128 \times 51$) e $y_i \in \{1, \dots, K\}$ la rispettiva label. $S_k$ denota il set di esempi etichettati con la classe $k$.
 
-La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k$, o \emph{prototipo}, di ogni classe tramite una funzione di embedding $f_\phi : \mathbb{R}^D \rightarrow \mathbb{R}^M$ con parametri da allenare $\phi$. La funzione di embedding è rappresentata da una rete convoluzionale. Ogni prototipo è il vettore media tra gli embedding delle istanze della stessa classe.
+La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k$, o \emph{prototipo}, di ogni classe tramite una funzione di embedding $f_\phi : \mathbb{R}^D \rightarrow \mathbb{R}^M$ con parametri da allenare $\phi$. La funzione di embedding è rappresentata da una rete convoluzionale. Ogni prototipo è calcolato come la media tra gli embedding delle istanze della stessa classe.
 \begin{equation}
 	\mathbf{c}_k=\frac{1}{|S_k|}\sum_{(\mathbf{x}_i,y_i)\in S_k}f_\phi (\mathbf{x}_i)
 \end{equation}
 Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Protypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
-\begin{equation}
+\begin{equation}\label{eq:softmax}
 p_\phi(y=k|\mathbf{x})=\dfrac{\exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k))}{\sum_k' \exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k'))}
 \end{equation}
-Il processo di training avviene minimizzando il negativo del logaritmo della probabilità $J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)$ considerando la distanza fra query e il prototipo della sua classe.
+Il processo di training avviene minimizzando il negativo del logaritmo della probabilità
+\begin{equation}\label{eq:loss_proto}
+	J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)
+\end{equation}
+considerando la distanza fra query e il prototipo della sua classe.
 Gli episodi di training sono formati campionando C classi di parole da un lettore e selezionando per ognuna casualmente K istanze e Q query.
 
 \begin{figure}[h]
 	\centering
-	\subfloat[Few-shot\label{fig:proto_few_shot}]{\includegraphics[width=0.3\textwidth]{Immagini/proto_few_shot}}
-	\qquad
-	\subfloat[Zero-shot\label{fig:proto_zero_shot}]{\includegraphics[width=0.35\textwidth]{Immagini/proto_zero_shot}}
+	{\includegraphics[width=0.5\textwidth]{Immagini/proto_few_shot}}
 	\label{fig:proto_few_zero_shot}	
-	\caption{Reti Prototypical negli scenari few-shot e zero-shot. (a): i prototipi few-shot $\mathbf{c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. (b): i prototipi zero-shot $\mathbf{c}_k$ sono prodotti facendo l'embedding dei metadati $\mathbf{v}_k$. In entrambi i casi i punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi(y = k|\mathbf{x}) \propto \exp \left(-d(f_\phi(\mathbf{x}),\mathbf{c}_k) \right)$.~\cite{snell:prototypical}}
+	\caption{I prototipi few-shot $\mathbf{c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. I punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi(y = k|\mathbf{x}) \propto \exp \left(-d(f_\phi(\mathbf{x}),\mathbf{c}_k) \right)$.~\cite{snell:prototypical}}
 \end{figure}
 \clearpage
 
@@ -423,7 +390,7 @@ Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che 
 	\centering
 	\subfloat[Blocco convoluzionale\label{fig:relation_network_architecture_a}]{\includegraphics[width=0.3\textwidth]{Immagini/relation_network_conv_block}}
 	\qquad
-	\subfloat[Relation Network per few-shot learning\label{fig:relation_network_architecture_b}]{\includegraphics[width=0.3\textwidth]{Immagini/relation_network_architecture}}
+	\subfloat[Relation Network per few-shot learning\label{fig:relation_network_architecture_b}]{\includegraphics[width=0.25\textwidth]{Immagini/relation_network_architecture}}
 	\label{fig:relation_network_architecture}	
 	\caption{Architettura della Relation Network per few-shot learning (b) composta dagli elementi inclusi nel blocco convoluzionale (a).~\cite{DBLP:journals/corr/abs-1711-06025}}
 \end{figure}
@@ -838,7 +805,23 @@ write_json_file("readers_words.json", readers_words, indent = 0)
 
 \subsection{Calcolo dello spettrogramma delle parole}
 \label{subsec:spettrogramma}
-Per ogni istanza delle parole, prendiamo una finestra di mezzo secondo centrata sulla parola, calcoliamo lo spettrogramma mel da 128 bin e lo portiamo scala logaritmica. La funzione \texttt{compute\_melspectrogram}, mostrata nel codice~\ref{mel_spectrogram}, usando la libreria \emph{librosa}, calcola gli spettrogrammi da dare in input ai modelli della rete neurale. I file audio, originalmente campionati ad una frequenza di \SI{44.1}{\kilo \hertz}, sono sottocampionati a \SI{16}{\kilo \hertz}. Per calcolare lo spettrogramma, usiamo una lunghezza della finestra di \SI{25}{\milli \second}, un hop size di \SI{10}{\milli \second} e una FFT di \SI{64}{\milli \second}. Lo spettrogramma è contenuto in una matrice di dimensioni $128 \times 51$, poiché il numero di bande mel è 128 e la parola di mezzo secondo viene divisa in finestre da \SI{10}{\milli \second}.
+Per ogni istanza delle parole, prendiamo una finestra di mezzo secondo centrata sulla parola, calcoliamo lo spettrogramma mel da 128 bin e lo portiamo scala logaritmica. Lo spettrogramma rappresenta l'intensità di un suono in funzione del tempo e della frequenza. Sull'asse delle ascisse della rappresentazione grafica dello spettrogramma è riportato il tempo, sull'asse delle ordinate la frequenza e per ogni punto del grafico un colore rappresenta l'intensità del suono.
+
+La scala \textit{mel} è una scala di percezione dell'altezza (pitch) di un suono. La relazione tra la scala mel e quella comunemente usata è rappresentata dall'uguaglianza tra 1000 Mel e \SI{1000}{\hertz} all'intensità di \SI{40}{\decibel}. La scala mel è definita nel seguente modo
+\begin{equation}
+\text{mel} = 2595\cdot \log \left(1 + \dfrac{f}{700} \right)
+\end{equation}
+e nella figura~\ref{fig:mel_plot} si può vedere la sua funzione in relazione agli Hertz.
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{Immagini/mel_plot}
+	\caption{Grafico della scala mel in funzione della scala in Hertz.}
+	\label{fig:mel_plot}
+\end{figure}
+
+Per il calcolo dello spettrogramma mel occorre dividere l'input in blocchi usando finestre con overlap, fare la FFT di ogni blocco, generare la scala mel e associare ogni componente spettrale alla relativa frequenza nella scala mel.    
+
+La funzione \texttt{compute\_melspectrogram}, mostrata nel codice~\ref{mel_spectrogram}, usando la libreria \emph{librosa}, calcola gli spettrogrammi da dare in input ai modelli della rete neurale. I file audio, originalmente campionati ad una frequenza di \SI{44.1}{\kilo \hertz}, sono sottocampionati a \SI{16}{\kilo \hertz}. Per calcolare lo spettrogramma, usiamo una lunghezza della finestra di \SI{25}{\milli \second}, un hop size di \SI{10}{\milli \second} e una FFT di \SI{64}{\milli \second}. Lo spettrogramma è contenuto in una matrice di dimensioni $128 \times 51$, poiché il numero di bande mel è 128 e la parola di mezzo secondo viene divisa in finestre da \SI{10}{\milli \second}.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=mel\_spectrogram.py, label=mel_spectrogram,captionpos=b]
 import librosa
@@ -1004,7 +987,7 @@ def find_valid_readers(min_classes = 2, min_instances_per_class = 26):
 
 La funzione \texttt{create\_training\_validation\_test\_readers} divide i lettori di training e validation da quelli di test usando la variabile \texttt{valid\_readers} creata nel codice~\ref{find_valid_readers}. I primi \texttt{number\_of\_training\_readers} + \texttt{number\_of\_validation\_readers} elementi di \texttt{valid\_readers} sono presi come lettori di training e validation, mentre i restanti come lettori di test.
 
-\begin{lstlisting}[language=iPython,firstnumber=68, caption=Funzione \texttt{create\_training\_validation\_test\_readers}, label=create_training_validation_test_readers,captionpos=b]
+\begin{lstlisting}[language=iPython,firstnumber=72, caption=Funzione \texttt{create\_training\_validation\_test\_readers}, label=create_training_validation_test_readers,captionpos=b]
 def create_training_validation_test_readers(valid_readers, number_of_training_readers, number_of_test_readers, number_of_validation_readers):
     """
     create_training_validation_test_readers split the valid readers into
@@ -1040,7 +1023,7 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
 
 La funzione \texttt{find\_classes} prende in ingresso un lettore e campiona in modo casuale un numero di parole massimo pari a \texttt{max\_class\_number} e un numero di istanze massimo pari a \texttt{max\_instances\_number}. Ritorna un dizionario con chiavi ``word'', ``start'', ``end'' e ``folders''.
 
-\begin{lstlisting}[language=iPython,firstnumber=10, caption=Funzione \texttt{find\_classes}, label=find_classes,captionpos=b]
+\begin{lstlisting}[language=iPython,firstnumber=100, caption=Funzione \texttt{find\_classes}, label=find_classes,captionpos=b]
 def find_classes(reader, max_class_number, max_instances_number):
     """
     find_classes returns classes, a list of dict that has 'word', 'start',
@@ -1106,9 +1089,11 @@ def find_classes(reader, max_class_number, max_instances_number):
     return classes
 \end{lstlisting}
 
-La funzione \texttt{save\_dataset} salva gli spettrogrammi delle parole di training e validation usando la funzione \texttt{compute\_melspectrogram} presentata nel codice~\ref{mel_spectrogram}. Gli spettrogrammi sono salvati in un tensore di dimensione $K \times 128 \times 51$, dove $K$ è il numero di volte in cui la parola è stata ripetuta. Il tensore viene salvato il un file con un nome del tipo ``word\_name.pt'', ad esempio ``as.pt'', ``like.pt'', ``the.pt'', ecc.
+La funzione \texttt{save\_dataset} salva gli spettrogrammi delle parole di training e validation usando la funzione \texttt{compute\_melspectrogram} presentata nel codice~\ref{mel_spectrogram}. Per ottenere i timestamp delle parole e il relativo audio, necessario alla funzione \texttt{compute\_melspectrogram}, è stato usato \texttt{find\_classes}, presentato nel codice~\ref{find_classes}. 
 
-\begin{lstlisting}[language=iPython,firstnumber=10, caption=Funzione \texttt{save\_dataset}, label=save_dataset,captionpos=b]
+Gli spettrogrammi sono salvati in un tensore di dimensione $K \times 128 \times 51$, dove $K$ è il numero di volte in cui la parola è stata ripetuta. Il tensore viene salvato il un file con un nome del tipo ``word\_name.pt'', ad esempio ``as.pt'', ``like.pt'', ``the.pt'', ecc.
+
+\begin{lstlisting}[language=iPython,firstnumber=164, caption=Funzione \texttt{save\_dataset}, label=save_dataset,captionpos=b]
 def save_dataset(readers, folder_name, dataset_path, audio_file_name, max_class_number, max_instances_number):
     """
     save_dataset saves a pytorch tensor for each word of a reader in a
@@ -1156,7 +1141,7 @@ def save_dataset(readers, folder_name, dataset_path, audio_file_name, max_class_
 
 La funzione \texttt{save\_test\_dataset} salva gli spettrogrammi delle parole di test. A differenza del codice~\ref{save_dataset} vengono salvate al massimo 16 istanze della parola perché durante il test vengono usate solo $p \in \{1, 5\}$ istanze della parola come \emph{positive set}, mentre tutte le istanze delle altre parole dell'audio compongono il \emph{negative set}.
 
-\begin{lstlisting}[language=iPython,firstnumber=10, caption=Funzione \texttt{save\_test\_dataset}, label=save_test_dataset,captionpos=b]
+\begin{lstlisting}[language=iPython,firstnumber=208, caption=Funzione \texttt{save\_test\_dataset}, label=save_test_dataset,captionpos=b]
 def save_test_dataset(test_readers, reader_paths, test_feature_folder_name, dataset_path, audio_file_name):
     """
     save_test_dataset saves a pytorch tensor for each word of a test reader in a folder named 
@@ -1220,7 +1205,22 @@ def save_test_dataset(test_readers, reader_paths, test_feature_folder_name, data
 
 
 
-\section{Codice Prototypical network}
+\section{Implementazione della Prototypical network}
+\label{sec:implementazione_protonet}
+\subsection{Definizione della rete}
+\label{subsec:definizione_protonet}
+La CNN che funge da rete di embedding per la Prototypical Network è costituita da 4 strati convoluzionali, come si può vedere nel codice~\ref{Protonet}. Il primo di essi ha come ingresso un singolo canale e come uscita 64 mentre i tre successivi traspongono 64 canali in altri 64.
+Ogni blocco convoluzionale ha 4 fasi:
+\begin{itemize}
+	\item \texttt{nn.Conv2d(in\_channels,out\_channels,3,padding=1)}: Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
+	\item \texttt{nn.BatchNorm2d(out\_channels)}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
+	\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
+	\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un’immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
+\end{itemize}
+Al termine dei blocchi viene effettuato il reshape dell'uscita schiacciandola in una sola dimensione, \texttt{x.view(x.size(0),-1)}, in modo da avere una matrice le cui righe rappresentano gli embedding vettoriali.
+
+La funzione \texttt{count\_parameters} ritorna il numero di parametri della rete che, in accordo con~\cite{Salamon:Few-Shot}, devono essere compresi tra $120000$ e $230000$.
+
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet.py, label= Protonet,captionpos=b]
 import torch.nn as nn
 
@@ -1247,60 +1247,17 @@ class Protonet(nn.Module):
         )
     def forward(self,x):
         (num_samples,mel_bins, seq_len) = x.shape
-        #print("x.shape:",x.shape)
         # tensor 3D to tensor 4D with 3rd dimension = 1
         x = x.view(-1,1,mel_bins,seq_len) 
-        #print("x.view:",x.shape)
         x = self.encoder(x)
-        #print("x.encoder:",x.shape)
         return x.view(x.size(0),-1)
 \end{lstlisting}
-La CNN al che funge da rete di embedding per la Prototypical Network è costituita da 4 strati convoluzionali. Il primo di essi ha come ingresso un singolo canale e come uscita 64 mentre i tre successivi traspongono 64 canali in altri 64.
-Ogni blocco convoluzionale ha 4 fasi:
-\begin{itemize}
-	\item \texttt{nn.Conv2d(in\_channels,out\_channels,3,padding=1)}: Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
-	\item \texttt{nn.BatchNorm2d(out\_channels)}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
-	\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
-	\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un’immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
-\end{itemize}
-Al termine dei blocchi viene effettuato il reshape dell'uscita schiacciandola in una sola dimensione, in modo da avere embedding vettoriali.
 
-\subsection{Protypical training}
-\begin{lstlisting}[language=iPython,firstnumber=1, caption=get\_training\_validation\_readers, label=get_training_validation_readers,captionpos=b]
-def get_training_validation_readers(features_folder, C):
-  """
-  get_training_validation_readers returns training and validation readers from the . 
-  From the training and validation readers, it takes only the readers with at least C words
-  and split the list in training readers and validation readers.
+\subsection{Training}
+Il primo for rappresenta l'inizio degli episodi.
+Il numero totale di iterazioni è 60000 come in \cite{Salamon:Few-Shot}; per ogni episodio viene richiamata la funzione \texttt{batch\_sample}.
 
-  Parameters:
-  features_folder (list of string): list of the path of the training and validation
-  C (int): number of classes
-
-  Returns:
-  training_readers (list of string): list of the training readers paths
-  validation_readers (list of string): list of the validation readers paths
-  """
-  readers_path = []
-  train_val_readers = []
-  # scan each reader folder in the feature_folder
-  for entry in os.scandir(features_folder):
-      # create a list of reader names
-      readers_path.append(entry.path)
-  for reader_path in readers_path:
-    words = []
-    for word in os.scandir(reader_path):
-            # create a list containing the path of the words
-            words.append(word.path)
-    if (len(words) >= C):
-      train_val_readers.append(reader_path)
-  train_val_readers = random.sample(train_val_readers, len(train_val_readers))
-  training_readers = train_val_readers[:int(138/153*len(train_val_readers))]
-  validation_readers = train_val_readers[int(138/153*len(train_val_readers)):]
-  return training_readers, validation_readers
-\end{lstlisting}
-La funzione \texttt{get\_training\_validation\_readers}, a partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo il rapporto usato in \cite{Salamon:Few-Shot} 138/153 e 15/153.
-Per fare ciò scorre l'elenco delle directory dei lettori e salva su un array le parole a loro associate. Al termine di questa operazione, se il numero di parole è almeno C il lettore è ritenuto valido e il suo nome viene aggiunto a una lista. Infine la lista viene scissa come spiegato sopra.
+Con \texttt{loss\_out.backward()} viene utilizzata la loss per la retropropagazione che aggiorna i parametri della rete.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet\_training.py, label=protonet_training main,captionpos=b]
 from tqdm import trange, tqdm
@@ -1329,7 +1286,7 @@ print("Model parameters: {}".format(count_parameters(model)))
 
 optim = torch.optim.Adam(model.parameters(), lr = 0.001)
 
-training_readers, validation_readers = get_training_validation_readers("/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Training_validation_features/", C)
+training_readers, validation_readers = get_training_validation_readers("/Training_validation_features/", C)
 
 print ("Training...")
 
@@ -1338,8 +1295,9 @@ train_loss = []
 train_acc = []
 
 
-# To construct a C-way K-shot training episode, we randomly sample a reader from the training set, 
-# sample C word classes from the reader, and sample K instances per class as the support set.
+# To construct a C-way K-shot training episode, we randomly sample a reader 
+# from the training set, sample C word classes from the reader, and sample K
+# instances per class as the support set.
 
 for episode in trange(60000, desc = "episode", position = 0, leave = True):
     query, support = batch_sample(training_readers, C, K, Q)
@@ -1392,17 +1350,52 @@ for episode in trange(60000, desc = "episode", position = 0, leave = True):
               'avg_acc_tr' : np.mean(train_acc),
               'avg_loss_val' : np.mean(valid_loss),
               'avg_acc_val' : np.mean(valid_acc),
-              }, "/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Modelli-Prototypical-Network/prototypical_model_C{}_K{}.pt".format(C, K))
+              }, "/Modelli-Prototypical-Network/prototypical_model_C{}_K{}.pt".format(C, K))
         
         last_accuracy = np.mean(valid_acc)
 
-        scipy.io.savemat('/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Modelli-Prototypical-Network/prototypical_results_C{}_K{}.mat'.format(C, K), {'train_loss': train_loss , 'train_acc' : train_acc, 'valid_loss':valid_loss,'valid_acc':valid_acc})
+        scipy.io.savemat('/Modelli-Prototypical-Network/prototypical_results_C{}_K{}.mat'.format(C, K), {'train_loss': train_loss , 'train_acc' : train_acc, 'valid_loss':valid_loss,'valid_acc':valid_acc})
 \end{lstlisting}
-Il primo for rappresenta l'inizio degli episodi.
-Il numero totale di iterazioni è 60000 come in \cite{Salamon:Few-Shot}; per ogni episodio viene richiamata la funzione \texttt{batch\_sample}.
-Essa campiona a caso uno dei lettori di training e di questo seleziona casualmente C parole.
-Per ognuna di queste parole si ricava il numero di istanze presenti del dataset.
-Viene inizializzato un vettore con gli indici di queste e ne vengono campionati K+Q in \texttt{index}. Poi, iterando, gli spettrogrammi il cui indice è presente in \texttt{index} vengono salvati e divisi in K istanze del support set e Q istanze del query set.
+
+La funzione \texttt{get\_training\_validation\_readers}, a partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo il rapporto usato in \cite{Salamon:Few-Shot}.
+Per fare ciò scorre l'elenco delle directory dei lettori e salva su un array le parole a loro associate. Al termine di questa operazione, se il numero di parole è almeno C il lettore è ritenuto valido e il suo nome viene aggiunto a una lista. Infine la lista viene scissa in lettori di training e di validation. 
+
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=get\_training\_validation\_readers, label=get_training_validation_readers,captionpos=b]
+def get_training_validation_readers(features_folder, C):
+  """
+  get_training_validation_readers returns training and validation readers. 
+  From the training and validation readers, it takes only the readers with 
+  at least C words and split the list in training readers and validation 
+  readers.
+
+  Parameters:
+  features_folder (list of string): list of the path of the training and validation
+  C (int): number of classes
+
+  Returns:
+  training_readers (list of string): list of the training readers paths
+  validation_readers (list of string): list of the validation readers paths
+  """
+  readers_path = []
+  train_val_readers = []
+  # scan each reader folder in the feature_folder
+  for entry in os.scandir(features_folder):
+      # create a list of reader names
+      readers_path.append(entry.path)
+  for reader_path in readers_path:
+    words = []
+    for word in os.scandir(reader_path):
+            # create a list containing the path of the words
+            words.append(word.path)
+    if (len(words) >= C):
+      train_val_readers.append(reader_path)
+  train_val_readers = random.sample(train_val_readers, len(train_val_readers))
+  training_readers = train_val_readers[:int(138/153*len(train_val_readers))]
+  validation_readers = train_val_readers[int(138/153*len(train_val_readers)):]
+  return training_readers, validation_readers
+\end{lstlisting}
+
+La funzione \texttt{batch\_sample} campiona a caso uno dei lettori di training e di questo seleziona casualmente $C$ parole. Per ognuna di queste parole si ricava il numero di istanze presenti del dataset e vengono campionate $K+Q$ istanze random della parola. Le $K+Q$ istanze vengono divise in $K$ istanze del support set e $Q$ stanze del query set. La funzione ritorna due tensori \texttt{query} e \texttt{support}, rispettivamente di dimensioni $C \times Q \times 128 \times 51$ e $C \times K \times 128 \times 51$.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=batch\_sample, label=batch_sample,captionpos=b]
 import os
@@ -1441,7 +1434,8 @@ def batch_sample(features, C, K, Q = 16):
     words = random.sample(words, C)
     # randomize the instances of each word
     for word in words:
-        # load the tensor containing the spectrograms of the instances of one word
+        # load the tensor containing the spectrograms of the instances of
+        # one word
         spectrogram_buf = torch.load(word)
         # get the spectrogram tensor shape
         x_dim, y_dim, z_dim = spectrogram_buf.shape
@@ -1452,8 +1446,8 @@ def batch_sample(features, C, K, Q = 16):
         # initialize the spectrogram tensor
         spectrogram = torch.empty([0, 128, 51])
         for i in index:
-            # concatenate spectrogram_buf with spectrogram to get a new tensor 
-            # of random sampled instances of the word
+            # concatenate spectrogram_buf with spectrogram to get a new
+            # tensor of random sampled instances of the word
             spectrogram = torch.cat((spectrogram, (spectrogram_buf[i, :, :]).view(1, y_dim, z_dim)), axis = 0)
         # concatenate the first K spectrograms with the support set
         support =  torch.cat((support, (spectrogram[:K]).view(1, K, y_dim, z_dim)), axis = 0)
@@ -1461,22 +1455,23 @@ def batch_sample(features, C, K, Q = 16):
         query = torch.cat((query, (spectrogram[K:K+Q]).view(1, Q, y_dim, z_dim)), axis = 0)
     return query, support
 \end{lstlisting}
-Una volta ottenute, le feature del support set e query set vengono date in ingresso alla funzione \texttt{loss}.
-Queste ultime vengono messe in fila e concatenate per poter essere passate al modello che calcolerà gli embedding per ogni istanza.
+Una volta ottenute, le feature del support set e query set vengono date in ingresso alla funzione \texttt{loss}, mostrata nel codice~\ref{protonet_loss}. Entrambi i set vengono ridimensionati, rispettivamente da $C \times K \times 128 \times 51$ a $(C \cdot K) \times 128 \times 51$ e da $C \times Q \times 128 \times 51$ a $(C \cdot Q) \times 128 \times 51$.
+Vengono poi concatenate, risultando in un tensore $\left(C \cdot (Q + K)\right) \times 128 \times 51$, per poter essere passate al modello che calcolerà gli embedding per ogni istanza.
 Gli elementi del support set che fanno parte della stessa classe andranno a costituire i prototipi tramite una media dei loro valori.
 
+Il parametro \texttt{target\_inds} viene costruito ripetendo l'indice di ogni classe, $0, 1, \dots, C$, per il numero di query, 16, e sarà utilizzato per poter ricavare a che classe appartiene ogni query.
 
-Il parametro \texttt{target\_inds} viene costruito ripetendo l'indice di ogni classe per il numero di query e sarà utilizzato per poter ricordare a che classe appartiene ogni query.
+Vengono successivamente calcolate le distanze rispetto ai prototipi degli embedding di ogni classe tramite la funzione \texttt{euclidean\_dist} che ritorna una matrice di dimensioni $(C \cdot Q) \times C$. L'i-esima riga e la j-esima colonna rappresentano la distanza euclidea tra gli embedding della i-esima query ($i = 1, \dots, C \cdot Q$) e quelli del j-esimo ($j = 1, \dots, C$) prototipo.
 
-Per ogni elemento del query set vengono calcolate le distanze rispetto ai prototipi di ogni classe tramite la funzione \texttt{euclidean\_dist} che rappresenta la distanza euclidea.
-Per ogni query viene poi usata la funzione di attivazione \texttt{log\_softmax} fra tutte le sue distanze.
-La funzione loss da minimizzare è costituita dalla media dei \texttt{log\_softmax} della classe corrispondente alla query presi con segno negativo. Infatti, nel caso ideale in cui la distanza delle query della stessa classe dal prototipo è 0, la media dei softmax delle distanze dal prototipo assegnato sarà nulla.
-La accuracy invece è determinata dal numero dei casi in cui il prototipo a distanza minima da una query (o il massimo del softmax) corrisponde con il prototipo della classe associata alla query.
+Per ogni query viene poi usata la funzione di attivazione softmax, definita in~\eqref{eq:softmax}, i cui argomenti sono le distanze tra la query e i prototipi delle varie classi. La funzione loss da minimizzare è il logaritmo del softmax preso con segno negativo, come nell'equazione~\eqref{eq:loss_proto}. Se la query è vicina al prototipo, la funzione softmax tende a 1 e di conseguenza il suo logaritmo a 0, dunque la loss tende a 0, come dovrebbe appunto risultare. Nel caso in cui, invece, la query è molto lontata dal prototipo, la funzione softmax tende a 0 e il suo logaritmo a $-\infty$. In questo caso, la loss, definita come il logaritmo del softmax preso con segno negativo, tende a $+\infty$, come ci si aspetta.
 
-\begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet\_loss.py, label=protonet loss,captionpos=b]
+Poiché la funzione \texttt{log\_softmax} di Pytorch ritorna una matrice $(C \cdot Q) \times C$, per ogni riga occorre prendere solo l'elemento relativo alla classe del prototipo. Questo è possibile utilizzando la funzione \texttt{gather} di Pytorch.
+
+L'accuracy invece è determinata dal numero dei casi in cui il prototipo a distanza minima da una query (o il massimo del logaritmo del softmax) corrisponde al prototipo della classe associata alla query.
+
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet\_loss.py, label=protonet_loss,captionpos=b]
 import torch
 import torch.nn.functional as F
-from torch.autograd import Variable
 
 def euclidean_dist(x, y):
     """ 
@@ -1504,8 +1499,9 @@ def euclidean_dist(x, y):
 def loss(xs, xq, model):
     """
     loss returns the loss and accuracy value. It calculates p_y, the loss 
-    softmax over distances to the prototypes in the embedding space. We need to 
-    minimize the negative log-probability of p_y to proceed the learning process.
+    softmax over distances to the prototypes in the embedding space. We need
+    to minimize the negative log-probability of p_y to proceed the learning
+    process.
 
     Parameters:
     xs (torch.FloatTensor): support set
@@ -1523,7 +1519,6 @@ def loss(xs, xq, model):
     n_query = xq.size(1)
 
     target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
-    #target_inds = Variable(target_inds, requires_grad=False)
 
     if torch.cuda.is_available():
         target_inds = target_inds.to(device='cuda')
@@ -1550,96 +1545,34 @@ def loss(xs, xq, model):
     
     return loss_val, acc_val
 \end{lstlisting}
-Con \texttt{loss\_out.backward()} viene utilizzata la loss per la retropropagazione che aggiorna i parametri della rete.
-\subsection{Prototypical validation}
+\subsection{Validation}
+\label{subsec:proto_validation}
 Ogni 5000 episodi del training vengono effettuati 1000 episodi di validation.
-Come nel training vengono ricavati support set e query set ma in questo caso dai lettori di validation.
+Come nel training vengono ricavati support set e query set, ma in questo caso dai lettori di validation.
 Per questi vengono calcolati con la funzione \texttt{loss} allo stesso modo loss e accuracy e vengono salvati.
 In questo caso però i parametri del modello non vengono aggiornati.
 Questo processo è necessario per verificare l'effettività del modello su ingressi mai visti in fase di training.
-Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel batch precedente il modello viene salvato e sovrascritto al precedente, altrimenti viene ignorato.
-In questo modo si aggira il problema dell'overfitting fungendo da pseudo early stopping. 
-\subsection{Prototypical test}
-\begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet\_test.py, label=protonet test,captionpos=b]
-import torch
-import os
-import random
-import numpy as np
-from protonet import *
-from utils import *
-from protonet_loss import *
-from tqdm import tqdm
-import sklearn.metrics
+Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel passo precedente il modello viene salvato e sovrascritto, altrimenti viene ignorato. In questo modo si salva il modello migliore durante il training, cercando di evitare sia underfitting sia overfitting.
 
-def test_predictions(model, negative_set, positive_set, query_set, n, p):
-    n_class = 2
-    n_query = query_set.size(0)
-    
-    xs = torch.cat((positive_set, negative_set), 0)   
-    x = torch.cat((xs, query_set), 0)
-    
-    embeddings = model(x)
-    embeddings_dim = embeddings.size(-1)
-    
-    positive_embeddings = embeddings[:p].view(1, p, embeddings_dim).mean(1)    
-    negative_embeddings = embeddings[p:p+n].view(1, n, embeddings_dim).mean(1)     
-    pos_neg_embeddings =  torch.cat((positive_embeddings, negative_embeddings), 0)
-    query_embeddings = embeddings[p+n:]
-    dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
 
-    target_inds = torch.arange(n_class-1, -1, step = -1).view(n_class, 1).expand(n_class, int(n_query/2)).long()
+\subsection{Test}
 
-    p_y = F.softmax(-dists, dim = 1).view(n_class, int(n_query/2), -1)
+Nella fase di test, seguendo l'articolo di riferimento, l'oggetto di interesse non sono i lettori come nel caso di training e validation. Un episodio di test è formato da un audio di un lettore di test. Da questi sarà necessario identificare un gruppo di istanze di una parola, il positive set e, campionando nell'audio, si potrà verificare se la rete è in grado di riconoscere la parola designata.
 
-    return p_y[:,:,0].view(-1).detach(), target_inds.reshape(1, -1).squeeze()
 
-def get_negative_positive_query_set(p, n, i, audio):
-    # initialize support tensor of dimension p x 128 x 51
-    positive_set = torch.empty([0, 128, 51])
-    negative_set = torch.empty([0, 128, 51])
-    # initialize query tensor of dimension n x 128 x 51
-    query_set = torch.empty([0, 128, 51])
-    
-    words = []
-    for word in os.scandir(audio.path):
-        words.append(word.path)
-        
-    pos_word = words[i]
+Per ogni audio quindi viene ricavato il numero di parole e le relative istanze.
+Per ognuna di esse viene ricavato un positive set e un negative set con i quali è possibile verificare la rete.
+Questo processo viene ripetuto 10 volte come in \cite{Salamon:Few-Shot}, in modo da generalizzare il più possibile il test.
+Infatti, il positive set è  ricavato campionando casualmente p istanze della parola che si sta analizzando, mentre il negative set è ottenuto campionando n istanze fra tutte le altre parole dello stesso audio.
 
-    spectrograms = torch.load(pos_word)
-    index = np.arange(spectrograms.shape[0])
-    pos_index = random.sample(list(index), p)
-    for i in pos_index:
-        pos = spectrograms[i, :, :]
-        positive_set = torch.cat((positive_set, pos.view(1, 128, 51)), axis = 0)
-    for i in index:
-        if i not in pos_index:
-            query = spectrograms[i, :, :]
-            query_set = torch.cat((query_set, query.view(1, 128, 51)), axis = 0)
+Le predizioni sono contenute nel vettore \texttt{y\_pred}, mentre in \texttt{y\_true} sono presenti le label reali di ogni query.
 
-    query_label = [1]*query_set.shape[0]
-    query_label += [0]*query_set.shape[0]
+La funzione \texttt{precision\_recall\_curve} utilizza \texttt{y\_pred} e \texttt{y\_true} per calcolare precision e recall.
+Infine, \texttt{sklearn.metrics.auc} calcola la AUPRC.
+Questo calcolo avviene al termine delle operazioni per ogni audio.
+Una volta terminati gli audio viene calcolata media e varianza degli AUPRC.
 
-    words.remove(pos_word)
-
-    for i in range(n):
-        neg = random.sample(words, 1)
-        spectrograms = torch.load(neg[0])
-        index = np.arange(spectrograms.shape[0])
-        neg_index = random.sample(list(index), 1)
-        neg = spectrograms[neg_index, :, :]
-        negative_set = torch.cat((negative_set, neg.view(1, 128, 51)), axis = 0)
-
-    for i in range(query_set.shape[0]):
-        query_sample = random.sample(words, 1)
-        spectrograms = torch.load(query_sample[0])
-        index = np.arange(spectrograms.shape[0])
-        query_index = random.sample(list(index), 1)
-        query = spectrograms[query_index, :, :]
-        query_set = torch.cat((query_set, query.view(1, 128, 51)), axis = 0)
-
-    return negative_set, positive_set, query_set
-
+\begin{lstlisting}[language=iPython,firstnumber=77, caption=protonet\_test.py, label=protonet_test,captionpos=b]
 def main():
     p = 5
     n = 10
@@ -1689,36 +1622,109 @@ def main():
     print("Area under precision recall curve: {}".format(auc))
     auc_std_dev = np.std(auc_list)
     print("Standard deviation area under precision recall curve: {}".format(auc_std_dev))
-
-if __name__ == "__main__":
-    main()
 \end{lstlisting}
-Nella fase di test, seguendo l'articolo di riferimento, l'oggetto di interesse non sono i lettori come nel caso di training e validation. Vengono infatti presi in considerazione i singoli audio. Da questi sarà necessario identificare un gruppo di istanze di una parola (il positive\_set) e, campionando nell'audio, si potrà verificare se la rete è in grado di riconoscere la parola designata.
 
-
-Per ogni audio quindi viene ricavato il numero di parole con spettrogramma (in base al contenuto di Test\_features).
-Per ognuna di esse viene ricavato un positive set e un negative set con i quali è possibile verificare la rete.
-Questo processo viene ripetuto 10 volte come in \cite{DBLP:journals/corr/abs-1711-06025}, in modo da generalizzare il più possibile il test.
-Infatti, il positive set è  ricavato campionando casualmente p istanze della parola che si sta analizzando, mentre il negative set è ottenuto campionando n istanze fra tutte le altre parole dello stesso audio.
-Per fare questo viene usata la funzione \texttt{get\_negative\_positive\_query\_set}.
-Tramite un indice che indica le istanze della parola "positiva" vengono campionati p spettrogrammi che vanno a costituire il positive set. Le restanti istanze della stessa parola vengono inserite invece nel query set come esempio di spettrogramma che la rete dovrebbe riconoscere.
+Per costruire il positive e negative set viene usata la funzione \texttt{get\_negative\_positive\_query\_set}.
+Tramite un indice che indica le istanze della parola appartenente alla classe positiva vengono campionati p spettrogrammi che vanno a costituire il positive set. Le restanti istanze della stessa parola vengono inserite invece nel query set come esempio di spettrogramma che la rete dovrebbe riconoscere.
 Tra l'elenco delle parole viene quindi rimossa la parola postiva con \texttt{words.remove(pos\_word)}.
 Usando le restanti vengono ricavate n esempi di negative set campionando a caso una delle parole e una delle istanze di essa.
 Allo stesso modo viene formata la seconda metà del query set che rappresenta gli esempi negativi. Il numeri di query negative viene preso uguale a quello delle positive.
 
+\begin{lstlisting}[language=iPython,firstnumber=33, caption=Funzione \texttt{get\_negative\_positive\_query\_set}, label=get_negative_positive_query_set,captionpos=b]
+def get_negative_positive_query_set(p, n, i, audio):
+    # initialize support tensor of dimension p x 128 x 51
+    positive_set = torch.empty([0, 128, 51])
+    negative_set = torch.empty([0, 128, 51])
+    # initialize query tensor of dimension n x 128 x 51
+    query_set = torch.empty([0, 128, 51])
+    
+    words = []
+    for word in os.scandir(audio.path):
+        words.append(word.path)
+        
+    pos_word = words[i]
 
-A questo punto, i tre set e il modello sono parametri della funzione \texttt{test\_predictions}.
+    spectrograms = torch.load(pos_word)
+    index = np.arange(spectrograms.shape[0])
+    pos_index = random.sample(list(index), p)
+    for i in pos_index:
+        pos = spectrograms[i, :, :]
+        positive_set = torch.cat((positive_set, pos.view(1, 128, 51)), axis = 0)
+    for i in index:
+        if i not in pos_index:
+            query = spectrograms[i, :, :]
+            query_set = torch.cat((query_set, query.view(1, 128, 51)), axis = 0)
+            
+    words.remove(pos_word)
+
+    for i in range(n):
+        neg = random.sample(words, 1)
+        spectrograms = torch.load(neg[0])
+        index = np.arange(spectrograms.shape[0])
+        neg_index = random.sample(list(index), 1)
+        neg = spectrograms[neg_index, :, :]
+        negative_set = torch.cat((negative_set, neg.view(1, 128, 51)), axis = 0)
+
+    for i in range(query_set.shape[0]):
+        query_sample = random.sample(words, 1)
+        spectrograms = torch.load(query_sample[0])
+        index = np.arange(spectrograms.shape[0])
+        query_index = random.sample(list(index), 1)
+        query = spectrograms[query_index, :, :]
+        query_set = torch.cat((query_set, query.view(1, 128, 51)), axis = 0)
+
+    return negative_set, positive_set, query_set
+\end{lstlisting}
+
+A questo punto, i tre set e il modello sono passati alla funzione \texttt{test\_predictions}.
 Allo stesso modo di training e validation vengono calcolati gli embedding per ogni istanza e i prototipi delle due classi: positive set e negative set.
-Vengono calcolate le distanze che sono passate con segno negativo alla funzione \texttt{log\_softmax}.
-Tra i risultati viene selezionato l'elemento 0 della terza dimesione che rappresenta la probabilità che la query appartenga alla classe positiva.
-Queste predizioni sono contenute nel vettore \texttt{y\_pred}, mentre in \texttt{y\_true} sono presenti le label reali di ogni query.
+Vengono calcolate le distanze che sono passate con segno negativo alla funzione \texttt{log\_softmax}. Tra i risultati viene selezionato l'elemento 0 della terza dimesione che rappresenta la probabilità che la query appartenga alla classe positiva.
 
-La funzione \texttt{precision\_recall\_curve} utilizza \texttt{y\_pred} e\texttt{y\_true} per calcolare precision e recall.
-Infine, \texttt{sklearn.metrics.auc} calcola la AUPRC.
-Questo calcolo avviene al termine delle operazioni per ogni audio.
-Una volta terminati gli audio viene calcolata media e varianza degli AUPRC.
+\begin{lstlisting}[language=iPython,firstnumber=11, caption=Funzione \texttt{test\_prediction}, label=test_predictions,captionpos=b]
+def test_predictions(model, negative_set, positive_set, query_set, n, p):
+    n_class = 2
+    n_query = query_set.size(0)
+    
+    xs = torch.cat((positive_set, negative_set), 0)   
+    x = torch.cat((xs, query_set), 0)
+    
+    embeddings = model(x)
+    embeddings_dim = embeddings.size(-1)
+    
+    positive_embeddings = embeddings[:p].view(1, p, embeddings_dim).mean(1)    
+    negative_embeddings = embeddings[p:p+n].view(1, n, embeddings_dim).mean(1)     
+    pos_neg_embeddings =  torch.cat((positive_embeddings, negative_embeddings), 0)
+    query_embeddings = embeddings[p+n:]
+    dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
 
-\section{Codice Relation network}
+    target_inds = torch.arange(n_class-1, -1, step = -1).view(n_class, 1).expand(n_class, int(n_query/2)).long()
+
+    p_y = F.softmax(-dists, dim = 1).view(n_class, int(n_query/2), -1)
+
+    return p_y[:,:,0].view(-1).detach(), target_inds.reshape(1, -1).squeeze()
+\end{lstlisting}
+\clearpage
+
+
+\section{Implementazione della Relation network}
+\subsection{Definizione della rete}
+Le reti neurali necessarie per la relation network sono effettivamente due.
+
+La prima, chiamata \texttt{CNNEncoder} ha lo stesso scopo della rete nella prototypical, ovvero a partire dalle feature in ingresso produce degli embedding che possono essere confrontati.
+Anche in questo caso i layer sono 4 e sono costituiti da:
+\begin{itemize}
+	\item \texttt{nn.Conv2d()}: Convoluzione bidimensionale con un kernel $3 \times 3$ i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
+	\item \texttt{nn.BatchNorm2d()}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
+	\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
+	\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un’immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
+\end{itemize}
+Seguendo le indicazioni in \cite{DBLP:journals/corr/abs-1711-06025} i primi due blocchi hanno padding pari a 0 mentre negli ultimi due padding=1.
+Inoltre, per soddisfare le dimensioni necessarie in ingresso alla seconda rete neurale, il Max Pooling è presente solo nei primi 3 layer. Questo concetto sarà approfondito nel capitolo di training.
+
+La seconda rete è detta \texttt{RelationNetwork} e ha lo scopo di confrontare le concatenazioni di embedding per predirre o meno la loro somiglianza.
+Essa è costituita da 2 layer di \texttt{nn.Conv2d()}, \texttt{nn.BatchNorm2d()}, \texttt{nn.ReLU()} e \texttt{nn.MaxPool2d(2)} al termine la funzione \texttt{out.view(out.size(0),-1)} ritorna una matrice le cui righe rappresentano gli embedding vettoriali.
+In seguito vengono applicati una ulteriore relu e una sigmoide.
+
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=relation\_network.py, label=relation network,captionpos=b]
 import torch
 import torch.nn as nn
@@ -1727,10 +1733,12 @@ import torch.nn.functional as F
 
 class CNNEncoder(nn.Module):
     """
-    CNNEncoder is the embedding module. The architecture consists of 4 convolutional block contains a 
-    64-filter 3 X 3 convolution, a batch normalisation and a ReLU nonlinearity layer respectively. 
-    The first 3 blocks also contain a 2 X 2 max-pooling layer while the last two do not. We do so 
-    because we need the output feature maps for further convolutional layers in the relation module
+    CNNEncoder is the embedding module. The architecture consists of 4 
+    convolutional block contains a 64-filter 3 X 3 convolution, a batch 
+    normalization and a ReLU nonlinearity layer respectively. 
+    The first 3 blocks also contain a 2 X 2 max-pooling layer while the last 
+    two do not. We do so because we need the output feature maps for further
+    convolutional layers in the relation module
     """
     def __init__(self):
         super(CNNEncoder, self).__init__()
@@ -1765,12 +1773,14 @@ class CNNEncoder(nn.Module):
 
 class RelationNetwork(nn.Module):
     """
-    The RelationNetwork is the relation module. It consists of two convolutional blocks and
-    two fully-connected layers. Each of convolutional block is a 3 X 3 convolution with 64 filters 
-    followed by batch normalisation, ReLU non-linearity and 2 X 2 max-pooling.
-    The two fully-connected layers are 8 and 1 dimensional, respectively. All fully-connected layers are
-    ReLU except the output layer is Sigmoid in order to generate relation scores in a reasonable range 
-    for all versions of our network architecture.
+    The RelationNetwork is the relation module. It consists of two 
+    convolutional blocks and two fully-connected layers. Each of 
+    convolutional block is a 3 X 3 convolution with 64 filters followed 
+    by batch normalisation, ReLU non-linearity and 2 X 2 max-pooling.
+    The two fully-connected layers are 8 and 1 dimensional, respectively. 
+    All fully-connected layers are ReLU except the output layer is Sigmoid 
+    in order to generate relation scores in a reasonable range for all 
+    versions of our network architecture.
     """
     def __init__(self,input_size,hidden_size):
         super(RelationNetwork, self).__init__()
@@ -1788,12 +1798,12 @@ class RelationNetwork(nn.Module):
         self.fc2 = nn.Linear(hidden_size, 1)
 
     def forward(self,x):
-        out = self.layer1(x)    #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X FEATURE_DIM X 2 X 2
-        out = self.layer2(out)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X FEATURE_DIM X 1 X 1
-        out = out.view(out.size(0),-1)   #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X FEATURE_DIM
-        out = F.relu(self.fc1(out))      #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X RELATION_DIM
+        out = self.layer1(x)    #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X FEATURE_DIM X 2 X 2
+        out = self.layer2(out)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X FEATURE_DIM X 1 X 1
+        out = out.view(out.size(0),-1)   #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X FEATURE_DIM
+        out = F.relu(self.fc1(out))      #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X RELATION_DIM
         #out = F.sigmoid(self.fc2(out)) # deprecated
-        out = torch.sigmoid(self.fc2(out))  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * 5) X 1
+        out = torch.sigmoid(self.fc2(out))  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X 1
         return out
 
 def weights_init(m):
@@ -1811,23 +1821,23 @@ def weights_init(m):
         m.weight.data.normal_(0, 0.01)
         m.bias.data = torch.ones(m.bias.data.size())
 \end{lstlisting}
-Le reti neurali necessarie per la relation network sono effettivamente due.
 
-La prima, chiamata \texttt{CNNEncoder} ha lo stesso scopo della rete nella prototypical, ovvero a partire dalle feature in ingresso produce degli embedding monodimensionali che possono essere confrontati.
-Anche in questo caso i layer sono 4 e sono costituiti da:
-\begin{itemize}
-	\item \texttt{nn.Conv2d()}: Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
-	\item \texttt{nn.BatchNorm2d()}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
-	\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
-	\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un’immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
-\end{itemize}
-Seguendo le indicazioni in \cite{DBLP:journals/corr/abs-1711-06025} i primi due blocchi hanno padding pari a 0 mentre negli ultimi due padding=1.
-Inoltre, per soddisfare le dimensioni necessarie in ingresso alla seconda rete neurale, il Max Pooling è presente solo nei primi 3 layer. Questo concetto sarà approfondito nel capitolo di training.
+\subsection{Training}
+Come nella rete precedente, il primo passo consiste nel campionare i lettori di training e validation con la funzione \texttt{get\_training\_validation\_readers}.
+Le due reti \texttt{CNNEncoder} e \texttt{RelationNetwork} con i rispettivi pesi vengono inizializzate.
+Per ogni episodio viene poi campionato un support set e query set per un lettore designato.
+Le istanze complessive vengono poi passate alla prima rete per costruire gli embedding.
+Gli embedding del support set hanno ora dimensione $(C\cdot K)\times64 \times 15 \times 5$ mentre quelli del query set sono $(C\cdot Q)\times64 \times 15 \times 5$.
 
-La seconda rete è detta \texttt{RelationNetwork} e ha lo scopo di confrontare le concatenazioni di embedding per predirre o meno la loro somiglianza.
-Essa è costituita da 2 layer di \texttt{nn.Conv2d()}, \texttt{nn.BatchNorm2d()}, \texttt{nn.ReLU()} e \texttt{nn.MaxPool2d(2)} al termine dei quali viene eseguito un flattening che riduce l'uscita a un vettore.
-In seguito vengono applicati una ulteriore relu e una sigmoide.
-\subsection{Relation training}
+Prima di essere passati alla seconda rete questi tensori necessitano di avere le ultime due dimensioni pari a 5.
+In questo modo, attraversando due volte lo strato di max pooling passeranno da $5 \times 5$ a $2 \times 2$ e infine a $1 \times 1$.
+In seguito al flattening le ultime due dimensioni scompaiono e l'ingresso alla relu ha la dimensione corretta: $(C\cdot Q \cdot C)\times 64$.
+Le concatenazioni hanno dimensione $(C\cdot Q \cdot C)\times 64 \times 5 \times 5$, infatti ogni query ($C \times Q$) va concetenata con il vettore che rappresenta ognuna delle classi (C).
+Quest'ultimo vettore è ottenuto sommando elemento per elemento gli embedding delle istanze di ogni classe usando \texttt{torch.sum(sample\_features,1).squeeze(1)}.
+La rete decisionale restituisce quindi un tensore \texttt{relations} $(C \cdot K \cdot C) \times 1 \times 1$  che viene poi suddiviso in una matrice $(C \cdot Q) \times C$ in cui in ogni riga sono presenti le probabilità che una certa query appartenga ad una determinata classe.
+La matrice \texttt{one\_hot\_labels} ha la stessa dimensione di \texttt{relations} ma è costituito da zeri tranne nelle colonne in cui la classe corrisponde realmente alla query, in cui il valore è pari a 1.
+Questa rappresenta il risultato ideale che vogliamo in uscita dalla rete.
+Usando quindi la funzione \texttt{mse} con parametri \texttt{relations} e \texttt{one\_hot\_labels} otteniamo la loss, calcolata come mean square error, che viene utilizzata per aggiornare i parametri delle due reti con \texttt{loss.backward()}.
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=relation\_training.py, label=relation training,captionpos=b]
 import torch
 import torch.nn as nn
@@ -1847,8 +1857,6 @@ BATCH_NUM_PER_CLASS = 16
 EPISODE = 60000
 TEST_EPISODE = 1000
 LEARNING_RATE = 0.001
-GPU = 0
-HIDDEN_UNIT = 10
 
 if torch.cuda.is_available():
   device = torch.device("cuda")
@@ -1857,14 +1865,9 @@ if torch.cuda.is_available():
 else:
   device = torch.device("cpu")
 
-# Step 1: init data folders
-print("init data folders")
-# init character folders for dataset construction
-training_readers, validation_readers = get_training_validation_readers("/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Training_validation_features/", CLASS_NUM)
+training_readers, validation_readers = get_training_validation_readers("/Training_validation_features/", CLASS_NUM)
 
-# Step 2: init neural networks
-print("init neural networks")
-
+# init neural network
 feature_encoder = CNNEncoder()
 relation_network = RelationNetwork(FEATURE_DIM, RELATION_DIM)
 
@@ -1878,7 +1881,6 @@ if torch.cuda.is_available():
 feature_encoder_optim = torch.optim.Adam(feature_encoder.parameters(), lr = LEARNING_RATE)
 relation_network_optim = torch.optim.Adam(relation_network.parameters(), lr = LEARNING_RATE)
 
-# Step 3: build graph
 print("Training...")
 
 train_loss = []
@@ -2006,134 +2008,28 @@ for episode in tqdm(range(EPISODE), desc = "training episode", position=0):
                     'avg_loss_tr' : np.mean(train_loss),
                     'valid_acc' : valid_accuracy,
                     'avg_acc_val' : np.mean(valid_accuracy),
-                    }, "/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Modelli-Relation-Network/relation_model_C{}_K{}.pt".format(CLASS_NUM, SAMPLE_NUM_PER_CLASS))
+                    }, "/Modelli-Relation-Network/relation_model_C{}_K{}.pt".format(CLASS_NUM, SAMPLE_NUM_PER_CLASS))
         last_accuracy = valid_accuracy
 
-        scipy.io.savemat('/content/drive/MyDrive/Few-Shot-Sound-Event-Detection/Modelli-Relation-Network/relation_results_C{}_K{}.mat'.format(CLASS_NUM, SAMPLE_NUM_PER_CLASS), {'train_loss': train_loss ,'valid_accuracy':valid_accuracy})
+        scipy.io.savemat('/Modelli-Relation-Network/relation_results_C{}_K{}.mat'.format(CLASS_NUM, SAMPLE_NUM_PER_CLASS), {'train_loss': train_loss ,'valid_accuracy':valid_accuracy})
 
 print('Average train loss: {}'.format(np.mean(train_loss)))
 \end{lstlisting}
 
-Come nella rete precedente, il primo passo consiste nel campionare i lettori di training e validation con la funzione \texttt{get\_training\_validation\_readers}.
-Le due reti \texttt{CNNEncoder} e \texttt{RelationNetwork} con i rispettivi pesi vengono inizializzate.
-Per ogni episodio viene poi campionato un support set e query set per un lettore designato.
-Le istanze complessive vengono poi passate alla prima rete per costruire gli embedding.
-Gli embedding del support set hanno ora dimensione C*Kx64x15x5 mentre quelli del query set sono C*Qx64x15x5.
 
-Prima di essere passati alla seconda rete questi tensori necessitano di avere le ultime due dimensioni pari a 5.
-In questo modo, attraversando due volte lo strato di max pooling passeranno da 5x5 a 2x2 a 1x1.
-In seguito al flattening le ultime due dimensioni scompaiono e l'ingresso alla relu ha la dimensione corretta: C*Q*Cx64.
-Le concatenazioni hanno dimensione C*Q*Cx64x5x5, infatti ogni query (CxQ) va concetenata con il vettore che rappresenta ognuna delle classi (C).
-Quest'ultimo vettore è ottenuto sommando elemento per elemento gli embedding delle istanze di ogni classe usando \texttt{torch.sum(sample\_features,1).squeeze(1)}.
-La rete decisionale restituisce quindi un vettore \texttt{relations} C*Q*Cx1 che viene poi suddiviso in una matrice C*QxC in cui in ogni riga sono presenti le probabilità che una data query appartenga alle varie classi.
-La matrice \texttt{one\_hot\_labels} ha la stessa forma di \texttt{relations} ma è costituito da zeri tranne nelle colonne in cui la classe corrisponde realmente alla query, in cui il valore è pari a 1.
-Questa rappresenta il risultato ideale che vogliamo in uscita dalla rete.
-Usando quindi la funzione \texttt{mse} con parametri \texttt{relations} e \texttt{one\_hot\_labels} otteniamo la loss che viene utilizzata per aggiornare i parametri delle due reti con \texttt{loss.backward()}.
-\subsection{Relation validation}
-Ogni 5000 episodi di training ne vengono effettuati 1000 di validation.
-Come nella prototypical network vengono utilizzati lettori di validation sconosciuti alla rete e, nel caso in cui il batch produca una accuracy migliore di quello precedente, il modello viene salvato.
-Per fare ciò viene utilizzato un vettore \texttt{reward} che conta il numero di volte in cui il valore massimo tra le predizioni della classe da associare a una query corrisponde con quello reale.
-L'accuracy infatti equivale al numero di reward diviso il totale delle query, mediato nei 1000 episodi del batch di validation.
-\subsection{Relation test}
-\begin{lstlisting}[language=iPython,firstnumber=1, caption=relation\_test.py, label=relation test,captionpos=b]
-import torch
-import os
-import random
-import numpy as np
-from relation_network import *
-from utils import *
-from protonet_loss import *
-from tqdm import tqdm
-import sklearn.metrics
+\subsection{Validation}
+Come nel capitolo~\ref{subsec:proto_validation}, ogni 5000 episodi di training ne vengono effettuati 1000 di validation. Allo stesso modo del validation della prototypical network, vengono utilizzati lettori di validation sconosciuti alla rete e, nel caso in cui la validation produca una accuracy migliore di quella precedente, il modello viene salvato.
+Per fare ciò viene utilizzato un array \texttt{reward} che contiene 1 se la label della j-esima predizione è uguale alla label della j-esima query, altrimenti 0. Successivamente, vengono sommati gli elementi di questo vettori e salvati nella variabile \texttt{total\_rewards}. Per ogni episodio di validation, all'aumentare del numero di predizioni corrette, la variabile \texttt{total\_rewards} tende a $C \cdot Q$.
 
-def test_predictions(feature_encoder,relation_network, positive_set, negative_set, query_set, n, p):
-    n_class = 2
-    n_query = query_set.size(0)
+L'accuracy equivale al numero di volte in cui la predizione è corretta, cioè \texttt{total\_rewards}, diviso il totale delle $C \cdot Q$ query, mediato nei 1000 episodi di validation, come mostrato nella formula~\eqref{eq:acc_relation}.
+\begin{equation}\label{eq:acc_relation}
+\text{accuracy} = \dfrac{\text{total rewards}}{C \cdot Q \cdot 1000}
+\end{equation}
+\subsection{Test}
+Anche in questo il test ha come oggetto di analisi i singoli audio del dataset e non i lettori. Le fasi del test sono analoghe alla Prototypical network, ma cambia la funzione che calcola le predizioni \texttt{test\_predictions}.
+Come in precedenza, il positive set, il negative set e il query set sono passati in ingresso alla prima rete che ne calcola gli embedding.
 
-    FEATURE_DIM = 64
-
-    pos_embeddings = feature_encoder(Variable(positive_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
-
-    # resize the images from 15 X 5 to 5 X 5 to get square images
-    # interpolate down samples the input to the given size
-    pos_embeddings = F.interpolate(pos_embeddings, size = 5)
-    pos_embeddings = pos_embeddings.view(1, p, FEATURE_DIM, 5, 5) # CLASS_NUM X SAMPLE_NUM_PER_CLASS X FEATURE_DIM X 5 X 5
-    pos_embeddings = torch.sum(pos_embeddings,1).squeeze(1)   # CLASS_NUM X FEATURE_DIM X 5 X 5
-
-    neg_embeddings = feature_encoder(Variable(negative_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
-
-    # resize the images from 15 X 5 to 5 X 5 to get square images
-    # interpolate down samples the input to the given size
-    neg_embeddings = F.interpolate(neg_embeddings, size = 5)
-    neg_embeddings = neg_embeddings.view(1, n, FEATURE_DIM, 5, 5) # CLASS_NUM X SAMPLE_NUM_PER_CLASS X FEATURE_DIM X 5 X 5
-    neg_embeddings = torch.sum(neg_embeddings,1).squeeze(1)   # CLASS_NUM X FEATURE_DIM X 5 X 5
-    
-    batch_features = feature_encoder(Variable(query_set)) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
-    batch_features = F.interpolate(batch_features, size = 5)
-    
-    pos_neg_embeddings =  torch.cat((pos_embeddings, neg_embeddings), 0)
-
-    # calculate relations
-    # each batch sample link to every samples to calculate relations
-    pos_neg_embeddings_ext = pos_neg_embeddings.unsqueeze(0).repeat(int(n_class * n_query/2), 1, 1, 1, 1) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X 5 X FEATURE_DIM X 5 X 5
-    
-    batch_features_ext = batch_features.unsqueeze(0).repeat(n_class, 1, 1, 1, 1)  # 5 X (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
-    batch_features_ext = torch.transpose(batch_features_ext, 0, 1)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X CLASS_NUM X FEATURE_DIM X 5 X 5
-
-    relation_pairs = torch.cat((pos_neg_embeddings_ext,batch_features_ext), 2).view(-1, FEATURE_DIM*2, 5, 5)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X (FEATURE_DIM * 2) X 5 X 5
-    relations = relation_network(relation_pairs).view(-1,n_class) #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X CLASS_NUM
-    
-    target_inds = torch.arange(n_class-1, -1, step = -1).view(n_class, 1).expand(n_class, int(n_query/2)).long()
-    
-    return relations[:,0].view(-1).detach(), target_inds.reshape(1, -1).squeeze()
-
-def get_negative_positive_query_set(p, n, i, audio):
-    # initialize support tensor of dimension p x 128 x 51
-    positive_set = torch.empty([0, 128, 51])
-    negative_set = torch.empty([0, 128, 51])
-    # initialize query tensor of dimension n x 128 x 51
-    query_set = torch.empty([0, 128, 51])
-    
-    words = []
-    for word in os.scandir(audio.path):
-        words.append(word.path)
-        
-    pos_word = words[i]
-
-    spectrograms = torch.load(pos_word)
-    index = np.arange(spectrograms.shape[0])
-    pos_index = random.sample(list(index), p)
-    for i in pos_index:
-        pos = spectrograms[i, :, :]
-        positive_set = torch.cat((positive_set, pos.view(1, 128, 51)), axis = 0)
-    for i in index:
-        if i not in pos_index:
-            query = spectrograms[i, :, :]
-            query_set = torch.cat((query_set, query.view(1, 128, 51)), axis = 0)
-
-    query_label = [1]*query_set.shape[0]
-    query_label += [0]*query_set.shape[0]
-
-    words.remove(pos_word)
-
-    for i in range(n):
-        neg = random.sample(words, 1)
-        spectrograms = torch.load(neg[0])
-        index = np.arange(spectrograms.shape[0])
-        neg_index = random.sample(list(index), 1)
-        neg = spectrograms[neg_index, :, :]
-        negative_set = torch.cat((negative_set, neg.view(1, 128, 51)), axis = 0)
-
-    for i in range(query_set.shape[0]):
-        query_sample = random.sample(words, 1)
-        spectrograms = torch.load(query_sample[0])
-        index = np.arange(spectrograms.shape[0])
-        query_index = random.sample(list(index), 1)
-        query = spectrograms[query_index, :, :]
-        query_set = torch.cat((query_set, query.view(1, 128, 51)), axis = 0)
-        
-    return negative_set, positive_set, query_set
-
+\begin{lstlisting}[language=iPython,firstnumber=99, caption=relation\_test.py, label=relation test,captionpos=b]
 def main():
     p = 5
     n = 10
@@ -2184,38 +2080,103 @@ def main():
 
         precision, recall, thresholds = sklearn.metrics.precision_recall_curve(y_true, y_pred)
         auc_tmp = sklearn.metrics.auc(recall, precision)
-        print("auc_tmp: {}".format(auc_tmp))
         auc_list.append(auc_tmp)
-    """
-    prob_query_pos_iter.extend(prob_query_neg_iter)
-    prob_pos_iter = prob_query_pos_iter
-
-    target_inds_iter = np.ones(int(len(prob_pos_iter)/2))
-    target_inds_iter = np.append(target_inds_iter, np.zeros(int(len(prob_pos_iter)/2)))
-
-    precision, recall, thresholds = sklearn.metrics.precision_recall_curve(target_inds_iter, prob_pos_iter)
-    """
+        
     auc = np.mean(auc_list)
     print("Area under precision recall curve: {}".format(auc))
     auc_std_dev = np.std(auc_list)
     print("Standard deviation area under precision recall curve: {}".format(auc_std_dev))
-
-    #average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
-    #print('Average precision: {}'.format(average_precision))
-
-if __name__ == "__main__":
-    main()
 \end{lstlisting}
-Anche in questo il test ha come oggetto di analisi i singoli audio del dataset e non i lettori.
-Le fasi del test sono analoghe alla Prototypical network ma cambia la funzione che calcola le predizioni \texttt{test\_predictions}.
-Come in precedenza, il positive set, il negative set e il query set sono passati in ingresso alla prima rete che ne calcola gli embedding.
-Ricordando la necessità di sottocampionare la penultima dimensione del tensore, positive e negative set vengono concatenati in quanto svolgono il ruolo delle classi con cui confrontare la query.
-Tutte le query vengono quindi concatenate con i vettori rappresentanti delle due classi producendo un numero di concatenazioni pari a il numero di query (ovvero il doppio delle istanze rimanenti nella classe positiva dopo la creazione del positive set) moltiplicato per 2.
 
-Questo tensore viene poi passata alla rete che calcola le predizioni su quale delle classi (positive set e negative set) sia più simile alla query. In questo modo la rete produce una coppia di valori che indicano la probabilità con cui una query è associata ai due set.
+Nella funzione \texttt{test\_predictions} la dimensione del tensore in uscita dalla prima rete passa da $(C \cdot Q) \times 64 \times 15 \times 5$ a $(C \cdot Q) \times 64 \times 5 \times 5$. Successivamente, il positive e negative set vengono concatenati in quanto svolgono il ruolo delle classi con cui confrontare la query.
+Tutte le query vengono quindi concatenate con i vettori rappresentanti delle due classi producendo un numero di concatenazioni pari al numero di query moltiplicato per 2 (ovvero il doppio delle istanze rimanenti nella classe positiva dopo la creazione del positive set).
+
+Questo tensore viene poi passato alla rete che calcola le predizioni su quale delle classi (positive set e negative set) sia più simile alla query. In questo modo la rete produce una coppia di valori che indicano la probabilità con cui una query è associata ai due set.
 Di questi viene presa solo l'elemento 0 che indica l'affinità con il positive set.
 Utilizzando poi un corrispettivo valore che contiene il valore atteso reale è possibile calcolare precision, recall e AUPRC.
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=Funzione \texttt{test\_predictions}, label=test_predictions_relation,captionpos=b]
+def test_predictions(feature_encoder,relation_network, positive_set, negative_set, query_set, n, p):
+    n_class = 2
+    n_query = query_set.size(0)
+
+    FEATURE_DIM = 64
+
+    pos_embeddings = feature_encoder(Variable(positive_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 15 X 5
+
+    # resize the images from 15 X 5 to 5 X 5 to get square images
+    # interpolate down samples the input to the given size
+    pos_embeddings = F.interpolate(pos_embeddings, size = 5)
+    pos_embeddings = pos_embeddings.view(1, p, FEATURE_DIM, 5, 5) # CLASS_NUM X SAMPLE_NUM_PER_CLASS X FEATURE_DIM X 5 X 5
+    pos_embeddings = torch.sum(pos_embeddings,1).squeeze(1)   # CLASS_NUM X FEATURE_DIM X 5 X 5
+
+    neg_embeddings = feature_encoder(Variable(negative_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+
+    # resize the images from 15 X 5 to 5 X 5 to get square images
+    # interpolate down samples the input to the given size
+    neg_embeddings = F.interpolate(neg_embeddings, size = 5)
+    neg_embeddings = neg_embeddings.view(1, n, FEATURE_DIM, 5, 5) # CLASS_NUM X SAMPLE_NUM_PER_CLASS X FEATURE_DIM X 5 X 5
+    neg_embeddings = torch.sum(neg_embeddings,1).squeeze(1)   # CLASS_NUM X FEATURE_DIM X 5 X 5
+    
+    batch_features = feature_encoder(Variable(query_set)) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+    batch_features = F.interpolate(batch_features, size = 5)
+    
+    pos_neg_embeddings =  torch.cat((pos_embeddings, neg_embeddings), 0)
+
+    # calculate relations
+    # each batch sample link to every samples to calculate relations
+    pos_neg_embeddings_ext = pos_neg_embeddings.unsqueeze(0).repeat(int(n_class * n_query/2), 1, 1, 1, 1) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X 5 X FEATURE_DIM X 5 X 5
+    
+    batch_features_ext = batch_features.unsqueeze(0).repeat(n_class, 1, 1, 1, 1)  # 5 X (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+    batch_features_ext = torch.transpose(batch_features_ext, 0, 1)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X CLASS_NUM X FEATURE_DIM X 5 X 5
+
+    relation_pairs = torch.cat((pos_neg_embeddings_ext,batch_features_ext), 2).view(-1, FEATURE_DIM*2, 5, 5)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X (FEATURE_DIM * 2) X 5 X 5
+    relations = relation_network(relation_pairs).view(-1,n_class) #  (CLASS_NUM * BATCH_NUM_PER_CLASS) X CLASS_NUM
+    
+    target_inds = torch.arange(n_class-1, -1, step = -1).view(n_class, 1).expand(n_class, int(n_query/2)).long()
+    
+    return relations[:,0].view(-1).detach(), target_inds.reshape(1, -1).squeeze()
+\end{lstlisting}
+
 \clearpage
+
+\section{Risultati}
+\subsection{Area under precision-recall curve (AUPRC)}
+Nella fase di test, la rete elabora una predizione dell'output a partire da un ingresso noto che poi viene confrontata con il valore effettivo.
+Nel nostro caso è presente un positive set e un negative set, si tratta quindi di classificazione binaria.
+Il confronto tra predizione e label può produrre quattro risultati:
+\begin{itemize}
+	\item Vero Negativo (TN): il valore reale è negativo e il valore predetto è negativo;
+	\item Vero Positivo (TP): il valore reale è positivo e il valore predetto	è positivo;
+	\item Falso Negativo (FN): il valore reale è positivo e il valore predetto è negativo;
+	\item Falso Positivo (FP): il valore reale è negativo e il valore predetto	è positivo;
+\end{itemize}
+Questi valori vanno a comporre la confusion matrix.
+Nel nostro caso siamo interessati a Precision e Recall.
+
+Il parametro Precision rappresenta quanti tra i casi predetti come positivi sono realmente positivi.
+
+Il parametro Recall indica quanti tra i casi realmente positivi è stato predetto in modo corretto.
+\begin{equation}
+Precision=\frac{TP}{TP+FP}
+\end{equation}
+\begin{equation}
+Recall=\frac{TP}{TP+FN}
+\end{equation}
+
+Consideriamo un vettore contenente le probabilità che una serie di query appartengano a una classe. Impostando una soglia di decisione e confrontando con un altro vettore contenente i valori desiderati, 1 se la query corrisponde alla classe positiva e 0 altrimenti, è possibile ottenere una coppia di valori di precision e recall.
+
+A questo punto ordiniamo il vettore con valori decrescenti.
+Consideriamo come soglia il valore di probabilità presente al primo elemento e calcoliamo precision e recall.
+Poi, spostiamo la soglia al valore del secondo elemento e calcoliamo altri valori.
+Continuando in questo modo si può ottenere una curva considerando alle ascisse i valori di recall e come ordinate i valori di precision.
+
+Calcolando l'area sottesa dalla curva si ricava il valore detto Area under precision-recall curve (AUPRC).
+Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
+\clearpage
+
+\section{Conclusioni}
+\clearpage
+
 \nocite{*}
 %Il comando \printbibliography produce la sezione bibliografica con relativi
 %titolo e testatina. Per mandarne il relativo titolo nell’indice generale si
