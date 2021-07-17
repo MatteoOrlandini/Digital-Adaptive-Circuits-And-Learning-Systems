@@ -1,0 +1,3 @@
+\babel@toc {italian}{}
+\babel@toc {italian}{}
+\beamer@sectionintoc {1}{Bluetooth}{3}{0}{1}
