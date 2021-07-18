@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.13)  17 JUL 2021 12:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.13)  18 JUL 2021 13:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1233,26 +1233,33 @@ ne 120.
 
 ] [8
 
-] [9
+]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 138.
+
+
+(c:/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) [9
 
 ] [10
 
 ] [11
 
+] [12
+
 ]
-<Immagini/relation_network.png, id=372, 847.66687pt x 422.32782pt>
+[13
+
+]
+<Immagini/relation_network.png, id=433, 847.66687pt x 422.32782pt>
 File: Immagini/relation_network.png Graphic file (type png)
 <use Immagini/relation_network.png>
-Package pdftex.def Info: Immagini/relation_network.png  used on input line 152.
+Package pdftex.def Info: Immagini/relation_network.png  used on input line 168.
 
 (pdftex.def)             Requested size: 307.28987pt x 153.09474pt.
- [12
+ [14
 
- <./Immagini/relation_network.png>] [13
-
-] [14
-
-] [15
+ <./Immagini/relation_network.png>] [15
 
 ] [16
 
@@ -1264,7 +1271,12 @@ Package pdftex.def Info: Immagini/relation_network.png  used on input line 152.
 
 ] [20
 
-] [21
+]
+[21
+
+] [22
+
+] [23
 
 ]
 \tf@nav=\write6
@@ -1276,35 +1288,36 @@ Package pdftex.def Info: Immagini/relation_network.png  used on input line 152.
 \tf@snm=\write8
 \openout8 = `Presentazione.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 220.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 220.
-
-(./Presentazione.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 220.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 220.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 237.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 237.
+ (./Presentazione.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 237.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 237.
 Package rerunfilecheck Info: File `Presentazione.out' has not changed.
 (rerunfilecheck)             Checksum: E4317509344CA7C7DD1D0F378E62632C;335.
  ) 
 Here is how much of TeX's memory you used:
- 31040 strings out of 492623
- 579625 string characters out of 6133290
+ 31064 strings out of 492623
+ 580260 string characters out of 6133290
  845017 words of memory out of 5000000
- 34385 multiletter control sequences out of 15000+600000
- 543906 words of font info for 53 fonts, out of 8000000 for 9000
+ 34401 multiletter control sequences out of 15000+600000
+ 544220 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,14n,79p,1310b,852s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texl
-ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2019/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/texlive/2019/texmf-di
-st/fonts/type1/public/cm-super/sfsi1000.pfb><c:/texlive/2019/texmf-dist/fonts/t
-ype1/public/cm-super/sfss0600.pfb><c:/texlive/2019/texmf-dist/fonts/type1/publi
-c/cm-super/sfss0800.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super
-/sfss1000.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1095.
-pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb>
-Output written on Presentazione.pdf (21 pages, 443782 bytes).
+ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2019/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2019/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/texlive/2019/texmf-dist/fonts/
+type1/public/cm-super/sfsi1000.pfb><c:/texlive/2019/texmf-dist/fonts/type1/publ
+ic/cm-super/sfss0600.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-supe
+r/sfss0800.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1000
+.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb><c:/t
+exlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb><c:/texlive/201
+9/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
+Output written on Presentazione.pdf (23 pages, 488548 bytes).
 PDF statistics:
- 699 PDF objects out of 1000 (max. 8388607)
- 630 compressed objects within 7 object streams
- 50 named destinations out of 1000 (max. 500000)
+ 763 PDF objects out of 1000 (max. 8388607)
+ 688 compressed objects within 7 object streams
+ 54 named destinations out of 1000 (max. 500000)
  119 words of extra memory for PDF output out of 10000 (max. 10000000)
 

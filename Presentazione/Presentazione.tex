@@ -132,6 +132,22 @@
 
 \section{Prototypical}
 \begin{frame}
+	\frametitle{Architettura della rete}La CNN che funge da rete di embedding per la Prototypical Network è costituita da 4 strati convoluzionali. Il primo di essi ha come ingresso un singolo canale e come uscita 64 mentre i tre successivi traspongono 64 canali in altri 64.
+
+	Al termine dei blocchi viene effettuato il reshape dell'uscita schiacciandola in una sola dimensione, \texttt{x.view(x.size(0),-1)}, in modo da avere una matrice le cui righe rappresentano gli embedding vettoriali.
+\end{frame}
+
+\begin{frame}
+	\frametitle{Blocco convoluzionale}
+		Ogni blocco convoluzionale ha 4 fasi:
+		\begin{itemize}
+			\item \texttt{nn.Conv2d(in\_channels,out\_channels,3,padding=1)}: Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
+			\item \texttt{nn.BatchNorm2d(out\_channels)}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
+			\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
+			\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un?immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
+		\end{itemize}
+\end{frame}
+\begin{frame}
 	\frametitle{Training}
 \end{frame}
 \begin{frame}
@@ -194,13 +210,14 @@
 	Area sottessa dalla curva precision-recall.
 	Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
 	\end{block}
+	Per calcolare questo parametro sono state usate le funzioni \texttt{precision\_recall\_curve} e \texttt{sklearn.metrics.auc}.
 \end{frame}
 \begin{frame}
 	\frametitle{Calcolo AUPRC}
 	\begin{enumerate}
 	\item Consideriamo i valori di probabilità delle query di appartenere alla classe positiva.
 	\item Ordiniamo il vettore in ordine decrescente.
-	\item Consideriamo come soglia il valore di probabilità presente al primo elemento e calcoliamo precision e recall.
+	\item Consideriamo come soglia il valore di probabilità presente al primo elemento e calcoliamo precision e recall confrontando con un vettore che indica la classe corretta.
 	\item Spostiamo la soglia al valore del secondo elemento e calcoliamo un'altra coppia di parametri.
 	\item Ripetiamo il passo 3 e 4 per tutti gli elementi.
 	\item Otteniamo una curva considerando alle ascisse i valori di recall e come ordinate i valori di precision.
