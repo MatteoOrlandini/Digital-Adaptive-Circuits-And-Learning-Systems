@@ -136,6 +136,8 @@
 	\item Un query set con Q istanze per ognuna delle C classi.
 	\end{itemize}
 	Ogni episodio può essere completamente unico; potremmo non vedere mai le classi di un episodio in nessuno degli altri.
+	
+	Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
 
 \end{frame}
 \section{Creazione del Dataset}
@@ -145,6 +147,30 @@
 \end{frame}
 
 \section{Prototypical}
+\begin{frame}
+	\frametitle{Protypical Network}
+	L'approccio si basa sull'idea che esista un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione per ogni classe, chiamata \textit{prototipo}. 
+	Nella classificazione few-shot per ogni episodio viene fornito un support set di $N$ esempi etichettati  $S=\{(\mathbf{x}_1,y_1), \dots,(\mathbf{x}_N,y_N)\}$ dove $\mathbf{x}_i\in \mathbb{R}^D$ rappresenta il vettore $D$-dimensionale della feature (nel nostro caso spettrogrammi di dimensione $128 \times 51$) e $y_i \in \{1, \dots, K\}$ la rispettiva label. $S_k$ denota il set di esempi etichettati con la classe $k$.
+\end{frame}
+\begin{frame}
+	La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k$, o \emph{prototipo}, di ogni classe tramite una funzione di embedding $f_\phi : \mathbb{R}^D \rightarrow \mathbb{R}^M$ con parametri da allenare $\phi$. La funzione di embedding è rappresentata da una rete convoluzionale. Ogni prototipo è calcolato come la media tra gli embedding delle istanze della stessa classe.
+	\begin{equation}
+		\mathbf{c}_k=\frac{1}{|S_k|}\sum_{(\mathbf{x}_i,y_i)\in S_k}f_\phi (\mathbf{x}_i)
+	\end{equation}
+	Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Prototypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
+	\begin{equation}\label{eq:softmax}
+	p_\phi(y=k|\mathbf{x})=\dfrac{\exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k))}{\sum_k' \exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k'))}
+	\end{equation}
+
+\end{frame}
+\begin{frame}
+	Il processo di training avviene minimizzando il negativo del logaritmo della probabilità
+	\begin{equation}\label{eq:loss_proto}
+		J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)
+	\end{equation}
+	considerando la distanza fra query e il prototipo della sua classe.
+	Gli episodi di training sono formati campionando C classi di parole da un lettore e selezionando per ognuna casualmente K istanze e Q query.
+\end{frame}
 \begin{frame}
 	\frametitle{Architettura della rete}La CNN che funge da rete di embedding per la Prototypical Network è costituita da 4 strati convoluzionali. Il primo di essi ha come ingresso un singolo canale e come uscita 64 mentre i tre successivi traspongono 64 canali in altri 64.
 
@@ -172,6 +198,24 @@
 \end{frame}
 
 \section{Relation}
+\begin{frame}
+	\frametitle{Relation Network}
+	La rete Relation ha lo scopo di associare due istanze alla volta per determinare la loro similarità.
+	Questo viene effettuato concatenando gli embedding di più istanze in un unico elemento che sarà dato in ingresso a una rete decisionale i cui parametri saranno aggiornati in modo che una concatenazione di elementi simili restituisca un risultato vicino a 1.
+	La Relation Network è costituita da due moduli: un modulo di \emph{embedding} $f_\varphi$ (equivalente a quello nella Prototypical) e un modulo di \emph{relation} $g_\phi$.
+	Le istanze $x_i$ del query set $\mathcal{Q}$ e quelle $x_j$ del support set $\mathcal{S}$ vengono date in ingresso al modulo di embedding producendo dei vettori (feature maps) $f_\varphi(x_i)$ e $f_\varphi(x_j)$.
+	Questi ultimi vengono poi dati all'operatore $\mathcal{C}(\cdot ,\cdot)$ che ne fa la concatenazione: $\mathcal{C}(f_\varphi(x_i),f_\varphi(x_j))$.
+\end{frame}
+\begin{frame}
+	Le feature map concatenate passano poi attraverso il modulo di decisione che restituisce uno scalare da 0 a 1, il quale rappresenta la somiglianza tra $x_i$ e $x_j$.
+	Per il caso $C$-way one-shot, viene concatenata la query con le istanze delle $C$ classi producendo $C$ punteggi di somiglianza.
+	\begin{equation}
+		r_{i,j}=g_\phi(\mathcal{C}(f_\varphi(x_i),f_\varphi(x_j))),  \qquad i = 1, 2, \dots, C
+	\end{equation}
+	Nel caso $C$-way K-shot invece, la query viene concatenata con la somma elemento per elemento degli embedding di ogni istanza delle classi. Quindi, in entrambi i casi i confronti $r_{i,j}$ sono $C$ per ogni query.
+	
+	Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che l'uscita del modulo di decisione produca 1 se i vettori concatenati sono della stessa classe e 0 altrimenti.
+\end{frame}
 \begin{frame}
 \frametitle{Relation Network}
 \begin{figure}[h]

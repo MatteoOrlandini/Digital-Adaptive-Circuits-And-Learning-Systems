@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.13)  19 JUL 2021 09:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2020.1.13)  19 JUL 2021 10:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1235,50 +1235,60 @@ ne 120.
 
 ] [9
 
-]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 152.
-
-
-(c:/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
-File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [10
+] [10
 
 ] [11
 
 ] [12
 
-] [13
+]
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 178.
+
+
+(c:/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) [13
+
+] [14
+
+] [15
+
+] [16
 
 ]
-[14
-
-]
-<Immagini/relation_network.png, id=462, 847.66687pt x 422.32782pt>
-File: Immagini/relation_network.png Graphic file (type png)
-<use Immagini/relation_network.png>
-Package pdftex.def Info: Immagini/relation_network.png  used on input line 182.
-
-(pdftex.def)             Requested size: 307.28987pt x 153.09474pt.
- [15
-
- <./Immagini/relation_network.png>] [16
-
-] [17
+[17
 
 ] [18
 
 ] [19
 
-] [20
-
-] [21
-
 ]
-[22
+<Immagini/relation_network.png, id=617, 847.66687pt x 422.32782pt>
+File: Immagini/relation_network.png Graphic file (type png)
+<use Immagini/relation_network.png>
+Package pdftex.def Info: Immagini/relation_network.png  used on input line 226.
+
+(pdftex.def)             Requested size: 307.28987pt x 153.09474pt.
+ [20
+
+ <./Immagini/relation_network.png>] [21
+
+] [22
 
 ] [23
 
 ] [24
+
+]
+[25
+
+] [26
+
+] [27
+
+] [28
+
+] [29
 
 ]
 \tf@nav=\write6
@@ -1290,37 +1300,52 @@ Package pdftex.def Info: Immagini/relation_network.png  used on input line 182.
 \tf@snm=\write8
 \openout8 = `Presentazione.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 251.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 251.
- (./Presentazione.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 251.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 251.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 295.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 295.
+ (./Presentazione.aux
+
+Package pdfbase Warning: Rerun to get internal references right!
+
+)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 295.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 295.
 Package rerunfilecheck Info: File `Presentazione.out' has not changed.
 (rerunfilecheck)             Checksum: E4317509344CA7C7DD1D0F378E62632C;335.
  ) 
 Here is how much of TeX's memory you used:
- 31070 strings out of 492623
- 580321 string characters out of 6133290
+ 31105 strings out of 492623
+ 580687 string characters out of 6133290
  845017 words of memory out of 5000000
- 34404 multiletter control sequences out of 15000+600000
- 545047 words of font info for 55 fonts, out of 8000000 for 9000
+ 34423 multiletter control sequences out of 15000+600000
+ 547372 words of font info for 58 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  57i,14n,79p,1310b,852s stack positions out of 5000i,500n,10000p,200000b,80000s
-{c:/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texl
-ive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2019/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2019/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmssi10.pfb><c:/texlive/2019/texmf-dist/fonts/
-type1/public/cm-super/sfsi1000.pfb><c:/texlive/2019/texmf-dist/fonts/type1/publ
-ic/cm-super/sfsi1095.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-supe
-r/sfss0600.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss0800
-.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1000.pfb><c:/t
-exlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb><c:/texlive/201
-9/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb><c:/texlive/2019/texmf-di
-st/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on Presentazione.pdf (24 pages, 500071 bytes).
+pdfTeX warning (dest): name{Navigation30} has been referenced but does not ex
+ist, replaced by a fixed one
+
+{c:/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}<c:/texliv
+e/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2019/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2019/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2019/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmss10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmss8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmssi10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi8
+.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/
+texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/20
+19/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb><c:/texlive/2019/t
+exmf-dist/fonts/type1/public/cm-super/sfsi1000.pfb><c:/texlive/2019/texmf-dist/
+fonts/type1/public/cm-super/sfsi1095.pfb><c:/texlive/2019/texmf-dist/fonts/type
+1/public/cm-super/sfss0600.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/c
+m-super/sfss0800.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sf
+ss1000.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1095.pfb
+><c:/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfss1440.pfb><c:/texli
+ve/2019/texmf-dist/fonts/type1/public/cm-super/sfsx0800.pfb><c:/texlive/2019/te
+xmf-dist/fonts/type1/public/cm-super/sfsx1095.pfb><c:/texlive/2019/texmf-dist/f
+onts/type1/public/cm-super/sftt1095.pfb>
+Output written on Presentazione.pdf (29 pages, 580761 bytes).
 PDF statistics:
- 797 PDF objects out of 1000 (max. 8388607)
- 718 compressed objects within 8 object streams
- 56 named destinations out of 1000 (max. 500000)
+ 980 PDF objects out of 1000 (max. 8388607)
+ 881 compressed objects within 9 object streams
+ 69 named destinations out of 1000 (max. 500000)
  119 words of extra memory for PDF output out of 10000 (max. 10000000)
 
