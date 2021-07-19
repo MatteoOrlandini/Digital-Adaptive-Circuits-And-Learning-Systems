@@ -140,6 +140,13 @@
 	Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
 
 \end{frame}
+\begin{frame}
+	\begin{figure}[h]
+		\centering	
+		\includegraphics[width=\textwidth]{Immagini/training_task}
+		\caption{Esempio episodi}
+	\end{figure}
+\end{frame}
 \section{Creazione del Dataset}
 
 \begin{frame}
@@ -151,6 +158,14 @@
 	\frametitle{Protypical Network}
 	L'approccio si basa sull'idea che esista un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione per ogni classe, chiamata \textit{prototipo}. 
 	Nella classificazione few-shot per ogni episodio viene fornito un support set di $N$ esempi etichettati  $S=\{(\mathbf{x}_1,y_1), \dots,(\mathbf{x}_N,y_N)\}$ dove $\mathbf{x}_i\in \mathbb{R}^D$ rappresenta il vettore $D$-dimensionale della feature (nel nostro caso spettrogrammi di dimensione $128 \times 51$) e $y_i \in \{1, \dots, K\}$ la rispettiva label. $S_k$ denota il set di esempi etichettati con la classe $k$.
+\end{frame}
+\begin{frame}
+\frametitle{Relation Network}
+\begin{figure}[h]
+	\centering
+	{\includegraphics[width=0.5\textwidth]{Immagini/proto_few_shot}}
+	\caption{I prototipi few-shot $\mathbf{c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. I punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi(y = k|\mathbf{x}) \propto \exp \left(-d(f_\phi(\mathbf{x}),\mathbf{c}_k) \right)$.}
+\end{figure}
 \end{frame}
 \begin{frame}
 	La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k$, o \emph{prototipo}, di ogni classe tramite una funzione di embedding $f_\phi : \mathbb{R}^D \rightarrow \mathbb{R}^M$ con parametri da allenare $\phi$. La funzione di embedding è rappresentata da una rete convoluzionale. Ogni prototipo è calcolato come la media tra gli embedding delle istanze della stessa classe.

@@ -2,8 +2,8 @@
 \babel@toc {italian}{}
 \beamer@sectionintoc {1}{Introduzione}{3}{0}{1}
 \beamer@sectionintoc {2}{Few-shot learning}{7}{0}{2}
-\beamer@sectionintoc {3}{Creazione del Dataset}{9}{0}{3}
-\beamer@sectionintoc {4}{Prototypical}{10}{0}{4}
-\beamer@sectionintoc {5}{Relation}{18}{0}{5}
-\beamer@sectionintoc {6}{Risultati}{24}{0}{6}
-\beamer@sectionintoc {7}{Conclusioni}{29}{0}{7}
+\beamer@sectionintoc {3}{Creazione del Dataset}{10}{0}{3}
+\beamer@sectionintoc {4}{Prototypical}{11}{0}{4}
+\beamer@sectionintoc {5}{Relation}{20}{0}{5}
+\beamer@sectionintoc {6}{Risultati}{26}{0}{6}
+\beamer@sectionintoc {7}{Conclusioni}{31}{0}{7}
