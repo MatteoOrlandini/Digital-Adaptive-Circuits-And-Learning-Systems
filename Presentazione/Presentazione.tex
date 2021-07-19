@@ -59,6 +59,96 @@
 	{»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
 }  
 
+\definecolor{maroon}{cmyk}{0, 0.87, 0.68, 0.32}
+\definecolor{halfgray}{gray}{0.55}
+\definecolor{ipython_frame}{RGB}{207, 207, 207}
+\definecolor{ipython_bg}{RGB}{247, 247, 247}
+\definecolor{ipython_red}{RGB}{186, 33, 33}
+\definecolor{ipython_green}{RGB}{0, 128, 0}
+\definecolor{ipython_cyan}{RGB}{64, 128, 128}
+\definecolor{ipython_purple}{RGB}{170, 34, 255}
+
+
+\lstdefinelanguage{iPython}{
+	morekeywords={access,and,break,class,continue,def,del,elif,else,except,exec,finally,for,from,global,if,import,in,is,lambda,not,or,pass,print,raise,return,try,while},%
+	%
+	% Built-ins
+	morekeywords=[2]{abs,all,any,basestring,bin,bool,bytearray,callable,chr,classmethod,cmp,compile,complex,delattr,dict,dir,divmod,enumerate,eval,execfile,file,filter,float,format,frozenset,getattr,globals,hasattr,hash,help,hex,id,input,int,isinstance,issubclass,iter,len,list,locals,long,map,memoryview,next,object,oct,open,ord,pow,property,range,raw_input,reduce,reload,repr,reversed,round,set,setattr,slice,sorted,staticmethod,str,sum,super,tuple,type,unichr,unicode,vars,xrange,zip,apply,buffer,coerce,intern, F, nn, np},%
+	%
+	sensitive=true,%
+	morecomment=[l]\#,%
+	morestring=[b]',%
+	morestring=[b]",%
+	%
+	morestring=[s]{'''}{'''},% used for documentation text (mulitiline strings)
+	morestring=[s]{"""}{"""},% added by Philipp Matthias Hahn
+	%
+	morestring=[s]{r'}{'},% `raw' strings
+	morestring=[s]{r"}{"},%
+	morestring=[s]{r'''}{'''},%
+	morestring=[s]{r"""}{"""},%
+	morestring=[s]{u'}{'},% unicode strings
+	morestring=[s]{u"}{"},%
+	morestring=[s]{u'''}{'''},%
+	morestring=[s]{u"""}{"""},%
+	%
+	% {replace}{replacement}{lenght of replace}
+	% *{-}{-}{1} will not replace in comments and so on
+	literate=
+	{á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+	{Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+	{à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+	{À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+	{ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+	{Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+	{â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+	{Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+	{?}{{\oe}}1 {?}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+	{ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+	{?}{{\EUR}}1 {£}{{\pounds}}1
+	%
+	{^}{{{\color{ipython_purple}\^{}}}}1
+	{=}{{{\color{ipython_purple}=}}}1
+	%
+	{+}{{{\color{ipython_purple}+}}}1
+	{*}{{{\color{ipython_purple}$^\ast$}}}1
+	{/}{{{\color{ipython_purple}/}}}1
+	%
+	{+=}{{{+=}}}1
+	{-=}{{{-=}}}1
+	{*=}{{{$^\ast$=}}}1
+	{/=}{{{/=}}}1,
+	literate=
+	*{-}{{{\color{ipython_purple}-}}}1
+	{?}{{{\color{ipython_purple}?}}}1,
+	%
+	identifierstyle=\color{black}\ttfamily\tiny,
+	commentstyle=\color{ipython_cyan}\ttfamily\tiny,
+	stringstyle=\color{ipython_red}\ttfamily\tiny,
+	keepspaces=false,
+	showspaces=false,
+	breaklines=true,
+	showstringspaces=false,
+	%
+	rulecolor=\color{ipython_frame},
+	frame=single,
+	frameround={t}{t}{t}{t},
+	framexleftmargin=6mm,
+	numbers=left,
+	numberstyle=\tiny\color{halfgray},
+	%
+	%
+	backgroundcolor=\color{ipython_bg},
+	%   extendedchars=true,
+	basicstyle=\scriptsize\tiny,
+	tabsize=1,
+	keywordstyle=\color{ipython_green}\ttfamily\tiny,
+	morekeywords={typeof, null, catch, switch, in, int, str, float, self, import, def, return, True, False, None},
+	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample, isdir, compute_melspectrogram, load, melspectrogram,power_to_db, mkdir, save_dataset, save_test_dataset, OSError, find_valid_readers, create_training_validation_test_readers, find_classes, concatenate, FloatTensor, save, load, tqdm, empty, count_parameters, conv_block, Protonet, Module, init,Sequential, forward, is_available, Adam, get_training_validation_readers, trange, batch_sample, to, train, zero_grad, loss, backward, step, batch_sample, mean, savemat,get_training_validation_readers, empty, shape, cat, unsqueeze, expand, squeeze, size, arange, view, expand, mean, euclidean_dist, log_softmax, gather, eq, max, min, Adam, load_state_dict, isfile, listdir, get_negative_positive_query_set, test_predictions, cpu, tolist, precision_recall_curve, auc, std, get_negative_positive_query_set, test_predictions, size, softmax, detach, reshape, squeeze, Sequential, Conv2d, BatchNorm2d, ReLU, MaxPool2d, Linear, normal_,sigmoid,relu,zero_,fill_,sqrt,get_device_properties, interpolate, repeat, unsqueeze, transpose, weights_init, init, ones, zeros,main, extend, clip_grad_norm_},          % Custom highlighting
+	emphstyle=\color{ipython_purple}\ttfamily,    % Custom highlighting style
+}
+
+
 \usetheme{Antibes}
 \usecolortheme{default} %https://hartwork.org/beamer-theme-matrix/
 %\useoutertheme[right,color=red]{sidebar} %{infolines}
@@ -160,7 +250,6 @@
 	Nella classificazione few-shot per ogni episodio viene fornito un support set di $N$ esempi etichettati  $S=\{(\mathbf{x}_1,y_1), \dots,(\mathbf{x}_N,y_N)\}$ dove $\mathbf{x}_i\in \mathbb{R}^D$ rappresenta il vettore $D$-dimensionale della feature (nel nostro caso spettrogrammi di dimensione $128 \times 51$) e $y_i \in \{1, \dots, K\}$ la rispettiva label. $S_k$ denota il set di esempi etichettati con la classe $k$.
 \end{frame}
 \begin{frame}
-\frametitle{Relation Network}
 \begin{figure}[h]
 	\centering
 	{\includegraphics[width=0.5\textwidth]{Immagini/proto_few_shot}}
@@ -191,7 +280,38 @@
 
 	Al termine dei blocchi viene effettuato il reshape dell'uscita schiacciandola in una sola dimensione, \texttt{x.view(x.size(0),-1)}, in modo da avere una matrice le cui righe rappresentano gli embedding vettoriali.
 \end{frame}
+\begin{frame}[fragile]
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet.py, label= Protonet,captionpos=b]
+import torch.nn as nn
 
+def count_parameters(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+def conv_block(in_channels,out_channels):
+
+    return nn.Sequential(
+        nn.Conv2d(in_channels,out_channels,3,padding=1),
+        nn.BatchNorm2d(out_channels),
+        nn.ReLU(),
+        nn.MaxPool2d(2)
+    )
+
+class Protonet(nn.Module):
+    def __init__(self):
+        super(Protonet,self).__init__()
+        self.encoder = nn.Sequential(
+            conv_block(1,64),
+            conv_block(64,64),
+            conv_block(64,64),
+            conv_block(64,64)
+        )
+    def forward(self,x):
+        (num_samples,mel_bins, seq_len) = x.shape
+        x = x.view(-1,1,mel_bins,seq_len) 
+        x = self.encoder(x)
+        return x.view(x.size(0),-1)
+\end{lstlisting}
+\end{frame}
 \begin{frame}
 	\frametitle{Blocco convoluzionale}
 		Ogni blocco convoluzionale ha 4 fasi:
@@ -204,9 +324,34 @@
 \end{frame}
 \begin{frame}
 	\frametitle{Training}
+	Il numero totale di iterazioni è 60000; per ogni episodio viene richiamata la funzione \texttt{batch\_sample}.
+	
+	Con \texttt{loss\_out.backward()} viene utilizzata la loss per la retropropagazione che aggiorna i parametri della rete.
+\end{frame}
+\begin{frame}
+	La funzione \texttt{get\_training\_validation\_readers}, a partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo il rapporto usato nel paper di riferimento.
+\end{frame}
+\begin{frame}
+	La funzione \texttt{batch\_sample} campiona a caso uno dei lettori di training e di questo seleziona casualmente $C$ parole. Per ognuna di queste parole si ricava il numero di istanze presenti del dataset e vengono campionate $K+Q$ istanze random della parola. Le $K+Q$ istanze vengono divise in $K$ istanze del support set e $Q$ stanze del query set. La funzione ritorna due tensori \texttt{query} e \texttt{support}, rispettivamente di dimensioni $C \times Q \times 128 \times 51$ e $C \times K \times 128 \times 51$.
+\end{frame}
+\begin{frame}
+	Una volta ottenute, le feature del support set e query set vengono date in ingresso alla funzione \texttt{loss}. Entrambi i set vengono ridimensionati, rispettivamente da $C \times K \times 128 \times 51$ a $(C \cdot K) \times 128 \times 51$ e da $C \times Q \times 128 \times 51$ a $(C \cdot Q) \times 128 \times 51$.
+	Vengono poi concatenate, risultando in un tensore $\left(C \cdot (Q + K)\right) \times 128 \times 51$, per poter essere passate al modello che calcolerà gli embedding per ogni istanza.
+	Gli elementi del support set che fanno parte della stessa classe andranno a costituire i prototipi tramite una media dei loro valori.
+\end{frame}
+\begin{frame}
+	Vengono successivamente calcolate le distanze rispetto ai prototipi degli embedding di ogni classe tramite la funzione \texttt{euclidean\_dist} che ritorna una matrice di dimensioni $(C \cdot Q) \times C$. L'i-esima riga e la j-esima colonna rappresentano la distanza euclidea tra gli embedding della i-esima query ($i = 1, \dots, C \cdot Q$) e quelli del j-esimo ($j = 1, \dots, C$) prototipo.
+	
+	Per ogni query viene poi usata la funzione di attivazione softmax, i cui argomenti sono le distanze tra la query e i prototipi delle varie classi. La funzione loss da minimizzare è il logaritmo del softmax preso con segno negativo. Se la query è vicina al prototipo, la funzione softmax tende a 1 e di conseguenza il suo logaritmo a 0, dunque la loss tende a 0, come dovrebbe appunto risultare. Nel caso in cui, invece, la query è molto lontata dal prototipo, la funzione softmax tende a 0 e il suo logaritmo a $-\infty$. In questo caso, la loss, definita come il logaritmo del softmax preso con segno negativo, tende a $+\infty$, come ci si aspetta.
 \end{frame}
 \begin{frame}
 	\frametitle{Validation}
+	Ogni 5000 episodi del training vengono effettuati 1000 episodi di validation.
+	Come nel training vengono ricavati support set e query set, ma in questo caso dai lettori di validation.
+	Per questi vengono calcolati con la funzione \texttt{loss} allo stesso modo loss e accuracy e vengono salvati.
+	In questo caso però i parametri del modello non vengono aggiornati.
+	Questo processo è necessario per verificare l'effettività del modello su ingressi mai visti in fase di training.
+	Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel passo precedente il modello viene salvato e sovrascritto, altrimenti viene ignorato. In questo modo si salva il modello migliore durante il training, cercando di evitare sia underfitting sia overfitting.
 \end{frame}
 \begin{frame}
 	\frametitle{Test}
