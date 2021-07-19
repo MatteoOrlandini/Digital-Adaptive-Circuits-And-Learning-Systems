@@ -122,8 +122,22 @@
 
 \begin{frame}
 	\frametitle{Few-shot learning}
+	L'algoritmo di few-shot learning non necessita di un dataset numeroso per il training.
+	\begin{block}{Meta-learning}
+	L'apprendimento supervisionato tradizionale chiede al modello di riconoscere i dati di training e quindi di generalizzare per dati di test non visti in precedenza. Diversamente, l'obiettivo del meta apprendimento è imparare.
+	\end{block}
+	 Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{episodi di training} e valutiamo utilizzando una serie di episodi di test.
 \end{frame}
+\begin{frame}
+	\frametitle{C-way K-shot}
+	Ogni episodio per la classificazione C-way K-shot contiene:
+	\begin{itemize}
+	\item Un support set costituito da K istanze di C classi.
+	\item Un query set con Q istanze per ognuna delle C classi.
+	\end{itemize}
+	Ogni episodio può essere completamente unico; potremmo non vedere mai le classi di un episodio in nessuno degli altri.
 
+\end{frame}
 \section{Creazione del Dataset}
 
 \begin{frame}
