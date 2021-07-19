@@ -13,7 +13,6 @@
 \usepackage{siunitx}
 \usepackage{amsmath,amssymb}
 \usepackage{xcolor}
-\usepackage{verbatim}
 
 \colorlet{punct}{red!60!black}
 \definecolor{background}{HTML}{EEEEEE}
@@ -186,7 +185,7 @@
 	tabsize=1,
 	keywordstyle=\color{ipython_green}\ttfamily,
 	morekeywords={typeof, null, catch, switch, in, int, str, float, self, import, def, return, True, False, None},
-	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample, isdir, compute_melspectrogram, load, melspectrogram,power_to_db, mkdir, save_dataset, save_test_dataset, OSError, find_valid_readers, create_training_validation_test_readers, find_classes, concatenate, FloatTensor, save, load, tqdm, empty, count_parameters, conv_block, Protonet, Module, init,Sequential, forward, is_available, Adam, get_training_validation_readers, trange, batch_sample, to, train, zero_grad, loss, backward, step, batch_sample, mean, savemat,get_training_validation_readers, empty, shape, cat, unsqueeze, expand, squeeze, size, arange, view, expand, mean, euclidean_dist, log_softmax, gather, eq, max, min, Adam, load_state_dict, isfile, listdir, get_negative_positive_query_set, test_predictions, cpu, tolist, precision_recall_curve, auc, std, get_negative_positive_query_set, test_predictions, size, softmax, detach, reshape, squeeze, Sequential, Conv2d, BatchNorm2d, ReLU, MaxPool2d, Linear, normal_,sigmoid,relu,zero_,fill_,sqrt,get_device_properties, interpolate, repeat, unsqueeze, transpose, },          % Custom highlighting
+	emph={read_json_file,write_json_file, exists, parse, getroot, basename, scandir, keys, Counter, append, sample, isdir, compute_melspectrogram, load, melspectrogram,power_to_db, mkdir, save_dataset, save_test_dataset, OSError, find_valid_readers, create_training_validation_test_readers, find_classes, concatenate, FloatTensor, save, load, tqdm, empty, count_parameters, conv_block, Protonet, Module, init,Sequential, forward, is_available, Adam, get_training_validation_readers, trange, batch_sample, to, train, zero_grad, loss, backward, step, batch_sample, mean, savemat,get_training_validation_readers, empty, shape, cat, unsqueeze, expand, squeeze, size, arange, view, expand, mean, euclidean_dist, log_softmax, gather, eq, max, min, Adam, load_state_dict, isfile, listdir, get_negative_positive_query_set, test_predictions, cpu, tolist, precision_recall_curve, auc, std, get_negative_positive_query_set, test_predictions, size, softmax, detach, reshape, squeeze, Sequential, Conv2d, BatchNorm2d, ReLU, MaxPool2d, Linear, normal_,sigmoid,relu,zero_,fill_,sqrt,get_device_properties, interpolate, repeat, unsqueeze, transpose, weights_init, init, ones, zeros,main, extend, clip_grad_norm_},          % Custom highlighting
 	emphstyle=\color{ipython_purple}\ttfamily,    % Custom highlighting style
 }
 
@@ -281,8 +280,7 @@ Per fare questo, l'idea è quella di costruire un set positivo e un set negativo
 
 Prima di fare questo però, la rete deve ``\textit{imparare ad imparare}'': verrà quindi sottoposta a una serie di task classici di few shot nei quali la rete deve riconoscere a quale classe appartiene una query avendo come riferimento K istanze di C classi, che costituiscono il support set.
 
-Il support set e la query può essere diverso ad ogni episodio, generalizzando il più possibile l'evento e allenando la capacità della rete di \textit{riconoscere la somiglianza} tra le parole, ma non le parole stesse.
-
+Il support e il query set possono essere diversi ad ogni episodio, generalizzando il più possibile l'evento e allenando la capacità della rete di \textit{riconoscere la somiglianza} tra le parole, ma non le parole stesse.
 
 \begin{figure}[h]
 	\centering	
@@ -310,25 +308,26 @@ Solitamente, viene effettuato uno zero-padding sui contorni del volume in modo d
 In seguito alla convoluzione viene applicata una funzione non-lineare come ad esempio una sigmoide o una ReLu con lo scopo di aumentare la proprietà di non linearità.
 
 Il pooling layer è uno strato della rete che ha lo scopo di ridurre le dimensioni della matrice prodotta dal convolutional layer. Combinando gruppi di elementi della matrice (solitamente $2 \times 2$) restituisce il valore massimo tra essi, che andrà a sostituire il blocco stesso.
+\clearpage
 
 \section{Few-shot learning}
 \label{section:Few-shot}
 \subsection{Introduzione}
 Gli esseri umani possono riconoscere nuove classi di oggetti partendo da pochissimi esempi. Tuttavia, la maggior parte delle tecniche di machine learning richiedono migliaia di esempi per ottenere prestazioni simili a quelle umane. L'obiettivo del \textit{few-shot learning} è classificare i nuovi dati dopo aver visto solo pochi esempi di training. Nel caso estremo, potrebbe esserci solo un singolo esempio per ogni classe (\textit{one shot learning}). In pratica, il few-shot learning è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando l'etichettatura dei dati è onerosa.
 
-L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \emph{C-way K-shot}. L'obiettivo è quello di discriminare le $C$ classi composte da $K$ esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $C=10$ classi con solo $K=5$ campioni ciascuno di training. Non possiamo allenare un classificatore usando metodi convenzionali; qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
+L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \emph{C-way K-shot}. L'obiettivo è quello di discriminare le $C$ classi composte da $K$ esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $C=10$ classi con solo $K=5$ campioni ciascuno di training. Non possiamo allenare un classificatore usando metodi convenzionali: qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
 
 Se i dati non sono sufficienti per ridurre il problema, una possibile soluzione è acquisire esperienza da altri problemi simili. A tal fine, la maggior parte degli approcci caratterizza l'apprendimento a breve termine con un problema di meta-apprendimento.
 
 \subsection{Struttura del meta learning}
-Nell'apprendimento classico, impariamo come classificare dai dati di training e valutiamo i risultati utilizzando i dati di test. Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{episodi di training} e valutiamo utilizzando una serie di episodi di test; In altre parole, usiamo un insieme di problemi di classificazione per aiutare a risolvere altri insiemi non correlati.
+Nell'apprendimento classico, impariamo come classificare dai dati di training e valutiamo i risultati utilizzando i dati di test. Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{episodi di training} e valutiamo le performace utilizzando una serie di episodi di test. In altre parole, usiamo un insieme di problemi di classificazione per aiutare a risolvere altri insiemi non correlati.
 
-Qui, ogni attività imita lo scenario few-shot, quindi per la classificazione C-way-K-shot, ogni attività include C classi con K esempi ciascuna. Questi sono noti come support set e vengono utilizzati per apprendere come risolvere il task. Inoltre, esistono ulteriori esempi delle stesse classi, note come set di query, utilizzate per valutare le prestazioni dell'episodio corrente. Ogni episodio può essere completamente unico; potremmo non vedere mai le classi di un episodio in nessuno degli altri. L'idea è che il sistema veda ripetutamente istanze durante l'addestramento che corrispondono alla struttura dell'attività finale di few-shot, ma che contengono classi diverse.
+Qui, ogni task imita lo scenario few-shot, quindi per la classificazione C-way-K-shot, ogni task include C classi con K esempi ciascuna. Questi sono chiamati \textit{support set} e vengono utilizzati per apprendere come risolvere il task. Inoltre, esistono ulteriori esempi delle stesse classi, note come \textit{query set}, utilizzate per valutare le prestazioni dell'episodio corrente. Ogni episodio può essere completamente unico: potremmo non vedere mai le classi di un episodio in nessuno degli altri. L'idea è che il sistema veda ripetutamente istanze durante l'addestramento che corrispondono alla struttura del task finale dell'algoritmo di few-shot, ma che contengono classi diverse.
 
 Ad ogni fase del meta-apprendimento, aggiorniamo i parametri del modello in base ad un episodio di training selezionato casualmente. La funzione di loss è determinata dalle prestazioni di classificazione sul set di query dell'episodio, in base alla conoscenza acquisita dal relativo support set. Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
 
-Per valutare le prestazioni nel few-shot, utilizziamo una serie di attività di test. Ciascuna contiene solo classi invisibili che non erano in nessuna delle attività di formazione. Per ciascuno, misuriamo le prestazioni sul query set in base alla conoscenza del loro support set.
-
+Per valutare le prestazioni nel few-shot, utilizziamo una serie di dati di test. Il set di test contiene solo classi  che non erano nel training set. Per ciascuno, misuriamo le prestazioni sul query set in base alla conoscenza del loro support set.
+\clearpage
 
 %\subsection{Approcci al meta-apprendimento}
 %Gli approcci al meta-apprendimento sono diversi e non c'è consenso sull'approccio migliore. Tuttavia, esistono tre famiglie distinte, ognuna delle quali sfrutta un diverso tipo di conoscenza a priori:
@@ -346,7 +345,7 @@ La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k
 \begin{equation}
 	\mathbf{c}_k=\frac{1}{|S_k|}\sum_{(\mathbf{x}_i,y_i)\in S_k}f_\phi (\mathbf{x}_i)
 \end{equation}
-Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Prototypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
+Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Protypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
 \begin{equation}\label{eq:softmax}
 p_\phi(y=k|\mathbf{x})=\dfrac{\exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k))}{\sum_k' \exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k'))}
 \end{equation}
@@ -710,7 +709,7 @@ for folder in tqdm(os.scandir(source_path), desc = "Folder number"):
 \label{subsec:unione}
 I file ``readers\_paths.json'' e ``word\_count.json'' vengono successivamente usati per salvare le parole di ogni lettore, il nome della relativa cartella in cui vengono pronunciate e i timestamp di inizio e fine della parola per ogni cartella come mostrato nel json~\ref{readers_words}. Il codice~\ref{words_per_reader} legge il nome di ogni lettore dal json precedentemente salvato, successivamente per ognuna delle cartelle del lettore viene usato ``word\_count.json'' per ottenere tutte le parole dell'audio e i relativi timestamp.
 
-Viene salvato infine il file ``readers\_words.json'' che contiene per ogni lettore le parole pronunciate, per ognuna di queste l'audio in cui vengono enunciate e per ogni audio i timestamp di inizio e fine.
+Viene salvato, infine, il file ``readers\_words.json'' che contiene per ogni lettore le parole pronunciate, per ognuna di queste l'audio in cui vengono enunciate e per ogni audio i timestamp di inizio e fine.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=words\_per\_reader.py, label=words_per_reader,captionpos=b]
 from tqdm import tqdm
@@ -868,7 +867,7 @@ I lettori di training e validation saranno poi divisi prima dell'inizio del trai
 
 Le feature, cioè gli spettrogrammi, vengono salvati in due cartelle chiamate ``Training\_validation\_features'' e ``Test\_features'', le quali hanno al loro interno delle cartelle rispettivamente chiamate come il nome del lettore e come il nome dell'articolo di Wikipedia. A sua volta, ogni cartella contiene gli spettrogrammi di ogni istanza della parola.
 
-Il dataset di training e validation viene salvato con la funzione \texttt{save\_dataset}, mentre quello di test con \texttt{save\_test\_dataset}. Il numero massimo di classi e di istanze per ogni classe salvate sono rispettivamente 32 e 64. Questi numeri sono stati scelti perché altrimenti il dataset sarebbe diventato di dimensioni molto grandi.
+Il dataset di training e validation viene salvato con la funzione \texttt{save\_dataset}, mentre quello di test con \texttt{save\_test\_dataset}. Il numero massimo di classi e di istanze per ogni classe salvate sono rispettivamente 32 e 64. Questi numeri sono stati scelti perché altrimenti il dataset sarebbe composto da un elevato numero di classi e istanze, risultando di dimensioni molto grandi.
 
 \begin{lstlisting}[language=iPython,firstnumber=262, caption=preprocessing.py, label=preprocessing,captionpos=b]
 min_classes = 2 # minimum number of classes
@@ -920,7 +919,7 @@ if not (os.path.exists(test_feature_folder_name)):
 save_test_dataset(test_readers, reader_paths, test_feature_folder_name, dataset_path, audio_file_name)
 \end{lstlisting}
 
-Nella funzione \texttt{find\_valid\_readers} viene letto il file ``readers\_words.json'' e viene creata una lista di dizionari con chiavi ``reader\_name'', ``word'', ``start'', ``end'' e ``folders''. Ogni lettore contiene infatti le parole pronunciate, i relativi timestamp e la cartella in cui è contenuto l'audio che contiene la parola pronunciata. Il dizionario è creato in modo che l'i-esimo valore di ``start'' (o ``end'') corrisponda all'i-esimo valore di ``folders''. I lettori validi sono quelli che pronunciano almeno 2 parole per 26 volte.
+Nella funzione \texttt{find\_valid\_readers} viene letto il file ``readers\_words.json'' e viene creata una lista di dizionari con chiavi ``reader\_name'', ``word'', ``start'', ``end'' e ``folders''. Ogni lettore contiene infatti le parole pronunciate, i relativi timestamp e la cartella in cui è contenuto l'audio che contiene la parola pronunciata. Il dizionario è creato in modo che l'i-esimo valore di ``start'' o ``end'' corrisponda all'i-esimo valore di ``folders''. I lettori validi sono quelli che pronunciano almeno 2 parole per 26 volte.
 
 \begin{lstlisting}[language=iPython,firstnumber=10, caption=Funzione \texttt{find\_valid\_readers}, label=find_valid_readers,captionpos=b]
 def find_valid_readers(min_classes = 2, min_instances_per_class = 26):
@@ -1140,7 +1139,7 @@ def save_dataset(readers, folder_name, dataset_path, audio_file_name, max_class_
                 print(error)   
 \end{lstlisting}
 
-La funzione \texttt{save\_test\_dataset} salva gli spettrogrammi delle parole di test. A differenza del codice~\ref{save_dataset} vengono salvate al massimo 16 istanze della parola perché durante il test vengono usate solo $p \in \{1, 5\}$ istanze della parola come \emph{positive set}, mentre tutte le istanze delle altre parole dell'audio compongono il \emph{negative set}.
+La funzione \texttt{save\_test\_dataset} salva gli spettrogrammi delle parole di test. A differenza del codice~\ref{save_dataset} vengono salvate al massimo 16 istanze della parola perché durante il test vengono usate solo $p \in \{1, 5\}$ istanze della parola come \emph{positive set}, mentre tutte le istanze delle altre parole dell'audio compongono il \emph{negative set}. Salvare tutte le istanze della parola risulterebbe dunque superfluo.
 
 \begin{lstlisting}[language=iPython,firstnumber=208, caption=Funzione \texttt{save\_test\_dataset}, label=save_test_dataset,captionpos=b]
 def save_test_dataset(test_readers, reader_paths, test_feature_folder_name, dataset_path, audio_file_name):
