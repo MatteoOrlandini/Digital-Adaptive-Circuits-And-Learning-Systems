@@ -422,9 +422,9 @@ Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che 
 
 Come nella Prototypical Network, anche nella Relation Network viene usata una architettura con quattro blocchi convoluzionali per il modulo di embedding, come illustrato in figura~\ref{fig:relation_network_architecture}.
 
-Ogni blocco convoluzionale contiene una convoluzione con 64 filtri $3 \times 3$, una batch normalisation e un layer ReLU non lineare. I primi tre blocchi contengono anche un layer di max pooling $2 \times 2$, mentre l'ultimo no. Lo facciamo perché abbiamo bisogno delle feature map di output per gli ulteriori livelli convoluzionali nel modulo realtion. 
+Ogni blocco convoluzionale contiene una convoluzione con 64 filtri $3 \times 3$, una batch normalization e un layer ReLU non lineare. I primi tre blocchi contengono anche un layer di max pooling $2 \times 2$, mentre l'ultimo no. Lo facciamo perché abbiamo bisogno delle feature map di output per gli ulteriori livelli convoluzionali nel modulo realtion. 
 
-Il modulo realtion è costituito da due blocchi convoluzionali e due layer fully-connected. Ciascuno dei blocchi convoluzionali è una convoluzione $3 \times 3$ con 64 filtri seguita da batch normalisation, non linearità ReLU e da un max pooling $2 \times 2$. La dimensione di output dell'ultimo layer di max pooling è pari a 64. I due layer fully-connected sono rispettivamente 8 e 1 dimensionale. Tutti i layer fully-connected sono ReLU eccetto quello di output, composto da una sigmoide per generare punteggi di relazione in un intervallo compreso tra 0 e 1.
+Il modulo realtion è costituito da due blocchi convoluzionali e due layer fully-connected. Ciascuno dei blocchi convoluzionali è una convoluzione $3 \times 3$ con 64 filtri seguita da batch normalization, non linearità ReLU e da un max pooling $2 \times 2$. La dimensione di output dell'ultimo layer di max pooling è pari a 64. I due layer fully-connected sono rispettivamente 8 e 1 dimensionale. Tutti i layer fully-connected sono ReLU eccetto quello di output, composto da una sigmoide per generare punteggi di relazione in un intervallo compreso tra 0 e 1.
 
 \begin{figure}[h]
 	\centering
@@ -1834,7 +1834,7 @@ class RelationNetwork(nn.Module):
     The RelationNetwork is the relation module. It consists of two 
     convolutional blocks and two fully-connected layers. Each of 
     convolutional block is a 3 X 3 convolution with 64 filters followed 
-    by batch normalisation, ReLU non-linearity and 2 X 2 max-pooling.
+    by batch normalization, ReLU non-linearity and 2 X 2 max-pooling.
     The two fully-connected layers are 8 and 1 dimensional, respectively. 
     All fully-connected layers are ReLU except the output layer is Sigmoid 
     in order to generate relation scores in a reasonable range for all 
