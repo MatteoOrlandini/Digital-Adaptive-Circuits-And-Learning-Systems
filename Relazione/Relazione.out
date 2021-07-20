@@ -25,4 +25,5 @@
 \BOOKMARK [2][-]{subsection.8.4}{Test}{section.8}% 25
 \BOOKMARK [1][-]{section.9}{Risultati}{}% 26
 \BOOKMARK [2][-]{subsection.9.1}{Area under precision-recall curve \(AUPRC\)}{section.9}% 27
-\BOOKMARK [1][-]{section.10}{Conclusioni}{}% 28
+\BOOKMARK [2][-]{subsection.9.2}{Confronto con l'AUPRC di riferimento}{section.9}% 28
+\BOOKMARK [1][-]{section.10}{Conclusioni}{}% 29

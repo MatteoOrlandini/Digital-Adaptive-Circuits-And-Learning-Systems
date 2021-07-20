@@ -7,7 +7,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{booktabs} %toprule, midrule, bottomrule
-\usepackage{subfig}
+\usepackage{subcaption,booktabs}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{siunitx}
@@ -388,9 +388,17 @@ Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che 
 
 \begin{figure}[h]
 	\centering
-	\subfloat[Blocco convoluzionale\label{fig:relation_network_architecture_a}]{\includegraphics[width=0.3\textwidth]{Immagini/relation_network_conv_block}}
+	\begin{subfigure}{.3\textwidth}
+	 \includegraphics{Immagini/relation_network_conv_block}
+	 \caption{Blocco convoluzionale}
+	 \label{fig:relation_network_architecture_a}
+	\end{subfigure}
 	\qquad
-	\subfloat[Relation Network per few-shot learning\label{fig:relation_network_architecture_b}]{\includegraphics[width=0.25\textwidth]{Immagini/relation_network_architecture}}
+	\begin{subfigure}{.3\textwidth}
+	\includegraphics[width=0.25\textwidth]{Immagini/relation_network_architecture}
+	\caption{Relation Network per few-shot learning}
+	\label{fig:relation_network_architecture_b}
+	\end{subfigure}
 	\label{fig:relation_network_architecture}	
 	\caption{Architettura della Relation Network per few-shot learning (b) composta dagli elementi inclusi nel blocco convoluzionale (a).~\cite{DBLP:journals/corr/abs-1711-06025}}
 \end{figure}
@@ -1606,6 +1614,11 @@ def main():
         for i in range (target_keywords_number):
             for j in range (10):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
+                
+                if torch.cuda.is_available:
+                  negative_set = negative_set.to(device='cuda')
+                  positive_set = positive_set.to(device='cuda')
+                  query_set = query_set.to(device='cuda')
 
                 y_pred_tmp, y_true_tmp = test_predictions(model, negative_set, positive_set, query_set, n, p)
                 y_pred_tmp = y_pred_tmp.cpu().tolist()
@@ -2069,6 +2082,11 @@ def main():
             for j in range (1):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)
 
+	               if torch.cuda.is_available:
+	               	 negative_set = negative_set.to(device='cuda')
+	               	 positive_set = positive_set.to(device='cuda')
+	               	 query_set = query_set.to(device='cuda')
+	              
                 negative_set = negative_set.view(1 * n, 1, *negative_set.size()[1:])  
                 positive_set = positive_set.view(1 * p, 1, *positive_set.size()[1:]) 
                 query_set = query_set.view(int(C * query_set.size()[0]/2), 1, *query_set.size()[1:])   # (C X Q) X 1 X 51 X 51
@@ -2172,6 +2190,100 @@ Continuando in questo modo si può ottenere una curva considerando alle ascisse 
 
 Calcolando l'area sottesa dalla curva si ricava il valore detto Area under precision-recall curve (AUPRC).
 Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
+La figura~\ref{fig:prec_rec} mostra la curva precision-recall per la rete prototypical con $C = 2$, $K=1$ e $p = 5$. Calcolando l'area sottesa dalla curva si può trovare il valore di AUPRC.
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{Immagini/pre_rec_2}
+	\caption{Curva precision-recall per il test della rete prototypical con $C = 2$, $K=1$ e $p = 5$.}
+	\label{fig:prec_rec}
+\end{figure}
+\clearpage
+
+\subsection{Confronto con l'AUPRC di riferimento}
+\begin{table}[h]
+\centering
+\begin{subtable}{0.48\textwidth}
+\centering
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.731        & 0.069                        \\
+2, 5          & 0.721        & 0.074                        \\
+5, 1          & 0.709        & 0.089                        \\
+5, 5          & 0.688        & 0.062                        \\
+10, 1         & 0.728        & 0.067                        \\
+10, 5         & 0.727        & 0.078                        \\
+10, 10        & 0.725        & 0.059                        \\ 
+\bottomrule
+\end{tabular}
+\label{tab:proto_p1}
+\caption{Prototypical network $p=1$, $n=10$.}
+\end{subtable}
+\hfil
+\begin{subtable}{0.48\textwidth}
+\centering  
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.800        & 0.056                        \\
+2, 5          & 0.791        & 0.062                        \\
+5, 1          & 0.774        & 0.092                        \\
+5, 5          & 0.754        & 0.075                        \\
+10, 1         & 0.787        & 0.057                        \\
+10, 5         & 0.794        & 0.070                        \\
+10, 10        & 0.793        & 0.050                        \\ 
+\bottomrule
+\end{tabular}
+\label{tab:proto_p5}
+\caption{Prototypical network $p=5$, $n=10$.}
+\end{subtable}
+\caption{AUPRC e deviazione standard della prototypical network}
+\end{table}
+
+\begin{table}[h]
+\centering
+\begin{subtable}{0.48\textwidth}
+\centering
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.775        & 0.069                        \\
+2, 5          & 0.609        & 0.046                        \\
+5, 1          & 0.889        & 0.061                        \\
+5, 5          & 0.666        & 0.047                        \\
+10, 1         & 0.898        & 0.053                        \\
+10, 5         & -----        & -----                        \\
+10, 10        & 0.538        & 0.015                        \\ 
+\bottomrule
+\end{tabular}
+\label{tab:relation_p1}
+\caption{Relation network $p=1$, $n=10$.}
+\end{subtable}
+\hfil
+\begin{subtable}{0.48\textwidth}
+\centering  
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.596        & 0.042                        \\
+2, 5          & 0.813        & 0.056                        \\
+5, 1          & 0.698        & 0.050                        \\
+5, 5          & 0.945        & 0.037                        \\
+10, 1         & 0.691        & 0.052                        \\
+10, 5         & -----        & -----                        \\
+10, 10        & 0.845        & 0.061                        \\ 
+\bottomrule
+\end{tabular}
+\label{tab:relation_p5}
+\caption{Relation network $p=5$, $n=10$.}
+\end{subtable}
+\caption{AUPRC e deviazione standard della relation network}
+\end{table}
 \clearpage
 
 \section{Conclusioni}
