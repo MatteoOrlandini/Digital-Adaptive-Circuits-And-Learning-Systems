@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  20 JUL 2021 19:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  20 JUL 2021 21:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1095,7 +1095,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 315.
-<Immagini/maxpool.png, id=215, 164.25pt x 68.547pt>
+<Immagini/maxpool.png, id=217, 164.25pt x 68.547pt>
 File: Immagini/maxpool.png Graphic file (type png)
 <use Immagini/maxpool.png>
 Package pdftex.def Info: Immagini/maxpool.png  used on input line 326.
@@ -1105,7 +1105,7 @@ Package pdftex.def Info: Immagini/maxpool.png  used on input line 326.
  <./Immagini/maxpool.png>] [5
 
 ] [6]
-<Immagini/proto_few_shot.png, id=234, 268.00125pt x 163.3603pt>
+<Immagini/proto_few_shot.png, id=236, 268.00125pt x 163.3603pt>
 File: Immagini/proto_few_shot.png Graphic file (type png)
 <use Immagini/proto_few_shot.png>
 Package pdftex.def Info: Immagini/proto_few_shot.png  used on input line 369.
@@ -1113,7 +1113,7 @@ Package pdftex.def Info: Immagini/proto_few_shot.png  used on input line 369.
  [7
 
  <./Immagini/proto_few_shot.png>] [8]
-<Immagini/relation_network.png, id=258, 847.66687pt x 422.32782pt>
+<Immagini/relation_network.png, id=260, 847.66687pt x 422.32782pt>
 File: Immagini/relation_network.png Graphic file (type png)
 <use Immagini/relation_network.png>
 Package pdftex.def Info: Immagini/relation_network.png  used on input line 418.
@@ -1122,13 +1122,13 @@ Package pdftex.def Info: Immagini/relation_network.png  used on input line 418.
  [9
 
  <./Immagini/relation_network.png>]
-<Immagini/relation_network_conv_block.png, id=268, 101.62968pt x 54.9553pt>
+<Immagini/relation_network_conv_block.png, id=270, 101.62968pt x 54.9553pt>
 File: Immagini/relation_network_conv_block.png Graphic file (type png)
 <use Immagini/relation_network_conv_block.png>
 Package pdftex.def Info: Immagini/relation_network_conv_block.png  used on inpu
 t line 433.
 (pdftex.def)             Requested size: 62.39809pt x 33.74069pt.
-<Immagini/relation_network_architecture.png, id=269, 88.83188pt x 429.10312pt>
+<Immagini/relation_network_architecture.png, id=271, 88.83188pt x 429.10312pt>
 File: Immagini/relation_network_architecture.png Graphic file (type png)
 <use Immagini/relation_network_architecture.png>
 Package pdftex.def Info: Immagini/relation_network_architecture.png  used on in
@@ -1148,13 +1148,13 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 561.
  [14] [15] [16] [17] [18] [19]
-<Immagini/mel_plot.png, id=685, 1284.8pt x 610.28pt>
+<Immagini/mel_plot.png, id=687, 1284.8pt x 610.28pt>
 File: Immagini/mel_plot.png Graphic file (type png)
 <use Immagini/mel_plot.png>
 Package pdftex.def Info: Immagini/mel_plot.png  used on input line 867.
 (pdftex.def)             Requested size: 390.0pt x 185.24582pt.
  [20 <./Immagini/mel_plot.png>]
-<../Stones_spectrogram.png, id=697, 987.2082pt x 509.5035pt>
+<../Stones_spectrogram.png, id=699, 987.2082pt x 509.5035pt>
 File: ../Stones_spectrogram.png Graphic file (type png)
 <use ../Stones_spectrogram.png>
 Package pdftex.def Info: ../Stones_spectrogram.png  used on input line 907.
@@ -1200,7 +1200,7 @@ la fun-zio-ne \T1/cmtt/m/n/12 test_predictions\T1/cmr/m/n/12 .
 ] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52
 
 ]
-<Immagini/pre_rec_2.png, id=1987, 462.528pt x 346.896pt>
+<Immagini/pre_rec_2.png, id=1989, 462.528pt x 346.896pt>
 File: Immagini/pre_rec_2.png Graphic file (type png)
 <use Immagini/pre_rec_2.png>
 Package pdftex.def Info: Immagini/pre_rec_2.png  used on input line 2243.
@@ -1216,7 +1216,7 @@ Package epstopdf Info: Source file: <Immagini/results.eps>
 rted-to.pdf Immagini/results.eps>
 (epstopdf)             \includegraphics on input line 2337.
 Package epstopdf Info: Output file is already uptodate.
-<Immagini/results-eps-converted-to.pdf, id=1996, 1028.84375pt x 519.9425pt>
+<Immagini/results-eps-converted-to.pdf, id=1998, 1028.84375pt x 519.9425pt>
 File: Immagini/results-eps-converted-to.pdf Graphic file (type pdf)
 <use Immagini/results-eps-converted-to.pdf>
 Package pdftex.def Info: Immagini/results-eps-converted-to.pdf  used on input l
@@ -1226,7 +1226,7 @@ ine 2337.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Immagini/results_paper.png, id=1999, 778.40813pt x 353.82187pt>
+<Immagini/results_paper.png, id=2001, 778.40813pt x 353.82187pt>
 File: Immagini/results_paper.png Graphic file (type png)
 <use Immagini/results_paper.png>
 Package pdftex.def Info: Immagini/results_paper.png  used on input line 2345.
@@ -1262,10 +1262,10 @@ Package logreq Info: Writing requests to 'Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31862 strings out of 492623
- 574487 string characters out of 6126681
- 1243652 words of memory out of 5000000
- 33898 multiletter control sequences out of 15000+600000
+ 31869 strings out of 492623
+ 574699 string characters out of 6126681
+ 1243533 words of memory out of 5000000
+ 33903 multiletter control sequences out of 15000+600000
  559280 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  42i,16n,63p,1576b,2486s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1308,10 +1308,10 @@ rogram Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><
 c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0800.p
 fb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt12
 00.pfb>
-Output written on Relazione.pdf (59 pages, 1416694 bytes).
+Output written on Relazione.pdf (59 pages, 1416993 bytes).
 PDF statistics:
- 2472 PDF objects out of 2487 (max. 8388607)
- 2326 compressed objects within 24 object streams
- 1575 named destinations out of 1728 (max. 500000)
+ 2477 PDF objects out of 2487 (max. 8388607)
+ 2331 compressed objects within 24 object streams
+ 1577 named destinations out of 1728 (max. 500000)
  298 words of extra memory for PDF output out of 10000 (max. 10000000)
 

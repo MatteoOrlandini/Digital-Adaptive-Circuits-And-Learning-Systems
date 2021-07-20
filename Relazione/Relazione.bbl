@@ -19,6 +19,39 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{koch:siamese}{inproceedings}{}
+      \name{author}{3}{}{%
+        {{hash=03f9adefbe3b9c96c1156db76c3d4735}{%
+           family={Koch},
+           familyi={K\bibinitperiod},
+           given={Gregory},
+           giveni={G\bibinitperiod}}}%
+        {{hash=77a44166b8233ae29b20f292779447e0}{%
+           family={Zemel},
+           familyi={Z\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=bd2be300d445e9f6db7808f9533e66cb}{%
+           family={Salakhutdinov},
+           familyi={S\bibinitperiod},
+           given={Ruslan},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{fullhash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{bibnamehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{authorbibnamehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{authornamehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{authorfullhash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Siamese Neural Networks for One-shot Image Recognition}
+      \field{year}{2015}
+      \true{nocite}
+      \keyw{neural-networks one-shot-learning}
+    \endentry
     \entry{minining_spoken_wikipedia}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=dd4441dee198cef69d0e82ddbcf259a7}{%
@@ -156,7 +189,7 @@
       \verb 1703.05175
       \endverb
     \endentry
-    \entry{DBLP:journals/corr/abs-1711-06025}{article}{}
+    \entry{sung:relation}{article}{}
       \name{author}{6}{}{%
         {{hash=dbe76b500b71e2176fd1b050b0b31525}{%
            family={Sung},
@@ -215,7 +248,61 @@
       \verb http://arxiv.org/abs/1711.06025
       \endverb
     \endentry
-    \entry{Salamon:Few-Shot}{book}{}
+    \entry{vinyals:matching}{article}{}
+      \name{author}{5}{}{%
+        {{hash=494b568c5dc85ba8f3f409635f9c5f25}{%
+           family={Vinyals},
+           familyi={V\bibinitperiod},
+           given={Oriol},
+           giveni={O\bibinitperiod}}}%
+        {{hash=24fe1af011227491e54e299ba4cb24b5}{%
+           family={Blundell},
+           familyi={B\bibinitperiod},
+           given={Charles},
+           giveni={C\bibinitperiod}}}%
+        {{hash=2a321a868e44d49baf52b5e2d816fb71}{%
+           family={Lillicrap},
+           familyi={L\bibinitperiod},
+           given={Timothy\bibnamedelima P.},
+           giveni={T\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=481308b301166b521c74fde6566e97e6}{%
+           family={Kavukcuoglu},
+           familyi={K\bibinitperiod},
+           given={Koray},
+           giveni={K\bibinitperiod}}}%
+        {{hash=d7805381550fb5f8360345f7f72c0b49}{%
+           family={Wierstra},
+           familyi={W\bibinitperiod},
+           given={Daan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{fullhash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{bibnamehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{authorbibnamehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{authornamehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{authorfullhash}{58128657d0ea57ffbefb4208eb31f72a}
+      \field{sortinit}{V}
+      \field{sortinithash}{75dd7385c90b2252c3ae853a80ca853b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{CoRR}
+      \field{title}{Matching Networks for One Shot Learning}
+      \field{volume}{abs/1606.04080}
+      \field{year}{2016}
+      \true{nocite}
+      \verb{eprint}
+      \verb 1606.04080
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1606.04080
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1606.04080
+      \endverb
+    \endentry
+    \entry{salamon:Few-Shot}{book}{}
       \name{author}{4}{}{%
         {{hash=b2eccb185095fccfeb40fdffd8b2105f}{%
            family={Wang},
