@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  20 JUL 2021 21:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  21 JUL 2021 09:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1154,7 +1154,7 @@ File: Immagini/mel_plot.png Graphic file (type png)
 Package pdftex.def Info: Immagini/mel_plot.png  used on input line 867.
 (pdftex.def)             Requested size: 390.0pt x 185.24582pt.
  [20 <./Immagini/mel_plot.png>]
-<../Stones_spectrogram.png, id=699, 987.2082pt x 509.5035pt>
+<../Stones_spectrogram.png, id=698, 987.2082pt x 509.5035pt>
 File: ../Stones_spectrogram.png Graphic file (type png)
 <use ../Stones_spectrogram.png>
 Package pdftex.def Info: ../Stones_spectrogram.png  used on input line 907.
@@ -1184,13 +1184,13 @@ training_readers \T1/cmr/m/n/12 + \T1/cmtt/m/n/12 number_of_validation_readers
 [25] [26] [27] [28] [29] [30
 
 ] [31] [32] [33] [34] [35] [36] [37] [38]
-Overfull \hbox (126.80849pt too wide) in paragraph at lines 1684--1689
+Overfull \hbox (126.80849pt too wide) in paragraph at lines 1681--1686
 []\T1/cmr/m/n/12 Per co-strui-re il po-si-ti-ve e ne-ga-ti-ve set vie-ne usa-ta
  la fun-zio-ne \T1/cmtt/m/n/12 get_negative_positive_query_set\T1/cmr/m/n/12 .
  []
 
 [39]
-Overfull \hbox (41.87097pt too wide) in paragraph at lines 1736--1739
+Overfull \hbox (41.87097pt too wide) in paragraph at lines 1733--1736
 []\T1/cmr/m/n/12 A que-sto pun-to, i tre set e il mo-del-lo so-no pas-sa-ti al-
 la fun-zio-ne \T1/cmtt/m/n/12 test_predictions\T1/cmr/m/n/12 .
  []
@@ -1200,10 +1200,10 @@ la fun-zio-ne \T1/cmtt/m/n/12 test_predictions\T1/cmr/m/n/12 .
 ] [42] [43] [44] [45] [46] [47] [48] [49] [50] [51] [52
 
 ]
-<Immagini/pre_rec_2.png, id=1989, 462.528pt x 346.896pt>
+<Immagini/pre_rec_2.png, id=1986, 462.528pt x 346.896pt>
 File: Immagini/pre_rec_2.png Graphic file (type png)
 <use Immagini/pre_rec_2.png>
-Package pdftex.def Info: Immagini/pre_rec_2.png  used on input line 2243.
+Package pdftex.def Info: Immagini/pre_rec_2.png  used on input line 2240.
 (pdftex.def)             Requested size: 390.0pt x 292.5128pt.
  [53 <./Immagini/pre_rec_2.png>]
 Package epstopdf Info: Source file: <Immagini/results.eps>
@@ -1214,22 +1214,22 @@ Package epstopdf Info: Source file: <Immagini/results.eps>
 (epstopdf)                    size: 9220 bytes
 (epstopdf)             Command: <repstopdf --outfile=Immagini/results-eps-conve
 rted-to.pdf Immagini/results.eps>
-(epstopdf)             \includegraphics on input line 2337.
+(epstopdf)             \includegraphics on input line 2334.
 Package epstopdf Info: Output file is already uptodate.
-<Immagini/results-eps-converted-to.pdf, id=1998, 1028.84375pt x 519.9425pt>
+<Immagini/results-eps-converted-to.pdf, id=1995, 1028.84375pt x 519.9425pt>
 File: Immagini/results-eps-converted-to.pdf Graphic file (type pdf)
 <use Immagini/results-eps-converted-to.pdf>
 Package pdftex.def Info: Immagini/results-eps-converted-to.pdf  used on input l
-ine 2337.
+ine 2334.
 (pdftex.def)             Requested size: 390.0pt x 197.09625pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Immagini/results_paper.png, id=2001, 778.40813pt x 353.82187pt>
+<Immagini/results_paper.png, id=1998, 778.40813pt x 353.82187pt>
 File: Immagini/results_paper.png Graphic file (type png)
 <use Immagini/results_paper.png>
-Package pdftex.def Info: Immagini/results_paper.png  used on input line 2345.
+Package pdftex.def Info: Immagini/results_paper.png  used on input line 2342.
 (pdftex.def)             Requested size: 390.0pt x 177.27762pt.
 
 LaTeX Warning: `h' float specifier changed to `ht'.
@@ -1240,20 +1240,20 @@ LaTeX Warning: `h' float specifier changed to `ht'.
  [56
 
 ]
-Overfull \hbox (12.55942pt too wide) in paragraph at lines 2360--2360
+Overfull \hbox (12.55942pt too wide) in paragraph at lines 2357--2357
 \T1/cmr/m/it/12 Shot Sound Event De-tec-tion\T1/cmr/m/n/12 . 2020, pp. 81^^U85.
  \T1/cmr/m/sc/12 doi\T1/cmr/m/n/12 : []$\T1/cmtt/m/n/12 10 . 1109 / ICASSP40776
  .
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2360.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2357.
 [57
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2360.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2357.
  (./Relazione.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2360.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2360.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2357.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2357.
 
 Package rerunfilecheck Info: File `Relazione.out' has not changed.
 (rerunfilecheck)             Checksum: AC263FBE6795BEBB4E54F8D28B82E65A;1943.
@@ -1262,13 +1262,13 @@ Package logreq Info: Writing requests to 'Relazione.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31869 strings out of 492623
- 574699 string characters out of 6126681
+ 31866 strings out of 492623
+ 574651 string characters out of 6126681
  1243533 words of memory out of 5000000
  33903 multiletter control sequences out of 15000+600000
  559280 words of font info for 89 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 42i,16n,63p,1576b,2486s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,16n,63p,1587b,2486s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Program Files/texlive/2019/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t
 1.enc}<c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/amsfont
@@ -1308,10 +1308,10 @@ rogram Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sfti1728.pfb><
 c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt0800.p
 fb><c:/Program Files/texlive/2019/texmf-dist/fonts/type1/public/cm-super/sftt12
 00.pfb>
-Output written on Relazione.pdf (59 pages, 1416993 bytes).
+Output written on Relazione.pdf (59 pages, 1417189 bytes).
 PDF statistics:
- 2477 PDF objects out of 2487 (max. 8388607)
- 2331 compressed objects within 24 object streams
- 1577 named destinations out of 1728 (max. 500000)
+ 2474 PDF objects out of 2487 (max. 8388607)
+ 2328 compressed objects within 24 object streams
+ 1574 named destinations out of 1728 (max. 500000)
  298 words of extra memory for PDF output out of 10000 (max. 10000000)
 

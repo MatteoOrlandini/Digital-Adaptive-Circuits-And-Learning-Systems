@@ -503,7 +503,7 @@ Ogni annotazione è racchiusa in un tag chiamato ``\texttt{article}'', che conti
 		<prop key="processing.step.git.commit.time" value="09.08.2017 @ 15:21:55 CEST" group="align"/>
 	</meta>
 \end{lstlisting}
-Il documento, contrassegnato dal tag ``\texttt{d}'', può contenere parti diverse, ciascuna spiegata di seguito. La sezione ``\texttt{extra}'' contiene il testo che abbiamo incluso ma non fa parte dell'articolo, ``\texttt{ignored}'' contiene ciò che fa parte del testo ma viene ignorato per l'allineamento, ``\texttt{section}'' contiene un titolo e un contenuto, ``\texttt{p}'' contiene un paragrafo  e ``\texttt{s}'' una frase che a sua volta contiene dei token ``\texttt{t}''. In quest'ultimo è contenuta la singola parola originale e le normalizzazioni. Per esempio, la punteggiatura non ha annotazioni di normalizzazione in quanto non è pronunciata, ma il numero 500 ne ha due - ``cinque'' e ``cento''. un token stesso non ha allineamento, solo la sua normalizzazione ``\texttt{n}'' è allineata. La normalizzazione ha una ``\texttt{pronunciation}'' e può avere un tempo di ``\texttt{start}'' ed ``\texttt{end}'', se è allineata. La normalizzazione, a sua volta, può contenere dei fonemi ``\texttt{ph}''.
+Il documento, contrassegnato dal tag ``\texttt{d}'', può contenere parti diverse, ciascuna spiegata di seguito. La sezione ``\texttt{extra}'' contiene il testo che abbiamo incluso ma non fa parte dell'articolo, ``\texttt{ignored}'' contiene ciò che fa parte del testo ma viene ignorato per l'allineamento, ``\texttt{section}'' contiene un titolo e un contenuto, ``\texttt{p}'' contiene un paragrafo  e ``\texttt{s}'' una frase che a sua volta contiene dei token ``\texttt{t}''. In quest'ultimo è contenuta la singola parola originale e le normalizzazioni. Per esempio, la punteggiatura non ha annotazioni di normalizzazione in quanto non è pronunciata, ma il numero 500 ne ha due: ``cinque'' e ``cento''. Il token stesso non ha allineamento, solo la sua normalizzazione ``\texttt{n}'' è allineata. La normalizzazione ha una ``\texttt{pronunciation}'' e può avere un tempo di ``\texttt{start}'' ed ``\texttt{end}'', se è allineata. La normalizzazione, a sua volta, può contenere dei fonemi ``\texttt{ph}''.
 
 \begin{lstlisting}[language=XML,firstnumber=1, caption=Annotazioni delle parole in un audio, label=annotazioni,captionpos=b]
 <d>
@@ -535,7 +535,7 @@ Il documento, contrassegnato dal tag ``\texttt{d}'', può contenere parti divers
 
 \subsection{Lettori del dataset}
 \label{subsec:lettori}
-Il dataset Spoken Wikipedia Corpora contiene un totale di 1340 audio di diversi lettori, ma nel progetto vengono presi solo gli audio che contengono annotazioni a livello di parola. In questo modo vengono presi solo 208 lettori e partizionati come in~\cite{salamon:Few-Shot} con un rapporto $138:15:30$ tra lettori di training, validation e test. I lettori e le parole sono state estratte dai file ``aligned.swc'' contenuti in ogni audio e, successivamente, salvati in diversi file json. Per la gestione dei json sono state create due funzioni utili per la lettura e scrittura come mostrato nel codice~\ref{json_manager}.
+Il dataset Spoken Wikipedia Corpora contiene un totale di 1340 audio di diversi lettori, ma nel progetto vengono presi solo gli audio che contengono annotazioni a livello di parola. In questo modo vengono presi solo 208 lettori e partizionati come in~\cite{salamon:Few-Shot} con un rapporto $138:15:30$ tra lettori di training, validation e test. I lettori e le parole sono state estratte dai file ``aligned.swc'' contenuti in ogni audio e, successivamente, salvati in diversi file json. Per la gestione dei json sono state create due funzioni, \texttt{write\_json\_file} e \texttt{read\_json\_file}, utili per la lettura e scrittura come mostrato nel codice~\ref{json_manager}.
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=json\_manager.py, label=json_manager,captionpos=b]
 import json
 	
@@ -551,7 +551,7 @@ def read_json_file(filename):
 	return list_of_dict
 \end{lstlisting}
 
-Il codice~\ref{xml_parser_readers} salva un file json chiamato ``readers\_paths.json'' formato dalle chiavi ``reader\_name'' e ``folder'' i cui valori sono rispettivamente il nome del lettore e le cartelle in cui sono salvati i file audio registrati dal relativo lettore, come si può vedere nel json~\ref{JSON_lettori}. Questo codice, usando la libreria \texttt{xml.etree.ElementTree} e la funzione \texttt{ET.parse}, rappresenta l'intero documento XML come un albero. La funzione \texttt{getroot} ne trova la radice e, successivamente, si scorre l'albero iterando finché non si trova il tag ``\texttt{prop}'', in cui è contenuta la chiave ``\texttt{reader.name}''. Inoltre, si effettua un controllo sul nome del lettore perché può capitare che questo venga salvato nel file ``aligned.swc'' in modi diversi. Ad esempio, in alcuni file si può trovare nella chiave ``reader.name'' il valore ``:en:user:alexkillby|alexkillby'', mentre in altri solo ``alexkillby'' oppure si può trovare ``user:popularoutcast'', mentre in altri solo ``popularoutcast''. Una volta noto il nome del lettore si vede se è già presente nella lista di dizionari e se è un lettore nuovo lo si aggiunge con il relativo nome del file audio, mentre se il lettore era già presente si aggiunge solamente il nome del file audio.
+Il codice~\ref{xml_parser_readers} salva un file json chiamato ``readers\_paths.json'' formato dalle chiavi ``reader\_name'' e ``folder'', i cui valori sono rispettivamente il nome del lettore e le cartelle in cui sono salvati i file audio registrati dal relativo lettore, come si può vedere nel json~\ref{JSON_lettori}. Questo codice, usando la libreria \texttt{xml.etree.ElementTree} e la funzione \texttt{ET.parse}, rappresenta l'intero documento XML come un albero. La funzione \texttt{getroot} ne trova la radice e, successivamente, si scorre l'albero iterando finché non si trova il tag ``\texttt{prop}'', in cui è contenuta la chiave ``\texttt{reader.name}''. Inoltre, si effettua un controllo sul nome del lettore perché può capitare che questo venga salvato nel file ``aligned.swc'' in modi diversi. Ad esempio, in alcuni file si può trovare nella chiave ``reader.name'' il valore ``:en:user:alexkillby|alexkillby'', mentre in altri solo ``alexkillby'' oppure si può trovare ``user:popularoutcast'', mentre in altri solo ``popularoutcast''. Una volta noto il nome del lettore si vede se è già presente nella lista di dizionari e se è un lettore nuovo lo si aggiunge con il relativo nome del file audio, mentre se il lettore era già presente si aggiunge solamente il nome del file audio.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=xml\_parser\_readers.py, label=xml_parser_readers,captionpos=b]
 import xml.etree.ElementTree as ET
@@ -642,9 +642,9 @@ Il codice~\ref{find_target_words} mostra come viene creato il json~\ref{word_cou
 
 Per ogni cartella del dataset SWC, se esistono i file ``audio.ogg'' e ``aligned.swc'', si procede con il parsing del file XML, iterando l'albero fino al tag  ``\texttt{n}'', cioè fino al tag che contiene la normalizzazione della parola come spiegato in~\ref{subsec:annotazioni}. Se è presente la chiave ``\texttt{start}'' (o, in modo equivalente, ``\texttt{end}''), la parola viene aggiunta alla lista \texttt{words}.
 
-Per trovare quante volte viene ripetuta la singola parola abbiamo usato la sottoclasse \texttt{Counter} della classe \texttt{dict} di Python, la quale restituisce una raccolta in cui gli elementi sono le chiavi del dizionario e il numero di ripetizioni è il loro valore. Si costruisce dunque una lista di dizionari chiamata \texttt{target\_words}, che contiene le \emph{target words}, cioè le parole che si ripetono almeno 10 volte nel testo.~\cite{salamon:Few-Shot}
+Per trovare quante volte viene ripetuta la singola parola abbiamo usato la sottoclasse \texttt{Counter} della classe \texttt{dict} di Python, la quale restituisce una raccolta in cui gli elementi sono le chiavi del dizionario e il numero di ripetizioni è il loro valore. Si costruisce dunque una lista di dizionari chiamata \texttt{target\_words}, che contiene le \textit{target words}, cioè le parole che si ripetono almeno 10 volte nel testo.~\cite{salamon:Few-Shot}
 
-Si rifà un parsing del file XML per aggiungere i timestamp di ``start'' e ``end'' ad ogni parola. Il file ``word\_count.json'' contiene tutte le parole che si ripetono almeno 10 volte e viene salvato all'interno di ogni cartella del dataset. Infine, si filtrano le target words, utili poi in fase di test della rete: se ci sono più di 10 parole che soddisfano la condizione di target word, si prendono tra queste solo 10 scelte in modo random. In questo modo, si cerca di evitare di scegliere parole molto comuni o molto rare. Le target words vengono salvate nel file ``target\_words.json'' contenuto all'interno di ogni cartella del dataset. 
+Si rifà un parsing del file XML per aggiungere i timestamp di ``start'' e ``end'' ad ogni parola. Il file ``word\_count.json'' contiene tutte le parole che si ripetono almeno 10 volte e viene salvato all'interno di ogni cartella del dataset. Infine, si filtrano le target words, utili poi in fase di test della rete: se ci sono più di 10 parole che soddisfano la condizione di target word, se ne prendono solo 10 scelte in modo random. In questo modo, si cerca di evitare di scegliere parole molto comuni o molto rare. Le target words vengono salvate nel file ``target\_words.json'' contenuto all'interno di ogni cartella del dataset. 
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=find\_target\_words.py, label=find_target_words,captionpos=b]
 import xml.etree.ElementTree as ET
@@ -859,9 +859,9 @@ Per ogni istanza delle parole, prendiamo una finestra di mezzo secondo centrata 
 
 La scala \textit{mel} è una scala di percezione dell'altezza (pitch) di un suono. La relazione tra la scala mel e quella comunemente usata è rappresentata dall'uguaglianza tra 1000 Mel e \SI{1000}{\hertz} all'intensità di \SI{40}{\decibel}. La scala mel è definita nel seguente modo
 \begin{equation}
-\text{mel} = 2595\cdot \log \left(1 + \dfrac{f}{700} \right)
+\text{mel} = 2595\cdot \log \left(1 + \dfrac{f}{700} \right).
 \end{equation}
-e nella figura~\ref{fig:mel_plot} si può vedere la sua funzione in relazione agli Hertz.
+Nella figura~\ref{fig:mel_plot} si può vedere la sua funzione in relazione agli Hertz.
 \begin{figure}[h]
 	\centering	
 	\includegraphics[width=1\textwidth]{Immagini/mel_plot}
@@ -871,7 +871,7 @@ e nella figura~\ref{fig:mel_plot} si può vedere la sua funzione in relazione ag
 
 Per il calcolo dello spettrogramma mel occorre dividere l'input in blocchi usando finestre con overlap, fare la FFT di ogni blocco, generare la scala mel e associare ogni componente spettrale alla relativa frequenza nella scala mel.    
 
-La funzione \texttt{compute\_melspectrogram}, mostrata nel codice~\ref{mel_spectrogram}, usando la libreria \emph{librosa}, calcola gli spettrogrammi da dare in input ai modelli della rete neurale. I file audio, originalmente campionati ad una frequenza di \SI{44.1}{\kilo \hertz}, sono sottocampionati a \SI{16}{\kilo \hertz}. Per calcolare lo spettrogramma, usiamo una lunghezza della finestra di \SI{25}{\milli \second}, un hop size di \SI{10}{\milli \second} e una FFT di \SI{64}{\milli \second}. Lo spettrogramma è contenuto in una matrice di dimensioni $128 \times 51$, le cui righe rappresentano le 128 bande mel, mentre le colonne contengono le FFT di ogni finestra da \SI{10}{\milli \second}.
+La funzione \texttt{compute\_melspectrogram}, mostrata nel codice~\ref{mel_spectrogram}, usando la libreria \emph{librosa}, calcola gli spettrogrammi da dare in input ai modelli della rete neurale. I file audio, originalmente campionati ad una frequenza di \SI{44.1}{\kilo \hertz}, sono sottocampionati a \SI{16}{\kilo \hertz}. Per calcolare lo spettrogramma usiamo la funzione \texttt{melspectrogram} con una lunghezza della finestra di \SI{25}{\milli \second}, un hop size di \SI{10}{\milli \second} e una FFT di \SI{64}{\milli \second}. Lo spettrogramma è contenuto in una matrice di dimensioni $128 \times 51$, le cui righe rappresentano le 128 bande mel, mentre le colonne contengono le FFT di ogni finestra da \SI{10}{\milli \second}. Infine, la funzione \texttt{power\_to\_db}, ritorna lo spettrogramma in scala logaritmica.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=mel\_spectrogram.py, label=mel_spectrogram,captionpos=b]
 import librosa
@@ -912,7 +912,7 @@ Il risultato della funzione \texttt{log\_mel\_spectrogram} applicato alla parola
 
 \subsection{Creazione delle feature}
 \label{subsec:creazione_feature}
-Gli spettrogrammi descritti in~\ref{subsec:spettrogramma} sono gli ingressi della rete neurale e sono stati salvati nel preprocessing prima di allenare la rete. Poiché per ogni episodio di training si usa un lettore campionato in modo random dal training set occorre dividere i lettori in training, validation e test. Infine, per ogni lettore occorre salvare gli spettrogrammi delle parole pronunciate. Il codice~\ref{preprocessing} mostra come dividere i lettori e salvare le varie feature. Tra tutti i lettori salvati nel file ``readers\_words.json'' vengono considerati validi solo quelli con almeno due classi, cioè due parole pronunciate e almeno 26 istanze per ogni parola. Questi numeri sono scelti perché in~\cite{salamon:Few-Shot} vengono proposti diversi modelli a seconda del numero delle classi $C$ e delle istanze $K$ per ogni classe. Il minimo numero di $C$ è pari a 2, mentre il numero minimo di istanze è pari a 26 perché nel training occorre utilizzare 16 istanze per la query e un numero variabile di $K$ che nel caso peggiore è uguale a 10, quindi in totale servirebbero 16+10 istanze della parola. Una volta noti i lettori validi con la funzione \texttt{find\_valid\_readers}, questi vengono ordinati in maniera random prima di dividerli in due gruppi: lettori di training insieme a quelli di validation e lettori di test. La funzione che divide i lettori con un rapporto $138:15:30$ tra training, validation e test si chiama \texttt{create\_training\_validation\_test\_readers}.
+Gli spettrogrammi descritti in~\ref{subsec:spettrogramma} sono gli ingressi della rete neurale e sono stati salvati nel preprocessing prima di allenare la rete. Poiché per ogni episodio di training si usa un lettore campionato in modo random dal training set occorre dividere i lettori in training, validation e test. Infine, per ogni lettore occorre salvare gli spettrogrammi delle parole pronunciate. Il codice~\ref{preprocessing} mostra come dividere i lettori e salvare le varie feature. Tra tutti i lettori salvati nel file ``readers\_words.json'', vengono considerati validi solo quelli con almeno due classi, cioè due parole pronunciate e almeno 26 istanze per ogni parola. Questi numeri sono scelti perché in~\cite{salamon:Few-Shot} vengono proposti diversi modelli a seconda del numero delle classi $C$ e delle istanze $K$ per ogni classe. Il minimo numero di $C$ è pari a 2, mentre il numero minimo di istanze è pari a 26 perché nel training occorre utilizzare 16 istanze per la query e un numero variabile di $K$ che nel caso peggiore è uguale a 10, quindi in totale servirebbero almeno $16+10$	 istanze della parola. Una volta noti i lettori validi con la funzione \texttt{find\_valid\_readers}, questi vengono ordinati in maniera random prima di dividerli in due gruppi: lettori di training insieme a quelli di validation e lettori di test. La funzione che divide i lettori con un rapporto $138:15:30$ tra training, validation e test si chiama \texttt{create\_training\_validation\_test\_readers}.
 I lettori di training e validation saranno poi divisi prima dell'inizio del training.
 
 Le feature, cioè gli spettrogrammi, vengono salvati in due cartelle chiamate ``Training\_validation\_features'' e ``Test\_features'', le quali hanno al loro interno delle cartelle rispettivamente chiamate come il nome del lettore e come il nome dell'articolo di Wikipedia. A sua volta, ogni cartella contiene gli spettrogrammi di ogni istanza della parola.
@@ -1094,7 +1094,6 @@ def find_classes(reader, max_class_number, max_instances_number):
     'end', 'folders' keys.
     """
     classes = []
-
     # taking at most C words from the reader
     # If the reader contains more words than C, random sample C words
     if (len(reader['words']) >= max_class_number):
@@ -1104,7 +1103,6 @@ def find_classes(reader, max_class_number, max_instances_number):
         reader_words = random.sample(reader['words'], len(reader['words']))  
 
     for word in reader_words:
-        # numpy.arange returns evenly spaced values within a given interval.
         # create an array of index to get the start, end and folder of the
         # same index
         index_array = list(numpy.arange(len(word['start'])))
@@ -1135,7 +1133,6 @@ def find_classes(reader, max_class_number, max_instances_number):
                         'start'   : instance_start,\
                         'end'     : instance_end, \
                         'folders' : instance_folder})
-
     return classes
 \end{lstlisting}
 
