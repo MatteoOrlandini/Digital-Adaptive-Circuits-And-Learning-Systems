@@ -10,11 +10,13 @@
 \usepackage[english, italian]{babel} %l?ultima lingua dichiarata è la lingua principale del documento
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{subfig}
+%\usepackage{subfig}
 \usepackage{graphicx}
 \usepackage{animate} %per le gif 
 \usepackage{xcolor}
 \usepackage{listings}
+\usepackage{booktabs} %toprule, midrule, bottomrule
+\usepackage{subcaption,booktabs}
 
 \lstset{% general command to set parameter(s)
 	backgroundcolor=\color{white},
@@ -316,42 +318,41 @@ class Protonet(nn.Module):
 	\frametitle{Blocco convoluzionale}
 		Ogni blocco convoluzionale ha 4 fasi:
 		\begin{itemize}
-			\item \texttt{nn.Conv2d(in\_channels,out\_channels,3,padding=1)}: Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
-			\item \texttt{nn.BatchNorm2d(out\_channels)}: La batch normalization è un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
-			\item \texttt{nn.ReLU()}: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
-			\item \texttt{nn.MaxPool2d(2)}: Il max-pooling è un metodo per ridurre la dimensione di un'immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
+			\item Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
+			\item Batch normalization: un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
+			\item ReLu: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
+			\item Max-pooling: metodo per ridurre la dimensione di un'immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
 		\end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{Training}
-	Il numero totale di iterazioni è 60000; per ogni episodio viene richiamata la funzione \texttt{batch\_sample}.
-	
-	Con \texttt{loss\_out.backward()} viene utilizzata la loss per la retropropagazione che aggiorna i parametri della rete.
+	A partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo lo stesso rapporto usato dal paper.
+	Il numero totale di iterazioni è 60000. Per ogni episodio:
+	\begin{enumerate}
+	\item Si campiona un lettore casuale e si selezionano C parole pronunciate da esso.
+	\item Si calcola la loss relativa all'episodio
+	\item Tramite la backpropagation si aggiornano i parametri della rete in base alla loss.
+	\end{enumerate}
 \end{frame}
 \begin{frame}
-	La funzione \texttt{get\_training\_validation\_readers}, a partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo il rapporto usato nel paper di riferimento.
+	Per il calcolo della loss le operazioni sono:
+	\begin{enumerate}
+	\item Entrambi i set vengono concatenati, risultando in un tensore $\left(C \cdot (Q + K)\right) \times 128 \times 51$, per poter essere passate al modello che calcolerà gli embedding per ogni istanza.
+	\item Gli elementi del support set che fanno parte della stessa classe andranno a costituire i prototipi tramite una media dei loro valori.
+	\item Vengono successivamente calcolate le distanze rispetto ai prototipi degli embedding di ogni classe ottenendo una matrice di dimensioni $(C \cdot Q) \times C$. L'i-esima riga e la j-esima colonna rappresentano la distanza euclidea tra gli embedding della i-esima query ($i = 1, \dots, C \cdot Q$) e quelli del j-esimo ($j = 1, \dots, C$) prototipo.
+	\item Per ogni query viene poi usata la funzione di attivazione softmax, i cui argomenti sono le distanze tra la query e i prototipi delle varie classi. La funzione loss da minimizzare è il logaritmo del softmax preso con segno negativo.
+	\end{enumerate}
 \end{frame}
-\begin{frame}
-	La funzione \texttt{batch\_sample} campiona a caso uno dei lettori di training e di questo seleziona casualmente $C$ parole. Per ognuna di queste parole si ricava il numero di istanze presenti del dataset e vengono campionate $K+Q$ istanze random della parola. Le $K+Q$ istanze vengono divise in $K$ istanze del support set e $Q$ stanze del query set. La funzione ritorna due tensori \texttt{query} e \texttt{support}, rispettivamente di dimensioni $C \times Q \times 128 \times 51$ e $C \times K \times 128 \times 51$.
-\end{frame}
-\begin{frame}
-	Una volta ottenute, le feature del support set e query set vengono date in ingresso alla funzione \texttt{loss}. Entrambi i set vengono ridimensionati, rispettivamente da $C \times K \times 128 \times 51$ a $(C \cdot K) \times 128 \times 51$ e da $C \times Q \times 128 \times 51$ a $(C \cdot Q) \times 128 \times 51$.
-	Vengono poi concatenate, risultando in un tensore $\left(C \cdot (Q + K)\right) \times 128 \times 51$, per poter essere passate al modello che calcolerà gli embedding per ogni istanza.
-	Gli elementi del support set che fanno parte della stessa classe andranno a costituire i prototipi tramite una media dei loro valori.
-\end{frame}
-\begin{frame}
-	Vengono successivamente calcolate le distanze rispetto ai prototipi degli embedding di ogni classe tramite la funzione \texttt{euclidean\_dist} che ritorna una matrice di dimensioni $(C \cdot Q) \times C$. L'i-esima riga e la j-esima colonna rappresentano la distanza euclidea tra gli embedding della i-esima query ($i = 1, \dots, C \cdot Q$) e quelli del j-esimo ($j = 1, \dots, C$) prototipo.
-	
-	Per ogni query viene poi usata la funzione di attivazione softmax, i cui argomenti sono le distanze tra la query e i prototipi delle varie classi. La funzione loss da minimizzare è il logaritmo del softmax preso con segno negativo. Se la query è vicina al prototipo, la funzione softmax tende a 1 e di conseguenza il suo logaritmo a 0, dunque la loss tende a 0, come dovrebbe appunto risultare. Nel caso in cui, invece, la query è molto lontata dal prototipo, la funzione softmax tende a 0 e il suo logaritmo a $-\infty$. In questo caso, la loss, definita come il logaritmo del softmax preso con segno negativo, tende a $+\infty$, come ci si aspetta.
-\end{frame}
+
 \begin{frame}
 	\frametitle{Validation}
 	Ogni 5000 episodi del training vengono effettuati 1000 episodi di validation.
 	Come nel training vengono ricavati support set e query set, ma in questo caso dai lettori di validation.
-	Per questi vengono calcolati con la funzione \texttt{loss} allo stesso modo loss e accuracy e vengono salvati.
+	Per questi vengono calcolati allo stesso modo loss e accuracy e vengono salvati.
 	In questo caso però i parametri del modello non vengono aggiornati.
 	Questo processo è necessario per verificare l'effettività del modello su ingressi mai visti in fase di training.
-	Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel passo precedente il modello viene salvato e sovrascritto, altrimenti viene ignorato. In questo modo si salva il modello migliore durante il training, cercando di evitare sia underfitting sia overfitting.
+	
+	Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel passo precedente il modello viene salvato e sovrascritto, altrimenti viene ignorato.
 \end{frame}
 \begin{frame}
 	\frametitle{Test}
@@ -443,13 +444,150 @@ class Protonet(nn.Module):
 	\end{enumerate}
 
 \end{frame}
+
 \begin{frame}
-	\frametitle{Risultati}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=0.8\textwidth]{Immagini/pre_rec_2}
+	\caption{Curva precision-recall per il test della rete prototypical con $C = 2$, $K=1$ e $p = 5$.}
+\end{figure}
 \end{frame}
+\begin{frame}
+\frametitle{Risultati}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{table}
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.731        & 0.069                        \\
+2, 5          & 0.721        & 0.074                        \\
+5, 1          & 0.709        & 0.089                        \\
+5, 5          & 0.688        & 0.062                        \\
+10, 1         & 0.728        & 0.067                        \\
+10, 5         & 0.727        & 0.078                        \\
+10, 10        & 0.725        & 0.059                        \\ 
+\bottomrule
+
+\end{tabular}
+\caption{Prototypical network $p=1$, $n=10$.}
+\end{table}
+
+
+\column{0.5\textwidth}
+\begin{table}
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.800        & 0.056                        \\
+2, 5          & 0.791        & 0.062                        \\
+5, 1          & 0.774        & 0.092                        \\
+5, 5          & 0.754        & 0.075                        \\
+10, 1         & 0.787        & 0.057                        \\
+10, 5         & 0.794        & 0.070                        \\
+10, 10        & 0.793        & 0.050                        \\ 
+\bottomrule
+
+\end{tabular}
+\caption{Prototypical network $p=5$, $n=10$.}
+\end{table}
+
+\end{columns}
+
+\end{frame}
+
+
+\begin{frame}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{table}
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.775        & 0.069                        \\
+2, 5          & 0.609        & 0.046                        \\
+5, 1          & 0.889        & 0.061                        \\
+5, 5          & 0.666        & 0.047                        \\
+10, 1         & 0.898        & 0.053                        \\
+10, 5         & 0.710        & 0.059                        \\
+10, 10        & 0.538        & 0.015                        \\ 
+\bottomrule
+
+\end{tabular}
+\caption{Relation network $p=1$, $n=10$.}
+\end{table}
+
+
+\column{0.5\textwidth}
+\begin{table}
+\begin{tabular}{ccc}
+\toprule
+\textbf{C, K} & \textbf{AUPRC} & \textbf{\begin{tabular}[c]{@{}c@{}}Deviazione \\ standard\end{tabular}} \\ 
+\midrule
+2, 1          & 0.596        & 0.042                        \\
+2, 5          & 0.813        & 0.056                        \\
+5, 1          & 0.698        & 0.050                        \\
+5, 5          & 0.945        & 0.037                        \\
+10, 1         & 0.691        & 0.052                        \\
+10, 5         & 0.945        & 0.036                        \\
+10, 10        & 0.845        & 0.061                        \\ 
+\bottomrule
+
+\end{tabular}
+\caption{Relation network $p=5$, $n=10$.}
+\end{table}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{Immagini/results}
+	\caption{Risultati ottenuti.}
+\end{figure}
+\end{frame}
+
+
 \section{Conclusioni}
 \begin{frame}
 	\frametitle{Conclusioni}
+	Si può notare che:
+	\begin{itemize}
+	\item La rete Prototypical ha un AUPRC più grande con $p = 5$ rispetto a $p = 1$ per ognuno dei modelli allenati.
+	\item Il miglioramento nell'AUPRC è di circa 6-7\% passando da $p = 1$ a $p = 5$.
+	\item Per la rete Relation questo comportamento non si presenta.
+	\item Con $p = 1$ si nota che la rete Prototypical ha un risultato migliore per $(C, K) \in \{ (10, 5), (10, 10)\}$, mentre nei restanti casi la rete Relation risulta migliore.
+	\item Per $p = 5$ la rete Prototypical ha invece un AUPRC più elevato per $(C, K) \in \{ (2, 1), (5, 1), (10, 1)\}$.
+	\end{itemize}
 \end{frame}
 
+\begin{frame}
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{Immagini/results_paper}
+	\caption{Risultati proposti nel paper}
+\end{figure}
+\end{frame}
+\begin{frame}
+	\frametitle{Confronto}
+	Confrontando i risultati con quelli del paper si può osservare che:
+	\begin{itemize}
+	\item in entrambi i grafici, per la rete Prototypical con $C = 10$ non si ha un miglioramento significativo dell'AUPRC e che questo tipo di rete si comporta meglio con $p = 5$.
+	\item la rete Relation ha sempre dei risultati peggiori rispetto alla Prototypical, mentre nel nostro caso dipende dai valori di $C$ e $K$ con cui è stata allenata la rete. 
+	\item i valori di AUPRC nella nostra implementazione sono generalmente più alti
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	Possibili cause di divergenza dei risultati:
+	\begin{itemize}
+	\item il preprocessing del dataset.
+	\item diversa implementazione della rete Relation, la cui funzione \textit{g\ped{sim}} non era stata descritta nell'articolo.
+	\item differente criterio per il salvataggio dei modelli durante il training.
+	\end{itemize}
+\end{frame}
 
 \end{document}
