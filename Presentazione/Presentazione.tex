@@ -169,80 +169,157 @@
 
 \section{Introduzione}
 \begin{frame}
-	\frametitle{Bluetooth Low Energy}
-	\begin{columns}
-		\column{0.5\textwidth}
-		\begin{block}{Concetti fondamentali del Bluetooth Low Energy:}
-		\begin{itemize}
-			\item Banda 2.4 GHz
-			\item 40 canali spaziati da 2 MHz
-			\item 37 canali per i dati e 3 per gli advertising
-			\item FDMA, TDMA
-			\item FHSS
-		\end{itemize}	
-		\end{block}
-
-		\column{0.5\textwidth}
-		\begin{block}{Stack protocollare BLE}
-			\centering			
-			%\includegraphics[width=1\textwidth]{Stack_protocollare_BLE}
-		\end{block}
-	\end{columns}
-	%\begin{block}
-		
-	%\end{block}
-\end{frame}
-\begin{frame}
 	\frametitle{Sound Event Detection}
-	Individuazione di eventi sonori percettivamente simili all'interno di una registrazione.
+	\begin{block}{Obiettivo}
+	Individuazione di eventi sonori percettivamente simili all'interno di una registrazione.	
+	\end{block}
+	
+	Esempi di applicazioni:
+	\begin{itemize}
+	\item rilevazione di particolari suoni nella musica
+	\item rimozione di parole di riempimento nei podcast
+	\end{itemize}
 \end{frame}
-\begin{frame}
-	\frametitle{Metodo proposto per il few-shot sound event detection}
-	\begin{figure}[h]
-	\includegraphics[width=.7\textwidth]{Immagini/few_shot_sound_event_detection_method}
-	\caption{Metodo proposto per il few-shot sound event detection. (a) Applicazione del modello few-shot, (b) costruzione del set di esempi negativi, in blu, e (c) data augmentation per la generazioni di più esempi positivi, in arancione.}
-	\end{figure}
-\end{frame}
-\begin{frame}
-\begin{figure}[h]
-	\centering	
-	\includegraphics[width=.8\textwidth]{Immagini/few_shot_learning_model}
-	\caption{Modello few-shot learning nel caso 5\emph{-way} 2\emph{-shot}}
-\end{figure}
-\end{frame}
-\section{Few-shot learning}
 
+\begin{frame}
+	\frametitle{Approccio proposto}
+	Modelli classici di deep-learning:
+	\begin{itemize}
+	\item grande mole di dati per effettuare il training
+	\item la rete è capace di riconoscere solo eventi sonori su cui è stata allenata.
+	\end{itemize}
+	
+	\begin{block}{Approccio \textit{few-shot}}
+		\begin{itemize}
+		\item la rete assumerà la capacità di riconoscere la somiglianza fra due suoni che sta analizzando
+		\item la rete ha la capacità di riconoscere una parola non vista in fase di training
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{Few-shot learning}
 \begin{frame}
 	\frametitle{Few-shot learning}
 	L'algoritmo di few-shot learning non necessita di un dataset numeroso per il training.
 	\begin{block}{Meta-learning}
-	L'apprendimento supervisionato tradizionale chiede al modello di riconoscere i dati di training e quindi di generalizzare per dati di test non visti in precedenza. Diversamente, l'obiettivo del meta apprendimento è imparare.
+	L'apprendimento supervisionato tradizionale chiede al modello di riconoscere i dati con cui la rete è stata allenata. Diversamente, l'obiettivo del meta apprendimento è \textit{imparare come imparare} a classificare i dati durante il training e generalizzare quanto imparato durante il test.
 	\end{block}
-	 Nel quadro del meta-apprendimento, \textit{impariamo come imparare} a classificare in base a una serie di \textit{episodi di training} e valutiamo utilizzando una serie di episodi di test.
+	 In ogni episodio di training della rete, le parole da riconoscere sono diverse, generalizzando il più possibile l'evento e allenando la capacità della rete di riconoscere la somiglianza tra le parole, ma non le parole stesse.
 \end{frame}
+
+\begin{frame}
+\begin{block}{Classificazione C-way K-shot}
+I modelli di few-shot learning sono allenati per risolvere il
+compito di classificazione \textit{C-way K-shot}, dove C è il numero fisso di classi tra cui discriminare e K è il numero di esempi forniti per classe.
+\end{block}
+La figura è un esempio di un task di classificazione 2-way 5-shot, in cui ogni colore rappresenta una classe.
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=.7\textwidth]{Immagini/few_shot_learning_model}
+	\caption{Modello few-shot learning nel caso 5\emph{-way} 2\emph{-shot}}
+\end{figure}
+\end{frame}
+
 \begin{frame}
 	\frametitle{C-way K-shot}
-	Ogni episodio per la classificazione C-way K-shot contiene:
-	\begin{itemize}
-	\item Un support set costituito da K istanze di C classi.
-	\item Un query set con Q istanze per ognuna delle C classi.
-	\end{itemize}
-	Ogni episodio può essere completamente unico; potremmo non vedere mai le classi di un episodio in nessuno degli altri.
+	\begin{block}{Training}
+		Per la classificazione C-way K-shot, ogni episodio di training usa C classi con K esempi ciascuna. Questi sono chiamati \textit{support set} e vengono utilizzati per apprendere come risolvere il task. Inoltre, esistono ulteriori esempi delle stesse	classi, note come \textit{query set}, utilizzate per valutare le prestazioni dell'episodio corrente.
+	\end{block}
 	
-	Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
-
+	Durante il training, la funzione costo valuta le prestazioni sul query set, dato il rispettivo support set.
+	
+	\begin{block}{Test}
+	Durante il test, utilizziamo un insieme di immagini completamente diverse
+	e valutiamo le prestazioni sul query set, dato il support set.
+	\end{block}
 \end{frame}
+
 \begin{frame}
+	\frametitle{Training e test task nel caso 3-way 2-shot}
 	\begin{figure}[h]
 		\centering	
 		\includegraphics[width=\textwidth]{Immagini/training_task}
-		\caption{Esempio episodi}
+		\caption{Esempio 3-way-2-shot.}
 	\end{figure}
 \end{frame}
-\section{Creazione del Dataset}
 
 \begin{frame}
-	\frametitle{esempio titolo: lettori validi}
+	\frametitle{Metodo proposto per il few-shot sound event detection}
+	Il modello few-shot viene applicato	ad un insieme aperto. Inoltre, viene costruito un set di esempi negativi e positivi per incrementare la precisione senza bisogno di ulteriore sforzo umano nell'etichettatura dei dati.
+	\begin{figure}[h]
+	\includegraphics[width=.5\textwidth]{Immagini/few_shot_sound_event_detection_method}
+	\caption{Metodo proposto per il few-shot sound event detection. (a) Applicazione del modello few-shot, (b) costruzione del set di esempi negativi, in blu, e (c) data augmentation per la generazioni di più esempi positivi, in arancione.}
+	\end{figure}
+\end{frame}
+
+
+
+\section{Preprocessing del Dataset}
+\begin{frame}
+	\frametitle{Dataset Spoken Wikipedia Corpora}
+	\begin{block}{Spoken Wikipedia Corpora}
+	\begin{itemize}
+	\item nato da lettori volontari di articoli di Wikipedia
+	\item formato da articoli in inglese, tedesco e olandese per
+		gli utenti che non sono in grado o non vogliono leggere la versione scritta
+		dell'articolo. 
+	\item  i file audio sono raccolti in un corpus, cioè una raccolta
+		ordinata e completa di opere o di autori, allineato nel tempo, rendendolo
+		accessibile per la ricerca.
+	\end{itemize}
+	\end{block}
+	Ogni cartella del dataset corrisponde ad un articolo di Wikipedia e in ognuna di esse è contenuto un file ``aligned.swc'' in cui sono salvate tutte le informazioni sull'audio come il nome del lettore, le parole e i relativi timestamp.
+\end{frame}
+
+\begin{frame}
+	Il dataset Spoken Wikipedia Corpora contiene un totale di 1340 audio di
+	diversi lettori, ma nel progetto vengono presi solo gli audio che contengono
+	annotazioni a livello di parola.
+	
+	\begin{block}{Partizionamento dei lettori}
+	Vengono presi 208	lettori e partizionati con un rapporto 138 : 15 : 30 tra lettori	di training, validation e test.
+	\end{block}
+	
+	Si effettua un controllo sul nome del lettore perché può capitare che questo venga salvato nel file ``aligned.swc'' in modi diversi. Ad esempio, in alcuni file si può trovare ``:en:user:alexkillby|alexkillby'', mentre in altri
+	solo ``alexkillby'' oppure si può trovare ``user:popularoutcast'', mentre in altri solo ``popularoutcast''.
+\end{frame}
+
+\begin{frame}
+	Per ogni cartella del dataset SWC si esegue il parsing del file XML, iterando l'albero fino al	tag ``n'', cioè fino al tag che contiene la normalizzazione della parola. Se è presente la chiave ``start'' (o, in modo equivalente,
+		``end''), la parola viene salvata.
+	\begin{block}{Target words}
+	Le target words sono le parole che si ripetono almeno 10 volte nel testo.
+	\end{block}
+	Vengono salvati due json all'interno di ogni cartella del dataset:
+	\begin{itemize}
+	\item ``word\_count.json'' contiene tutte le parole pronunciate almeno 10 volte
+	\item ``target\_words.json'' contiene al massimo 10 target words.
+	
+	\end{itemize}
+	Se ci sono più di 10 parole che soddisfano la condizione di target word, se ne prendono solo 10 scelte in modo random. In questo modo, si evita di scegliere parole molto comuni o molto rare.
+\end{frame}
+
+\begin{frame}
+	\begin{block}{Calcolo dello spettrogramma delle parole}
+	Per ogni istanza delle parole, prendiamo una finestra di mezzo secondo centrata
+	sulla parola, calcoliamo lo spettrogramma mel da 128 bin e lo portiamo
+	scala logaritmica.
+	\end{block}
+	\begin{columns}
+	\column{0.5\textwidth}
+	Lo spettrogramma rappresenta l'intensità di un suono in funzione del tempo e della frequenza.
+	
+	La scala mel è una scala di percezione dell'altezza (pitch) di un suono.
+	La relazione tra la scala mel e quella comunemente usata è rappresentata
+	dall'uguaglianza tra 1000 Mel e 1000 Hz all'intensità di 40 dB.
+	\column{0.5\textwidth}
+	\begin{figure}[h]
+		\centering	
+		\includegraphics[width=1\textwidth]{../Stones_spectrogram}
+		\caption{Spettrogramma di mezzo secondo centrato sulla parola ``stones'' pronunciata nell'audio ``I can't get no satisfaction''}
+		\label{fig:stones_spec}
+	\end{figure}
+	\end{columns}
 \end{frame}
 
 \section{Prototypical}
