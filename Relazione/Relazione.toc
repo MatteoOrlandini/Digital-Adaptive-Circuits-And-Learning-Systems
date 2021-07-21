@@ -3,30 +3,30 @@
 \babel@toc {italian}{}
 \contentsline {section}{\numberline {1}Introduzione}{1}{section.1}% 
 \contentsline {section}{\numberline {2}Convolutional Neural Network (CNN)}{4}{section.2}% 
-\contentsline {section}{\numberline {3}Few-shot learning}{5}{section.3}% 
-\contentsline {subsection}{\numberline {3.1}Introduzione}{5}{subsection.3.1}% 
-\contentsline {subsection}{\numberline {3.2}Struttura del meta learning}{5}{subsection.3.2}% 
-\contentsline {section}{\numberline {4}Prototypical Network}{7}{section.4}% 
-\contentsline {section}{\numberline {5}Relation Network}{9}{section.5}% 
-\contentsline {section}{\numberline {6}Preprocessing del dataset}{11}{section.6}% 
-\contentsline {subsection}{\numberline {6.1}Dataset Spoken Wikipedia Corpora}{11}{subsection.6.1}% 
-\contentsline {subsection}{\numberline {6.2}Le annotazioni del dataset}{11}{subsection.6.2}% 
-\contentsline {subsection}{\numberline {6.3}Lettori del dataset}{13}{subsection.6.3}% 
-\contentsline {subsection}{\numberline {6.4}Parole degli audio}{15}{subsection.6.4}% 
-\contentsline {subsection}{\numberline {6.5}Associazione delle parole con il rispettivo lettore}{18}{subsection.6.5}% 
-\contentsline {subsection}{\numberline {6.6}Calcolo dello spettrogramma delle parole}{19}{subsection.6.6}% 
-\contentsline {subsection}{\numberline {6.7}Creazione delle feature}{21}{subsection.6.7}% 
-\contentsline {section}{\numberline {7}Implementazione della Prototypical network}{30}{section.7}% 
-\contentsline {subsection}{\numberline {7.1}Definizione della rete}{30}{subsection.7.1}% 
-\contentsline {subsection}{\numberline {7.2}Training}{31}{subsection.7.2}% 
-\contentsline {subsection}{\numberline {7.3}Validation}{37}{subsection.7.3}% 
-\contentsline {subsection}{\numberline {7.4}Test}{37}{subsection.7.4}% 
-\contentsline {section}{\numberline {8}Implementazione della Relation network}{41}{section.8}% 
-\contentsline {subsection}{\numberline {8.1}Definizione della rete}{41}{subsection.8.1}% 
-\contentsline {subsection}{\numberline {8.2}Training}{43}{subsection.8.2}% 
-\contentsline {subsection}{\numberline {8.3}Validation}{48}{subsection.8.3}% 
-\contentsline {subsection}{\numberline {8.4}Test}{48}{subsection.8.4}% 
-\contentsline {section}{\numberline {9}Risultati}{52}{section.9}% 
-\contentsline {subsection}{\numberline {9.1}Area under precision-recall curve (AUPRC)}{52}{subsection.9.1}% 
-\contentsline {subsection}{\numberline {9.2}Confronto con l'AUPRC di riferimento}{54}{subsection.9.2}% 
-\contentsline {section}{\numberline {10}Conclusioni}{56}{section.10}% 
+\contentsline {section}{\numberline {3}Few-shot learning}{6}{section.3}% 
+\contentsline {subsection}{\numberline {3.1}Introduzione}{6}{subsection.3.1}% 
+\contentsline {subsection}{\numberline {3.2}Struttura del meta learning}{6}{subsection.3.2}% 
+\contentsline {section}{\numberline {4}Prototypical Network}{8}{section.4}% 
+\contentsline {section}{\numberline {5}Relation Network}{10}{section.5}% 
+\contentsline {section}{\numberline {6}Preprocessing del dataset}{13}{section.6}% 
+\contentsline {subsection}{\numberline {6.1}Dataset Spoken Wikipedia Corpora}{13}{subsection.6.1}% 
+\contentsline {subsection}{\numberline {6.2}Le annotazioni del dataset}{13}{subsection.6.2}% 
+\contentsline {subsection}{\numberline {6.3}Lettori del dataset}{15}{subsection.6.3}% 
+\contentsline {subsection}{\numberline {6.4}Parole degli audio}{17}{subsection.6.4}% 
+\contentsline {subsection}{\numberline {6.5}Associazione delle parole con il rispettivo lettore}{20}{subsection.6.5}% 
+\contentsline {subsection}{\numberline {6.6}Calcolo dello spettrogramma delle parole}{21}{subsection.6.6}% 
+\contentsline {subsection}{\numberline {6.7}Creazione delle feature}{23}{subsection.6.7}% 
+\contentsline {section}{\numberline {7}Implementazione della Prototypical network}{32}{section.7}% 
+\contentsline {subsection}{\numberline {7.1}Definizione della rete}{32}{subsection.7.1}% 
+\contentsline {subsection}{\numberline {7.2}Training}{33}{subsection.7.2}% 
+\contentsline {subsection}{\numberline {7.3}Validation}{39}{subsection.7.3}% 
+\contentsline {subsection}{\numberline {7.4}Test}{39}{subsection.7.4}% 
+\contentsline {section}{\numberline {8}Implementazione della Relation network}{43}{section.8}% 
+\contentsline {subsection}{\numberline {8.1}Definizione della rete}{43}{subsection.8.1}% 
+\contentsline {subsection}{\numberline {8.2}Training}{45}{subsection.8.2}% 
+\contentsline {subsection}{\numberline {8.3}Validation}{50}{subsection.8.3}% 
+\contentsline {subsection}{\numberline {8.4}Test}{50}{subsection.8.4}% 
+\contentsline {section}{\numberline {9}Risultati}{54}{section.9}% 
+\contentsline {subsection}{\numberline {9.1}Area under precision-recall curve (AUPRC)}{54}{subsection.9.1}% 
+\contentsline {subsection}{\numberline {9.2}Confronto dei risultati nelle due reti}{56}{subsection.9.2}% 
+\contentsline {section}{\numberline {10}Conclusioni}{58}{section.10}% 

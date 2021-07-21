@@ -1,15 +1,15 @@
 [0] Config.pm:304> INFO - This is Biber 2.12
 [0] Config.pm:307> INFO - Logfile is 'Relazione.blg'
-[52] biber-MSWIN32:315> INFO - === 
-[88] Biber.pm:371> INFO - Reading 'Relazione.bcf'
-[252] Biber.pm:886> INFO - Using all citekeys in bib section 0
-[276] Biber.pm:4093> INFO - Processing section 0
-[297] Biber.pm:4254> INFO - Looking for bibtex format file 'Bibliografia.bib' for section 0
-[301] bibtex.pm:1523> INFO - LaTeX decoding ...
-[320] bibtex.pm:1340> INFO - Found BibTeX data source 'Bibliografia.bib'
+[44] biber-MSWIN32:315> INFO - === 
+[78] Biber.pm:371> INFO - Reading 'Relazione.bcf'
+[222] Biber.pm:886> INFO - Using all citekeys in bib section 0
+[245] Biber.pm:4093> INFO - Processing section 0
+[265] Biber.pm:4254> INFO - Looking for bibtex format file 'Bibliografia.bib' for section 0
+[270] bibtex.pm:1523> INFO - LaTeX decoding ...
+[294] bibtex.pm:1340> INFO - Found BibTeX data source 'Bibliografia.bib'
 [466] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
 [466] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
 [466] Biber.pm:3921> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'it-IT'
 [466] Biber.pm:3927> INFO - No sort tailoring available for locale 'it-IT'
-[485] bbl.pm:636> INFO - Writing 'Relazione.bbl' with encoding 'UTF-8'
-[490] bbl.pm:739> INFO - Output to Relazione.bbl
+[489] bbl.pm:636> INFO - Writing 'Relazione.bbl' with encoding 'UTF-8'
+[495] bbl.pm:739> INFO - Output to Relazione.bbl

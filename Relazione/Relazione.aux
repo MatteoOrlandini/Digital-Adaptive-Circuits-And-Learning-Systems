@@ -24,10 +24,14 @@
 \babel@aux{italian}{}
 \abx@aux@cite{salamon:Few-Shot}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
+\abx@aux@cite{chou:learning_to_match}
+\abx@aux@segm{0}{0}{chou:learning_to_match}
+\abx@aux@cite{zhang:few_shot}
+\abx@aux@segm{0}{0}{zhang:few_shot}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduzione}{1}{section.1}\protected@file@percent }
-\newlabel{section:Introduzione}{{1}{1}{Introduzione}{section.1}{}}
+\newlabel{sec:introduzione}{{1}{1}{Introduzione}{section.1}{}}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
@@ -46,165 +50,176 @@
 \newlabel{fig:few-shot_learning_model}{{2}{2}{Modello few-shot learning nel caso 5\emph {-way} 2\emph {-shot}.~\cite {salamon:Few-Shot}\relax }{figure.caption.3}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Convolutional Neural Network (CNN)}{4}{section.2}\protected@file@percent }
 \newlabel{sec:cnn}{{2}{4}{Convolutional Neural Network (CNN)}{section.2}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Esempio di max pooling $2 \times 2$.\relax }}{4}{figure.caption.4}\protected@file@percent }
-\newlabel{fig:max_pool}{{3}{4}{Esempio di max pooling $2 \times 2$.\relax }{figure.caption.4}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Few-shot learning}{5}{section.3}\protected@file@percent }
-\newlabel{sec:few-shot}{{3}{5}{Few-shot learning}{section.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Introduzione}{5}{subsection.3.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Struttura del meta learning}{5}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Architettura di una Convolutional Neural Network\relax }}{4}{figure.caption.4}\protected@file@percent }
+\newlabel{fig:cnn}{{3}{4}{Architettura di una Convolutional Neural Network\relax }{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Effetto dei parametri stride e padding nella convoluzione di un'immagine di dimensioni $5 \times 5$ con un kernel $3 \times 3$.\relax }}{5}{figure.caption.5}\protected@file@percent }
+\newlabel{fig:padding_stride}{{4}{5}{Effetto dei parametri stride e padding nella convoluzione di un'immagine di dimensioni $5 \times 5$ con un kernel $3 \times 3$.\relax }{figure.caption.5}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Esempio di max pooling $2 \times 2$.\relax }}{5}{figure.caption.6}\protected@file@percent }
+\newlabel{fig:max_pool}{{5}{5}{Esempio di max pooling $2 \times 2$.\relax }{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Few-shot learning}{6}{section.3}\protected@file@percent }
+\newlabel{sec:few-shot}{{3}{6}{Few-shot learning}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Introduzione}{6}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Struttura del meta learning}{6}{subsection.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Training e test task nel caso 3-way 2-shot.\relax }}{7}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:few_shot}{{6}{7}{Training e test task nel caso 3-way 2-shot.\relax }{figure.caption.7}{}}
 \abx@aux@segm{0}{0}{snell:prototypical}
 \abx@aux@segm{0}{0}{snell:prototypical}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Prototypical Network}{7}{section.4}\protected@file@percent }
-\newlabel{sec:protonet}{{4}{7}{Prototypical Network}{section.4}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces I prototipi few-shot $\mathbf  {c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. I punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi (y = k|\mathbf  {x}) \propto \qopname  \relax o{exp}\left (-d(f_\phi (\mathbf  {x}),\mathbf  {c}_k) \right )$.~\cite {snell:prototypical}\relax }}{7}{figure.caption.5}\protected@file@percent }
-\newlabel{fig:proto_few_zero_shot}{{4}{7}{I prototipi few-shot $\mathbf {c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. I punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi (y = k|\mathbf {x}) \propto \exp \left (-d(f_\phi (\mathbf {x}),\mathbf {c}_k) \right )$.~\cite {snell:prototypical}\relax }{figure.caption.5}{}}
-\newlabel{eq:softmax}{{2}{8}{Prototypical Network}{equation.4.2}{}}
-\newlabel{eq:loss_proto}{{3}{8}{Prototypical Network}{equation.4.3}{}}
+\abx@aux@segm{0}{0}{snell:prototypical}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Prototypical Network}{8}{section.4}\protected@file@percent }
+\newlabel{sec:protonet}{{4}{8}{Prototypical Network}{section.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces I prototipi few-shot $\mathbf  {c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. I punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi (y = k|\mathbf  {x}) \propto \qopname  \relax o{exp}\left (-d(f_\phi (\mathbf  {x}),\mathbf  {c}_k) \right )$.~\cite {snell:prototypical}\relax }}{8}{figure.caption.8}\protected@file@percent }
+\newlabel{fig:proto_few_zero_shot}{{7}{8}{I prototipi few-shot $\mathbf {c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. I punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi (y = k|\mathbf {x}) \propto \exp \left (-d(f_\phi (\mathbf {x}),\mathbf {c}_k) \right )$.~\cite {snell:prototypical}\relax }{figure.caption.8}{}}
+\newlabel{eq:softmax}{{2}{9}{Prototypical Network}{equation.4.2}{}}
+\newlabel{eq:loss_proto}{{3}{9}{Prototypical Network}{equation.4.3}{}}
 \abx@aux@segm{0}{0}{sung:relation}
 \abx@aux@segm{0}{0}{sung:relation}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Relation Network}{9}{section.5}\protected@file@percent }
-\newlabel{sec:relation}{{5}{9}{Relation Network}{section.5}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Architettura della Relation Network nel caso \textit  {5-way 1-shot} con un esempio di query.~\cite {sung:relation}\relax }}{9}{figure.caption.6}\protected@file@percent }
-\newlabel{fig:relation_network}{{5}{9}{Architettura della Relation Network nel caso \textit {5-way 1-shot} con un esempio di query.~\cite {sung:relation}\relax }{figure.caption.6}{}}
+\abx@aux@segm{0}{0}{sung:relation}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Relation Network}{10}{section.5}\protected@file@percent }
+\newlabel{sec:relation}{{5}{10}{Relation Network}{section.5}{}}
 \abx@aux@segm{0}{0}{sung:relation}
 \abx@aux@segm{0}{0}{sung:relation}
-\newlabel{fig:relation_network_architecture_a}{{6a}{10}{Blocco convoluzionale\relax }{figure.caption.7}{}}
-\newlabel{sub@fig:relation_network_architecture_a}{{a}{10}{Blocco convoluzionale\relax }{figure.caption.7}{}}
-\newlabel{fig:relation_network_architecture_b}{{6b}{10}{Relation Network per few-shot learning\relax }{figure.caption.7}{}}
-\newlabel{sub@fig:relation_network_architecture_b}{{b}{10}{Relation Network per few-shot learning\relax }{figure.caption.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Architettura della Relation Network per few-shot learning (b) composta dagli elementi inclusi nel blocco convoluzionale (a).~\cite {sung:relation}\relax }}{10}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:relation_network_architecture}{{6}{10}{Architettura della Relation Network per few-shot learning (b) composta dagli elementi inclusi nel blocco convoluzionale (a).~\cite {sung:relation}\relax }{figure.caption.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Architettura della Relation Network nel caso \textit  {5-way 1-shot} con un esempio di query.~\cite {sung:relation}\relax }}{11}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:relation_network}{{8}{11}{Architettura della Relation Network nel caso \textit {5-way 1-shot} con un esempio di query.~\cite {sung:relation}\relax }{figure.caption.9}{}}
+\newlabel{fig:relation_network_architecture_a}{{9a}{12}{Blocco convoluzionale\relax }{figure.caption.10}{}}
+\newlabel{sub@fig:relation_network_architecture_a}{{a}{12}{Blocco convoluzionale\relax }{figure.caption.10}{}}
+\newlabel{fig:relation_network_architecture_b}{{9b}{12}{Relation Network per few-shot learning\relax }{figure.caption.10}{}}
+\newlabel{sub@fig:relation_network_architecture_b}{{b}{12}{Relation Network per few-shot learning\relax }{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Architettura della Relation Network per few-shot learning (b) composta dagli elementi inclusi nel blocco convoluzionale (a).~\cite {sung:relation}\relax }}{12}{figure.caption.10}\protected@file@percent }
+\newlabel{fig:relation_network_architecture}{{9}{12}{Architettura della Relation Network per few-shot learning (b) composta dagli elementi inclusi nel blocco convoluzionale (a).~\cite {sung:relation}\relax }{figure.caption.10}{}}
 \abx@aux@cite{minining_spoken_wikipedia}
 \abx@aux@segm{0}{0}{minining_spoken_wikipedia}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Preprocessing del dataset}{11}{section.6}\protected@file@percent }
-\newlabel{sec:preprocessing_dataset}{{6}{11}{Preprocessing del dataset}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Dataset Spoken Wikipedia Corpora}{11}{subsection.6.1}\protected@file@percent }
-\newlabel{subsec:spoken_wikipedia_corpora}{{6.1}{11}{Dataset Spoken Wikipedia Corpora}{subsection.6.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Le annotazioni del dataset}{11}{subsection.6.2}\protected@file@percent }
-\newlabel{subsec:annotazioni}{{6.2}{11}{Le annotazioni del dataset}{subsection.6.2}{}}
-\newlabel{metadati_annotazioni}{{1}{11}{Metadati delle annotazioni delle parole in un audio}{lstlisting.1}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Metadati delle annotazioni delle parole in un audio}{11}{lstlisting.1}\protected@file@percent }
-\newlabel{annotazioni}{{2}{12}{Annotazioni delle parole in un audio}{lstlisting.2}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Annotazioni delle parole in un audio}{12}{lstlisting.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Preprocessing del dataset}{13}{section.6}\protected@file@percent }
+\newlabel{sec:preprocessing_dataset}{{6}{13}{Preprocessing del dataset}{section.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.1}Dataset Spoken Wikipedia Corpora}{13}{subsection.6.1}\protected@file@percent }
+\newlabel{subsec:spoken_wikipedia_corpora}{{6.1}{13}{Dataset Spoken Wikipedia Corpora}{subsection.6.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.2}Le annotazioni del dataset}{13}{subsection.6.2}\protected@file@percent }
+\newlabel{subsec:annotazioni}{{6.2}{13}{Le annotazioni del dataset}{subsection.6.2}{}}
+\newlabel{metadati_annotazioni}{{1}{13}{Metadati delle annotazioni delle parole in un audio}{lstlisting.1}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {1}Metadati delle annotazioni delle parole in un audio}{13}{lstlisting.1}\protected@file@percent }
+\newlabel{annotazioni}{{2}{14}{Annotazioni delle parole in un audio}{lstlisting.2}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {2}Annotazioni delle parole in un audio}{14}{lstlisting.2}\protected@file@percent }
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Lettori del dataset}{13}{subsection.6.3}\protected@file@percent }
-\newlabel{subsec:lettori}{{6.3}{13}{Lettori del dataset}{subsection.6.3}{}}
-\newlabel{json_manager}{{3}{13}{json\_manager.py}{lstlisting.3}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}json\_manager.py}{13}{lstlisting.3}\protected@file@percent }
-\newlabel{xml_parser_readers}{{4}{14}{xml\_parser\_readers.py}{lstlisting.4}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}xml\_parser\_readers.py}{14}{lstlisting.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.3}Lettori del dataset}{15}{subsection.6.3}\protected@file@percent }
+\newlabel{subsec:lettori}{{6.3}{15}{Lettori del dataset}{subsection.6.3}{}}
+\newlabel{json_manager}{{3}{15}{json\_manager.py}{lstlisting.3}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {3}json\_manager.py}{15}{lstlisting.3}\protected@file@percent }
+\newlabel{xml_parser_readers}{{4}{16}{xml\_parser\_readers.py}{lstlisting.4}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {4}xml\_parser\_readers.py}{16}{lstlisting.4}\protected@file@percent }
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\newlabel{JSON_lettori}{{5}{15}{Formato del file readers\_paths.json}{lstlisting.5}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}Formato del file readers\_paths.json}{15}{lstlisting.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Parole degli audio}{15}{subsection.6.4}\protected@file@percent }
-\newlabel{subsec:parole}{{6.4}{15}{Parole degli audio}{subsection.6.4}{}}
-\newlabel{find_target_words}{{6}{16}{find\_target\_words.py}{lstlisting.6}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}find\_target\_words.py}{16}{lstlisting.6}\protected@file@percent }
-\newlabel{word_count}{{7}{17}{Formato del file word\_count.json}{lstlisting.7}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}Formato del file word\_count.json}{17}{lstlisting.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Associazione delle parole con il rispettivo lettore}{18}{subsection.6.5}\protected@file@percent }
-\newlabel{subsec:unione}{{6.5}{18}{Associazione delle parole con il rispettivo lettore}{subsection.6.5}{}}
-\newlabel{words_per_reader}{{8}{18}{words\_per\_reader.py}{lstlisting.8}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}words\_per\_reader.py}{18}{lstlisting.8}\protected@file@percent }
-\newlabel{readers_words}{{9}{19}{Formato del file readers\_words.json}{lstlisting.9}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}Formato del file readers\_words.json}{19}{lstlisting.9}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Calcolo dello spettrogramma delle parole}{19}{subsection.6.6}\protected@file@percent }
-\newlabel{subsec:spettrogramma}{{6.6}{19}{Calcolo dello spettrogramma delle parole}{subsection.6.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Grafico della scala mel in funzione della scala in Hertz.\relax }}{20}{figure.caption.8}\protected@file@percent }
-\newlabel{fig:mel_plot}{{7}{20}{Grafico della scala mel in funzione della scala in Hertz.\relax }{figure.caption.8}{}}
+\newlabel{JSON_lettori}{{5}{17}{Formato del file readers\_paths.json}{lstlisting.5}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {5}Formato del file readers\_paths.json}{17}{lstlisting.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.4}Parole degli audio}{17}{subsection.6.4}\protected@file@percent }
+\newlabel{subsec:parole}{{6.4}{17}{Parole degli audio}{subsection.6.4}{}}
+\newlabel{find_target_words}{{6}{18}{find\_target\_words.py}{lstlisting.6}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {6}find\_target\_words.py}{18}{lstlisting.6}\protected@file@percent }
+\newlabel{word_count}{{7}{19}{Formato del file word\_count.json}{lstlisting.7}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {7}Formato del file word\_count.json}{19}{lstlisting.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.5}Associazione delle parole con il rispettivo lettore}{20}{subsection.6.5}\protected@file@percent }
+\newlabel{subsec:unione}{{6.5}{20}{Associazione delle parole con il rispettivo lettore}{subsection.6.5}{}}
+\newlabel{words_per_reader}{{8}{20}{words\_per\_reader.py}{lstlisting.8}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {8}words\_per\_reader.py}{20}{lstlisting.8}\protected@file@percent }
+\newlabel{readers_words}{{9}{21}{Formato del file readers\_words.json}{lstlisting.9}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {9}Formato del file readers\_words.json}{21}{lstlisting.9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.6}Calcolo dello spettrogramma delle parole}{21}{subsection.6.6}\protected@file@percent }
+\newlabel{subsec:spettrogramma}{{6.6}{21}{Calcolo dello spettrogramma delle parole}{subsection.6.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Grafico della scala mel in funzione della scala in Hertz.\relax }}{22}{figure.caption.11}\protected@file@percent }
+\newlabel{fig:mel_plot}{{10}{22}{Grafico della scala mel in funzione della scala in Hertz.\relax }{figure.caption.11}{}}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\newlabel{mel_spectrogram}{{10}{21}{mel\_spectrogram.py}{lstlisting.10}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}mel\_spectrogram.py}{21}{lstlisting.10}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Creazione delle feature}{21}{subsection.6.7}\protected@file@percent }
-\newlabel{subsec:creazione_feature}{{6.7}{21}{Creazione delle feature}{subsection.6.7}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Spettrogramma di mezzo secondo centrato sulla parola ``stones'' pronunciata nell'audio ``I can't get no satisfaction'' dopo 50.35 secondi.\relax }}{22}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:stones_spec}{{8}{22}{Spettrogramma di mezzo secondo centrato sulla parola ``stones'' pronunciata nell'audio ``I can't get no satisfaction'' dopo 50.35 secondi.\relax }{figure.caption.9}{}}
-\newlabel{preprocessing}{{11}{22}{preprocessing.py}{lstlisting.11}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}preprocessing.py}{22}{lstlisting.11}\protected@file@percent }
-\newlabel{find_valid_readers}{{12}{24}{Funzione \texttt {find\_valid\_readers}}{lstlisting.12}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {12}Funzione \texttt  {find\_valid\_readers}}{24}{lstlisting.12}\protected@file@percent }
-\newlabel{create_training_validation_test_readers}{{13}{25}{Funzione \texttt {create\_training\_validation\_test\_readers}}{lstlisting.13}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {13}Funzione \texttt  {create\_training\_validation\_test\_readers}}{25}{lstlisting.13}\protected@file@percent }
-\newlabel{find_classes}{{14}{25}{Funzione \texttt {find\_classes}}{lstlisting.14}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {14}Funzione \texttt  {find\_classes}}{25}{lstlisting.14}\protected@file@percent }
-\newlabel{save_dataset}{{15}{27}{Funzione \texttt {save\_dataset}}{lstlisting.15}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {15}Funzione \texttt  {save\_dataset}}{27}{lstlisting.15}\protected@file@percent }
-\newlabel{save_test_dataset}{{16}{28}{Funzione \texttt {save\_test\_dataset}}{lstlisting.16}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {16}Funzione \texttt  {save\_test\_dataset}}{28}{lstlisting.16}\protected@file@percent }
+\newlabel{mel_spectrogram}{{10}{23}{mel\_spectrogram.py}{lstlisting.10}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {10}mel\_spectrogram.py}{23}{lstlisting.10}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {6.7}Creazione delle feature}{23}{subsection.6.7}\protected@file@percent }
+\newlabel{subsec:creazione_feature}{{6.7}{23}{Creazione delle feature}{subsection.6.7}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Spettrogramma di mezzo secondo centrato sulla parola ``stones'' pronunciata nell'audio ``I can't get no satisfaction'' dopo 50.35 secondi.\relax }}{24}{figure.caption.12}\protected@file@percent }
+\newlabel{fig:stones_spec}{{11}{24}{Spettrogramma di mezzo secondo centrato sulla parola ``stones'' pronunciata nell'audio ``I can't get no satisfaction'' dopo 50.35 secondi.\relax }{figure.caption.12}{}}
+\newlabel{preprocessing}{{11}{24}{preprocessing.py}{lstlisting.11}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {11}preprocessing.py}{24}{lstlisting.11}\protected@file@percent }
+\newlabel{find_valid_readers}{{12}{26}{Funzione \texttt {find\_valid\_readers}}{lstlisting.12}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {12}Funzione \texttt  {find\_valid\_readers}}{26}{lstlisting.12}\protected@file@percent }
+\newlabel{create_training_validation_test_readers}{{13}{27}{Funzione \texttt {create\_training\_validation\_test\_readers}}{lstlisting.13}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {13}Funzione \texttt  {create\_training\_validation\_test\_readers}}{27}{lstlisting.13}\protected@file@percent }
+\newlabel{find_classes}{{14}{27}{Funzione \texttt {find\_classes}}{lstlisting.14}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {14}Funzione \texttt  {find\_classes}}{27}{lstlisting.14}\protected@file@percent }
+\newlabel{save_dataset}{{15}{29}{Funzione \texttt {save\_dataset}}{lstlisting.15}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {15}Funzione \texttt  {save\_dataset}}{29}{lstlisting.15}\protected@file@percent }
+\newlabel{save_test_dataset}{{16}{30}{Funzione \texttt {save\_test\_dataset}}{lstlisting.16}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {16}Funzione \texttt  {save\_test\_dataset}}{30}{lstlisting.16}\protected@file@percent }
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Implementazione della Prototypical network}{30}{section.7}\protected@file@percent }
-\newlabel{sec:implementazione_protonet}{{7}{30}{Implementazione della Prototypical network}{section.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Definizione della rete}{30}{subsection.7.1}\protected@file@percent }
-\newlabel{subsec:definizione_protonet}{{7.1}{30}{Definizione della rete}{subsection.7.1}{}}
-\newlabel{Protonet}{{17}{30}{protonet.py}{lstlisting.17}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {17}protonet.py}{30}{lstlisting.17}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7}Implementazione della Prototypical network}{32}{section.7}\protected@file@percent }
+\newlabel{sec:implementazione_protonet}{{7}{32}{Implementazione della Prototypical network}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Definizione della rete}{32}{subsection.7.1}\protected@file@percent }
+\newlabel{subsec:definizione_protonet}{{7.1}{32}{Definizione della rete}{subsection.7.1}{}}
+\newlabel{Protonet}{{17}{32}{protonet.py}{lstlisting.17}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {17}protonet.py}{32}{lstlisting.17}\protected@file@percent }
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Training}{31}{subsection.7.2}\protected@file@percent }
-\newlabel{protonet_training main}{{18}{31}{protonet\_training.py}{lstlisting.18}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {18}protonet\_training.py}{31}{lstlisting.18}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Training}{33}{subsection.7.2}\protected@file@percent }
+\newlabel{protonet_training main}{{18}{33}{protonet\_training.py}{lstlisting.18}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {18}protonet\_training.py}{33}{lstlisting.18}\protected@file@percent }
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\newlabel{get_training_validation_readers}{{19}{33}{get\_training\_validation\_readers}{lstlisting.19}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {19}get\_training\_validation\_readers}{33}{lstlisting.19}\protected@file@percent }
-\newlabel{batch_sample}{{20}{34}{batch\_sample}{lstlisting.20}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {20}batch\_sample}{34}{lstlisting.20}\protected@file@percent }
-\newlabel{protonet_loss}{{21}{35}{protonet\_loss.py}{lstlisting.21}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {21}protonet\_loss.py}{35}{lstlisting.21}\protected@file@percent }
+\newlabel{get_training_validation_readers}{{19}{35}{get\_training\_validation\_readers}{lstlisting.19}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {19}get\_training\_validation\_readers}{35}{lstlisting.19}\protected@file@percent }
+\newlabel{batch_sample}{{20}{36}{batch\_sample}{lstlisting.20}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {20}batch\_sample}{36}{lstlisting.20}\protected@file@percent }
+\newlabel{protonet_loss}{{21}{37}{protonet\_loss.py}{lstlisting.21}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {21}protonet\_loss.py}{37}{lstlisting.21}\protected@file@percent }
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Validation}{37}{subsection.7.3}\protected@file@percent }
-\newlabel{subsec:proto_validation}{{7.3}{37}{Validation}{subsection.7.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Test}{37}{subsection.7.4}\protected@file@percent }
-\newlabel{subsec:proto_test}{{7.4}{37}{Test}{subsection.7.4}{}}
-\newlabel{protonet_test}{{22}{38}{protonet\_test.py}{lstlisting.22}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {22}protonet\_test.py}{38}{lstlisting.22}\protected@file@percent }
-\newlabel{get_negative_positive_query_set}{{23}{39}{Funzione \texttt {get\_negative\_positive\_query\_set}}{lstlisting.23}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {23}Funzione \texttt  {get\_negative\_positive\_query\_set}}{39}{lstlisting.23}\protected@file@percent }
-\newlabel{test_predictions}{{24}{40}{Funzione \texttt {test\_prediction}}{lstlisting.24}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {24}Funzione \texttt  {test\_prediction}}{40}{lstlisting.24}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Validation}{39}{subsection.7.3}\protected@file@percent }
+\newlabel{subsec:proto_validation}{{7.3}{39}{Validation}{subsection.7.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.4}Test}{39}{subsection.7.4}\protected@file@percent }
+\newlabel{subsec:proto_test}{{7.4}{39}{Test}{subsection.7.4}{}}
+\newlabel{protonet_test}{{22}{40}{protonet\_test.py}{lstlisting.22}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {22}protonet\_test.py}{40}{lstlisting.22}\protected@file@percent }
+\newlabel{get_negative_positive_query_set}{{23}{41}{Funzione \texttt {get\_negative\_positive\_query\_set}}{lstlisting.23}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {23}Funzione \texttt  {get\_negative\_positive\_query\_set}}{41}{lstlisting.23}\protected@file@percent }
+\newlabel{test_predictions}{{24}{42}{Funzione \texttt {test\_prediction}}{lstlisting.24}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {24}Funzione \texttt  {test\_prediction}}{42}{lstlisting.24}\protected@file@percent }
 \abx@aux@segm{0}{0}{sung:relation}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Implementazione della Relation network}{41}{section.8}\protected@file@percent }
-\newlabel{sec:implementazione_relation}{{8}{41}{Implementazione della Relation network}{section.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Definizione della rete}{41}{subsection.8.1}\protected@file@percent }
-\newlabel{relation network}{{25}{41}{relation\_network.py}{lstlisting.25}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {25}relation\_network.py}{41}{lstlisting.25}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Training}{43}{subsection.8.2}\protected@file@percent }
-\newlabel{relation training}{{26}{44}{relation\_training.py}{lstlisting.26}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {26}relation\_training.py}{44}{lstlisting.26}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Validation}{48}{subsection.8.3}\protected@file@percent }
-\newlabel{eq:acc_relation}{{6}{48}{Validation}{equation.8.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Test}{48}{subsection.8.4}\protected@file@percent }
-\newlabel{relation test}{{27}{48}{relation\_test.py}{lstlisting.27}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {27}relation\_test.py}{48}{lstlisting.27}\protected@file@percent }
-\newlabel{test_predictions_relation}{{28}{50}{Funzione \texttt {test\_predictions}}{lstlisting.28}{}}
-\@writefile{lol}{\contentsline {lstlisting}{\numberline {28}Funzione \texttt  {test\_predictions}}{50}{lstlisting.28}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {9}Risultati}{52}{section.9}\protected@file@percent }
-\newlabel{sec:risultati}{{9}{52}{Risultati}{section.9}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Area under precision-recall curve (AUPRC)}{52}{subsection.9.1}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Curva precision-recall per il test della rete prototypical con $C = 2$, $K=1$ e $p = 5$.\relax }}{53}{figure.caption.10}\protected@file@percent }
-\newlabel{fig:prec_rec}{{9}{53}{Curva precision-recall per il test della rete prototypical con $C = 2$, $K=1$ e $p = 5$.\relax }{figure.caption.10}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Implementazione della Relation network}{43}{section.8}\protected@file@percent }
+\newlabel{sec:implementazione_relation}{{8}{43}{Implementazione della Relation network}{section.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Definizione della rete}{43}{subsection.8.1}\protected@file@percent }
+\newlabel{relation network}{{25}{43}{relation\_network.py}{lstlisting.25}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {25}relation\_network.py}{43}{lstlisting.25}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.2}Training}{45}{subsection.8.2}\protected@file@percent }
+\newlabel{relation training}{{26}{46}{relation\_training.py}{lstlisting.26}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {26}relation\_training.py}{46}{lstlisting.26}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.3}Validation}{50}{subsection.8.3}\protected@file@percent }
+\newlabel{eq:acc_relation}{{6}{50}{Validation}{equation.8.6}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.4}Test}{50}{subsection.8.4}\protected@file@percent }
+\newlabel{relation test}{{27}{50}{relation\_test.py}{lstlisting.27}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {27}relation\_test.py}{50}{lstlisting.27}\protected@file@percent }
+\newlabel{test_predictions_relation}{{28}{52}{Funzione \texttt {test\_predictions}}{lstlisting.28}{}}
+\@writefile{lol}{\contentsline {lstlisting}{\numberline {28}Funzione \texttt  {test\_predictions}}{52}{lstlisting.28}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {9}Risultati}{54}{section.9}\protected@file@percent }
+\newlabel{sec:risultati}{{9}{54}{Risultati}{section.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.1}Area under precision-recall curve (AUPRC)}{54}{subsection.9.1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Curva precision-recall per il test della rete prototypical con $C = 2$, $K=1$ e $p = 5$.\relax }}{55}{figure.caption.13}\protected@file@percent }
+\newlabel{fig:prec_rec}{{12}{55}{Curva precision-recall per il test della rete prototypical con $C = 2$, $K=1$ e $p = 5$.\relax }{figure.caption.13}{}}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
 \abx@aux@segm{0}{0}{salamon:Few-Shot}
-\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Confronto con l'AUPRC di riferimento}{54}{subsection.9.2}\protected@file@percent }
-\newlabel{tab:proto_p1}{{\caption@xref {tab:proto_p1}{ on input line 2264}}{54}{Confronto con l'AUPRC di riferimento}{table.caption.11}{}}
-\newlabel{sub@tab:proto_p1}{{}{54}{Confronto con l'AUPRC di riferimento}{table.caption.11}{}}
-\newlabel{tab:proto_p5}{{\caption@xref {tab:proto_p5}{ on input line 2283}}{54}{Confronto con l'AUPRC di riferimento}{table.caption.11}{}}
-\newlabel{sub@tab:proto_p5}{{a}{54}{Confronto con l'AUPRC di riferimento}{table.caption.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces AUPRC e deviazione standard della prototypical network\relax }}{54}{table.caption.11}\protected@file@percent }
-\newlabel{tab:relation_p1}{{\caption@xref {tab:relation_p1}{ on input line 2306}}{54}{Confronto con l'AUPRC di riferimento}{table.caption.12}{}}
-\newlabel{sub@tab:relation_p1}{{}{54}{Confronto con l'AUPRC di riferimento}{table.caption.12}{}}
-\newlabel{tab:relation_p5}{{\caption@xref {tab:relation_p5}{ on input line 2325}}{54}{Confronto con l'AUPRC di riferimento}{table.caption.12}{}}
-\newlabel{sub@tab:relation_p5}{{a}{54}{Confronto con l'AUPRC di riferimento}{table.caption.12}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces AUPRC e deviazione standard della relation network\relax }}{54}{table.caption.12}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Risultati ottenuti.\relax }}{55}{figure.caption.13}\protected@file@percent }
-\newlabel{fig:results}{{10}{55}{Risultati ottenuti.\relax }{figure.caption.13}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Risultati proposti in~\cite {salamon:Few-Shot}.\relax }}{55}{figure.caption.14}\protected@file@percent }
-\newlabel{fig:results_paper}{{11}{55}{Risultati proposti in~\cite {salamon:Few-Shot}.\relax }{figure.caption.14}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusioni}{56}{section.10}\protected@file@percent }
-\newlabel{sec:conclusioni}{{10}{56}{Conclusioni}{section.10}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {9.2}Confronto dei risultati nelle due reti}{56}{subsection.9.2}\protected@file@percent }
+\newlabel{tab:proto_p1}{{1a}{56}{Prototypical network $p=1$, $n=10$.\relax }{table.caption.14}{}}
+\newlabel{sub@tab:proto_p1}{{a}{56}{Prototypical network $p=1$, $n=10$.\relax }{table.caption.14}{}}
+\newlabel{tab:proto_p5}{{1b}{56}{Prototypical network $p=5$, $n=10$.\relax }{table.caption.14}{}}
+\newlabel{sub@tab:proto_p5}{{b}{56}{Prototypical network $p=5$, $n=10$.\relax }{table.caption.14}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces AUPRC e deviazione standard della prototypical network\relax }}{56}{table.caption.14}\protected@file@percent }
+\newlabel{tab:relation_p1}{{2a}{56}{Relation network $p=1$, $n=10$.\relax }{table.caption.15}{}}
+\newlabel{sub@tab:relation_p1}{{a}{56}{Relation network $p=1$, $n=10$.\relax }{table.caption.15}{}}
+\newlabel{tab:relation_p5}{{2b}{56}{Relation network $p=5$, $n=10$.\relax }{table.caption.15}{}}
+\newlabel{sub@tab:relation_p5}{{b}{56}{Relation network $p=5$, $n=10$.\relax }{table.caption.15}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces AUPRC e deviazione standard della relation network\relax }}{56}{table.caption.15}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {13}{\ignorespaces Risultati ottenuti.\relax }}{57}{figure.caption.16}\protected@file@percent }
+\newlabel{fig:results}{{13}{57}{Risultati ottenuti.\relax }{figure.caption.16}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {14}{\ignorespaces Risultati proposti in~\cite {salamon:Few-Shot}.\relax }}{57}{figure.caption.17}\protected@file@percent }
+\newlabel{fig:results_paper}{{14}{57}{Risultati proposti in~\cite {salamon:Few-Shot}.\relax }{figure.caption.17}{}}
+\abx@aux@segm{0}{0}{salamon:Few-Shot}
+\@writefile{toc}{\contentsline {section}{\numberline {10}Conclusioni}{58}{section.10}\protected@file@percent }
+\newlabel{sec:conclusioni}{{10}{58}{Conclusioni}{section.10}{}}
 \abx@aux@refcontextdefaultsdone
+\abx@aux@defaultrefcontext{0}{chou:learning_to_match}{nty/global//global/global}
 \abx@aux@defaultrefcontext{0}{koch:siamese}{nty/global//global/global}
 \abx@aux@defaultrefcontext{0}{minining_spoken_wikipedia}{nty/global//global/global}
 \abx@aux@defaultrefcontext{0}{snell:prototypical}{nty/global//global/global}
 \abx@aux@defaultrefcontext{0}{sung:relation}{nty/global//global/global}
 \abx@aux@defaultrefcontext{0}{vinyals:matching}{nty/global//global/global}
 \abx@aux@defaultrefcontext{0}{salamon:Few-Shot}{nty/global//global/global}
+\abx@aux@defaultrefcontext{0}{zhang:few_shot}{nty/global//global/global}

@@ -261,23 +261,22 @@
 \setcounter{page}{1}
 
 \section{Introduzione}
-\label{section:Introduzione}
-L'argomento centrale della tesina è l'individuazione di eventi sonori percettivamente simili all'interno di una registrazione. Per fare ciò, sono state implementate due reti neurali presentate nel paper ``\textit{Few-Shot Event Detection}''~\cite{salamon:Few-Shot}.
+\label{sec:introduzione}
+Lo scopo del presente lavoro è l'implementazione di parte degli algoritmi descritti nel paper  ``\textit{Few-Shot Event Detection}''~\cite{salamon:Few-Shot} e di riprodurne i risultati. Questo articolo ha come obiettivo l'individuazione di eventi sonori percettivamente simili all'interno di una registrazione.
 
 Varie applicazioni di queste reti possono essere la rilevazione di particolari suoni nella musica o la rimozione di parole di riempimento nei podcast, come ad esempio gli ``ehm''. Solitamente questo processo viene eseguito manualmente, risultando in un compito difficile e tedioso.
 
-I classici modelli di deep-learning per la determinazione di suoni richiedono una grande mole di dati per fare il training. In questo modo la rete è capace di riconoscere parole sulle quali si è allenata.
+I classici modelli di deep-learning per il rilevamento di suoni richiedono una grande mole di dati per effettuare il training e in questo modo la rete è capace di riconoscere eventi sonori su cui è stata allenata.
 
-Nell'approccio proposta, chiamato \textit{few-shot}, invece, è necessario un piccolo dataset di riferimento. La rete non sarà allenata a riconoscere i suoni che ha ascoltato nel training, ma assumerà la capacità di riconoscere la somiglianza fra due suoni che sta analizzando.
+Nell'approccio \textit{few-shot}, invece, è sufficiente un dataset composto da pochi esempi di riferimento. La rete non sarà implementata con la finalità di identificare eventi sonori appartenenti a classi con cui è stata allenata, ma assumerà la capacità di riconoscere la somiglianza fra due suoni che sta analizzando.
 
-Le reti few-shot di solito sono state utilizzate per un set chiuso, dove in un \textit{task} di classificazione veniva presentata una query e confrontata con K istanze di C classi, con C fisso.
-Questo metodo è chiamato C-way K-shot.
+In precedenti lavori,~\cite{chou:learning_to_match} e~\cite{zhang:few_shot}, le reti few-shot sono state utilizzate per un set chiuso, dove in un \textit{task} di classificazione veniva presentata una query e confrontata con K istanze di C classi, con C fisso. Questo metodo è chiamato \textit{C-way K-shot}.
 
-Il paper di riferimento invece, cerca di applicare una rete few-shot in un contesto più ampio, in cui è necessario riconoscere una parola non vista in precedenza in una sequenza di suoni non classificati precedentemente dalla rete.
+Nel paper di riferimento, invece, gli autori applicano una rete few-shot in un contesto più ampio, in cui è necessario riconoscere una parola non vista in precedenza in una sequenza di suoni non classificati precedentemente dalla rete.
 
 In figura~\ref{fig:few_shot_sound_event_detection_method} è mostrato il metodo proposto, in cui il few-shot viene applicato ad un insieme aperto. Inoltre, viene mostrato come costruire un set di esempi negativi e come aumentare i dati positivi per incrementare la precisione senza bisogno di ulteriore sforzo umano nell'etichettatura dei dati.
 
-Prima di fare questo però, la rete deve ``\textit{imparare ad imparare}'': verrà quindi sottoposta a una serie di task classici di few shot nei quali la rete deve riconoscere a quale classe appartiene una parola avendo come riferimento C classi di parole ciascuna composta da K istanze.
+Prima di fare questo però, la rete deve ``\textit{imparare ad imparare}'': verrà quindi sottoposta a una serie di task classici di few-shot nei quali la rete deve riconoscere a quale classe appartiene una parola avendo come riferimento C classi di parole ciascuna composta da K istanze.
 
 In ogni episodio di training della rete, le parole da riconoscere sono diverse, generalizzando il più possibile l'evento e allenando la capacità della rete di \textit{riconoscere la somiglianza} tra le parole, ma non le parole stesse.
 
@@ -301,14 +300,24 @@ Nell'articolo~\cite{salamon:Few-Shot}, vengono proposti quattro metodi di appren
 
 La principale differenza tra questi metodi è la funzione \textit{g\textsubscript{sim}}, cioè la metrica della distanza utilizzata per misurare la somiglianza tra gli embedding del support e query set. Le Siamese Networks vengono addestrate utilizzando coppie di dati della stessa classe o di classi diverse con una triplet loss e la distanza L1. Le Matching Networks calcolano il coseno di similitudine tra l'embedding della query e ogni support. Le Prototypical Networks calcolano il quadrato della distanza euclidea tra l'embedding della query e la media di ogni classe (prototipo) degli embedding del support set. Le Relation Networks sostituiscono le metriche a distanza fissa con un modulo di relazione composto a sua volta da una rete neurale.
 
-In questa tesina sono state implementate la Prototypical Network e la Relation Network, comparandone i risultati nel capitolo~\ref{sec:risultati}. Nel capitolo~\ref{sec:cnn} vengono introdotte le reti neurali convoluzionali usate per implementare la  funzione\textit{f\textsubscript{emb}}, in~\ref{sec:few-shot} vengono descritte le reti few-show più in particolare, mentre in~\ref{sec:protonet} e~\ref{sec:relation} le due reti utilizzate. Nel capitolo~\ref{sec:preprocessing_dataset} viene spiegato come è stato fatto il preprocessing del dataset, in~\ref{sec:implementazione_protonet} e~\ref{sec:implementazione_relation} vengono descritte le implementazioni delle due reti usando \textit{PyTorch}.
+In questa tesina sono state implementate la Prototypical Network e la Relation Network, comparandone i risultati nel capitolo~\ref{sec:risultati}. Nel capitolo~\ref{sec:cnn} vengono introdotte le reti neurali convoluzionali usate per implementare la funzione \textit{f\textsubscript{emb}}, in~\ref{sec:few-shot} vengono descritte le reti few-show più in particolare, mentre in~\ref{sec:protonet} e~\ref{sec:relation} le due reti utilizzate. Nel capitolo~\ref{sec:preprocessing_dataset} viene spiegato come è stato fatto il preprocessing del dataset, in~\ref{sec:implementazione_protonet} e~\ref{sec:implementazione_relation} vengono descritte le implementazioni delle due reti usando \textit{PyTorch}.
 
 \clearpage
 
 \section{Convolutional Neural Network (CNN)}
 \label{sec:cnn}
-Una rete neurale convoluzionale (CNN) è una rete feedforward pensata per applicazioni che richiedono l'elaborazione di immagini o di grandi moli di dati.
+La funzione \textit{f\textsubscript{emb}} descritta nel capitolo~\ref{sec:introduzione} rappresenta una rete neurale convoluzionale (CNN) sia nella rete Prototypical sia nella Relation. In quest'ultima anche la funzione \textit{g\textsubscript{sim}} è una CNN.
+
+Una rete neurale convoluzionale è una rete feed-forward pensata per applicazioni che richiedono l'elaborazione di immagini o di grandi moli di dati.
 In una CNN, l'input è un tensore di dimensione: $\text{(numero di immagini)} \times \text{(altezza dell'immagine)} \times \text{(larghezza dell'immagine)} \times \text{(canali dell'immagine)}$. Dopo aver attraversato un layer convoluzionale, l'immagine viene astratta in una \textit{feature map} di dimensione: $\text{(numero di input)} \times \text{(altezza della feature map)} \times \text{(larghezza della feature map)} \times \text{(canali della feature map)}$. 
+
+L'architettura di una CNN è mostrata in figura~\ref{fig:cnn}.
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{Immagini/cnn}
+	\caption{Architettura di una Convolutional Neural Network}
+	\label{fig:cnn}
+\end{figure}
 
 Un layer convoluzionale all'interno di una CNN è costituito da: 
 \begin{itemize}
@@ -317,17 +326,25 @@ Un layer convoluzionale all'interno di una CNN è costituito da:
 \item ulteriori funzioni dell'operazione di convoluzione, come: \textit{padding}, \textit{stride} e \textit{dilatation}.
 \end{itemize}
 
-Il parametro stride definisce il passo con cui il kernel viene traslato sulla matrice di ingresso. Solitamente, viene effettuato uno zero-padding sui contorni del volume in modo da poter caratterizzare anche i valori che si trovano ai bordi delle matrici. In seguito alla convoluzione viene applicata una funzione non-lineare, come ad esempio una sigmoide o una ReLu, con lo scopo di aumentare la proprietà di non linearità.
+Il parametro stride definisce il passo con cui il kernel viene traslato sulla matrice di ingresso. Solitamente, viene effettuato uno zero-padding sui contorni del volume in modo da poter caratterizzare anche i valori che si trovano ai bordi delle matrici. La figura~\ref{fig:padding_stride} mostra la convoluzione con i parametri zero-padding = 1, stride = 2, dimensione del kernel uguale a 3, altezza e larghezza dell'immagine pari a 5.
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{Immagini/padding_stride}
+	\caption{Effetto dei parametri stride e padding nella convoluzione di un'immagine di dimensioni $5 \times 5$ con un kernel $3 \times 3$.}
+	\label{fig:padding_stride}
+\end{figure}
+
+In seguito alla convoluzione viene applicata una funzione non-lineare, come ad esempio una sigmoide o una ReLu, con lo scopo di aumentare la proprietà di non linearità. 
 
 Il pooling layer è uno strato della rete che ha lo scopo di ridurre le dimensioni della matrice prodotta dal convolutional layer. Combinando gruppi di elementi della matrice (solitamente $2 \times 2$) restituisce il valore massimo tra essi, che andrà a sostituire il blocco stesso. La figura~\ref{fig:max_pool} illustra un esempio di max pooling $2 \times 2$.
 
 \begin{figure}[h]
 	\centering	
-	\includegraphics[width=.7\textwidth]{Immagini/maxpool}
+	\includegraphics[width=.8\textwidth]{Immagini/maxpool}
 	\caption{Esempio di max pooling $2 \times 2$.}
 	\label{fig:max_pool}
 \end{figure}
-
 
 \clearpage
 
@@ -345,6 +362,17 @@ Nell'apprendimento classico, impariamo come classificare dai dati di training e 
 
 Per la classificazione \textit{C-way K-shot}, ogni task include C classi con K esempi ciascuna. Questi sono chiamati \textit{support set} e vengono utilizzati per apprendere come risolvere il task. Inoltre, esistono ulteriori esempi delle stesse classi, note come \textit{query set}, che non fanno parte del support set, utilizzate per valutare le prestazioni dell'episodio corrente. Ogni episodio può essere completamente unico: potremmo non vedere mai le classi di un episodio in nessuno degli altri. L'idea è che il sistema veda ripetutamente istanze durante l'addestramento che corrispondono alla struttura del task finale dell'algoritmo di few-shot, ma che contengono classi diverse.
 
+La figura~\ref{fig:few_shot} mostra un esempio di funzionamento del meta-learning, in cui un algoritmo viene allenato utilizzando una serie di training task. Il support set è formato da tre diverse classi e con due esempi ciascuna. Durante il training, la funzione costo valuta le prestazioni sul query set, dato il rispettivo support set. 
+
+Durante il test, utilizziamo un insieme di immagini completamente diverse e valutiamo le prestazioni sul query set, dato il support set. Nel test non sono presenti immagini già usate nel training, quindi l'algoritmo deve imparare a classificare le classi di immagini in generale piuttosto che un insieme particolare.
+
+\begin{figure}[h]
+	\centering	
+	\includegraphics[width=1\textwidth]{Immagini/training_task}
+	\caption{Training e test task nel caso 3-way 2-shot.}
+	\label{fig:few_shot}
+\end{figure}
+
 Ad ogni fase del meta-apprendimento, aggiorniamo i parametri in ogni episodio di training usando i dati di allenamento selezionati casualmente. La funzione di loss è determinata dalle prestazioni di classificazione sul set di query dell'episodio, in base alla conoscenza acquisita dal relativo support set. Poiché la rete viene sottoposta ad un compito diverso in ogni fase temporale, deve imparare a discriminare le classi di dati in generale, piuttosto che un particolare sottoinsieme di classi.
 
 Per valutare le prestazioni nel few-shot, utilizziamo una serie di dati di test. Il set di test contiene solo classi  che non erano nel training set. Per ciascuno, misuriamo le prestazioni sul query set in base alla conoscenza del \textit{positive set} e del \textit{negative set}. Il positive set è composto dalle stesse istanze della parola del query set, mentre il negative set è composto da parti di audio prese casualmente nella registrazione che non fanno parte del positive set.
@@ -360,6 +388,8 @@ Per valutare le prestazioni nel few-shot, utilizziamo una serie di dati di test.
 
 \section{Prototypical Network}
 \label{sec:protonet}
+La Prototypical Network è stata proposta da Jake Snell nel paper~\cite{snell:prototypical}.
+
 Le Prototypical Network apprendono una rappresentazione spaziale in cui la classificazione può essere eseguita calcolando le distanze delle rappresentazioni del \textit{prototipo} di ciascuna classe. 
 
 Per fare ciò, apprendiamo un mapping non lineare dell'input in uno spazio di embedding utilizzando una rete neurale e prendiamo il prototipo di una classe come la media del suo support set nello spazio di embedding. La classificazione viene quindi eseguita per un punto dell'embedding del query semplicemente trovando il prototipo della classe più vicino. La figura~\ref{fig:proto_few_zero_shot} mostra come avviene la classificazione della query $\mathbf{x}$ avendo costruito tre prototipi $\mathbf{c}_1$, $\mathbf{c}_2$ e $\mathbf{c}_3$.
@@ -377,7 +407,7 @@ La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k
 \begin{equation}
 	\mathbf{c}_k=\frac{1}{|S_k|}\sum_{(\mathbf{x}_i,y_i)\in S_k}f_\phi (\mathbf{x}_i)
 \end{equation}
-Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Protypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
+Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Prototypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
 \begin{equation}\label{eq:softmax}
 p_\phi(y=k|\mathbf{x})=\dfrac{\exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k))}{\sum_k' \exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k'))}
 \end{equation}
@@ -386,9 +416,8 @@ Il processo di training avviene minimizzando il negativo del logaritmo della pro
 	J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)
 \end{equation}
 considerando la distanza fra query e il prototipo della sua classe.
-Gli episodi di training sono formati campionando C classi di parole da un lettore e selezionando per ognuna casualmente K istanze e Q query.
 
-Le reti Protypical differiscono dalle reti Marching nel caso few-shot, mentre sono uguali nel caso one-shot. Le reti Marching producono un classificatore nearest neighbor ponderato dato il support set, mentre le reti Protypical producono un classificatore lineare quando viene utilizzata la distanza euclidea al quadrato. Nel caso dell'apprendimento one-shot, $\mathbf{c}_k = \mathbf{x}_k$ poiché esiste un solo punto di supporto per classe, in questo modo le reti Marching e le reti Protypical diventano equivalenti.
+Le reti Protypical differiscono dalle reti Matching nel caso few-shot, mentre sono uguali nel caso one-shot. Le reti Matching producono un classificatore nearest neighbor ponderato dato il support set, mentre le reti Protypical producono un classificatore lineare quando viene utilizzata la distanza euclidea al quadrato. Nel caso dell'apprendimento one-shot, $\mathbf{c}_k = \mathbf{x}_k$ poiché esiste un solo punto di supporto per classe, in questo modo le reti Matching e le reti Protypical diventano equivalenti.
 
 Come nella maggior parte dei modelli di apprendimento few-shot, la funzione di embedding è composta da quattro blocchi convoluzionali. Ogni blocco è formato da 64 filtri $3 \times 3$, un layer di batch normalization, un layer ReLu che rappresenta la non linearità e un max-pooling $2 \times 2$.
 
@@ -396,6 +425,8 @@ Come nella maggior parte dei modelli di apprendimento few-shot, la funzione di e
 
 \section{Relation Network}
 \label{sec:relation}
+La Relation Network è stata proposta da Flood Sung nel paper~\cite{sung:relation}.
+
 La rete Relation ha lo scopo di associare due istanze alla volta per determinare la loro similarità.
 Questo viene effettuato concatenando gli embedding di più istanze in un unico elemento che sarà dato in ingresso a una rete decisionale i cui parametri saranno aggiornati in modo che una concatenazione di elementi simili restituisca un risultato vicino a 1.
 
@@ -422,9 +453,9 @@ Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che 
 
 Come nella Prototypical Network, anche nella Relation Network viene usata una architettura con quattro blocchi convoluzionali per il modulo di embedding, come illustrato in figura~\ref{fig:relation_network_architecture}.
 
-Ogni blocco convoluzionale contiene una convoluzione con 64 filtri $3 \times 3$, una batch normalization e un layer ReLU non lineare. I primi tre blocchi contengono anche un layer di max pooling $2 \times 2$, mentre l'ultimo no. Lo facciamo perché abbiamo bisogno delle feature map di output per gli ulteriori livelli convoluzionali nel modulo realtion. 
+Ogni blocco convoluzionale contiene una convoluzione con 64 filtri $3 \times 3$, una batch normalization e un layer ReLU non lineare. I primi tre blocchi contengono anche un layer di max pooling $2 \times 2$, mentre l'ultimo no. Lo facciamo perché abbiamo bisogno delle feature map di output per gli ulteriori livelli convoluzionali nel modulo relation. 
 
-Il modulo realtion è costituito da due blocchi convoluzionali e due layer fully-connected. Ciascuno dei blocchi convoluzionali è una convoluzione $3 \times 3$ con 64 filtri seguita da batch normalization, non linearità ReLU e da un max pooling $2 \times 2$. La dimensione di output dell'ultimo layer di max pooling è pari a 64. I due layer fully-connected sono rispettivamente 8 e 1 dimensionale. Tutti i layer fully-connected sono ReLU eccetto quello di output, composto da una sigmoide per generare punteggi di relazione in un intervallo compreso tra 0 e 1.
+Il modulo relation è costituito da due blocchi convoluzionali e due layer fully-connected. Ciascuno dei blocchi convoluzionali è una convoluzione $3 \times 3$ con 64 filtri seguita da batch normalization, non linearità ReLU e da un max pooling $2 \times 2$. La dimensione di output dell'ultimo layer di max pooling è pari a 64. I due layer fully-connected sono rispettivamente 8 e 1 dimensionale. Tutti i layer fully-connected sono ReLU eccetto quello di output, composto da una sigmoide per generare punteggi di relazione in un intervallo compreso tra 0 e 1.
 
 \begin{figure}[h]
 	\centering
@@ -2243,7 +2274,7 @@ La figura~\ref{fig:prec_rec} mostra la curva precision-recall per la rete protot
 \end{figure}
 \clearpage
 
-\subsection{Confronto con l'AUPRC di riferimento}
+\subsection{Confronto dei risultati nelle due reti}
 \begin{table}[h]
 \centering
 \begin{subtable}{0.48\textwidth}
@@ -2261,8 +2292,8 @@ La figura~\ref{fig:prec_rec} mostra la curva precision-recall per la rete protot
 10, 10        & 0.725        & 0.059                        \\ 
 \bottomrule
 \end{tabular}
-\label{tab:proto_p1}
 \caption{Prototypical network $p=1$, $n=10$.}
+\label{tab:proto_p1}
 \end{subtable}
 \hfil
 \begin{subtable}{0.48\textwidth}
@@ -2280,8 +2311,8 @@ La figura~\ref{fig:prec_rec} mostra la curva precision-recall per la rete protot
 10, 10        & 0.793        & 0.050                        \\ 
 \bottomrule
 \end{tabular}
-\label{tab:proto_p5}
 \caption{Prototypical network $p=5$, $n=10$.}
+\label{tab:proto_p5}
 \end{subtable}
 \caption{AUPRC e deviazione standard della prototypical network}
 \end{table}
@@ -2303,8 +2334,8 @@ La figura~\ref{fig:prec_rec} mostra la curva precision-recall per la rete protot
 10, 10        & 0.538        & 0.015                        \\ 
 \bottomrule
 \end{tabular}
-\label{tab:relation_p1}
 \caption{Relation network $p=1$, $n=10$.}
+\label{tab:relation_p1}
 \end{subtable}
 \hfil
 \begin{subtable}{0.48\textwidth}
@@ -2322,8 +2353,8 @@ La figura~\ref{fig:prec_rec} mostra la curva precision-recall per la rete protot
 10, 10        & 0.845        & 0.061                        \\ 
 \bottomrule
 \end{tabular}
-\label{tab:relation_p5}
 \caption{Relation network $p=5$, $n=10$.}
+\label{tab:relation_p5}
 \end{subtable}
 \caption{AUPRC e deviazione standard della relation network}
 \end{table}
@@ -2347,6 +2378,16 @@ La figura~\ref{fig:results_paper} mostra i risultati ottenuti nell'articolo~\cit
 
 \section{Conclusioni}
 \label{sec:conclusioni}
+La figura~\ref{fig:results} mostra che la rete Prototypical ha un AUPRC più grande con $p = 5$ rispetto a $p = 1$ per ognuno dei modelli allenati. Inoltre, dalle tabelle~\ref{tab:proto_p1} e~\ref{tab:proto_p5} si nota che il miglioramento nell'AUPRC è di circa 6-7\% passando da $p = 1$ a $p = 5$. Per la rete Relation, invece, questo comportamento non si presenta, in quanto per le coppie $(C, K) \in \{ (2,1), (5,1), (10,1)\}$ l'AUPRC è maggiore con $p = 1$.
+
+Con $p = 1$ si nota che la rete Prototypical ha un risultato migliore per $(C, K) \in \{ (10, 5), (10, 10)\}$, mentre nei restanti casi la rete Relation risulta migliore. Per $p = 5$ la rete Prototypical ha invece un AUPRC più elevato per $(C, K) \in \{ (2, 1), (5, 1), (10, 1)\}$.
+
+Confrontando la figura~\ref{fig:results} con la~\ref{fig:results_paper} si nota che in entrambi i grafici, per la rete Prototypical con $C = 10$ non si ha un miglioramento significativo dell'AUPRC e che questo tipo di rete si comporta meglio con $p = 5$.
+
+Nella figura~\ref{fig:results_paper} si può osservare che la rete Relation ha sempre dei risultati peggiori rispetto alla Prototypical, mentre nel nostro caso dipende dai valori di $C$ e $K$ con cui è stata allenata la rete. 
+
+Si può notare che i valori di AUPRC nella nostra implementazione sono generalmente più alti rispetto a quelli proposti in~\cite{salamon:Few-Shot}. Questo può essere dovuto a diversi fattori come il preprocessing del dataset, una diversa implementazione della rete Relation, la cui funzione \textit{g\ped{sim}} non era stata descritta nell'articolo, o un differente criterio per il salvataggio dei modelli durante il training.
+
 \clearpage
 
 \nocite{*}

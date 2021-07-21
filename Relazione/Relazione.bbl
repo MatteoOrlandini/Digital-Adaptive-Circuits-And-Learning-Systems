@@ -19,6 +19,55 @@
 
 \refsection{0}
   \datalist[entry]{nty/global//global/global}
+    \entry{chou:learning_to_match}{article}{}
+      \name{author}{4}{}{%
+        {{hash=3d49e8b1ef590ddaedfd574237f8120d}{%
+           family={Chou},
+           familyi={C\bibinitperiod},
+           given={Szu{-}Yu},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7a69c59ad8b9ead2210117192607e087}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Kai{-}Hsiang},
+           giveni={K\bibinitperiod}}}%
+        {{hash=70ea4c1b27fd2facf7fb397264709abd}{%
+           family={Jang},
+           familyi={J\bibinitperiod},
+           given={Jyh{-}Shing\bibnamedelima Roger},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=dc4d44f6814797864181d8ee2756517f}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yi{-}Hsuan},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{fullhash}{04e700399ea3c22077647dc5b5371048}
+      \strng{bibnamehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{authorbibnamehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{authornamehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{authorfullhash}{04e700399ea3c22077647dc5b5371048}
+      \field{sortinit}{C}
+      \field{sortinithash}{963e9d84a3da2344e8833203de5aed05}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{CoRR}
+      \field{title}{Learning to match transient sound events using attentional similarity for few-shot sound recognition}
+      \field{volume}{abs/1812.01269}
+      \field{year}{2018}
+      \true{nocite}
+      \verb{eprint}
+      \verb 1812.01269
+      \endverb
+      \verb{urlraw}
+      \verb http://arxiv.org/abs/1812.01269
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/1812.01269
+      \endverb
+    \endentry
     \entry{koch:siamese}{inproceedings}{}
       \name{author}{3}{}{%
         {{hash=03f9adefbe3b9c96c1156db76c3d4735}{%
@@ -343,6 +392,55 @@
       \range{pages}{5}
       \verb{doi}
       \verb 10.1109/ICASSP40776.2020.9054708
+      \endverb
+    \endentry
+    \entry{zhang:few_shot}{inproceedings}{}
+      \name{author}{4}{}{%
+        {{hash=bf4e1e62e0f1db256dd1eb9a345f2a2a}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Shilei},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6d51ded0132f69542c52688eaad1f25f}{%
+           family={Qin},
+           familyi={Q\bibinitperiod},
+           given={Yong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=120909f85d61cf504f8462f2b700534c}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Kewei},
+           giveni={K\bibinitperiod}}}%
+        {{hash=97fbf6c08d48df6a4099330dc70a1716}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Yonghua},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{fullhash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{bibnamehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{authorbibnamehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{authornamehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{authorfullhash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \field{sortinit}{Z}
+      \field{sortinithash}{156173bd08b075d7295bc3e0f4735a04}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{Proc. Interspeech 2019}
+      \field{title}{{Few-Shot Audio Classification with Attentional Graph Neural Networks}}
+      \field{year}{2019}
+      \true{nocite}
+      \field{pages}{3649\bibrangedash 3653}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.21437/Interspeech.2019-1532
+      \endverb
+      \verb{urlraw}
+      \verb http://dx.doi.org/10.21437/Interspeech.2019-1532
+      \endverb
+      \verb{url}
+      \verb http://dx.doi.org/10.21437/Interspeech.2019-1532
       \endverb
     \endentry
   \enddatalist
