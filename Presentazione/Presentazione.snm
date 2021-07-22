@@ -1,4 +1,7 @@
-\beamer@slide {fig:stones_spec}{13}
-\beamer@slide {eq:softmax}{16}
-\beamer@slide {eq:loss_proto}{17}
-\beamer@slide {Protonet}{19}
+\beamer@slide {fig:stones_spec}{15}
+\beamer@slide {eq:softmax}{19}
+\beamer@slide {eq:loss_proto}{19}
+\beamer@slide {Protonet}{21}
+\beamer@slide {relation_encoder}{31}
+\beamer@slide {relation_network}{32}
+\beamer@slide {auc_tmp}{40}

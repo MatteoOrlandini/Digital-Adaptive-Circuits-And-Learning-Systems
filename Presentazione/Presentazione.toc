@@ -3,7 +3,7 @@
 \beamer@sectionintoc {1}{Introduzione}{3}{0}{1}
 \beamer@sectionintoc {2}{Few-shot learning}{5}{0}{2}
 \beamer@sectionintoc {3}{Preprocessing del Dataset}{10}{0}{3}
-\beamer@sectionintoc {4}{Prototypical}{14}{0}{4}
-\beamer@sectionintoc {5}{Relation}{25}{0}{5}
-\beamer@sectionintoc {6}{Risultati}{31}{0}{6}
-\beamer@sectionintoc {7}{Conclusioni}{39}{0}{7}
+\beamer@sectionintoc {4}{Prototypical Network}{16}{0}{4}
+\beamer@sectionintoc {5}{Relation Network}{28}{0}{5}
+\beamer@sectionintoc {6}{Risultati}{38}{0}{6}
+\beamer@sectionintoc {7}{Conclusioni}{46}{0}{7}

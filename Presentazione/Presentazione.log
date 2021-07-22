@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  21 JUL 2021 18:34
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.12.18)  22 JUL 2021 12:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1301,62 +1301,68 @@ Overfull \vbox (4.7608pt too high) detected at line 251
 ] [12
 
 ]
-LaTeX Font Info:    Try loading font information for U+msa on input line 321.
+[13
+
+] [14
+
+]
+<../Stones_spectrogram.png, id=462, 987.2082pt x 509.5035pt>
+File: ../Stones_spectrogram.png Graphic file (type png)
+<use ../Stones_spectrogram.png>
+Package pdftex.def Info: ../Stones_spectrogram.png  used on input line 332.
+(pdftex.def)             Requested size: 307.28987pt x 158.58972pt.
+ [15
+
+ <../Stones_spectrogram.png>]
+LaTeX Font Info:    Try loading font information for U+msa on input line 341.
 
 (c:/Program Files/texlive/2019/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 321.
+LaTeX Font Info:    Try loading font information for U+msb on input line 341.
 
 (c:/Program Files/texlive/2019/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Try loading font information for OT1+mathkerncmss on input 
-line 321.
+line 341.
 
 (c:/Program Files/texlive/2019/texmf-dist/tex/latex/sansmathaccent/ot1mathkernc
 mss.fd
 File: ot1mathkerncmss.fd 2013/03/27 Fontinst v1.933 font definitions for OT1/ma
 thkerncmss.
-)
-<../Stones_spectrogram.png, id=405, 987.2082pt x 509.5035pt>
-File: ../Stones_spectrogram.png Graphic file (type png)
-<use ../Stones_spectrogram.png>
-Package pdftex.def Info: ../Stones_spectrogram.png  used on input line 321.
-(pdftex.def)             Requested size: 153.64493pt x 79.29097pt.
- [13
-
- <../Stones_spectrogram.png>] [14
+) [16
 
 ]
-<Immagini/proto_few_shot.png, id=472, 268.00125pt x 163.3603pt>
+<Immagini/proto_few_shot.png, id=529, 268.00125pt x 163.3603pt>
 File: Immagini/proto_few_shot.png Graphic file (type png)
 <use Immagini/proto_few_shot.png>
-Package pdftex.def Info: Immagini/proto_few_shot.png  used on input line 335.
+Package pdftex.def Info: Immagini/proto_few_shot.png  used on input line 348.
 (pdftex.def)             Requested size: 153.64493pt x 93.65225pt.
- [15
+ [17
 
- <./Immagini/proto_few_shot.png>] [16
+ <./Immagini/proto_few_shot.png>] [18
 
-] [17
+] [19
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 359.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 380.
 
 
 (c:/Program Files/texlive/2019/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-) [18
+)
+<Immagini/proto_steps.png, id=625, 757.32938pt x 170.88844pt>
+File: Immagini/proto_steps.png Graphic file (type png)
+<use Immagini/proto_steps.png>
+Package pdftex.def Info: Immagini/proto_steps.png  used on input line 380.
+(pdftex.def)             Requested size: 307.28987pt x 69.33981pt.
+ [20
 
-]
+ <./Immagini/proto_steps.png>]
 \openout4 = `Presentazione.vrb'.
 
-
-(./Presentazione.vrb) [19
-
-] [20
-
-] [21
+ (./Presentazione.vrb) [21
 
 ] [22
 
@@ -1369,59 +1375,88 @@ File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 ] [26
 
 ]
-<Immagini/relation_network.png, id=827, 847.66687pt x 422.32782pt>
-File: Immagini/relation_network.png Graphic file (type png)
-<use Immagini/relation_network.png>
-Package pdftex.def Info: Immagini/relation_network.png  used on input line 462.
+[27
 
-(pdftex.def)             Requested size: 307.28987pt x 153.09474pt.
- [27
-
- <./Immagini/relation_network.png>] [28
+] [28
 
 ] [29
 
-] [30
+]
+<Immagini/relation_network.png, id=913, 847.66687pt x 422.32782pt>
+File: Immagini/relation_network.png Graphic file (type png)
+<use Immagini/relation_network.png>
+Package pdftex.def Info: Immagini/relation_network.png  used on input line 507.
 
-] [31
+(pdftex.def)             Requested size: 307.28987pt x 153.09474pt.
+ [30
 
-] [32
+ <./Immagini/relation_network.png>]
+\openout4 = `Presentazione.vrb'.
+
+ (./Presentazione.vrb)
+Overfull \vbox (4.2713pt too high) detected at line 542
+ []
+
+[31
+
+]
+\openout4 = `Presentazione.vrb'.
+
+ (./Presentazione.vrb) [32
 
 ] [33
 
 ] [34
 
+] [35
+
+] [36
+
+] [37
+
+] [38
+
+] [39
+
 ]
-<Immagini/pre_rec_2.png, id=1054, 462.528pt x 346.896pt>
+\openout4 = `Presentazione.vrb'.
+
+
+(./Presentazione.vrb) [40
+
+] [41
+
+]
+<Immagini/pre_rec_2.png, id=1258, 462.528pt x 346.896pt>
 File: Immagini/pre_rec_2.png Graphic file (type png)
 <use Immagini/pre_rec_2.png>
-Package pdftex.def Info: Immagini/pre_rec_2.png  used on input line 529.
+Package pdftex.def Info: Immagini/pre_rec_2.png  used on input line 682.
 (pdftex.def)             Requested size: 245.83282pt x 184.37802pt.
- [35
+ [42
 
  <./Immagini/pre_rec_2.png>]
-Overfull \hbox (3.93784pt too wide) in paragraph at lines 574--574
+Overfull \hbox (3.93784pt too wide) in paragraph at lines 727--727
  [] 
  []
 
 
-Overfull \hbox (3.93784pt too wide) in paragraph at lines 574--574
+Overfull \hbox (3.93784pt too wide) in paragraph at lines 727--727
  [] 
  []
 
-[36
+[43
 
 ]
-Overfull \hbox (3.93784pt too wide) in paragraph at lines 618--618
+Overfull \hbox (3.93784pt too wide) in paragraph at lines 771--771
  [] 
  []
 
 
-Overfull \hbox (3.93784pt too wide) in paragraph at lines 618--618
+Overfull \hbox (3.93784pt too wide) in paragraph at lines 771--771
  [] 
  []
 
-[37
+[44
 
 ]
 Package epstopdf Info: Source file: <Immagini/results.eps>
@@ -1432,29 +1467,29 @@ Package epstopdf Info: Source file: <Immagini/results.eps>
 (epstopdf)                    size: 9220 bytes
 (epstopdf)             Command: <repstopdf --outfile=Immagini/results-eps-conve
 rted-to.pdf Immagini/results.eps>
-(epstopdf)             \includegraphics on input line 626.
+(epstopdf)             \includegraphics on input line 779.
 Package epstopdf Info: Output file is already uptodate.
-<Immagini/results-eps-converted-to.pdf, id=1140, 1028.84375pt x 519.9425pt>
+<Immagini/results-eps-converted-to.pdf, id=1344, 1028.84375pt x 519.9425pt>
 File: Immagini/results-eps-converted-to.pdf Graphic file (type pdf)
 <use Immagini/results-eps-converted-to.pdf>
 Package pdftex.def Info: Immagini/results-eps-converted-to.pdf  used on input l
-ine 626.
+ine 779.
 (pdftex.def)             Requested size: 307.28987pt x 155.29372pt.
- [38
+ [45
 
- <./Immagini/results-eps-converted-to.pdf>] [39
+ <./Immagini/results-eps-converted-to.pdf>] [46
 
 ]
-<Immagini/results_paper.png, id=1202, 778.40813pt x 353.82187pt>
+<Immagini/results_paper.png, id=1406, 778.40813pt x 353.82187pt>
 File: Immagini/results_paper.png Graphic file (type png)
 <use Immagini/results_paper.png>
-Package pdftex.def Info: Immagini/results_paper.png  used on input line 648.
+Package pdftex.def Info: Immagini/results_paper.png  used on input line 801.
 (pdftex.def)             Requested size: 307.28987pt x 139.67981pt.
- [40
+ [47
 
- <./Immagini/results_paper.png>] [41
+ <./Immagini/results_paper.png>] [48
 
-] [42
+] [49
 
 ]
 \tf@nav=\write6
@@ -1466,19 +1501,19 @@ Package pdftex.def Info: Immagini/results_paper.png  used on input line 648.
 \tf@snm=\write8
 \openout8 = `Presentazione.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 668.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 668.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 821.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 821.
  (./Presentazione.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 668.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 668.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 821.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 821.
 Package rerunfilecheck Info: File `Presentazione.out' has not changed.
-(rerunfilecheck)             Checksum: 57C9A47EE59E38207988EF213782F6EE;339.
+(rerunfilecheck)             Checksum: B9071D8145B6D428B11F7CC67D54BCCF;355.
  ) 
 Here is how much of TeX's memory you used:
- 31826 strings out of 492623
- 593585 string characters out of 6126681
- 977872 words of memory out of 5000000
- 35084 multiletter control sequences out of 15000+600000
+ 31956 strings out of 492623
+ 595207 string characters out of 6126681
+ 1167872 words of memory out of 5000000
+ 35190 multiletter control sequences out of 15000+600000
  556130 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  65i,16n,100p,1254b,1586s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1510,10 +1545,10 @@ s/type1/public/cm-super/sfsx1000.pfb><c:/Program Files/texlive/2019/texmf-dist/
 fonts/type1/public/cm-super/sfsx1095.pfb><c:/Program Files/texlive/2019/texmf-d
 ist/fonts/type1/public/cm-super/sftt0800.pfb><c:/Program Files/texlive/2019/tex
 mf-dist/fonts/type1/public/cm-super/sftt1095.pfb>
-Output written on Presentazione.pdf (42 pages, 1553612 bytes).
+Output written on Presentazione.pdf (49 pages, 1686604 bytes).
 PDF statistics:
- 1391 PDF objects out of 1440 (max. 8388607)
- 1248 compressed objects within 13 object streams
- 96 named destinations out of 1000 (max. 500000)
- 149 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1600 PDF objects out of 1728 (max. 8388607)
+ 1439 compressed objects within 15 object streams
+ 113 named destinations out of 1000 (max. 500000)
+ 154 words of extra memory for PDF output out of 10000 (max. 10000000)
 

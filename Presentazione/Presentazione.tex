@@ -258,9 +258,7 @@ La figura è un esempio di un task di classificazione 2-way 5-shot, in cui ogni c
 	\begin{block}{Spoken Wikipedia Corpora}
 	\begin{itemize}
 	\item nato da lettori volontari di articoli di Wikipedia
-	\item formato da articoli in inglese, tedesco e olandese per
-		gli utenti che non sono in grado o non vogliono leggere la versione scritta
-		dell'articolo. 
+	\item formato da articoli in inglese, tedesco e olandese per gli utenti che non sono in grado di leggere la versione scritta dell'articolo. 
 	\item  i file audio sono raccolti in un corpus, cioè una raccolta
 		ordinata e completa di opere o di autori, allineato nel tempo, rendendolo
 		accessibile per la ricerca.
@@ -270,16 +268,29 @@ La figura è un esempio di un task di classificazione 2-way 5-shot, in cui ogni c
 \end{frame}
 
 \begin{frame}
+	Fasi del preprocessing:
+	\begin{enumerate}
+	\item Individuazione dei lettori con i relativi audio
+	\item Individuazione delle parole con almeno 10 istanze negli audio 
+	\item Associazione delle parole per ogni lettore
+	\item Divisione in lettori di training, validation e test
+	\item Salvataggio dei rispettivi dataset considerando un massimo di 64 istanze per 32 classi 
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
 	Il dataset Spoken Wikipedia Corpora contiene un totale di 1340 audio di
 	diversi lettori, ma nel progetto vengono presi solo gli audio che contengono
 	annotazioni a livello di parola.
 	
+	Vengono salvati i nomi dei lettori che pronunciano almeno 2 parole per 26 volte.
+	
 	\begin{block}{Partizionamento dei lettori}
-	Vengono presi 208	lettori e partizionati con un rapporto 138 : 15 : 30 tra lettori	di training, validation e test.
+	Vengono presi 208 lettori e partizionati con un rapporto 138 : 15 : 30 tra lettori	di training, validation e test.
 	\end{block}
 	
 	Si effettua un controllo sul nome del lettore perché può capitare che questo venga salvato nel file ``aligned.swc'' in modi diversi. Ad esempio, in alcuni file si può trovare ``:en:user:alexkillby|alexkillby'', mentre in altri
-	solo ``alexkillby'' oppure si può trovare ``user:popularoutcast'', mentre in altri solo ``popularoutcast''.
+	solo ``alexkillby''.
 \end{frame}
 
 \begin{frame}
@@ -291,39 +302,41 @@ La figura è un esempio di un task di classificazione 2-way 5-shot, in cui ogni c
 	Vengono salvati due json all'interno di ogni cartella del dataset:
 	\begin{itemize}
 	\item ``word\_count.json'' contiene tutte le parole pronunciate almeno 10 volte
-	\item ``target\_words.json'' contiene al massimo 10 target words.
+	\item ``target\_words.json'' contiene al massimo 10 target words utilizzate per il test.
 	
 	\end{itemize}
 	Se ci sono più di 10 parole che soddisfano la condizione di target word, se ne prendono solo 10 scelte in modo random. In questo modo, si evita di scegliere parole molto comuni o molto rare.
 \end{frame}
 
 \begin{frame}
-	\begin{block}{Calcolo dello spettrogramma delle parole}
 	Per ogni istanza delle parole, prendiamo una finestra di mezzo secondo centrata
-	sulla parola, calcoliamo lo spettrogramma mel da 128 bin e lo portiamo
+	sulla parola, calcoliamo lo spettrogramma mel da 128 bin e lo portiamo in
 	scala logaritmica.
+	\begin{block}{Spettrogramma}
+		Lo spettrogramma rappresenta l'intensità di un suono in funzione del tempo e della frequenza.
 	\end{block}
-	\begin{columns}
-	\column{0.5\textwidth}
-	Lo spettrogramma rappresenta l'intensità di un suono in funzione del tempo e della frequenza.
-	
-	La scala mel è una scala di percezione dell'altezza (pitch) di un suono.
-	La relazione tra la scala mel e quella comunemente usata è rappresentata
-	dall'uguaglianza tra 1000 Mel e 1000 Hz all'intensità di 40 dB.
-	\column{0.5\textwidth}
+	\begin{block}{Scala mel}
+		La scala mel è una scala di percezione dell'altezza (pitch) di un suono.
+			La relazione tra la scala mel e quella comunemente usata è rappresentata
+			dall'uguaglianza tra 1000 Mel e 1000 Hz all'intensità di 40 dB.
+	\end{block}
+\end{frame}
+
+\begin{frame}
 	\begin{figure}[h]
 		\centering	
 		\includegraphics[width=1\textwidth]{../Stones_spectrogram}
 		\caption{Spettrogramma di mezzo secondo centrato sulla parola ``stones'' pronunciata nell'audio ``I can't get no satisfaction''}
 		\label{fig:stones_spec}
 	\end{figure}
-	\end{columns}
 \end{frame}
 
-\section{Prototypical}
+\section{Prototypical Network}
 \begin{frame}
-	\frametitle{Protypical Network}
-	L'approccio si basa sull'idea che esista un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione per ogni classe, chiamata \textit{prototipo}. 
+	\frametitle{Prototypical Network}
+	\begin{block}{Prototipo}
+	L'approccio si basa sull'idea che esista un embedding in cui i punti delle istanze di una classe si raggruppano attorno a una singola rappresentazione per ogni classe, chiamata \textbf{prototipo}. 
+	\end{block}	
 	Nella classificazione few-shot per ogni episodio viene fornito un support set di $N$ esempi etichettati  $S=\{(\mathbf{x}_1,y_1), \dots,(\mathbf{x}_N,y_N)\}$ dove $\mathbf{x}_i\in \mathbb{R}^D$ rappresenta il vettore $D$-dimensionale della feature (nel nostro caso spettrogrammi di dimensione $128 \times 51$) e $y_i \in \{1, \dots, K\}$ la rispettiva label. $S_k$ denota il set di esempi etichettati con la classe $k$.
 \end{frame}
 \begin{frame}
@@ -333,30 +346,39 @@ La figura è un esempio di un task di classificazione 2-way 5-shot, in cui ogni c
 	\caption{I prototipi few-shot $\mathbf{c}_k$ sono calcolati come la media degli embedding del support set per ogni classe. I punti degli embedding delle query sono classificati facendo il softmax sulle distanze del prototipo delle classi: $p_\phi(y = k|\mathbf{x}) \propto \exp \left(-d(f_\phi(\mathbf{x}),\mathbf{c}_k) \right)$.}
 \end{figure}
 \end{frame}
+
 \begin{frame}
 	La rete Prototypical calcola una rappresentazione $M$-dimensionale $\mathbf{c}_k$, o \emph{prototipo}, di ogni classe tramite una funzione di embedding $f_\phi : \mathbb{R}^D \rightarrow \mathbb{R}^M$ con parametri da allenare $\phi$. La funzione di embedding è rappresentata da una rete convoluzionale. Ogni prototipo è calcolato come la media tra gli embedding delle istanze della stessa classe.
 	\begin{equation}
 		\mathbf{c}_k=\frac{1}{|S_k|}\sum_{(\mathbf{x}_i,y_i)\in S_k}f_\phi (\mathbf{x}_i)
 	\end{equation}
-	Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Prototypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
+\end{frame}
+
+\begin{frame}
+Data una funzione distanza $d: \mathbb{R}^M \times \mathbb{R}^M \rightarrow [0, +\infty )$, la rete Prototypical calcola la relazione di una query $\mathbf{x}$ rispetto ai prototipi tramite la funzione softmax delle distanze prese con segno negativo.
 	\begin{equation}\label{eq:softmax}
 	p_\phi(y=k|\mathbf{x})=\dfrac{\exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k))}{\sum_k' \exp(-d(f_\phi(\mathbf{x}),\mathbf{c}_k'))}
 	\end{equation}
-
-\end{frame}
-\begin{frame}
+	
 	Il processo di training avviene minimizzando il negativo del logaritmo della probabilità
 	\begin{equation}\label{eq:loss_proto}
 		J(\phi)=-\log\left(p_\phi(y=k|\mathbf{x})\right)
 	\end{equation}
 	considerando la distanza fra query e il prototipo della sua classe.
-	Gli episodi di training sono formati campionando C classi di parole da un lettore e selezionando per ognuna casualmente K istanze e Q query.
 \end{frame}
+
 \begin{frame}
 	\frametitle{Architettura della rete}La CNN che funge da rete di embedding per la Prototypical Network è costituita da 4 strati convoluzionali. Il primo di essi ha come ingresso un singolo canale e come uscita 64 mentre i tre successivi traspongono 64 canali in altri 64.
 
-	Al termine dei blocchi viene effettuato il reshape dell'uscita schiacciandola in una sola dimensione, \texttt{x.view(x.size(0),-1)}, in modo da avere una matrice le cui righe rappresentano gli embedding vettoriali.
+	Al termine dei blocchi viene effettuato il reshape dell'uscita, \texttt{x.view(x.size(0),-1)}, in modo da avere una matrice le cui righe rappresentano gli embedding vettoriali.
+	
+	\begin{figure}[h]
+		\centering	
+		\includegraphics[width=\textwidth]{Immagini/proto_steps}
+		\caption{Fasi della Prototypical Network.}
+	\end{figure}
 \end{frame}
+
 \begin{frame}[fragile]
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet.py, label= Protonet,captionpos=b]
 import torch.nn as nn
@@ -393,7 +415,7 @@ class Protonet(nn.Module):
 	\frametitle{Blocco convoluzionale}
 		Ogni blocco convoluzionale ha 4 fasi:
 		\begin{itemize}
-			\item Convoluzione bidimensionale con un kernel 3x3 i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
+			\item Convoluzione bidimensionale con un kernel $3 \times 3$ i cui parametri vengono aggiornati ad ogni backward. Viene effettuato un padding di zeri ai bordi dell'ingresso.
 			\item Batch normalization: un metodo utilizzato per rendere le reti neurali artificiali più veloci e stabili attraverso la normalizzazione degli input dei livelli con re-centering and re-scaling.
 			\item ReLu: il rettificatore è una funzione di attivazione definita come la parte positiva del suo argomento. $f(x)=\max(0,x)$
 			\item Max-pooling: metodo per ridurre la dimensione di un'immagine, suddividendola in blocchi e tenendo solo quello col valore più alto.
@@ -401,10 +423,11 @@ class Protonet(nn.Module):
 \end{frame}
 \begin{frame}
 	\frametitle{Training}
-	A partire dalla lista di lettori di training/validation, seleziona quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo lo stesso rapporto usato dal paper.
+	A partire dalla lista di lettori di training/validation, vengono selezionati quelli che hanno almeno un numero di parole diverse pari a C e li suddivide tra training e validation seguendo lo stesso rapporto usato dal paper.
 	Il numero totale di iterazioni è 60000. Per ogni episodio:
 	\begin{enumerate}
 	\item Si campiona un lettore casuale e si selezionano C parole pronunciate da esso.
+	\item Si formano il support set e il query set di dimensioni $C \times K \times 128 \times 51$ e $C \times Q \times 128 \times 51$, rispettivamente.
 	\item Si calcola la loss relativa all'episodio
 	\item Tramite la backpropagation si aggiornano i parametri della rete in base alla loss.
 	\end{enumerate}
@@ -426,32 +449,54 @@ class Protonet(nn.Module):
 	Per questi vengono calcolati allo stesso modo loss e accuracy e vengono salvati.
 	In questo caso però i parametri del modello non vengono aggiornati.
 	Questo processo è necessario per verificare l'effettività del modello su ingressi mai visti in fase di training.
-	
+	\begin{block}{Criterio di salvataggio del modello}
 	Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel passo precedente il modello viene salvato e sovrascritto, altrimenti viene ignorato.
-\end{frame}
-\begin{frame}
-	\frametitle{Test}
+	\end{block}
 \end{frame}
 
-\section{Relation}
+\begin{frame}
+	\frametitle{Test}
+	L'oggetto del test non sono i lettori, ma gli audio. Per ognuno di essi, ad ogni iterazione, vengono estratti:
+	\begin{itemize}
+	\item \textbf{Positive set}: contiene gli esempi della parola da individuare nell'audio.
+	\item \textbf{Negative set}: contiene istanze di parole diverse da quella target. Rappresenta un generico esempio di tutto ciò che non comprende la parola da cercare.
+	\item \textbf{Query set}: campioni che la rete deve classificare correttamente.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+Analogamente al C-way K-shot, positive e negative set rappresentano le due classi del support set con cui confrontare il query set.
+
+\begin{block}{Calcolo delle predizioni}
+La somiglianza tra gli embedding della query e i due prototipi è data dal softmax delle distanze con segno negativo. Se il softmax tende a zero, significa che la query è molto distante dal prototipo, viceversa, se tende a 1, è molto vicina.
+\end{block}
+
+Per valutare le prestazioni si confrontano le label della query con le predizioni associata al positive set, calcolando l'AUPRC.
+\end{frame}
+
+\section{Relation Network}
 \begin{frame}
 	\frametitle{Relation Network}
-	La rete Relation ha lo scopo di associare due istanze alla volta per determinare la loro similarità.
-	Questo viene effettuato concatenando gli embedding di più istanze in un unico elemento che sarà dato in ingresso a una rete decisionale i cui parametri saranno aggiornati in modo che una concatenazione di elementi simili restituisca un risultato vicino a 1.
-	La Relation Network è costituita da due moduli: un modulo di \emph{embedding} $f_\varphi$ (equivalente a quello nella Prototypical) e un modulo di \emph{relation} $g_\phi$.
+	\begin{block}{Architettura Relation Network}
+	La Relation Network è costituita da due moduli: 
+	\begin{itemize}
+	\item un modulo di \emph{embedding} $f_\varphi$ (equivalente a quello nella Prototypical)
+	\item un modulo di \emph{relation} $g_\phi$.
+	\end{itemize} 
+	\end{block}
 	Le istanze $x_i$ del query set $\mathcal{Q}$ e quelle $x_j$ del support set $\mathcal{S}$ vengono date in ingresso al modulo di embedding producendo dei vettori (feature maps) $f_\varphi(x_i)$ e $f_\varphi(x_j)$.
 	Questi ultimi vengono poi dati all'operatore $\mathcal{C}(\cdot ,\cdot)$ che ne fa la concatenazione: $\mathcal{C}(f_\varphi(x_i),f_\varphi(x_j))$.
+	
+	La rete decisionale viene aggiornata in modo che una concatenazione di elementi simili restituisca un risultato vicino a 1.
 \end{frame}
 \begin{frame}
-	Le feature map concatenate passano poi attraverso il modulo di decisione che restituisce uno scalare da 0 a 1, il quale rappresenta la somiglianza tra $x_i$ e $x_j$.
-	Per il caso $C$-way one-shot, viene concatenata la query con le istanze delle $C$ classi producendo $C$ punteggi di somiglianza.
+	Nel caso \textit{C-way K-shot}, la query viene concatenata con la somma elemento per elemento degli embedding di ogni istanza delle classi producendo $C$ punteggi di somiglianza.
 	\begin{equation}
 		r_{i,j}=g_\phi(\mathcal{C}(f_\varphi(x_i),f_\varphi(x_j))),  \qquad i = 1, 2, \dots, C
 	\end{equation}
-	Nel caso $C$-way K-shot invece, la query viene concatenata con la somma elemento per elemento degli embedding di ogni istanza delle classi. Quindi, in entrambi i casi i confronti $r_{i,j}$ sono $C$ per ogni query.
-	
 	Per allenare il modello viene usato l'errore quadratico medio (MSE) in modo che l'uscita del modulo di decisione produca 1 se i vettori concatenati sono della stessa classe e 0 altrimenti.
 \end{frame}
+
 \begin{frame}
 \frametitle{Relation Network}
 \begin{figure}[h]
@@ -460,14 +505,116 @@ class Protonet(nn.Module):
 	\caption{Architettura della Relation Network nel caso 5\emph{-way} 1\emph{-shot} con un esempio di query.}
 \end{figure}
 \end{frame}
+
+\begin{frame}[fragile]
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=relation\_network.py, label=relation_encoder,captionpos=b]
+class CNNEncoder(nn.Module):
+    def __init__(self):
+        super(CNNEncoder, self).__init__()
+        self.layer1 = nn.Sequential(
+                        nn.Conv2d(1,64,kernel_size=3,padding=0),
+                        nn.BatchNorm2d(64, momentum=1, affine=True),
+                        nn.ReLU(),
+                        nn.MaxPool2d(2))
+        self.layer2 = nn.Sequential(
+                        nn.Conv2d(64,64,kernel_size=3,padding=0),
+                        nn.BatchNorm2d(64, momentum=1, affine=True),
+                        nn.ReLU(),
+                        nn.MaxPool2d(2))
+        self.layer3 = nn.Sequential(
+                        nn.Conv2d(64,64,kernel_size=3,padding=1),
+                        nn.BatchNorm2d(64, momentum=1, affine=True),
+                        nn.ReLU(),
+                        nn.MaxPool2d(2))
+        self.layer4 = nn.Sequential(
+                        nn.Conv2d(64,64,kernel_size=3,padding=1),
+                        nn.BatchNorm2d(64, momentum=1, affine=True),
+                        nn.ReLU())
+                        #nn.MaxPool2d(2))
+
+    def forward(self,x):
+        out = self.layer1(x)
+        out = self.layer2(out)
+        out = self.layer3(out)
+        out = self.layer4(out)
+        return out # 64
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\begin{lstlisting}[language=iPython,firstnumber=1, caption=relation\_network.py, label=relation_network,captionpos=b]
+class RelationNetwork(nn.Module):
+    def __init__(self,input_size,hidden_size):
+        super(RelationNetwork, self).__init__()
+        self.layer1 = nn.Sequential(
+                        nn.Conv2d(128,64,kernel_size=3,padding=1),
+                        nn.BatchNorm2d(64, momentum=1, affine=True),
+                        nn.ReLU(),
+                        nn.MaxPool2d(2))
+        self.layer2 = nn.Sequential(
+                        nn.Conv2d(64,64,kernel_size=3,padding=1),
+                        nn.BatchNorm2d(64, momentum=1, affine=True),
+                        nn.ReLU(),
+                        nn.MaxPool2d(2))
+        self.fc1 = nn.Linear(input_size, hidden_size)
+        self.fc2 = nn.Linear(hidden_size, 1)
+
+    def forward(self,x):
+        out = self.layer1(x)    #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X FEATURE_DIM X 2 X 2
+        out = self.layer2(out)  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X FEATURE_DIM X 1 X 1
+        out = out.view(out.size(0),-1)   #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X FEATURE_DIM
+        out = F.relu(self.fc1(out))      #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X RELATION_DIM
+        #out = F.sigmoid(self.fc2(out)) # deprecated
+        out = torch.sigmoid(self.fc2(out))  #  (CLASS_NUM * BATCH_NUM_PER_CLASS * CLASS_NUM) X 1
+        return out
+\end{lstlisting}
+\end{frame}   
+    
+\begin{frame}    
+Come nella Prototypical Network, anche nella Relation Network viene
+usata una architettura con quattro blocchi convoluzionali per il modulo di
+\textbf{embedding}.
+Ogni blocco convoluzionale contiene:
+\begin{itemize}
+\item una convoluzione con 64 filtri $3 \times 3$,
+\item una batch normalization,
+\item un layer ReLU non lineare.
+\end{itemize} 
+I primi tre blocchi contengono anche un layer di max pooling $2 \times 2$, mentre l'ultimo no.
+\end{frame}
+
+\begin{frame}
+Il modulo \textbf{relation} è costituito da due blocchi convoluzionali e due layer
+fully-connected. Ciascuno dei blocchi convoluzionali è composto da:
+\begin{itemize}
+\item una convoluzione $3 \times 3$ con 64 filtri, 
+\item una batch normalization,
+\item un layer ReLU non lineare,
+\item un max pooling $2 \times 2$.
+\end{itemize}
+
+Tutti i layer fully-connected sono ReLU eccetto quello di output, composto
+da una sigmoide per generare punteggi di relazione in un intervallo compreso
+tra 0 e 1.
+\end{frame}   
+
 \begin{frame}
 	\frametitle{Training}
+	Come nella Prototypical Network, le fasi sono:
+	\begin{enumerate}
+	\item Si campiona un lettore casuale e si selezionano C parole pronunciate da esso.
+	\item Si formano il support set e il query set di dimensioni $C \times K \times 128 \times 51$ e $C \times Q \times 128 \times 51$, rispettivamente.
+	\item Si calcola la loss relativa all'episodio
+	\item Tramite la backpropagation si aggiornano i parametri della rete in base alla loss.
+	\end{enumerate}
+	La differenza consiste nel calcolo della loss poiché la metrica non è più fissa, ma con parametri allenabili.
 \end{frame}
 \begin{frame}
 	\frametitle{Validation}
 \end{frame}
 \begin{frame}
 	\frametitle{Test}
+	Inserire calcolo AUPRC
 \end{frame}
 
 \section{Risultati}
@@ -498,13 +645,19 @@ class Protonet(nn.Module):
 	Recall=\frac{TP}{TP+FN}
 	\end{equation}
 \end{frame}
-\begin{frame}
+\begin{frame}[fragile]
 	\frametitle{AUPRC}
 	\begin{block}{Area under precision-recall curve (AUPRC)}
 	Area sottessa dalla curva precision-recall.
 	Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
 	\end{block}
 	Per calcolare questo parametro sono state usate le funzioni \texttt{precision\_recall\_curve} e \texttt{sklearn.metrics.auc}.
+	\begin{lstlisting}[language=iPython,firstnumber=1, caption=calcolo della AUPRC per ogni audio, label= auc_tmp,captionpos=b]
+	precision, recall, thresholds = sklearn.metrics.precision_recall_curve (y_true, y_pred)
+	auc_tmp = sklearn.metrics.auc(recall, precision)	
+	auc_list.append(auc_tmp)
+	\end{lstlisting}
+	Infine si fa una media di tutte le AUPRC di ogni audio di test.
 \end{frame}
 \begin{frame}
 	\frametitle{Calcolo AUPRC}

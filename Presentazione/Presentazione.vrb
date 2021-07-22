@@ -1,30 +1,12 @@
-\begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet.py, label= Protonet,captionpos=b]
-import torch.nn as nn
-
-def count_parameters(model):
-    return sum(p.numel() for p in model.parameters() if p.requires_grad)
-
-def conv_block(in_channels,out_channels):
-
-    return nn.Sequential(
-        nn.Conv2d(in_channels,out_channels,3,padding=1),
-        nn.BatchNorm2d(out_channels),
-        nn.ReLU(),
-        nn.MaxPool2d(2)
-    )
-
-class Protonet(nn.Module):
-    def __init__(self):
-        super(Protonet,self).__init__()
-        self.encoder = nn.Sequential(
-            conv_block(1,64),
-            conv_block(64,64),
-            conv_block(64,64),
-            conv_block(64,64)
-        )
-    def forward(self,x):
-        (num_samples,mel_bins, seq_len) = x.shape
-        x = x.view(-1,1,mel_bins,seq_len)
-        x = self.encoder(x)
-        return x.view(x.size(0),-1)
-\end{lstlisting}
+\frametitle{AUPRC}
+	\begin{block}{Area under precision-recall curve (AUPRC)}
+	Area sottessa dalla curva precision-recall.
+	Questo valore è molto utile quando i dati sono sbilanciati e, in una classificazione binaria, siamo più interessati al riconoscimento di una classe in particolare.
+	\end{block}
+	Per calcolare questo parametro sono state usate le funzioni \texttt{precision\_recall\_curve} e \texttt{sklearn.metrics.auc}.
+	\begin{lstlisting}[language=iPython,firstnumber=1, caption=calcolo della AUPRC per ogni audio, label= auc_tmp,captionpos=b]
+	precision, recall, thresholds = sklearn.metrics.precision_recall_curve (y_true, y_pred)
+	auc_tmp = sklearn.metrics.auc(recall, precision)	
+	auc_list.append(auc_tmp)
+	\end{lstlisting}
+	Infine si fa una media di tutte le AUPRC di ogni audio di test.
