@@ -1,0 +1,313 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{chou:learning_to_match}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=3d49e8b1ef590ddaedfd574237f8120d}{%
+           family={Chou},
+           familyi={C\bibinitperiod},
+           given={Szu{-}Yu},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7a69c59ad8b9ead2210117192607e087}{%
+           family={Cheng},
+           familyi={C\bibinitperiod},
+           given={Kai{-}Hsiang},
+           giveni={K\bibinitperiod}}}%
+        {{hash=70ea4c1b27fd2facf7fb397264709abd}{%
+           family={Jang},
+           familyi={J\bibinitperiod},
+           given={Jyh{-}Shing\bibnamedelima Roger},
+           giveni={J\bibinitperiod\bibinitdelim R\bibinitperiod}}}%
+        {{hash=dc4d44f6814797864181d8ee2756517f}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yi{-}Hsuan},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{fullhash}{04e700399ea3c22077647dc5b5371048}
+      \strng{bibnamehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{authorbibnamehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{authornamehash}{04e700399ea3c22077647dc5b5371048}
+      \strng{authorfullhash}{04e700399ea3c22077647dc5b5371048}
+      \field{sortinit}{C}
+      \field{sortinithash}{963e9d84a3da2344e8833203de5aed05}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Learning to match transient sound events using attentional similarity for few-shot sound recognition}
+      \true{nocite}
+    \endentry
+    \entry{koch:siamese}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=03f9adefbe3b9c96c1156db76c3d4735}{%
+           family={Koch},
+           familyi={K\bibinitperiod},
+           given={Gregory},
+           giveni={G\bibinitperiod}}}%
+        {{hash=77a44166b8233ae29b20f292779447e0}{%
+           family={Zemel},
+           familyi={Z\bibinitperiod},
+           given={Richard},
+           giveni={R\bibinitperiod}}}%
+        {{hash=bd2be300d445e9f6db7808f9533e66cb}{%
+           family={Salakhutdinov},
+           familyi={S\bibinitperiod},
+           given={Ruslan},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{fullhash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{bibnamehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{authorbibnamehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{authornamehash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \strng{authorfullhash}{c2939b4abb7681b07a46b9a9208ffeff}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Siamese Neural Networks for One-shot Image Recognition}
+      \true{nocite}
+    \endentry
+    \entry{minining_spoken_wikipedia}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=dd4441dee198cef69d0e82ddbcf259a7}{%
+           family={K{ö}hn},
+           familyi={K\bibinitperiod},
+           given={Arne},
+           giveni={A\bibinitperiod}}}%
+        {{hash=a6a29e54eadbd83c697710b90073df31}{%
+           family={Stegen},
+           familyi={S\bibinitperiod},
+           given={Florian},
+           giveni={F\bibinitperiod}}}%
+        {{hash=44e00333dd91f73923f2790c12e5a066}{%
+           family={Baumann},
+           familyi={B\bibinitperiod},
+           given={Timo},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{fullhash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{bibnamehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{authorbibnamehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{authornamehash}{d843fde01d62fc58a85dc10daf8acac3}
+      \strng{authorfullhash}{d843fde01d62fc58a85dc10daf8acac3}
+      \field{sortinit}{K}
+      \field{sortinithash}{9fd838a31ba64d981e8f44562bd33f89}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Mining the Spoken Wikipedia for Speech Data and Beyond}
+      \true{nocite}
+    \endentry
+    \entry{snell:prototypical}{misc}{}
+      \name{author}{3}{}{%
+        {{hash=6e4faf0ec15f439e8189ae61eb405d69}{%
+           family={Snell},
+           familyi={S\bibinitperiod},
+           given={Jake},
+           giveni={J\bibinitperiod}}}%
+        {{hash=fe49ec9b6f902b79d166c1f25405c088}{%
+           family={Swersky},
+           familyi={S\bibinitperiod},
+           given={Kevin},
+           giveni={K\bibinitperiod}}}%
+        {{hash=936deb796814f7b18da88b71fa5ae940}{%
+           family={Zemel},
+           familyi={Z\bibinitperiod},
+           given={Richard\bibnamedelima S.},
+           giveni={R\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+      }
+      \strng{namehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{fullhash}{0727f715c226912c5a42d2802d420e42}
+      \strng{bibnamehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{authorbibnamehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{authornamehash}{0727f715c226912c5a42d2802d420e42}
+      \strng{authorfullhash}{0727f715c226912c5a42d2802d420e42}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Prototypical Networks for Few-shot Learning}
+      \true{nocite}
+    \endentry
+    \entry{sung:relation}{misc}{}
+      \name{author}{6}{}{%
+        {{hash=dbe76b500b71e2176fd1b050b0b31525}{%
+           family={Sung},
+           familyi={S\bibinitperiod},
+           given={Flood},
+           giveni={F\bibinitperiod}}}%
+        {{hash=7e9b1d0ad76c6c1d68c2b6e5d6f0daad}{%
+           family={Yang},
+           familyi={Y\bibinitperiod},
+           given={Yongxin},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=32a08717e0d6dcde59bc98b96800ed6c}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Li},
+           giveni={L\bibinitperiod}}}%
+        {{hash=20de9f859b0b9bfb12fa85f3513c2fc1}{%
+           family={Xiang},
+           familyi={X\bibinitperiod},
+           given={Tao},
+           giveni={T\bibinitperiod}}}%
+        {{hash=3269ee96fb4b61a52f4c01b02fc0751c}{%
+           family={Torr},
+           familyi={T\bibinitperiod},
+           given={Philip\bibnamedelimb H.\bibnamedelimi S.},
+           giveni={P\bibinitperiod\bibinitdelim H\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=925f77faddc6019beb9b26a56fe09e0c}{%
+           family={Hospedales},
+           familyi={H\bibinitperiod},
+           given={Timothy\bibnamedelima M.},
+           giveni={T\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{fullhash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{bibnamehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{authorbibnamehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{authornamehash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \strng{authorfullhash}{ba4550d63f9597aa43bdaf9524ea7483}
+      \field{sortinit}{S}
+      \field{sortinithash}{322b1d5276f2f6c1bccdcd15920dbee6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Learning to Compare: Relation Network for Few-Shot Learning}
+      \true{nocite}
+    \endentry
+    \entry{vinyals:matching}{misc}{}
+      \name{author}{5}{}{%
+        {{hash=494b568c5dc85ba8f3f409635f9c5f25}{%
+           family={Vinyals},
+           familyi={V\bibinitperiod},
+           given={Oriol},
+           giveni={O\bibinitperiod}}}%
+        {{hash=24fe1af011227491e54e299ba4cb24b5}{%
+           family={Blundell},
+           familyi={B\bibinitperiod},
+           given={Charles},
+           giveni={C\bibinitperiod}}}%
+        {{hash=2a321a868e44d49baf52b5e2d816fb71}{%
+           family={Lillicrap},
+           familyi={L\bibinitperiod},
+           given={Timothy\bibnamedelima P.},
+           giveni={T\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=481308b301166b521c74fde6566e97e6}{%
+           family={Kavukcuoglu},
+           familyi={K\bibinitperiod},
+           given={Koray},
+           giveni={K\bibinitperiod}}}%
+        {{hash=d7805381550fb5f8360345f7f72c0b49}{%
+           family={Wierstra},
+           familyi={W\bibinitperiod},
+           given={Daan},
+           giveni={D\bibinitperiod}}}%
+      }
+      \strng{namehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{fullhash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{bibnamehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{authorbibnamehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{authornamehash}{58128657d0ea57ffbefb4208eb31f72a}
+      \strng{authorfullhash}{58128657d0ea57ffbefb4208eb31f72a}
+      \field{sortinit}{V}
+      \field{sortinithash}{75dd7385c90b2252c3ae853a80ca853b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Matching Networks for One Shot Learning}
+      \true{nocite}
+    \endentry
+    \entry{salamon:Few-Shot}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=b2eccb185095fccfeb40fdffd8b2105f}{%
+           family={Wang},
+           familyi={W\bibinitperiod},
+           given={Yu},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=6f29e3fb8b241a304c6a9778479b58d2}{%
+           family={Salamon},
+           familyi={S\bibinitperiod},
+           given={Justin},
+           giveni={J\bibinitperiod}}}%
+        {{hash=59ebbe2b242cb94c5adecfc59d91c403}{%
+           family={Bryan},
+           familyi={B\bibinitperiod},
+           given={Nicholas\bibnamedelima J.},
+           giveni={N\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=c6b84e28dafa9afbb1a85604d2a3c91e}{%
+           family={Pablo\bibnamedelima Bello},
+           familyi={P\bibinitperiod\bibinitdelim B\bibinitperiod},
+           given={Juan},
+           giveni={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{fullhash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{bibnamehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{authorbibnamehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{authornamehash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \strng{authorfullhash}{e1012732fa5b41d5eea4e9bfb17ce76b}
+      \field{sortinit}{W}
+      \field{sortinithash}{ecb89ff85896a47dc313960773ac311d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Few-Shot Sound Event Detection}
+      \true{nocite}
+    \endentry
+    \entry{zhang:few_shot}{misc}{}
+      \name{author}{4}{}{%
+        {{hash=bf4e1e62e0f1db256dd1eb9a345f2a2a}{%
+           family={Zhang},
+           familyi={Z\bibinitperiod},
+           given={Shilei},
+           giveni={S\bibinitperiod}}}%
+        {{hash=6d51ded0132f69542c52688eaad1f25f}{%
+           family={Qin},
+           familyi={Q\bibinitperiod},
+           given={Yong},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=120909f85d61cf504f8462f2b700534c}{%
+           family={Sun},
+           familyi={S\bibinitperiod},
+           given={Kewei},
+           giveni={K\bibinitperiod}}}%
+        {{hash=97fbf6c08d48df6a4099330dc70a1716}{%
+           family={Lin},
+           familyi={L\bibinitperiod},
+           given={Yonghua},
+           giveni={Y\bibinitperiod}}}%
+      }
+      \strng{namehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{fullhash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{bibnamehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{authorbibnamehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{authornamehash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \strng{authorfullhash}{5eabf73e23b9b4eddd851f9de836e20c}
+      \field{sortinit}{Z}
+      \field{sortinithash}{156173bd08b075d7295bc3e0f4735a04}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Few-Shot Audio Classification with Attentional Graph Neural Networks}}
+      \true{nocite}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

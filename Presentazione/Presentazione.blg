@@ -1,5 +1,15 @@
 [0] Config.pm:304> INFO - This is Biber 2.12
 [0] Config.pm:307> INFO - Logfile is 'Presentazione.blg'
-[25] biber-MSWIN32:315> INFO - === 
-[411] Utils.pm:209> ERROR - Cannot find control file 'Presentazione.bcf'! - Did latex run successfully on your .tex file before you ran biber?
-[411] Biber.pm:114> INFO - ERRORS: 1
+[44] biber-MSWIN32:315> INFO - === 
+[78] Biber.pm:371> INFO - Reading 'Presentazione.bcf'
+[215] Biber.pm:886> INFO - Using all citekeys in bib section 0
+[236] Biber.pm:4093> INFO - Processing section 0
+[255] Biber.pm:4254> INFO - Looking for bibtex format file 'Bibliografia.bib' for section 0
+[260] bibtex.pm:1523> INFO - LaTeX decoding ...
+[289] bibtex.pm:1340> INFO - Found BibTeX data source 'Bibliografia.bib'
+[398] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[398] UCollate.pm:68> INFO - Overriding locale 'it-IT' defaults 'variable = shifted' with 'variable = non-ignorable'
+[398] Biber.pm:3921> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'it-IT'
+[398] Biber.pm:3927> INFO - No sort tailoring available for locale 'it-IT'
+[412] bbl.pm:636> INFO - Writing 'Presentazione.bbl' with encoding 'latin1'
+[418] bbl.pm:739> INFO - Output to Presentazione.bbl

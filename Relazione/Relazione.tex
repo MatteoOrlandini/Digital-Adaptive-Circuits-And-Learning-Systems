@@ -2102,7 +2102,7 @@ print('Average train loss: {}'.format(np.mean(train_loss)))
 
 \subsection{Validation}
 Come nel capitolo~\ref{subsec:proto_validation}, ogni 5000 episodi di training ne vengono effettuati 1000 di validation. Allo stesso modo del validation della prototypical network, vengono utilizzati lettori di validation sconosciuti alla rete e, nel caso in cui la validation produca una accuracy migliore di quella precedente, il modello viene salvato.
-Per fare ciò viene utilizzato un array \texttt{reward} che contiene 1 se la label della j-esima predizione è uguale alla label della j-esima query, altrimenti 0. Successivamente, vengono sommati gli elementi di questo vettori e salvati nella variabile \texttt{total\_rewards}. Per ogni episodio di validation, all'aumentare del numero di predizioni corrette, la variabile \texttt{total\_rewards} tende a $C \cdot Q$.
+Per fare ciò viene utilizzato un array \texttt{reward} che contiene 1 se la label della j-esima predizione è uguale alla label della j-esima query, altrimenti 0. Successivamente, vengono sommati gli elementi di questo vettore e salvati nella variabile \texttt{total\_rewards}. Per ogni episodio di validation, all'aumentare del numero di predizioni corrette, la variabile \texttt{total\_rewards} tende a $C \cdot Q$.
 
 L'accuracy equivale al numero di volte in cui la predizione è corretta, cioè \texttt{total\_rewards}, diviso il totale delle $C \cdot Q$ query, mediato nei 1000 episodi di validation, come mostrato nella formula~\eqref{eq:acc_relation}.
 \begin{equation}\label{eq:acc_relation}

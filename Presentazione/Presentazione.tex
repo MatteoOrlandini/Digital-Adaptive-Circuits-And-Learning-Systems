@@ -155,6 +155,21 @@
 %\setbeamertemplate{sidebar canvas right}[vertical shading][top=red,bottom=white]
 \setbeamercovered{dynamic}
 
+%\usepackage[latin1]{inputenc} %l'ho messo io (Jacopo)
+%inizio impostazioni bibliografia
+\usepackage[autostyle,italian=guillemets]{csquotes} 
+%autostyle adatta lo stile delle citazioni alla lingua corrente del documento;
+%italian=guillemets racchiude automaticamente tra virgolette caporali
+%i campi che prevedono le virgolette;
+\usepackage[backend=biber, style=numeric, citestyle=numeric,maxcitenames=2,maxbibnames = 2]{biblatex}
+%backend=biber dice a biblatex che s?intende usare Biber come motore bibliografico
+%style:numeric Anno di pubblicazione: in fondo al riferimento.
+%citestyle=numeric Riferimento: numerico ([1], [2], eccetera).
+%fine impostazioni bibliografia
+\renewcommand*{\bibfont}{\footnotesize}
+
+\addbibresource{Bibliografia.bib}
+
 \begin{document}
 	\begin{frame}
 		\maketitle
@@ -166,6 +181,10 @@
 \end{frame}
 
 \section{Introduzione}
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
 	\frametitle{Sound Event Detection}
 	\begin{block}{Obiettivo}
@@ -196,6 +215,10 @@
 \end{frame}
 
 \section{Few-shot learning}
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
 	\frametitle{Few-shot learning}
 	L'algoritmo di few-shot learning non necessita di un dataset numeroso per il training.
@@ -253,6 +276,11 @@ La figura è un esempio di un task di classificazione 2-way 5-shot, in cui ogni c
 
 
 \section{Preprocessing del Dataset}
+
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
 	\frametitle{Dataset Spoken Wikipedia Corpora}
 	\begin{block}{Spoken Wikipedia Corpora}
@@ -332,6 +360,11 @@ La figura è un esempio di un task di classificazione 2-way 5-shot, in cui ogni c
 \end{frame}
 
 \section{Prototypical Network}
+
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
 	\frametitle{Prototypical Network}
 	\begin{block}{Prototipo}
@@ -446,12 +479,25 @@ class Protonet(nn.Module):
 	\frametitle{Validation}
 	Ogni 5000 episodi del training vengono effettuati 1000 episodi di validation.
 	Come nel training vengono ricavati support set e query set, ma in questo caso dai lettori di validation.
-	Per questi vengono calcolati allo stesso modo loss e accuracy e vengono salvati.
+	
 	In questo caso però i parametri del modello non vengono aggiornati.
 	Questo processo è necessario per verificare l'effettività del modello su ingressi mai visti in fase di training.
 	\begin{block}{Criterio di salvataggio del modello}
 	Al termine dei 1000 episodi di validation, se la media dell'accuracy è migliore di quella calcolata nel passo precedente il modello viene salvato e sovrascritto, altrimenti viene ignorato.
 	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	Le label sono contenute in un tensore di dimensioni $C \times Q \times 1$, in cui ogni riga corrisponde all'indice della classe. Viene applicato il logaritmo del softmax alle distanze prese con segno negativo.
+	\begin{block}{Calcolo accuracy}
+	L'accuracy viene calcolata mediando il numero di volte in cui l'indice del massimo del logaritmo del softmax corrisponde alla label.
+	\end{block}
+	\begin{lstlisting}[language=iPython,firstnumber=1, caption=Calcolo dell'accuracy, label=calcolo_accuracy,captionpos=b]
+	target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
+	log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, n_query, -1)
+	_, y_hat = log_p_y.max(2)
+	acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
+	\end{lstlisting}
 \end{frame}
 
 \begin{frame}
@@ -475,6 +521,11 @@ Per valutare le prestazioni si confrontano le label della query con le predizion
 \end{frame}
 
 \section{Relation Network}
+
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
 	\frametitle{Relation Network}
 	\begin{block}{Architettura Relation Network}
@@ -609,15 +660,46 @@ tra 0 e 1.
 	\end{enumerate}
 	La differenza consiste nel calcolo della loss poiché la metrica non è più fissa, ma con parametri allenabili.
 \end{frame}
+
 \begin{frame}
-	\frametitle{Validation}
-\end{frame}
-\begin{frame}
-	\frametitle{Test}
-	Inserire calcolo AUPRC
+	Per il calcolo della loss le operazioni sono:
+	\begin{enumerate}
+	\item il support set e il query set vengono passati al modello ottenendo in uscita, rispettivamente, un tensore di dimensioni $(C \cdot K) \times 64 \times 15 \times 5$ e $(C \cdot Q) \times 64 \times 15 \times 5$.
+	\item i tensori vengono ridimensionati in modo che la terza dimensione sia pari a 5	
+	\item gli embedding di ogni classe del support set vengono sommati elemento per elemento
+	\item si concatenano gli embedding del support con quelli del query set
+	\item le coppie vengono date in ingresso al secondo modello che restituisce un punteggio di somiglianza
+	\item viene calcolata la loss come il mean square error tra la label e il punteggio di somiglianza
+	\end{enumerate}
 \end{frame}
 
-\section{Risultati}
+\begin{frame}
+	\frametitle{Validation}
+	La validation si svolge allo stesso modo della Prototypical Network: ogni 5000 episodi di training si calcola l'accuracy.
+	
+	La seconda rete restituisce $(C \cdot Q) \times C$ relazioni. Si prende il massimo di ogni riga ottenendo $C \cdot Q$ predizioni.
+		
+	Per ognuna delle $C \cdot Q$ predizioni, si contano le volte in cui la j-esima predizione è uguale alla label della j-esima query. Questo valore è contenuto nella variabile \texttt{total\_rewards}. Per ogni episodio di validation, all'aumentare del numero di predizioni corrette, il valore di total rewards tende a $C \cdot Q$.
+	
+	\begin{equation}\label{eq:acc_relation}
+	\text{mean accuracy} = \dfrac{\text{total rewards}}{C \cdot Q \cdot 1000}
+	\end{equation} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Test}
+	Per il test si concatenano le query con l'embedding rappresentante del positive set e del negative set e vengono passati alla seconda rete.
+	
+	La rete produce una coppia di valori che indicano la probabilità con cui
+	una query è associata ai due set. Di questi viene presa solo l'elemento 0 che	indica l'affinità con il positive set. Utilizzando poi un corrispettivo valore che contiene la label è possibile calcolare precision, recall e AUPRC.
+\end{frame}
+
+\section{Risultati e conclusioni}
+
+\begin{frame}
+\tableofcontents[currentsection]
+\end{frame}
+
 \begin{frame}
 	\frametitle{Matrice di confusione}
 	Nella fase di test, la rete elabora una predizione dell'output a partire da un ingresso noto che poi viene confrontata con il valore effettivo.
@@ -630,6 +712,7 @@ tra 0 e 1.
 		\item Falso Positivo (FP): il valore reale è negativo e il valore predetto	è positivo;
 	\end{itemize}
 \end{frame}
+
 \begin{frame}
 	\frametitle{Precision e Recall}
 	\begin{block}{Precision}
@@ -645,6 +728,7 @@ tra 0 e 1.
 	Recall=\frac{TP}{TP+FN}
 	\end{equation}
 \end{frame}
+
 \begin{frame}[fragile]
 	\frametitle{AUPRC}
 	\begin{block}{Area under precision-recall curve (AUPRC)}
@@ -659,6 +743,7 @@ tra 0 e 1.
 	\end{lstlisting}
 	Infine si fa una media di tutte le AUPRC di ogni audio di test.
 \end{frame}
+
 \begin{frame}
 	\frametitle{Calcolo AUPRC}
 	\begin{enumerate}
@@ -680,6 +765,7 @@ tra 0 e 1.
 	\caption{Curva precision-recall per il test della rete prototypical con $C = 2$, $K=1$ e $p = 5$.}
 \end{figure}
 \end{frame}
+
 \begin{frame}
 \frametitle{Risultati}
 \begin{columns}
@@ -778,8 +864,6 @@ tra 0 e 1.
 \end{figure}
 \end{frame}
 
-
-\section{Conclusioni}
 \begin{frame}
 	\frametitle{Conclusioni}
 	Si può notare che:
@@ -816,6 +900,14 @@ tra 0 e 1.
 	\item diversa implementazione della rete Relation, la cui funzione \textit{g\ped{sim}} non era stata descritta nell'articolo.
 	\item differente criterio per il salvataggio dei modelli durante il training.
 	\end{itemize}
+\end{frame}
+
+\nocite{*}
+\section{Bibliografia}
+
+\begin{frame}
+\frametitle{Bibliografia}
+\printbibliography
 \end{frame}
 
 \end{document}
