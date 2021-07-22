@@ -262,7 +262,7 @@
 
 \section{Introduzione}
 \label{sec:introduzione}
-Lo scopo del presente lavoro è l'implementazione di parte degli algoritmi descritti nel paper  ``\textit{Few-Shot Event Detection}''~\cite{salamon:Few-Shot} e di riprodurne i risultati. Questo articolo ha come obiettivo l'individuazione di eventi sonori percettivamente simili all'interno di una registrazione.
+Lo scopo del presente lavoro è l'implementazione di parte degli algoritmi descritti nel paper  ``\textit{Few-Shot Sound Event Detection}''~\cite{salamon:Few-Shot} e di riprodurne i risultati. Questo articolo ha come obiettivo l'individuazione di eventi sonori percettivamente simili all'interno di una registrazione.
 
 Varie applicazioni di queste reti possono essere la rilevazione di particolari suoni nella musica o la rimozione di parole di riempimento nei podcast, come ad esempio gli ``ehm''. Solitamente questo processo viene eseguito manualmente, risultando in un compito difficile e tedioso.
 
@@ -351,7 +351,7 @@ Il pooling layer è uno strato della rete che ha lo scopo di ridurre le dimensio
 \section{Few-shot learning}
 \label{sec:few-shot}
 \subsection{Introduzione}
-Gli esseri umani possono riconoscere nuove classi di oggetti partendo da pochissimi esempi. Tuttavia, la maggior parte delle tecniche di machine learning richiedono migliaia di esempi per ottenere prestazioni simili a quelle umane. L'obiettivo del \textit{few-shot learning} è classificare i nuovi dati dopo aver visto solo pochi esempi di training. Nel caso estremo, potrebbe esserci solo un singolo esempio per ogni classe (\textit{one shot learning}). Nelle applicazioni pratiche, il few-shot learning è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando l'etichettatura dei dati è onerosa.
+Gli esseri umani possono riconoscere nuove classi di oggetti partendo da pochissimi esempi. Tuttavia, la maggior parte delle tecniche di machine learning richiedono migliaia di esempi per ottenere prestazioni simili a quelle umane. L'obiettivo del \textit{few-shot learning} è classificare i nuovi dati dopo aver visto solo pochi esempi di training. Nel caso estremo, potrebbe esserci solo un singolo esempio per ogni classe (\textit{one-shot learning}). Nelle applicazioni pratiche, il few-shot learning è utile quando è difficile trovare esempi di training (ad es. casi di una malattia rara) o quando l'etichettatura dei dati è onerosa.
 
 L'apprendimento few-shot viene solitamente studiato utilizzando la classificazione \textit{C-way K-shot}. L'obiettivo è quello di discriminare le \textit{C} classi composte da \textit{K} esempi ciascuna. Una tipica dimensione del problema potrebbe essere quella di discriminare tra $C=10$ classi con solo $K=5$ esempi ciascuna durante il training. Questo tipo di apprendimento viene usato quando non possiamo allenare un classificatore usando metodi convenzionali, poiché qualsiasi algoritmo di classificazione moderno dipenderà da molti più parametri rispetto agli esempi di addestramento e generalizzerà male.
 
@@ -390,7 +390,7 @@ Per valutare le prestazioni nel few-shot, utilizziamo una serie di dati di test.
 \label{sec:protonet}
 La Prototypical Network è stata proposta da Jake Snell nel paper~\cite{snell:prototypical}.
 
-Le Prototypical Network apprendono una rappresentazione spaziale in cui la classificazione può essere eseguita calcolando le distanze delle rappresentazioni del \textit{prototipo} di ciascuna classe. 
+Le Prototypical Networks apprendono una rappresentazione spaziale in cui la classificazione può essere eseguita calcolando le distanze delle rappresentazioni del \textit{prototipo} di ciascuna classe. 
 
 Per fare ciò, apprendiamo un mapping non lineare dell'input in uno spazio di embedding utilizzando una rete neurale e prendiamo il prototipo di una classe come la media del suo support set nello spazio di embedding. La classificazione viene quindi eseguita per un punto dell'embedding del query semplicemente trovando il prototipo della classe più vicino. La figura~\ref{fig:proto_few_zero_shot} mostra come avviene la classificazione della query $\mathbf{x}$ avendo costruito tre prototipi $\mathbf{c}_1$, $\mathbf{c}_2$ e $\mathbf{c}_3$.
 
@@ -558,9 +558,6 @@ Il documento, contrassegnato dal tag ``\texttt{d}'', può contenere parti divers
 			</t>
 			<t text="at">
 				<n pronunciation="at"/>
-			</t>
-			<t text="e">
-				<n pronunciation="e" start="3490" end="3710"/>
 			</t>
 \end{lstlisting}
 
@@ -902,7 +899,7 @@ Nella figura~\ref{fig:mel_plot} si può vedere la sua funzione in relazione agli
 
 Per il calcolo dello spettrogramma mel occorre dividere l'input in blocchi usando finestre con overlap, fare la FFT di ogni blocco, generare la scala mel e associare ogni componente spettrale alla relativa frequenza nella scala mel.    
 
-La funzione \texttt{compute\_melspectrogram}, mostrata nel codice~\ref{mel_spectrogram}, usando la libreria \emph{librosa}, calcola gli spettrogrammi da dare in input ai modelli della rete neurale. I file audio, originalmente campionati ad una frequenza di \SI{44.1}{\kilo \hertz}, sono sottocampionati a \SI{16}{\kilo \hertz}. Per calcolare lo spettrogramma usiamo la funzione \texttt{melspectrogram} con una lunghezza della finestra di \SI{25}{\milli \second}, un hop size di \SI{10}{\milli \second} e una FFT di \SI{64}{\milli \second}. Lo spettrogramma è contenuto in una matrice di dimensioni $128 \times 51$, le cui righe rappresentano le 128 bande mel, mentre le colonne contengono le FFT di ogni finestra da \SI{10}{\milli \second}. Infine, la funzione \texttt{power\_to\_db}, ritorna lo spettrogramma in scala logaritmica.
+La funzione \texttt{compute\_melspectrogram}, mostrata nel codice~\ref{mel_spectrogram}, usando la libreria \emph{librosa}, calcola gli spettrogrammi da dare in input ai modelli della rete neurale. I file audio, originalmente campionati ad una frequenza di \SI{44.1}{\kilo \hertz}, sono sottocampionati a \SI{16}{\kilo \hertz}. Per calcolare lo spettrogramma usiamo la funzione \texttt{melspectrogram} con una lunghezza della finestra di \SI{25}{\milli \second}, un hop size di \SI{10}{\milli \second} e una FFT di \SI{64}{\milli \second}. Lo spettrogramma è contenuto in una matrice di dimensioni $128 \times 51$, le cui righe rappresentano le 128 bande mel, mentre le colonne contengono le FFT di ogni finestra da \SI{10}{\milli \second}. Infine, la funzione \texttt{power\_to\_db}, restituisce lo spettrogramma in scala logaritmica.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=mel\_spectrogram.py, label=mel_spectrogram,captionpos=b]
 import librosa
@@ -1066,7 +1063,7 @@ def find_valid_readers(min_classes = 2, min_instances_per_class = 26):
     return valid_readers
 \end{lstlisting}
 
-La funzione \texttt{create\_training\_validation\_test\_readers} divide i lettori di training e validation da quelli di test usando la variabile \texttt{valid\_readers} creata nel codice~\ref{find_valid_readers}. I primi \texttt{number\_of\_training\_readers} + \texttt{number\_of\_validation\_readers} elementi di \texttt{valid\_readers} sono presi come lettori di training e validation, mentre i restanti come lettori di test.
+La funzione \texttt{create\_training\_validation\_test\_readers} divide i lettori di training e validation da quelli di test usando la variabile \texttt{valid\_readers} creata nel codice~\ref{find_valid_readers}. I primi \texttt{number\_of\_training\_readers} +\texttt{number\_of\_\\validation\_readers} elementi di \texttt{valid\_readers} sono presi come lettori di training e validation, mentre i restanti come lettori di test.
 
 \begin{lstlisting}[language=iPython,firstnumber=72, caption=Funzione \texttt{create\_training\_validation\_test\_readers}, label=create_training_validation_test_readers,captionpos=b]
 def create_training_validation_test_readers(valid_readers, number_of_training_readers, number_of_test_readers, number_of_validation_readers):
@@ -1102,7 +1099,7 @@ def create_training_validation_test_readers(valid_readers, number_of_training_re
     return training_validation_readers, test_readers
 \end{lstlisting}
 
-La funzione \texttt{find\_classes} prende in ingresso un lettore e campiona in modo casuale un numero di parole massimo pari a \texttt{max\_class\_number} e un numero di istanze massimo pari a \texttt{max\_instances\_number}. Ritorna un dizionario con chiavi ``word'', ``start'', ``end'' e ``folders''.
+La funzione \texttt{find\_classes} prende in ingresso un lettore e campiona in modo casuale un numero di parole massimo pari a \texttt{max\_class\_number} e un numero di istanze massimo pari a \texttt{max\_instances\_number}. Restituisce un dizionario con chiavi ``word'', ``start'', ``end'' e ``folders''.
 
 \begin{lstlisting}[language=iPython,firstnumber=100, caption=Funzione \texttt{find\_classes}, label=find_classes,captionpos=b]
 def find_classes(reader, max_class_number, max_instances_number):
@@ -1297,7 +1294,7 @@ Ogni blocco convoluzionale ha 4 fasi:
 \end{itemize}
 Al termine dei blocchi viene effettuato il reshape dell'uscita schiacciandola in una sola dimensione, \texttt{x.view(x.size(0),-1)}, in modo da avere una matrice le cui righe rappresentano gli embedding vettoriali.
 
-La funzione \texttt{count\_parameters} ritorna il numero di parametri della rete che, in accordo con~\cite{salamon:Few-Shot}, devono essere compresi tra $120000$ e $230000$.
+La funzione \texttt{count\_parameters} restituisce il numero di parametri della rete che, in accordo con~\cite{salamon:Few-Shot}, devono essere compresi tra $120000$ e $230000$.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=protonet.py, label= Protonet,captionpos=b]
 import torch.nn as nn
@@ -1473,7 +1470,7 @@ def get_training_validation_readers(features_folder, C):
   return training_readers, validation_readers
 \end{lstlisting}
 
-La funzione \texttt{batch\_sample} campiona a caso uno dei lettori di training e di questo seleziona casualmente $C$ parole. Per ognuna di queste parole si ricava il numero di istanze presenti del dataset e vengono campionate $K+Q$ istanze random della parola. Le $K+Q$ istanze vengono divise in $K$ istanze del support set e $Q$ stanze del query set. La funzione ritorna due tensori \texttt{query} e \texttt{support}, rispettivamente di dimensioni $C \times Q \times 128 \times 51$ e $C \times K \times 128 \times 51$.
+La funzione \texttt{batch\_sample} campiona a caso uno dei lettori di training e di questo seleziona casualmente $C$ parole. Per ognuna di queste parole si ricava il numero di istanze presenti del dataset e vengono campionate $K+Q$ istanze random della parola. Le $K+Q$ istanze vengono divise in $K$ istanze del support set e $Q$ stanze del query set. La funzione restituisce due tensori \texttt{query} e \texttt{support}, rispettivamente di dimensioni $C \times Q \times 128 \times 51$ e $C \times K \times 128 \times 51$.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=batch\_sample, label=batch_sample,captionpos=b]
 import os
@@ -1539,11 +1536,11 @@ Gli elementi del support set che fanno parte della stessa classe andranno a cost
 
 Il parametro \texttt{target\_inds} viene costruito ripetendo l'indice di ogni classe, $0, 1, \dots, C$, per il numero di query, 16, e sarà utilizzato per poter ricavare a che classe appartiene ogni query.
 
-Vengono successivamente calcolate le distanze rispetto ai prototipi degli embedding di ogni classe tramite la funzione \texttt{euclidean\_dist} che ritorna una matrice di dimensioni $(C \cdot Q) \times C$. L'i-esima riga e la j-esima colonna rappresentano la distanza euclidea tra gli embedding della i-esima query ($i = 1, \dots, C \cdot Q$) e quelli del j-esimo ($j = 1, \dots, C$) prototipo.
+Vengono successivamente calcolate le distanze rispetto ai prototipi degli embedding di ogni classe tramite la funzione \texttt{euclidean\_dist} che restituisce una matrice di dimensioni $(C \cdot Q) \times C$. L'i-esima riga e la j-esima colonna rappresentano la distanza euclidea tra gli embedding della i-esima query ($i = 1, \dots, C \cdot Q$) e quelli del j-esimo ($j = 1, \dots, C$) prototipo.
 
 Per ogni query viene poi usata la funzione di attivazione softmax, definita in~\eqref{eq:softmax}, i cui argomenti sono le distanze tra la query e i prototipi delle varie classi. La funzione loss da minimizzare è il logaritmo del softmax preso con segno negativo, come nell'equazione~\eqref{eq:loss_proto}. Se la query è vicina al prototipo, la funzione softmax tende a 1 e di conseguenza il suo logaritmo a 0, dunque la loss tende a 0, come dovrebbe appunto risultare. Nel caso in cui, invece, la query è molto lontata dal prototipo, la funzione softmax tende a 0 e il suo logaritmo a $-\infty$. In questo caso, la loss, definita come il logaritmo del softmax preso con segno negativo, tende a $+\infty$, come ci si aspetta.
 
-Poiché la funzione \texttt{log\_softmax} di Pytorch ritorna una matrice $(C \cdot Q) \times C$, per ogni riga occorre prendere solo l'elemento relativo alla classe del prototipo. Questo è possibile utilizzando la funzione \texttt{gather} di Pytorch.
+Poiché la funzione \texttt{log\_softmax} di Pytorch restituisce una matrice $(C \cdot Q) \times C$, per ogni riga occorre prendere solo l'elemento relativo alla classe del prototipo. Questo è possibile utilizzando la funzione \texttt{gather} di Pytorch.
 
 L'accuracy invece è determinata dal numero dei casi in cui il prototipo a distanza minima da una query (o il massimo del logaritmo del softmax) corrisponde al prototipo della classe associata alla query.
 
@@ -1709,9 +1706,9 @@ def main():
     print("Standard deviation area under precision recall curve: {}".format(auc_std_dev))
 \end{lstlisting}
 
-Per costruire il positive e negative set viene usata la funzione \texttt{get\_negative\_positive\_query\_set}.
+Per costruire il positive e negative set viene usata la funzione \texttt{get\_negati-\\ve\_positive\_query\_set}.
 Tramite un indice che indica le istanze della parola appartenente alla classe positiva vengono campionati p spettrogrammi che vanno a costituire il positive set. Le restanti istanze della stessa parola vengono inserite invece nel query set come esempio di spettrogramma che la rete dovrebbe riconoscere.
-Tra l'elenco delle parole viene quindi rimossa la parola postiva con \texttt{words.remove(pos\_word)}.
+Tra l'elenco delle parole viene quindi rimossa la parola positiva con \texttt{words.remove(pos\_word)}.
 Usando le restanti vengono ricavate n esempi di negative set campionando a caso una delle parole e una delle istanze di essa.
 Allo stesso modo viene formata la seconda metà del query set che rappresenta gli esempi negativi. Il numeri di query negative viene preso uguale a quello delle positive.
 
@@ -1767,26 +1764,26 @@ Vengono calcolate le distanze che sono passate con segno negativo alla funzione 
 
 \begin{lstlisting}[language=iPython,firstnumber=11, caption=Funzione \texttt{test\_prediction}, label=test_predictions,captionpos=b]
 def test_predictions(model, negative_set, positive_set, query_set, n, p):
-    n_class = 2
-    n_query = query_set.size(0)
-    
-    xs = torch.cat((positive_set, negative_set), 0)   
-    x = torch.cat((xs, query_set), 0)
-    
-    embeddings = model(x)
-    embeddings_dim = embeddings.size(-1)
-    
-    positive_embeddings = embeddings[:p].view(1, p, embeddings_dim).mean(1)    
-    negative_embeddings = embeddings[p:p+n].view(1, n, embeddings_dim).mean(1)     
-    pos_neg_embeddings =  torch.cat((positive_embeddings, negative_embeddings), 0)
-    query_embeddings = embeddings[p+n:]
-    dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
-
-    target_inds = torch.arange(n_class-1, -1, step = -1).view(n_class, 1).expand(n_class, int(n_query/2)).long()
-
-    p_y = F.softmax(-dists, dim = 1).view(n_class, int(n_query/2), -1)
-
-    return p_y[:,:,0].view(-1).detach(), target_inds.reshape(1, -1).squeeze()
+	n_class = 2
+	n_query = query_set.size(0)
+	
+	xs = torch.cat((positive_set, negative_set), 0)   
+	x = torch.cat((xs, query_set), 0)
+	
+	embeddings = model(x)
+	embeddings_dim = embeddings.size(-1)
+	
+	positive_embeddings = embeddings[:p].view(1, p, embeddings_dim).mean(1)    
+	negative_embeddings = embeddings[p:p+n].view(1, n, embeddings_dim).mean(1)     
+	pos_neg_embeddings =  torch.cat((positive_embeddings, negative_embeddings), 0)
+	query_embeddings = embeddings[p+n:]
+	dists = euclidean_dist(query_embeddings, pos_neg_embeddings)
+	
+	target_inds = torch.arange(n_class-1, -1, step = -1).view(n_class, 1).expand(n_class, int(n_query/2)).long()
+	
+	p_y = F.softmax(-dists, dim = 1).view(n_class, int(n_query/2), -1)
+	
+	return p_y[:,:,0].view(-1).detach(), target_inds.reshape(1, -1).squeeze()
 \end{lstlisting}
 \clearpage
 
@@ -1808,7 +1805,7 @@ Seguendo le indicazioni in \cite{sung:relation} i primi due blocchi hanno paddin
 Inoltre, per soddisfare le dimensioni necessarie in ingresso alla seconda rete neurale, il Max Pooling è presente solo nei primi 3 layer. Questo concetto sarà approfondito nel capitolo di training.
 
 La seconda rete è detta \texttt{RelationNetwork} e ha lo scopo di confrontare le concatenazioni di embedding per predirre o meno la loro somiglianza.
-Essa è costituita da 2 layer di \texttt{nn.Conv2d()}, \texttt{nn.BatchNorm2d()}, \texttt{nn.ReLU()} e \texttt{nn.MaxPool2d(2)} al termine la funzione \texttt{out.view(out.size(0),-1)} ritorna una matrice le cui righe rappresentano gli embedding vettoriali.
+Essa è costituita da 2 layer di \texttt{nn.Conv2d()}, \texttt{nn.BatchNorm2d()}, \texttt{nn.ReLU()} e \texttt{nn.MaxPool2d(2)} al termine la funzione \texttt{out.view(out.size(0),-1)} restituisce una matrice le cui righe rappresentano gli embedding vettoriali.
 In seguito vengono applicati una ulteriore relu e una sigmoide.
 
 \begin{lstlisting}[language=iPython,firstnumber=1, caption=relation\_network.py, label=relation network,captionpos=b]

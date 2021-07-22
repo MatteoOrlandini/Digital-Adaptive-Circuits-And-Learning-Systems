@@ -13,9 +13,9 @@
 \contentsline {subsection}{\numberline {6.2}Le annotazioni del dataset}{13}{subsection.6.2}% 
 \contentsline {subsection}{\numberline {6.3}Lettori del dataset}{15}{subsection.6.3}% 
 \contentsline {subsection}{\numberline {6.4}Parole degli audio}{17}{subsection.6.4}% 
-\contentsline {subsection}{\numberline {6.5}Associazione delle parole con il rispettivo lettore}{20}{subsection.6.5}% 
+\contentsline {subsection}{\numberline {6.5}Associazione delle parole con il rispettivo lettore}{19}{subsection.6.5}% 
 \contentsline {subsection}{\numberline {6.6}Calcolo dello spettrogramma delle parole}{21}{subsection.6.6}% 
-\contentsline {subsection}{\numberline {6.7}Creazione delle feature}{23}{subsection.6.7}% 
+\contentsline {subsection}{\numberline {6.7}Creazione delle feature}{24}{subsection.6.7}% 
 \contentsline {section}{\numberline {7}Implementazione della Prototypical network}{32}{section.7}% 
 \contentsline {subsection}{\numberline {7.1}Definizione della rete}{32}{subsection.7.1}% 
 \contentsline {subsection}{\numberline {7.2}Training}{33}{subsection.7.2}% 
