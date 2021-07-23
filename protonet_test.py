@@ -7,6 +7,7 @@ from utils import *
 from protonet_loss import *
 from tqdm import tqdm
 import sklearn.metrics
+import matplotlib.pyplot as plt
 
 def test_predictions(model, negative_set, positive_set, query_set, n, p):
     n_class = 2
@@ -110,6 +111,11 @@ def main():
         for i in range (target_keywords_number):
             for j in range (10):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)  
+                    
+                if torch.cuda.is_available():
+                  positive_set = positive_set.to(device='cuda')
+                  negative_set = negative_set.to(device='cuda')
+                  query_set = query_set.to(device='cuda')
 
                 y_pred_tmp, y_true_tmp = test_predictions(model, negative_set, positive_set, query_set, n, p)
                 y_pred_tmp = y_pred_tmp.cpu().tolist()
@@ -117,15 +123,24 @@ def main():
                 
                 y_pred.extend(y_pred_tmp)
                 y_true.extend(y_true_tmp)
-
+                """
+                precision, recall, thresholds = sklearn.metrics.precision_recall_curve(y_true, y_pred)
+                fig, ax = plt.subplots()
+                pr_display = sklearn.metrics.PrecisionRecallDisplay(precision, recall)
+                pr_display.plot(ax=ax)
+                plt.savefig('prec_rec_curves/pre_rec_{}.png'.format(i*10+j))
+                plt.close()
+                """
         precision, recall, thresholds = sklearn.metrics.precision_recall_curve(y_true, y_pred)
+
         auc_tmp = sklearn.metrics.auc(recall, precision)
         auc_list.append(auc_tmp)
-        
+
     auc = np.mean(auc_list)
     print("Area under precision recall curve: {}".format(auc))
     auc_std_dev = np.std(auc_list)
     print("Standard deviation area under precision recall curve: {}".format(auc_std_dev))
 
+    
 if __name__ == "__main__":
     main()

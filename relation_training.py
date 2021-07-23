@@ -36,8 +36,8 @@ args = parser.parse_args()
 # Hyper Parameters
 FEATURE_DIM = 64
 RELATION_DIM = 8
-CLASS_NUM = 2
-SAMPLE_NUM_PER_CLASS = 10
+CLASS_NUM = 5
+SAMPLE_NUM_PER_CLASS = 5
 BATCH_NUM_PER_CLASS = 16
 EPISODE = 60000
 TEST_EPISODE = 1000
@@ -79,15 +79,15 @@ def main():
         # sample datas
         batches, samples = batch_sample(training_readers, CLASS_NUM, SAMPLE_NUM_PER_CLASS, BATCH_NUM_PER_CLASS) # samples: C X K X 128 X 51,  batches: C X Q X 128 X 51
         
-        samples = samples.view(CLASS_NUM * SAMPLE_NUM_PER_CLASS, 1, *samples.size()[2:])  # (C X K) X 1 X 51 X 51
-        batches = batches.view(CLASS_NUM * BATCH_NUM_PER_CLASS, 1, *batches.size()[2:])   # (C X Q) X 1 X 51 X 51
+        samples = samples.view(CLASS_NUM * SAMPLE_NUM_PER_CLASS, 1, *samples.size()[2:])  # (C * K) X 1 X 128 X 51
+        batches = batches.view(CLASS_NUM * BATCH_NUM_PER_CLASS, 1, *batches.size()[2:])   # (C * Q) X 1 X 128 X 51
 
         if torch.cuda.is_available():
             samples = samples.to(device='cuda')
             batches = batches.to(device='cuda')
 
         # calculate features
-        sample_features = feature_encoder(Variable(samples)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+        sample_features = feature_encoder(Variable(samples)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 15 X 5
 
         # resize the images from 15 X 5 to 5 X 5 to get square images
         # interpolate down samples the input to the given size
@@ -95,7 +95,7 @@ def main():
         sample_features = sample_features.view(CLASS_NUM, SAMPLE_NUM_PER_CLASS, FEATURE_DIM, 5, 5) # CLASS_NUM X SAMPLE_NUM_PER_CLASS X FEATURE_DIM X 5 X 5
         sample_features = torch.sum(sample_features,1).squeeze(1)   # CLASS_NUM X FEATURE_DIM X 5 X 5
 
-        batch_features = feature_encoder(Variable(batches)) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+        batch_features = feature_encoder(Variable(batches)) # (CLASS_NUM * BATCH_NUM_PER_CLASS) X FEATURE_DIM X 15 X 5
         batch_features = F.interpolate(batch_features, size = 5)
 
         # calculate relations

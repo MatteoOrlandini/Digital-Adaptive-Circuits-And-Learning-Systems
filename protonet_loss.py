@@ -69,73 +69,29 @@ def loss(xs, xq, model):
     embeddings = model(x)
     
     embeddings_dim = embeddings.size(-1)
-    """
-    if (distance_type == "euclidean_dist"):
-        target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
-        print("target inds", target_inds)
-        print("euclidean target inds shape", target_inds.shape)
-        prototypes = embeddings[:n_class*n_support].view(n_class, n_support, embeddings_dim).mean(1)  
-        queries = embeddings[n_class*n_support:]
-        dists = euclidean_dist(queries, prototypes)
-        print("dists",dists)
-        print("euclidean dists.shape", dists.shape)
 
-        if torch.cuda.is_available():
-            target_inds = target_inds.to(device='cuda')
-
-        log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, n_query, -1)
-        print('log_p_y.shape', log_p_y.shape)
-        print('log_p_y', log_p_y)
-        
-        loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
-        print('target_inds)', target_inds)
-        print('log_p_y.gather(2, target_inds)', log_p_y.gather(2, target_inds))
-        print('log_p_y.gather(2, target_inds).shape', log_p_y.gather(2, target_inds).shape)
-
-        _, y_hat = log_p_y.max(2)
-        acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
-    """
-    
-    target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query*n_support, 1).long()
-    #print("targ ind", target_inds)
-    #print("cosine target_inds shape", target_inds.shape)
-    supports = embeddings[:n_class*n_support]
+    target_inds = torch.arange(0, n_class).view(n_class, 1, 1).expand(n_class, n_query, 1).long()
+    #print("target inds", target_inds)
+    #print("euclidean target inds shape", target_inds.shape)
+    prototypes = embeddings[:n_class*n_support].view(n_class, n_support, embeddings_dim).mean(1)  
     queries = embeddings[n_class*n_support:]
-    dists = torch.empty(n_query*n_support*n_class, 0)
-    for i in range(n_class):
-        #distances = torch.empty(n_query*n_support)
-        distances = torch.empty(0)
-        for k in range(n_query):
-            for j in range(n_support*n_class):
-                cosine_distance = cosine_dist(queries[i*n_query+k], supports[j])
-                #andare a capo a metà e poi concatenare
-                distances = torch.cat((distances, torch.tensor([cosine_distance], requires_grad = True)), 0)
-        #distances = torch.tensor(distances)
-        distances = distances.view(-1,1) 
-        print("dists.shape:",dists.shape)
-        #print("distances.shape:",distances.shape)
-        dists = torch.cat((dists, distances), 1)
-    #dists=torch.transpose(dists, 0, 1)
-    print("dists",dists)
-    #print("cosine dist shape", dists.shape)
+    dists = euclidean_dist(queries, prototypes)
+    #print("dists",dists)
+    #print("euclidean dists.shape", dists.shape)
 
     if torch.cuda.is_available():
         target_inds = target_inds.to(device='cuda')
 
-    #print("dists", dists.shape)
-    log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, n_support*n_query, -1)
-    print('log_p_y', log_p_y)
-    print('log_p_y.shape', log_p_y.shape)
+    log_p_y = F.log_softmax(-dists, dim = 1).view(n_class, n_query, -1)
+    #print('log_p_y.shape', log_p_y.shape)
+    #print('log_p_y', log_p_y)
     
     loss_val = -log_p_y.gather(2, target_inds).squeeze().view(-1).mean()
-    print('target_inds)', target_inds)
-    print('log_p_y.gather(2, target_inds)', log_p_y.gather(2, target_inds))
-    print('log_p_y.gather(2, target_inds).shape', log_p_y.gather(2, target_inds).shape)
+    #print('target_inds)', target_inds)
+    #print('log_p_y.gather(2, target_inds)', log_p_y.gather(2, target_inds))
+    #print('log_p_y.gather(2, target_inds).shape', log_p_y.gather(2, target_inds).shape)
 
     _, y_hat = log_p_y.max(2)
-    print("y_hat", y_hat)
-    acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()  
-    print("torch.eq(y_hat, target_inds.squeeze()).float()", torch.eq(y_hat, target_inds.squeeze()).float())
-    print("acc_val", acc_val)
+    acc_val = torch.eq(y_hat, target_inds.squeeze()).float().mean()
     
     return loss_val, acc_val

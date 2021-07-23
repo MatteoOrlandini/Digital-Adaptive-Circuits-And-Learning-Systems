@@ -14,7 +14,7 @@ def test_predictions(feature_encoder,relation_network, positive_set, negative_se
 
     FEATURE_DIM = 64
 
-    pos_embeddings = feature_encoder(Variable(positive_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 5 X 5
+    pos_embeddings = feature_encoder(Variable(positive_set)) # (CLASS_NUM * SAMPLE_NUM_PER_CLASS) X FEATURE_DIM X 15 X 5
 
     # resize the images from 15 X 5 to 5 X 5 to get square images
     # interpolate down samples the input to the given size
@@ -100,8 +100,8 @@ def main():
     p = 5
     n = 10
 
-    C = 2
-    K = 5
+    C = 10
+    K = 10
 
     FEATURE_DIM = 64
     RELATION_DIM = 8
@@ -135,6 +135,11 @@ def main():
             for j in range (1):
                 negative_set, positive_set, query_set = get_negative_positive_query_set(p, n, i, audio)
 
+                if torch.cuda.is_available:
+                    negative_set = negative_set.to(device='cuda')
+                    positive_set = positive_set.to(device='cuda')
+                    query_set = query_set.to(device='cuda')
+
                 negative_set = negative_set.view(1 * n, 1, *negative_set.size()[1:])  
                 positive_set = positive_set.view(1 * p, 1, *positive_set.size()[1:]) 
                 query_set = query_set.view(int(C * query_set.size()[0]/2), 1, *query_set.size()[1:])   # (C X Q) X 1 X 51 X 51
@@ -146,24 +151,12 @@ def main():
 
         precision, recall, thresholds = sklearn.metrics.precision_recall_curve(y_true, y_pred)
         auc_tmp = sklearn.metrics.auc(recall, precision)
-        print("auc_tmp: {}".format(auc_tmp))
         auc_list.append(auc_tmp)
-    """
-    prob_query_pos_iter.extend(prob_query_neg_iter)
-    prob_pos_iter = prob_query_pos_iter
 
-    target_inds_iter = np.ones(int(len(prob_pos_iter)/2))
-    target_inds_iter = np.append(target_inds_iter, np.zeros(int(len(prob_pos_iter)/2)))
-
-    precision, recall, thresholds = sklearn.metrics.precision_recall_curve(target_inds_iter, prob_pos_iter)
-    """
     auc = np.mean(auc_list)
     print("Area under precision recall curve: {}".format(auc))
     auc_std_dev = np.std(auc_list)
     print("Standard deviation area under precision recall curve: {}".format(auc_std_dev))
-
-    #average_precision = sklearn.metrics.average_precision_score(np.array(target_inds_iter), prob_pos_iter)
-    #print('Average precision: {}'.format(average_precision))
 
 if __name__ == "__main__":
     main()
