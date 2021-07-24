@@ -386,3 +386,6 @@ Open a command window and type:
 [relation_test.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_validation.py) is used for the test of the relation neural network.
 
 # Results
+Both relation and prototypical networks were trained with different C and K. The results are shown below for p = 1 and p = 5, where p are the samples of the positive class, and n = 10 where n are the samples of the negative class. For more information, please see [Relazione.pdf](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/Relazione/Relazione.pdf).
+
+![](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/results.png)
