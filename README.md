@@ -1,7 +1,12 @@
 #  Digital-Adaptive-Circuits-And-Learning-Systems
 
 ## Introduction
-The dataset [Spoken Wikipedia Corpora](https://nats.gitlab.io/swc/) is saved in `./Dataset/English spoken wikipedia/english/`
+The purpose of this work is the implementation of part of the algorithms described in Justin Salamon's “Few-Shot Sound Event Detection” paper and to reproduce the results. This article aims to identify perceptually similar sound events within a recording. Various applications of these networks can be the example of particular sounds in music or the removal of filler words in podcasts, such as "ehm". This process is usually done manually, resulting in a difficult and tedious task.
+
+In the few-shot approach, however, a dataset consisting of a few is sufficient reference examples. The network will not be implemented with the purpose to identify sound events belonging to classes with which she has been trained, but it will assume the ability to recognize the similarity between two sounds that is analyzing.
+
+## Dataset
+The dataset [Spoken Wikipedia Corpora](https://nats.gitlab.io/swc/) is saved in `./Dataset/English spoken wikipedia/english/`.
 
 ## Prereqs (at least)
 * [Python 3.9.5](https://www.python.org/) 
@@ -64,15 +69,15 @@ Open a command window and type:
 		
 	2.2 Run the training script 
 	
-	` python training.py `
+	` python protonet_training.py `
 	
-	2.3 Run the validation script
-	
-	` python validation.py `
+	` python relation_training.py `
 		
-	2.4 Run the test script
+	2.3 Run the test script
 	
-	` python test_protonet.py `
+	` python protonet_test.py `
+	
+	` python relation_test.py `
 	
 ## The code
 [json_manager.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/json_manager.py) is used to read and write json files.
@@ -372,62 +377,12 @@ Open a command window and type:
 
 [protonet_training.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/training.py) is used for training the prototypical neural network.
 
-[protonet_validation.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/protonet_validation.py) is used for the validation of the prototypical neural network.
-
 [protonet_test.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/protonet_test.py) is used for the test of the prototypical neural network.
 
 [relation_network.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_network.py) is used to create the relation neural network model with the embedding module and the relation module. The embedding module architecture consists of 4 convolutional block contains a 64-filter 3 X 3 convolution, a batch normalisation and a ReLU nonlinearity layer respectively. The first 3 blocks also contain a 2 X 2 max-pooling layer while the last two do not. We do so because we need the output feature maps for further convolutional layers in the relation module. The relation module consists of two convolutional blocks and two fully-connected layers. Each of convolutional block is a 3 X 3 convolution with 64 filters followed by batch normalisation, ReLU non-linearity and 2 X 2 max-pooling. The two fully-connected layers are 8 and 1 dimensional, respectively. All fully-connected layers are ReLU except the output layer is Sigmoid in order to generate relation scores in a reasonable range for all versions of our network architecture.
 
 [relation_training.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_training.py) is used for training the relation neural network.
 
-[relation_validation.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_validation.py) is used for the validation of the relation neural network.
+[relation_test.py](https://github.com/MatteoOrlandini/Digital-Adaptive-Circuits-And-Learning-Systems/blob/main/relation_validation.py) is used for the test of the relation neural network.
 
-
-Average training loss for each network:
-
-| C, K   | Prototypical Network | Relation Network| 
-|--------|----------------------|-----------------|
-| 2, 1   | 0.38632819493522547  |                 |               
-| 2, 5   |                      |                 |          
-| 5, 1   |                      |                 |      
-| 5, 5   |                      |                 |                                    
-| 10, 1  |                      |                 |                                    
-| 10, 5  |                      |                 |                                    
-| 10, 10 |                      |                 |                                    
-
-Average training accuracy for each network:
-
-| C, K   | Prototypical Network | Relation Network|
-|--------|----------------------|-----------------|
-| 2, 1   | 0.844255729166666    |                 |                                    
-| 2, 5   |                      |                 |                                    
-| 5, 1   |                      |                 |                                   
-| 5, 5   |                      |                 |                                    
-| 10, 1  |                      |                 |                                    
-| 10, 5  |                      |                 |                                    
-| 10, 10 |                      |                 |      
-
-
-Average validation loss for each network:
-
-| C, K   | Prototypical Network | Relation Network|
-|--------|----------------------|-----------------|
-| 2, 1   | 0.37211547262442374  |                 |                                  
-| 2, 5   |                      |                 |                                    
-| 5, 1   |                      |                 |                                    
-| 5, 5   |                      |                 |                                    
-| 10, 1  |                      |                 |                                    
-| 10, 5  |                      |                 |                                    
-| 10, 10 |                      |                 |                                    
-
-Average validation accuracy for each network:
-
-| C, K   | Prototypical Network | Relation Network| 
-|--------|----------------------|-----------------|
-| 2, 1   | 0.8423802083333334   |                 |                                    
-| 2, 5   |                      |                 |                                    
-| 5, 1   |                      |                 |                                    
-| 5, 5   |                      |                 |                                    
-| 10, 1  |                      |                 |                                    
-| 10, 5  |                      |                 |                                    
-| 10, 10 |                      |                 |                                    
+# Results
