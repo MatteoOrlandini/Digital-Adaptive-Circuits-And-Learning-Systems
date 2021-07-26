@@ -1915,9 +1915,9 @@ Gli embedding del support set hanno ora dimensione $(C\cdot K)\times64 \times 15
 Prima di essere passati alla seconda rete questi tensori necessitano di avere le ultime due dimensioni pari a 5.
 In questo modo, attraversando due volte lo strato di max pooling passeranno da $5 \times 5$ a $2 \times 2$ e infine a $1 \times 1$.
 In seguito al flattening le ultime due dimensioni scompaiono e l'ingresso alla relu ha la dimensione corretta: $(C\cdot Q \cdot C)\times 64$.
-Le concatenazioni hanno dimensione $(C\cdot Q \cdot C)\times 64 \times 5 \times 5$, infatti ogni query ($C \times Q$) va concetenata con il vettore che rappresenta ognuna delle classi (C).
+Le concatenazioni hanno dimensione $(C\cdot Q \cdot C)\times 64 \times 5 \times 5$, infatti ogni query ($C \times Q$) va concatenata con il vettore che rappresenta ognuna delle classi (C).
 Quest'ultimo vettore è ottenuto sommando elemento per elemento gli embedding delle istanze di ogni classe usando \texttt{torch.sum(sample\_features,1).squeeze(1)}.
-La rete decisionale restituisce quindi un tensore \texttt{relations} $(C \cdot K \cdot C) \times 1 \times 1$  che viene poi suddiviso in una matrice $(C \cdot Q) \times C$ in cui in ogni riga sono presenti le probabilità che una certa query appartenga ad una determinata classe.
+La rete decisionale restituisce quindi un tensore \texttt{relations} $(C \cdot Q \cdot C) \times 1 \times 1$  che viene poi suddiviso in una matrice $(C \cdot Q) \times C$, in cui in ogni riga sono presenti le probabilità che una certa query appartenga ad una determinata classe.
 La matrice \texttt{one\_hot\_labels} ha la stessa dimensione di \texttt{relations} ma è costituito da zeri tranne nelle colonne in cui la classe corrisponde realmente alla query, in cui il valore è pari a 1.
 Questa rappresenta il risultato ideale che vogliamo in uscita dalla rete.
 Usando quindi la funzione \texttt{mse} con parametri \texttt{relations} e \texttt{one\_hot\_labels} otteniamo la loss, calcolata come mean square error, che viene utilizzata per aggiornare i parametri delle due reti con \texttt{loss.backward()}.
