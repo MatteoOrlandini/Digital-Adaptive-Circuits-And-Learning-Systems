@@ -1,2 +1,4 @@
 # Auto detect text files and perform LF normalization
-* text=auto
+*.tex linguist-detectable=false
+*.aux linguist-detectable=false
+*.toc linguist-detectable=false
